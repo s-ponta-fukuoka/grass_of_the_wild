@@ -1,0 +1,115 @@
+//=============================================================================
+//
+// [render_manager.h]
+// Author : shota fukuoka
+//
+//=============================================================================
+#include "render_manager.h"
+#include "renderer.h"
+
+//*****************************************************************************
+// マクロ定義
+//*****************************************************************************
+
+///////////////////////////////////////////////////////////////////////////////
+//コンストラクタ
+///////////////////////////////////////////////////////////////////////////////
+RenderManager::RenderManager()
+{
+	;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//デストラクタ
+///////////////////////////////////////////////////////////////////////////////
+RenderManager::~RenderManager()
+{
+	;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//追加
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::AddRenderer(Renderer* renderer)
+{
+	if (renderer == NULL) { return; }
+	m_listRenderer.push_back(renderer);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//削除
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::DeleteRenderer(const Renderer* renderer)
+{
+	for (auto ite = m_listRenderer.begin(); ite != m_listRenderer.end(); ++ite)
+	{
+		if ((*ite) != renderer) { continue; }
+		m_listRenderer.erase(ite);
+		return;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//全描画
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::DrawAll(void)
+{
+	for (auto ite = m_listRenderer.begin(); ite != m_listRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Draw();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//シャドウマップ用追加
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::AddShadowRenderer(Renderer* renderer)
+{
+	if (renderer == NULL) { return; }
+	m_listShadowRenderer.push_back(renderer);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//シャドウマップ用削除
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::DeleteShadowRenderer(const Renderer* renderer)
+{
+	for (auto ite = m_listRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	{
+		if ((*ite) != renderer) { continue; }
+		m_listShadowRenderer.erase(ite);
+		return;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//シャドウマップ用オブジェクト描画
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::ShadowDrawAll(void)
+{
+	for (auto ite = m_listRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Draw();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//全削除
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::ReleaseAll(void)
+{
+	for (auto ite = m_listRenderer.begin(); ite != m_listRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Release();
+	}
+
+	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Release();
+	}
+}
+

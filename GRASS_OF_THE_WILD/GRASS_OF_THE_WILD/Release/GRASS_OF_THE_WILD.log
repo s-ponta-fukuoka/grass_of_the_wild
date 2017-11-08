@@ -1,0 +1,17 @@
+﻿  main.cpp
+src\main.cpp(56): warning C4459: 'hWnd' を宣言すると、グローバル宣言が隠蔽されます
+  src\main.cpp(31): note: 'hWnd' の宣言を確認してください
+src\main.cpp(38): warning C4100: 'lpCmdLine': 引数は関数の本体部で 1 度も参照されません。
+src\main.cpp(38): warning C4100: 'hPrevInstance': 引数は関数の本体部で 1 度も参照されません。
+src\main.cpp(163): warning C4459: 'hWnd' を宣言すると、グローバル宣言が隠蔽されます
+  src\main.cpp(31): note: 'hWnd' の宣言を確認してください
+src\main.cpp(193): warning C4459: 'hWnd' を宣言すると、グローバル宣言が隠蔽されます
+  src\main.cpp(31): note: 'hWnd' の宣言を確認してください
+src\main.cpp(193): warning C4100: 'bWindow': 引数は関数の本体部で 1 度も参照されません。
+src\main.cpp(193): warning C4100: 'hWnd': 引数は関数の本体部で 1 度も参照されません。
+  コード生成しています。
+  1 of 2 functions (50.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD.exe
