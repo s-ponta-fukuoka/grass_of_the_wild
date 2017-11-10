@@ -104,7 +104,7 @@ void RenderManager::ShadowDrawAll(void)
 	ID3D11RenderTargetView* pRender[1] = { NULL };
 	pDeviceContext->OMSetRenderTargets(1, &m_pShadowRenderTargetView, m_pShadowDepthStencilView);
 
-	for (auto ite = m_listRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Draw();
@@ -159,4 +159,12 @@ void RenderManager::SetShadowRenderTargetVie(ID3D11RenderTargetView* pShadowRend
 void RenderManager::SetShadowTexture(ID3D11ShaderResourceView* pShadowTexture)
 {
 	m_pShadowTexture = pShadowTexture;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//シャドウマップ取得
+///////////////////////////////////////////////////////////////////////////////
+ID3D11ShaderResourceView* RenderManager::GetShadowTexture(void) const
+{
+	return m_pShadowTexture;
 }

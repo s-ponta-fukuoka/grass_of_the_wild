@@ -30,7 +30,7 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant)
+MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant)
 {
 	m_pVertexBuffer = NULL;
 
@@ -52,16 +52,33 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 
 	Texture* pTexture = new Texture("resource/sprite/field000.jpg", pTextureManager);
 
+	pConstant->lightView = pLightCameraConstant->view;
+	pConstant->lightProjection = pLightCameraConstant->projection;
+	pConstant->light = pLightCameraConstant->light;
+
 	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
 												m_pIndexBuffer,
 												pShaderManager,
 												pTexture->GetTexture(),
+												pRenderManager->GetShadowTexture(),
 												m_pTransform,
 												pConstant,
 												MESH_FILED_VERTEX,
 												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 												VertexShader::VS_NORMAL,
 												PixelShader::PS_NORMAL));
+
+	pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
+												m_pIndexBuffer,
+												pShaderManager,
+												pTexture->GetTexture(),
+												NULL,
+												m_pTransform,
+												pLightCameraConstant,
+												MESH_FILED_VERTEX,
+												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+												VertexShader::VS_NORMAL,
+												PixelShader::PS_SHADOW));
 
 	delete[] pTexture;
 	pTexture = NULL;
@@ -100,7 +117,7 @@ HRESULT MeshField::Init( void )
 //=============================================================================
 void MeshField::Release(void)
 {
-	Release();
+	Mesh::Release();
 }
 
 //=============================================================================

@@ -19,6 +19,7 @@
 #include "../object/mesh/mesh_manager.h"
 #include "../object/mesh/meshfiled/mesh_field.h"
 #include "../object/mesh/skybox/skybox.h"
+#include "../object/canvas/shadow_map.h"
 #include "../device/input.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,8 +75,10 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pRenderManager = new RenderManager();
 
+	ShadowMap* pShadow = new ShadowMap(m_pRenderManager, m_pShaderManager, m_pTextureManager);
+
 	m_pMeshManager = new MeshManager();
-	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
+	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
 	return S_OK;

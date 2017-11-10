@@ -72,6 +72,9 @@ public:
 
 	//シャドウマップ設定
 	void SetShadowTexture(ID3D11ShaderResourceView* pShadowTexture);
+
+	//シャドウマップ取得
+	ID3D11ShaderResourceView* GetShadowTexture(void) const;
 };
 
 #endif

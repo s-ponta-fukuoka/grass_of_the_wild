@@ -40,6 +40,7 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 							ID3D11Buffer* pIndexBuffer,
 							ShaderManager* pShaderManager,
 							ID3D11ShaderResourceView* pTexture,
+							ID3D11ShaderResourceView* pShadowMap,
 							Object::Transform* pTransform,
 							AppRenderer::Constant* pConstant,
 							int	nNumVertexPolygon,
@@ -65,6 +66,8 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 
 	m_pTexture = pTexture;
 
+	m_pShadowMap = pShadowMap;
+
 	ConfigConstantBuffer();
 
 	ConfigSamplerState();
@@ -84,7 +87,21 @@ CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
 	VertexShader::VERTEX_TYPE eVsType,
 	PixelShader::PIXEL_TYPE ePsType)
 {
-	;
+	m_ePolygon = ePolygon;
+
+	m_pVertexBuffer = pVertexBuffer;
+
+	m_pIndexBuffer = pIndexBuffer;
+
+	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
+
+	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
+
+	m_nNumVertexPolygon = nNumVertexPolygon;
+
+	m_pTexture = pTexture;
+
+	ConfigSamplerState();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -193,6 +210,11 @@ void MeshRenderer::Draw(void)
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
 	pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+
+	if (m_pShadowMap != NULL)
+	{
+		pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+	}
 
 	if (m_pIndexBuffer != NULL)
 	{

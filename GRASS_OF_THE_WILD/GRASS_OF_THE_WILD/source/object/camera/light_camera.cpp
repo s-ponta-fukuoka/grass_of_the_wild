@@ -63,44 +63,6 @@ void LightCamera::Release(void)
 void LightCamera::Update(void)
 {
 	Camera::Update();
-
-	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
-
-	if (pInputKeyboard->GetKeyPress(DIK_W))
-	{
-		m_pTransform->position.z++;
-		m_positionAt.z++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_A))
-	{
-		m_pTransform->position.x--;
-		m_positionAt.x--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_S))
-	{
-		m_pTransform->position.z--;
-		m_positionAt.z--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_pTransform->position.x++;
-		m_positionAt.x++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_Y))
-	{
-		m_pTransform->position.y++;
-		m_positionAt.y++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_N))
-	{
-		m_pTransform->position.y--;
-		m_positionAt.y--;
-	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -116,6 +78,9 @@ void LightCamera::SetCamera(void)
 
 	XMMATRIX hProjection;	//“§Ž‹ŽË‰e•ÏŠ·s—ñ
 	hProjection = XMMatrixPerspectiveFovLH(D3D_PI / 3.0f, (float)1024 / 1024, 5000.0f, 30000.0f);
+
+	XMVECTOR LightPos = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1);
+	m_pConstant->light = LightPos;
 
 	m_pConstant->view = XMMatrixTranspose(hView);
 	m_pConstant->projection = XMMatrixTranspose(hProjection);

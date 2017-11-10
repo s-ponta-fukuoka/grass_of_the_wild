@@ -93,6 +93,8 @@ void AppRenderer::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void AppRenderer::Draw(RenderManager* pRenderManager)
 {
+	pRenderManager->ShadowDrawAll();
+
 	float ClearColor[4] = { 0,0,1,1 }; //Á‹F
 	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);//‰æ–ÊƒNƒŠƒA 
 

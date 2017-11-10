@@ -80,6 +80,7 @@ public:
 		ID3D11Buffer* pIndexBuffer,
 		ShaderManager* pShaderManager,
 		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
 		AppRenderer::Constant* pConstant,
 		int	nNumVertexPolygon,
@@ -102,6 +103,8 @@ private:
 	int									m_nNumVertexPolygon;
 
 	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
+
+	ID3D11ShaderResourceView*			m_pShadowMap;
 };
 
 //-----------------------------------------------------------------------------

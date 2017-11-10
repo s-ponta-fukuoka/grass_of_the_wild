@@ -40,6 +40,7 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 		NULL,
 		pShaderManager,
 		pTexture->GetTexture(),
+		NULL,
 		m_pTransform,
 		pConstant,
 		SKY_BOX_VERTEX,
@@ -129,7 +130,7 @@ void SkyBox::MakeVertex(void)
 //=============================================================================
 void SkyBox::Release(void)
 {
-	Release();
+	Mesh::Release();
 }
 
 //=============================================================================

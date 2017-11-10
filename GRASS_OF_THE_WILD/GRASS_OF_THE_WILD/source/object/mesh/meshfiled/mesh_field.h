@@ -33,7 +33,8 @@ public:
 	MeshField( RenderManager* pRenderManager,
 				ShaderManager* pShaderManager,
 				TextureManager* pTextureManager,
-				AppRenderer::Constant* pConstant);			//コンストラクタ
+				AppRenderer::Constant* pConstant,
+				AppRenderer::Constant* pLightCameraConstant);			//コンストラクタ
 
 	~MeshField( );			//デストラクタ
 

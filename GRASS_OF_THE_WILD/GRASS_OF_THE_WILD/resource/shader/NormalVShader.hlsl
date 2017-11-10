@@ -2,8 +2,8 @@
 struct vertexIn
 {
 	float4 pos : POSITION0;
-	float2 tex : TEXCOORD0;
 	float4 color : COLOR0;
+	float2 tex : TEXCOORD0;
 };
 
 //èoóÕóp

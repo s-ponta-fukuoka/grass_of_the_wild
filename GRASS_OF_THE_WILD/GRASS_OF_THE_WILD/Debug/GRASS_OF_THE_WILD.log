@@ -1,4 +1,4 @@
-﻿  light_camera.cpp
+﻿  skybox.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -140,732 +140,204 @@ c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path
 c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.h(53): warning C4324: 'Camera': アラインメント指定子のために構造体がパッドされました
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(71): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(72): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(73): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(74): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(75): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(77): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(78): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(79): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(80): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(81): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(82): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(84): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(85): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(86): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(87): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(88): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(89): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(91): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(92): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(93): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(94): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(95): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(96): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(98): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(99): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(100): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(101): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(102): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(103): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(108): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(109): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(110): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(66): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
+  mesh_field.cpp
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
+c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
+c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(47): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(49): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(105): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(107): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(214): warning C4244: '引数': 'int' から 'const float' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(238): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(241): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(244): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(248): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(250): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(259): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(232): warning C4189: 'nNo': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(135): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(289): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(290): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(303): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(304): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(305): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(306): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  スキップ中... (関連する変更は検出されませんでした)
+  mesh_manager.cpp
+  mesh.cpp
   app.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.h(53): warning C4324: 'Camera': アラインメント指定子のために構造体がパッドされました
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(64): warning C4316: 'MainCamera': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(67): warning C4316: 'LightCamera': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(61): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(62): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
-  コードを生成中...
-  コンパイル中...
-  app_renderer.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-  shadow_map.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\canvas\shadow_map.cpp(28): warning C4100: 'pTextureManager': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\canvas\shadow_map.cpp(208): warning C4245: '=': 'int' から 'UINT' に変換しました。signed/unsigned が一致しません。
-  main_camera.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.h(53): warning C4324: 'Camera': アラインメント指定子のために構造体がパッドされました
-  camera.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52946): note: 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52955): note: 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52964): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52973): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52982): note: 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52991): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53006): note: 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53015): note: 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53024): note: 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53033): note: 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53042): note: 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53051): note: 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53061): note: 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53070): note: 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53080): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53089): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53099): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53108): note: 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53117): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53127): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53136): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53400): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53409): note: 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53419): note: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53428): note: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2662): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2663): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2664): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2665): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2666): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2667): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2668): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2689): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2690): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2691): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2694): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2695): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2698): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2702): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2712): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2713): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2715): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2716): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2717): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2727): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2728): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2729): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2730): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2731): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2732): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2742): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2743): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamath.h(2754): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(2254): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4523): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4577): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4639): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4707): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4770): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.inl(4832): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2015): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2017): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2019): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2086): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2088): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2090): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2157): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2159): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2161): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2225): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2227): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2229): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'count': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2306): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'instanceParameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2308): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'userData': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2310): warning C4100: 'parameter': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'textureType': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2423): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2432): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
-c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.h(53): warning C4324: 'Camera': アラインメント指定子のために構造体がパッドされました
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.cpp(32): warning C4316: 'AppRenderer::Constant': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
-  main.cpp
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(32): warning C4100: 'lpCmdLine': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(32): warning C4100: 'hPrevInstance': 引数は関数の本体部で 1 度も参照されません。
-  コードを生成中...
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.exe
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.pdb (Partial PDB)
