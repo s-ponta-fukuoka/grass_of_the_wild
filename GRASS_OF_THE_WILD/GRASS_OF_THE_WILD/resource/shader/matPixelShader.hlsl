@@ -12,7 +12,7 @@ float3 g_lightVec = { 0.71,-0.71,0.0 };
 Texture2D txDiffuse2 : register(t1);
 SamplerState samLinear : register(s0);
 
-float4 ps_main(pixcelIn IN) : SV_Target
+float4 main(pixcelIn IN) : SV_Target
 {
 	pixcelIn OUT;
 	

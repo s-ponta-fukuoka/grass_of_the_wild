@@ -14,7 +14,7 @@ struct vertexOut
 	float4 color : COLOR0;
 };
 
-vertexOut vs_main(vertexIn IN)
+vertexOut main(vertexIn IN)
 {
 	vertexOut OUT;
 

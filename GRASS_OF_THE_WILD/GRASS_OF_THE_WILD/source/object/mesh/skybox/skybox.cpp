@@ -46,6 +46,9 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 		VertexShader::VS_3D,
 		PixelShader::PS_3D));
+
+	delete[] pTexture;
+	pTexture = NULL;
 }
 
 //=============================================================================

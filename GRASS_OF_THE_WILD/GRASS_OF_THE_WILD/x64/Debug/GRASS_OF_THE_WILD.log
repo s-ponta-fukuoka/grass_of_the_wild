@@ -1,0 +1,70 @@
+﻿C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\matPixelShader.hlsl(19,21-43): warning X3206: 'dot': implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\matPixelShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\NormalPShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\NormalVShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\Pixel3DShader.cso
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\PixelShader.hlsl(24,22-44): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\PixelShader.hlsl(36,8-55): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\PixelShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\Shadow.cso
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\SkinMeshShader.hlsl(46,12-29): warning X3206: 'mul': implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\SkinMeshShader.cso
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonPixel.hlsl(26,22-44): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonPixel.hlsl(40,8-55): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\ToonPixel.cso
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonShader.hlsl(70,17-31): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonShader.hlsl(72,9-43): warning X3206: implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonShader.hlsl(75,17-33): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonShader.hlsl(85,13-27): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\ToonShader.hlsl(39,14-27): warning X3578: Output value 'main' is not completely initialized
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\ToonShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\Vertex3DShader.cso
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\VertexShader.hlsl(66,13-27): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\resource\shader\VertexShader.hlsl(33,14-27): warning X3578: Output value 'main' is not completely initialized
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\GRASS_OF_THE_WILD\bin\shader\VertexShader.cso
+  texturemanager.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  texture.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  shader_manager.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  shader.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  renderer.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  render_manager.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  app_renderer.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  skybox.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  mesh_field.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  mesh_manager.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  mesh.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  character.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  shadow_map.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  camera.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  main.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(48): error C2440: '初期化中': 'const char [9]' から 'LPCWSTR' に変換できません。
+  c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(48): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(74): error C2664: 'HWND CreateWindowExW(DWORD,LPCWSTR,LPCWSTR,DWORD,int,int,int,int,HWND,HMENU,HINSTANCE,LPVOID)': 引数 2 を 'const char [9]' から 'LPCWSTR' へ変換できません。
+  c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(74): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(136): error C2664: 'BOOL UnregisterClassW(LPCWSTR,HINSTANCE)': 引数 1 を 'const char [9]' から 'LPCWSTR' へ変換できません。
+  c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\main.cpp(136): note: 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたは関数スタイルのキャストが必要です。
+  input.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  app.cpp
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\app_renderer.h(14): fatal error C1083: include ファイルを開けません。'xnamath.h':No such file or directory
+  コードを生成中...

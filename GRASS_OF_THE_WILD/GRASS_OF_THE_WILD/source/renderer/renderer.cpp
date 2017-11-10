@@ -75,22 +75,16 @@ SkinnedMeshRenderer::SkinnedMeshRenderer()
 	;
 }
 
-CanvasRenderer::CanvasRenderer()
+CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
+	ID3D11Buffer* pIndexBuffer,
+	ShaderManager* pShaderManager,
+	ID3D11ShaderResourceView* pTexture,
+	int	nNumVertexPolygon,
+	D3D_PRIMITIVE_TOPOLOGY ePolygon,
+	VertexShader::VERTEX_TYPE eVsType,
+	PixelShader::PIXEL_TYPE ePsType)
 {
 	;
-}
-
-//コンストラクタ
-ShadowRenderer::ShadowRenderer(ID3D11Buffer* pVertexBuffer,
-								ShaderManager* pShaderManager,
-								VertexShader::VERTEX_TYPE eVsType,
-								PixelShader::PIXEL_TYPE ePsType)
-{
-	m_pVertexBuffer = pVertexBuffer;
-
-	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
-
-	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -112,11 +106,6 @@ SkinnedMeshRenderer::~SkinnedMeshRenderer()
 }
 
 CanvasRenderer::~CanvasRenderer()
-{
-	;
-}
-
-ShadowRenderer::~ShadowRenderer()
 {
 	;
 }
@@ -196,8 +185,6 @@ void MeshRenderer::Draw(void)
 
 	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
 
-	ID3D11ShaderResourceView* pTexture = m_pTexture->GetTexture();
-
 	//コンテキストに設定
 	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
 	//使用するシェーダーの登録
@@ -205,7 +192,7 @@ void MeshRenderer::Draw(void)
 	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
-	pDeviceContext->PSSetShaderResources(0, 1, &pTexture);
+	pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
 
 	if (m_pIndexBuffer != NULL)
 	{
@@ -325,44 +312,18 @@ void CanvasRenderer::Draw(void)
 	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
 	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
 
-	ID3D11ShaderResourceView* pTexture = m_pTexture->GetTexture();
-
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
-	pDeviceContext->PSSetShaderResources(0, 1, &pTexture);
-	//プリミティブをレンダリング
-	pDeviceContext->Draw(m_nNumVertexPolygon, 0);
-}
+	pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
 
-void ShadowRenderer::Draw(void)
-{
-	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
-
-	ID3D11Device* pDevice = pAppRenderer->GetDevice();
-	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
-	ID3D11DepthStencilView* pDepthStencilView = pAppRenderer->GetDepthStencilView();
-	ID3D11RenderTargetView* pRenderTargetView = pAppRenderer->GetRenderTargetView();
-
-	float clearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, clearColor);//画面クリア 
-
-															 // 自前のレンダーターゲットビューに切り替え
-	pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-	pDeviceContext->RSSetViewports(1, &m_pView[1]);
-
-	// OMに描画ターゲット ビューと深度/ステンシル・ビューを設定
-	ID3D11RenderTargetView* pRender[1] = { NULL };
-	pDeviceContext->OMSetRenderTargets(1, &mpRTV, m_pDepthStencilView);
-
-	//描画
-
-	float ClearColor[4] = { 0,0,1,1 }; //消去色
-	pDeviceContext->ClearRenderTargetView(pRenderTargetView, ClearColor);//画面クリア 
-
-	pDeviceContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-	pDeviceContext->RSSetViewports(1, &m_pView[0]);
-
-	pDeviceContext->OMSetRenderTargets(1, &pRenderTargetView, pDepthStencilView);
+	if (m_pIndexBuffer != NULL)
+	{
+		//そのインデックスバッファをコンテキストに設定
+		pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		pDeviceContext->DrawIndexed(m_nNumVertexPolygon, 0, 0);
+	}
+	else
+	{
+		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
+	}
 }

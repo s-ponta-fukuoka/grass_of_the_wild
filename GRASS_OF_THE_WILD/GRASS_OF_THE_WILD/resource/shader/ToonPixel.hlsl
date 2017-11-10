@@ -19,7 +19,7 @@ SamplerState samLinear : register(s0);
 
 float3 g_lightVec = { 0.71,-0.71,0.0 };
 
-float4 ps_main(pixcelIn IN) : SV_Target
+float4 main(pixcelIn IN) : SV_Target
 {
 	pixcelIn OUT;
 	

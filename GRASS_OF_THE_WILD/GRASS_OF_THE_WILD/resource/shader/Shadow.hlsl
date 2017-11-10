@@ -13,7 +13,7 @@ struct pixcelIn
 Texture2D txDiffuse : register(t0);
 SamplerState samLinear : register(s0);
 
-float4 ps_main(pixcelIn IN) : SV_Target
+float4 main(pixcelIn IN) : SV_Target
 {
 	return IN.Spos.z / IN.Spos.w;
 }

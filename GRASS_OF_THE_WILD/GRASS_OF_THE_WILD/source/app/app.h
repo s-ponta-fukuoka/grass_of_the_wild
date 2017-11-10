@@ -29,7 +29,8 @@
 // ‘O•ûéŒ¾
 //*****************************************************************************
 class AppRenderer;
-class Camera;
+class MainCamera;
+class LightCamera;
 class ShaderManager;
 class TextureManager;
 class RenderManager;
@@ -62,7 +63,9 @@ public:
 private:
 	AppRenderer*					m_pAppRenderer;
 
-	Camera*							m_pCamera;
+	MainCamera*						m_pCamera;
+
+	LightCamera*					m_pLightCamera;
 
 	TextureManager*					m_pTextureManager;
 

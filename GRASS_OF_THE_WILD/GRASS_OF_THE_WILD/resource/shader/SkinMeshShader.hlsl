@@ -27,7 +27,7 @@ cbuffer ConstantBuffer : register(b0)
 	matrix Bones[100];
 }
 
-vertexOut vs_main(vertexIn IN)
+vertexOut main(vertexIn IN)
 {
 	vertexOut OUT;
 	

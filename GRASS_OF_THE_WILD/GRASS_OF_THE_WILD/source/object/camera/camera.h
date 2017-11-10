@@ -25,7 +25,7 @@ class Camera : public Object
 {
 public:
 	//コンストラクタ
-	Camera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp);
+	Camera();
 
 	//デストラクタ
 	virtual ~Camera();
@@ -39,14 +39,8 @@ public:
 	//更新
 	void Update(void);
 
-	//カメラセット
-	void SetCamera(void);
-
-	//定数取得
-	AppRenderer::Constant* GetConstant(void);
-
-private:
-	AppRenderer::Constant*		m_pConstant;
+protected:
+	AppRenderer::Constant*				m_pConstant;
 
 	XMMATRIX							m_mtxView;
 

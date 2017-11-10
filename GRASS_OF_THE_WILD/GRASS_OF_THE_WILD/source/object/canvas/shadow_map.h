@@ -11,7 +11,7 @@
 // ヘッダファイル
 //*****************************************************************************
 #include <Windows.h>
-#include "../object.h"
+#include "../canvas/canvas.h"
 #include "../../renderer/app_renderer.h"
 
 //*****************************************************************************
@@ -26,17 +26,16 @@
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
-class ShadowMap : public Object
+class ShadowMap : public Canvas
 {
 public:
 	//コンストラクタ
-	ShadowMap( );
+	ShadowMap(RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager);
 
 	//デストラクタ
 	virtual ~ShadowMap( );
-
-	//初期化
-	HRESULT Init( void );
 
 	//終了
 	void Release( void );
@@ -44,41 +43,40 @@ public:
 	//更新
 	void Update( void );
 
+	//バッファ
+	void MakeVertex(ID3D11Device* pDevice);
+
 	//テクスチャ2D設定
-	void ConfigTexture2D(void);
+	void ConfigTexture2D(ID3D11Device* pDevice);
 
 	//レンダーターゲット設定
-	void ConfigRenderTargetView(void);
+	void ConfigRenderTargetView(ID3D11Device* pDevice);
 
 	//ステンシルターゲット設定
-	void ConfigDepthStencilView(void);
+	void ConfigDepthStencilView(ID3D11Device* pDevice);
 
 	//シェーダーリソースビュー設定
-	void ConfigShaderResourceView(void);
+	void ConfigShaderResourceView(ID3D11Device* pDevice);
 
 	//ビューポート設定
 	void ConfigViewPort(void);
 
-protected:
-	VECTOR3				m_pos;			// ポリゴン座標
-	VECTOR3				m_size;			// サイズ
-	VECTOR3				m_normal;
-	VECTOR2				m_tex;			// テクスチャ座標
-	VECTOR2				m_ofsettex;		// テクスチャオフセット
-
 private:
-	ID3D11BlendState* m_pBlendState;
-	D3D11_VIEWPORT m_pView;
-	ID3D11DepthStencilView* m_pDepthStencilView; //ステンシルターゲットビュー
-	ID3D11Texture2D *m_pTexture2D;
-	ID3D11Texture2D *m_pStencilTexture2D;
-	ID3D11RenderTargetView *mpRTV;
-	ID3D11SamplerState* m_pSampleLinear;//テクスチャーのサンプラー
-	static ID3D11ShaderResourceView* m_pTexture;//テクスチャー
-	ID3D11ShaderResourceView* m_pShadow;//テクスチャー
-	ID3D11Buffer* m_pVertexBuffer;
-	ID3D11Buffer* m_pConstantBuffer;//コンスタントバッファ
-	bool m_bLoadTexture;
+	VECTOR3							m_size;
+
+	ID3D11BlendState*				m_pBlendState;
+
+	D3D11_VIEWPORT					m_pView;
+
+	ID3D11DepthStencilView*			m_pDepthStencilView;
+
+	ID3D11RenderTargetView*			m_pRenderTargetView;
+
+	ID3D11ShaderResourceView*		m_pTexture;
+
+	ID3D11Texture2D*				m_pTexture2D;
+
+	ID3D11Texture2D*				m_pStencilTexture2D;
 };
 
 #endif

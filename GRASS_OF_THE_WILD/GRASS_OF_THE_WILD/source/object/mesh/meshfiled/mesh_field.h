@@ -39,7 +39,7 @@ public:
 
 	HRESULT Init( void );	//初期化処理
 
-	void Uninit( void );	//終了処理
+	void Release( void );	//終了処理
 
 	void Update( void );	//更新処理
 

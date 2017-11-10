@@ -22,7 +22,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4x4 Projection;		//プロジェクション変換行列
 }
 
-vertexOut vs_main(vertexIn IN)
+vertexOut main(vertexIn IN)
 {
 	vertexOut OUT;
 

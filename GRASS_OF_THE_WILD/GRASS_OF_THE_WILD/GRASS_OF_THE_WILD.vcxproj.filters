@@ -114,6 +114,15 @@
     <ClCompile Include="source\object\canvas\shadow_map.cpp">
       <Filter>source\object\canvas</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\canvas\canvas.cpp">
+      <Filter>source\object\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\camera\main_camera.cpp">
+      <Filter>source\object\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\camera\light_camera.cpp">
+      <Filter>source\object\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\object\object.h">
@@ -172,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="source\object\canvas\shadow_map.h">
       <Filter>source\object\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\canvas.h">
+      <Filter>source\object\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\camera\main_camera.h">
+      <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\camera\light_camera.h">
+      <Filter>source\object\camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

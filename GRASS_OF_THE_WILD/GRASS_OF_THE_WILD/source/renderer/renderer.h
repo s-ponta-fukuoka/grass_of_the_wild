@@ -154,31 +154,4 @@ private:
 	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
 };
 
-//-----------------------------------------------------------------------------
-// シャドウレンダラー
-//-----------------------------------------------------------------------------
-class ShadowRenderer : public Renderer
-{
-public:
-	//コンストラクタ
-	ShadowRenderer(ID3D11Buffer* pVertexBuffer,
-		ShaderManager* pShaderManager,
-		VertexShader::VERTEX_TYPE eVsType,
-		PixelShader::PIXEL_TYPE ePsType);
-
-	//デストラクタ
-	virtual ~ShadowRenderer();
-
-	//終了
-	void Release(void) {};
-
-	//描画
-	void Draw(void);
-
-private:
-	ID3D11DepthStencilView* m_pDepthStencilView;
-
-	ID3D11RenderTargetView* m_pRenderTargetView;
-};
-
 #endif

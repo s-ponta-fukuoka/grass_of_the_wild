@@ -36,7 +36,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4 Color;
 }
 
-vertexOut vs_main(vertexIn IN)
+vertexOut main(vertexIn IN)
 {
 	vertexOut OUT;
 

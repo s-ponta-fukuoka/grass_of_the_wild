@@ -64,7 +64,7 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												PixelShader::PS_NORMAL));
 
 	delete[] pTexture;
-	pTexture;
+	pTexture = NULL;
 }
 
 //=============================================================================
@@ -98,7 +98,7 @@ HRESULT MeshField::Init( void )
 //=============================================================================
 // ƒ|ƒŠƒSƒ“‚ÌI—¹ˆ—
 //=============================================================================
-void MeshField::Uninit(void)
+void MeshField::Release(void)
 {
 	Release();
 }
