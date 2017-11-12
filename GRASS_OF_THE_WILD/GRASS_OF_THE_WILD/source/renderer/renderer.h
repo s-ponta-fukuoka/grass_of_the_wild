@@ -13,7 +13,7 @@
 #include "app_renderer.h"
 #include "../object/object.h"
 #include "../shader/shader.h"
-#include "../texture/texturemanager.h"
+#include "../texture/texture_manager.h"
 
 
 //*****************************************************************************

@@ -19,7 +19,8 @@
 #include "../object/mesh/mesh_manager.h"
 #include "../object/mesh/meshfiled/mesh_field.h"
 #include "../object/mesh/skybox/skybox.h"
-#include "../object/canvas/shadow_map.h"
+#include "../object/canvas/canvas_manager.h"
+#include "../object/canvas/shadow_map/shadow_map.h"
 #include "../device/input.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,7 @@ App::App()
 	, m_pRenderManager(NULL)
 	, m_pMeshManager(NULL)
 	, m_pInputKeybord(NULL)
+	, m_pCanvasManager(NULL)
 {
 	;
 }
@@ -75,7 +77,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pRenderManager = new RenderManager();
 
-	ShadowMap* pShadow = new ShadowMap(m_pRenderManager, m_pShaderManager, m_pTextureManager);
+	m_pCanvasManager = new CanvasManager();
+	m_pCanvasManager->AddCanvas(new ShadowMap(m_pRenderManager, m_pShaderManager, m_pTextureManager));
 
 	m_pMeshManager = new MeshManager();
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
@@ -119,6 +122,11 @@ void App::Release(void)
 	delete m_pMeshManager;
 	m_pMeshManager = NULL;
 
+	if (m_pCanvasManager == NULL) { return; }
+	m_pCanvasManager->ReleaseAll();
+	delete m_pCanvasManager;
+	m_pCanvasManager = NULL;
+
 	if (m_pRenderManager == NULL) { return; }
 	m_pRenderManager->ReleaseAll();
 	delete m_pRenderManager;
@@ -137,6 +145,8 @@ void App::Update(void)
 	m_pCamera->Update();
 
 	m_pMeshManager->UpdateAll();
+
+	m_pCanvasManager->UpdateAll();
 
 }
 

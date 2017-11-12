@@ -55,6 +55,12 @@
     <Filter Include="source\object\canvas">
       <UniqueIdentifier>{6a2bd98c-c625-4ff2-9f2e-dcd0c9657c3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\object\canvas\shadow_map">
+      <UniqueIdentifier>{b331f291-64b3-478a-8f76-b05ca4f536f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\model">
+      <UniqueIdentifier>{257145db-863d-422f-acda-7c0d6e414cac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -102,17 +108,11 @@
     <ClCompile Include="source\texture\texture.cpp">
       <Filter>source\texture</Filter>
     </ClCompile>
-    <ClCompile Include="source\texture\texturemanager.cpp">
-      <Filter>source\texture</Filter>
-    </ClCompile>
     <ClCompile Include="source\object\mesh\skybox\skybox.cpp">
       <Filter>source\object\mesh\skybox</Filter>
     </ClCompile>
     <ClCompile Include="source\device\input.cpp">
       <Filter>source\device</Filter>
-    </ClCompile>
-    <ClCompile Include="source\object\canvas\shadow_map.cpp">
-      <Filter>source\object\canvas</Filter>
     </ClCompile>
     <ClCompile Include="source\object\canvas\canvas.cpp">
       <Filter>source\object\canvas</Filter>
@@ -122,6 +122,21 @@
     </ClCompile>
     <ClCompile Include="source\object\camera\light_camera.cpp">
       <Filter>source\object\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp">
+      <Filter>source\object\canvas\shadow_map</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\canvas_manager.cpp">
+      <Filter>source\object\canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="source\texture\texture_manager.cpp">
+      <Filter>source\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="source\model\model.cpp">
+      <Filter>source\model</Filter>
+    </ClCompile>
+    <ClCompile Include="source\model\model_manager.cpp">
+      <Filter>source\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +182,6 @@
     <ClInclude Include="source\texture\texture.h">
       <Filter>source\texture</Filter>
     </ClInclude>
-    <ClInclude Include="source\texture\texturemanager.h">
-      <Filter>source\texture</Filter>
-    </ClInclude>
     <ClInclude Include="source\texture\stb_image.h">
       <Filter>source\texture</Filter>
     </ClInclude>
@@ -179,9 +191,6 @@
     <ClInclude Include="source\device\input.h">
       <Filter>source\device</Filter>
     </ClInclude>
-    <ClInclude Include="source\object\canvas\shadow_map.h">
-      <Filter>source\object\canvas</Filter>
-    </ClInclude>
     <ClInclude Include="source\object\canvas\canvas.h">
       <Filter>source\object\canvas</Filter>
     </ClInclude>
@@ -190,6 +199,21 @@
     </ClInclude>
     <ClInclude Include="source\object\camera\light_camera.h">
       <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h">
+      <Filter>source\object\canvas\shadow_map</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\canvas_manager.h">
+      <Filter>source\object\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="source\texture\texture_manager.h">
+      <Filter>source\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="source\model\model.h">
+      <Filter>source\model</Filter>
+    </ClInclude>
+    <ClInclude Include="source\model\model_manager.h">
+      <Filter>source\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

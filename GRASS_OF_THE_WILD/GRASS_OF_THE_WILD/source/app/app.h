@@ -31,10 +31,11 @@
 class AppRenderer;
 class MainCamera;
 class LightCamera;
-class ShaderManager;
 class TextureManager;
 class RenderManager;
+class ShaderManager;
 class MeshManager;
+class CanvasManager;
 class InputKeyboard;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
@@ -74,6 +75,8 @@ private:
 	RenderManager*					m_pRenderManager;
 
 	MeshManager*					m_pMeshManager;
+
+	CanvasManager*					m_pCanvasManager;
 
 	InputKeyboard*					m_pInputKeybord;
 };

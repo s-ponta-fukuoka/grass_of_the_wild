@@ -1,4 +1,4 @@
-﻿  skybox.cpp
+﻿  model_manager.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -140,40 +140,7 @@ c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path
 c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(71): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(72): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(73): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(74): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(75): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(77): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(78): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(79): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(80): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(81): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(82): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(84): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(85): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(86): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(87): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(88): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(89): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(91): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(92): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(93): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(94): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(95): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(96): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(98): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(99): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(100): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(101): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(102): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(103): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(108): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(109): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(110): warning C4305: '引数': 'double' から 'const float' へ切り詰めます。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\skybox\skybox.cpp(66): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
-  mesh_field.cpp
+  model.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -315,29 +282,231 @@ c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path
 c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(47): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(49): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(105): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(107): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(214): warning C4244: '引数': 'int' から 'const float' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(238): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(241): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(244): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(248): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(250): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(259): warning C4244: '=': 'float' から 'WORD' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(232): warning C4189: 'nNo': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(135): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(289): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(290): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(303): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(304): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(305): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\mesh\meshfiled\mesh_field.cpp(306): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(176): warning C4316: '_XMMATRIX': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: 'fopen' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(70): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(74): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(77): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(79): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(82): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(85): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(88): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(91): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(94): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(95): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(103): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(104): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(105): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(106): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(107): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(108): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(111): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(112): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(113): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(114): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(115): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(116): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(117): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(118): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(121): warning C4477: 'fscanf' : 書式文字列 '%d' には、型 'int *' の引数が必要ですが、可変個引数 1 は型 'float *' です
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(121): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(122): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(123): warning C4477: 'fscanf' : 書式文字列 '%d' には、型 'int *' の引数が必要ですが、可変個引数 1 は型 'float *' です
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(123): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(124): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(125): warning C4477: 'fscanf' : 書式文字列 '%d' には、型 'int *' の引数が必要ですが、可変個引数 1 は型 'float *' です
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(125): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(126): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(127): warning C4477: 'fscanf' : 書式文字列 '%d' には、型 'int *' の引数が必要ですが、可変個引数 1 は型 'float *' です
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(127): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(128): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(131): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(132): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(133): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(134): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(135): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(136): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(137): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(138): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(141): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(142): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(149): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(150): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(151): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(152): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(153): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(154): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(157): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(158): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(159): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(160): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(163): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(164): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(167): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(168): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(180): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(181): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(182): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(183): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(184): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(185): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(186): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(187): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(189): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(190): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(191): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(192): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(193): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(194): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(195): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(196): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(198): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(199): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(200): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(201): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(202): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(203): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(204): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(205): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(207): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(208): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(209): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(210): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(211): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(212): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(213): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(214): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(220): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(221): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(222): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(223): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(224): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(225): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(227): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(228): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(229): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(230): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(231): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(232): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(234): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(235): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(236): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(237): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(238): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(239): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(241): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(248): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\model\model.cpp(249): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' の宣言を確認してください
   コードを生成中...
-  スキップ中... (関連する変更は検出されませんでした)
-  mesh_manager.cpp
-  mesh.cpp
-  app.cpp
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.exe
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.pdb (Partial PDB)

@@ -23,11 +23,14 @@
     <ClCompile Include="source\device\input.cpp" />
     <ClCompile Include="source\lib\vector.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\model\model.cpp" />
+    <ClCompile Include="source\model\model_manager.cpp" />
     <ClCompile Include="source\object\camera\camera.cpp" />
     <ClCompile Include="source\object\camera\light_camera.cpp" />
     <ClCompile Include="source\object\camera\main_camera.cpp" />
     <ClCompile Include="source\object\canvas\canvas.cpp" />
-    <ClCompile Include="source\object\canvas\shadow_map.cpp" />
+    <ClCompile Include="source\object\canvas\canvas_manager.cpp" />
+    <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
     <ClCompile Include="source\object\mesh\mesh.cpp" />
     <ClCompile Include="source\object\mesh\meshfiled\mesh_field.cpp" />
@@ -40,17 +43,20 @@
     <ClCompile Include="source\shader\shader.cpp" />
     <ClCompile Include="source\shader\shader_manager.cpp" />
     <ClCompile Include="source\texture\texture.cpp" />
-    <ClCompile Include="source\texture\texturemanager.cpp" />
+    <ClCompile Include="source\texture\texture_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h" />
     <ClInclude Include="source\device\input.h" />
     <ClInclude Include="source\lib\vector.h" />
+    <ClInclude Include="source\model\model.h" />
+    <ClInclude Include="source\model\model_manager.h" />
     <ClInclude Include="source\object\camera\camera.h" />
     <ClInclude Include="source\object\camera\light_camera.h" />
     <ClInclude Include="source\object\camera\main_camera.h" />
     <ClInclude Include="source\object\canvas\canvas.h" />
-    <ClInclude Include="source\object\canvas\shadow_map.h" />
+    <ClInclude Include="source\object\canvas\canvas_manager.h" />
+    <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
     <ClInclude Include="source\object\mesh\mesh.h" />
     <ClInclude Include="source\object\mesh\meshfiled\mesh_field.h" />
@@ -64,7 +70,7 @@
     <ClInclude Include="source\shader\shader_manager.h" />
     <ClInclude Include="source\texture\stb_image.h" />
     <ClInclude Include="source\texture\texture.h" />
-    <ClInclude Include="source\texture\texturemanager.h" />
+    <ClInclude Include="source\texture\texture_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resource\shader\matPixelShader.hlsl">

@@ -7,7 +7,7 @@
 #include "renderer.h"
 #include "../shader/shader.h"
 #include "../shader/shader_manager.h"
-#include "../texture/texturemanager.h"
+#include "../texture/texture_manager.h"
 
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
