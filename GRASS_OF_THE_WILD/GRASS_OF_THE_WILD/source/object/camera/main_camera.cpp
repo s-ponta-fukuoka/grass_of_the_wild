@@ -117,8 +117,11 @@ void MainCamera::SetCamera(void)
 	XMMATRIX hProjection;	//“§Ž‹ŽË‰e•ÏŠ·s—ñ
 	hProjection = XMMatrixPerspectiveFovLH(D3D_PI / 3.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 30000.0f);
 
-	m_pConstant->view = XMMatrixTranspose(hView);
-	m_pConstant->projection = XMMatrixTranspose(hProjection);
+	XMVECTOR LightPos = XMVectorSet(0, 1.f, -1.0f, 1);
+	m_pConstant->light = LightPos;
+
+	m_pConstant->view = hView;
+	m_pConstant->projection = hProjection;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

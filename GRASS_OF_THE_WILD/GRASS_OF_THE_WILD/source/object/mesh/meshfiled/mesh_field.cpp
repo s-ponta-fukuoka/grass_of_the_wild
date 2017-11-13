@@ -52,9 +52,6 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 
 	Texture* pTexture = new Texture("resource/sprite/field000.jpg", pTextureManager);
 
-	pConstant->lightView = pLightCameraConstant->view;
-	pConstant->lightProjection = pLightCameraConstant->projection;
-	pConstant->light = pLightCameraConstant->light;
 
 	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
 												m_pIndexBuffer,
@@ -63,6 +60,7 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												pRenderManager->GetShadowTexture(),
 												m_pTransform,
 												pConstant,
+												pLightCameraConstant,
 												MESH_FILED_VERTEX,
 												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 												VertexShader::VS_NORMAL,
@@ -75,6 +73,7 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												NULL,
 												m_pTransform,
 												pLightCameraConstant,
+												NULL,
 												MESH_FILED_VERTEX,
 												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 												VertexShader::VS_NORMAL,

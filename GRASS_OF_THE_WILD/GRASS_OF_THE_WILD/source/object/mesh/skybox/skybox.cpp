@@ -28,7 +28,7 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 	AppRenderer::Constant* pConstant)
 {
 	m_pVertexBuffer = NULL;
-	m_pTransform->position = VECTOR3(-10000.0f, 10000.0f, 10000.0f);
+	m_pos = VECTOR3(-10000.0f, 10000.0f, 10000.0f);
 	m_vertex.normal = VECTOR3(0.0f, 0.0f, 0.0f);			// ƒ|ƒŠƒSƒ“‚ÌˆÊ’u
 	m_size = VECTOR3(20000.0f, 20000.0f, 100.0f);			// ƒ|ƒŠƒSƒ“‚ÌˆÊ’u
 
@@ -43,6 +43,7 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 		NULL,
 		m_pTransform,
 		pConstant,
+		NULL,
 		SKY_BOX_VERTEX,
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 		VertexShader::VS_3D,
@@ -68,46 +69,46 @@ void SkyBox::MakeVertex(void)
 	//ŽlŠpŒ`
 	AppRenderer::Vertex3D vertices[] =
 	{
-		VECTOR3(m_pTransform->position.x + m_size.x, m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.75,0.333),
-		VECTOR3(m_pTransform->position.x, m_pTransform->position.y,-m_pTransform->position.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(1,0.333),
-		VECTOR3(m_pTransform->position.x + m_size.x, m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1) , VECTOR2(0.75,0.666),
-		VECTOR3(m_pTransform->position.x, m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(1,0.666),
-		VECTOR3(m_pTransform->position.x, m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(1,0.666),
+		VECTOR3(m_pos.x + m_size.x, m_pos.y,-m_pos.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.75,0.333),
+		VECTOR3(m_pos.x, m_pos.y,-m_pos.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(1,0.333),
+		VECTOR3(m_pos.x + m_size.x, m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1) , VECTOR2(0.75,0.666),
+		VECTOR3(m_pos.x, m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(1,0.666),
+		VECTOR3(m_pos.x, m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(1,0.666),
 
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,m_pTransform->position.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.333),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,m_pTransform->position.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,m_pTransform->position.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.333333333),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.666666666),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z),  VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.666666666),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z),  VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.666666666),
+		VECTOR3(m_pos.x,m_pos.y,m_pos.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.333),
+		VECTOR3(m_pos.x,m_pos.y,m_pos.z),VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,m_pos.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.333333333),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,m_pos.z), VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.25,0.666666666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,m_pos.z),  VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.666666666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,m_pos.z),  VECTOR3(0,0,0), VECTOR4(0,0,0,1), VECTOR2(0.5,0.666666666),
 		
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.333333333),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.333333333),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.333333333),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.666666666),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666666666),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666666666),
+		VECTOR3(m_pos.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.333333333),
+		VECTOR3(m_pos.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.333333333),
+		VECTOR3(m_pos.x,m_pos.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.333333333),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0,0.666666666),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,m_pos.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666666666),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,m_pos.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666666666),
 		
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333333333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333333333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.75,0.333333333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.666666666),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.75,0.666666666),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.75,0.666666666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333333333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333333333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.75,0.333333333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.666666666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.75,0.666666666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.75,0.666666666),
 		
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.666),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.999),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.5,0.999),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y - m_size.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.5,0.999),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.666),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.666),
+		VECTOR3(m_pos.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.999),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.5,0.999),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y - m_size.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1), VECTOR2(0.5,0.999),
 		
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.0),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.0),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,-m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.0),
-		VECTOR3(m_pTransform->position.x,m_pTransform->position.y,m_pTransform->position.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,m_pTransform->position.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333),
-		VECTOR3(m_pTransform->position.x + m_size.x,m_pTransform->position.y,m_pTransform->position.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333),
+		VECTOR3(m_pos.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.0),
+		VECTOR3(m_pos.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.0),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,-m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.0),
+		VECTOR3(m_pos.x,m_pos.y,m_pos.z), VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.25,0.333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,m_pos.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333),
+		VECTOR3(m_pos.x + m_size.x,m_pos.y,m_pos.z),  VECTOR3(0,0,0),VECTOR4(0,0,0,1),VECTOR2(0.5,0.333),
 	};
 
 	D3D11_BUFFER_DESC bd;

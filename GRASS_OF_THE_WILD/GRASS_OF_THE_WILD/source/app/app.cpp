@@ -21,6 +21,8 @@
 #include "../object/mesh/skybox/skybox.h"
 #include "../object/canvas/canvas_manager.h"
 #include "../object/canvas/shadow_map/shadow_map.h"
+#include "../model/model_manager.h"
+#include "../object/character/player/player.h"
 #include "../device/input.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -75,6 +77,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	m_pShaderManager = new ShaderManager();
 	m_pShaderManager->GenerateShader();
 
+	m_pModelManager = new ModelManager();
+
 	m_pRenderManager = new RenderManager();
 
 	m_pCanvasManager = new CanvasManager();
@@ -83,6 +87,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	m_pMeshManager = new MeshManager();
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
+
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
 	return S_OK;
 }

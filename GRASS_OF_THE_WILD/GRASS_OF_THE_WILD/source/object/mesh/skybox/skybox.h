@@ -42,6 +42,7 @@ public:
 	void MakeVertex(void);
 
 private:
+	VECTOR3				m_pos;
 	ID3D11Buffer* m_pVertexBuffer;
 	VECTOR3				m_size;
 };

@@ -28,7 +28,7 @@ public:
 	//ファイルネーム取得
 	const char *GetFileName();
 
-private:
+protected:
 	const char* m_pFileName;
 };
 
@@ -54,10 +54,10 @@ public:
 		XMMATRIX world;
 		XMMATRIX view;
 		XMMATRIX projection;
-		XMMATRIX LightView;
-		XMMATRIX LightProjection;
-		XMMATRIX Cluster[256];
-		XMMATRIX LclCluster;
+		XMMATRIX lightView;
+		XMMATRIX lightProjection;
+		XMMATRIX cluster[256];
+		XMMATRIX lclCluster;
 		XMVECTOR light;
 	};
 
@@ -68,6 +68,7 @@ public:
 
 	struct Mesh
 	{
+		int					nNumCluster;
 		int					nNumVertex;
 		int					nNumPolygon;
 		int					nNumPolygonVertex;
@@ -92,7 +93,7 @@ public:
 	};
 
 	//コンストラクタ
-	SkinMeshModel();
+	SkinMeshModel(char* pFileName);
 
 	//デストラクタ
 	virtual ~SkinMeshModel();
@@ -100,10 +101,20 @@ public:
 	//読み込み
 	void LoadFile(const  char* FilenName);
 
+	//メッシュの取得
+	Mesh *GetMesh(void);
+
+	//アニメ―ションの取得
+	Anime *GetAnime(void);
+
+	//メッシュ数の取得
+	int GetNumMesh(void);
+
+	//アニメーション数の取得
+	int GetNumAnime(void);
+
 private:
 	int					m_nNumMesh;
-
-	int					m_nNumCluster;
 
 	int					m_nNumAnime;
 

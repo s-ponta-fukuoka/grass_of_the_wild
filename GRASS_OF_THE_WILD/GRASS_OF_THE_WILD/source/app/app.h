@@ -21,10 +21,6 @@
 //安全に解放する
 #define SAFE_RELEASE(x) if(x){x->Release(); x=NULL;}
 
-#define D3D_PI ((FLOAT) 3.141592654f) 
-#define D3DToRadian( degree ) ((degree) * (D3DX_PI / 180.0f))
-#define D3DToDegree( radian ) ((radian) * (180.0f / D3DX_PI))
-
 //*****************************************************************************
 // 前方宣言
 //*****************************************************************************
@@ -37,6 +33,8 @@ class ShaderManager;
 class MeshManager;
 class CanvasManager;
 class InputKeyboard;
+class ModelManager;
+class Player;
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -79,6 +77,10 @@ private:
 	CanvasManager*					m_pCanvasManager;
 
 	InputKeyboard*					m_pInputKeybord;
+
+	ModelManager*					m_pModelManager;
+
+	Player*							m_pPlayer;
 };
 
 #endif

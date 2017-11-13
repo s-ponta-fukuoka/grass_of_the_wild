@@ -8,6 +8,7 @@
 #include "../shader/shader.h"
 #include "../shader/shader_manager.h"
 #include "../texture/texture_manager.h"
+#include "../model/model.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -43,6 +44,7 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 							ID3D11ShaderResourceView* pShadowMap,
 							Object::Transform* pTransform,
 							AppRenderer::Constant* pConstant,
+							AppRenderer::Constant* pLightConstant,
 							int	nNumVertexPolygon,
 							D3D_PRIMITIVE_TOPOLOGY ePolygon,
 							VertexShader::VERTEX_TYPE eVsType,
@@ -62,20 +64,69 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 
 	m_pConstant = pConstant;
 
+	m_pLightConstant = pLightConstant;
+
 	m_nNumVertexPolygon = nNumVertexPolygon;
 
 	m_pTexture = pTexture;
 
 	m_pShadowMap = pShadowMap;
 
-	ConfigConstantBuffer();
+	ConfigConstantBuffer(sizeof(AppRenderer::Constant));
 
 	ConfigSamplerState();
 }
 
-SkinnedMeshRenderer::SkinnedMeshRenderer()
+SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+	ID3D11Buffer* pIndexBuffer,
+	ShaderManager* pShaderManager,
+	ID3D11ShaderResourceView* pTexture,
+	ID3D11ShaderResourceView* pShadowMap,
+	Object::Transform* pTransform,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightConstant,
+	int	nNumVertexPolygon,
+	int* pFrame,
+	int* pAnimeNumber,
+	D3D_PRIMITIVE_TOPOLOGY ePolygon,
+	VertexShader::VERTEX_TYPE eVsType,
+	PixelShader::PIXEL_TYPE ePsType,
+	SkinMeshModel::Cluster*	pCluster,
+	SkinMeshModel::Mesh mesh)
 {
-	;
+	m_ePolygon = ePolygon;
+
+	m_pVertexBuffer = pVertexBuffer;
+
+	m_pIndexBuffer = pIndexBuffer;
+
+	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
+
+	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
+
+	m_pTransform = pTransform;
+
+	m_pConstant = pConstant;
+
+	m_pLightConstant = pLightConstant;
+
+	m_nNumVertexPolygon = nNumVertexPolygon;
+
+	m_pFrame = pFrame;
+
+	m_pAnimeNumber = pAnimeNumber;
+
+	m_pTexture = pTexture;
+
+	m_pShadowMap = pShadowMap;
+
+	m_pCluster = pCluster;
+
+	m_mesh = mesh;
+
+	ConfigConstantBuffer(sizeof(SkinMeshModel::ModelConstant));
+
+	ConfigSamplerState();
 }
 
 CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
@@ -130,14 +181,14 @@ CanvasRenderer::~CanvasRenderer()
 ///////////////////////////////////////////////////////////////////////////////
 //定数バッファ設定
 ///////////////////////////////////////////////////////////////////////////////
-void Renderer::ConfigConstantBuffer(void)
+void Renderer::ConfigConstantBuffer(UINT ByteWidth)
 {
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 
 	//コンスタントバッファ作成
 	D3D11_BUFFER_DESC cb;
-	cb.ByteWidth = sizeof(AppRenderer::Constant);
+	cb.ByteWidth = ByteWidth;
 	cb.Usage = D3D11_USAGE_DEFAULT;
 	cb.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	cb.CPUAccessFlags = 0;
@@ -187,18 +238,27 @@ void MeshRenderer::Draw(void)
 
 	AppRenderer::Constant hConstant;
 
-	//ワールド変換用行列を生成
-	XMMATRIX hWorld;
+	XMMATRIX hWorld = XMMatrixIdentity();
+	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
+	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
+	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
 
-	//初期化
-	hWorld = XMMatrixIdentity();
-
-	XMMATRIX hRotate = XMMatrixRotationY(m_pTransform->rot.y);
+	hWorld = XMMatrixMultiply(hWorld, hScaling);
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
+	hWorld = XMMatrixMultiply(hWorld, hPosition);
 
 	hConstant.world = XMMatrixTranspose(hWorld);
-	hConstant.view = m_pConstant->view;
-	hConstant.projection = m_pConstant->projection;
+	hConstant.view = XMMatrixTranspose(m_pConstant->view);
+	hConstant.projection = XMMatrixTranspose(m_pConstant->projection);
+
+	if (m_pLightConstant != NULL)
+	{
+		hConstant.lightView = XMMatrixTranspose(m_pLightConstant->view);
+		hConstant.light = m_pConstant->light;
+
+		XMMATRIX mat = XMMatrixTranspose(hWorld * m_pLightConstant->view * m_pLightConstant->projection);
+		hConstant.lightProjection = mat;
+	}
 
 	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
 
@@ -231,83 +291,95 @@ void MeshRenderer::Draw(void)
 
 void SkinnedMeshRenderer::Draw()
 {
-	//for (int i = 0; i < modelCnt; i++)
-	//{
-	//	//そのブレンディングをコンテキストに設定
-	//	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
-	//	pDeviceContext->OMSetBlendState(m_fbxModel[i].pBlendState, blendFactor, 0xffffffff);
-	//
-	//	//バーテックスバッファーをセット
-	//	UINT stride = sizeof(ModelVertex);
-	//	UINT offset = 0;
-	//	pDeviceContext->IASetVertexBuffers(0, 1, &m_fbxModel[i].pVertexBuffer, &stride, &offset);
-	//
-	//	//そのインデックスバッファをコンテキストに設定
-	//	pDeviceContext->IASetIndexBuffer(m_fbxModel[i].pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-	//
-	//	//プリミティブ・トポロジーをセット
-	//	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//
-	//	//頂点インプットレイアウトをセット
-	//	pDeviceContext->IASetInputLayout(m_pVertexShader->GetVertexLayout());
-	//
-	//
-	//	ConstantModel hConstantBuffer;
-	//
-	//	//初期化
-	//	XMMATRIX hLcl = XMMatrixIdentity();
-	//	XMMATRIX hLclPosition = XMMatrixTranslation(m_Bone[i]->pos.x, m_Bone[i]->pos.y, m_Bone[i]->pos.z);
-	//	XMMATRIX hLclRotate = XMMatrixRotationRollPitchYaw(D3DXToRadian(m_Bone[i]->rot.x), D3DXToRadian(m_Bone[i]->rot.y), D3DXToRadian(m_Bone[i]->rot.z));
-	//	XMMATRIX hLclScaling = XMMatrixScaling(m_Bone[i]->scl.x, m_Bone[i]->scl.y, m_Bone[i]->scl.z);
-	//
-	//	hLcl = XMMatrixMultiply(hLcl, hLclScaling);
-	//	hLcl = XMMatrixMultiply(hLcl, hLclRotate);
-	//	hLcl = XMMatrixMultiply(hLcl, hLclPosition);
-	//
-	//	//初期化
-	//	XMMATRIX hWorld = XMMatrixIdentity();
-	//	XMMATRIX hPosition = XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
-	//	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DXToRadian(m_rot.x), -m_rot.y, D3DXToRadian(m_rot.z));
-	//	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
-	//
-	//	hWorld = XMMatrixMultiply(hWorld, hScaling);
-	//	hWorld = XMMatrixMultiply(hWorld, hRotate);
-	//	hWorld = XMMatrixMultiply(hWorld, hPosition);
-	//
-	//	hConstantBuffer.mWorld = XMMatrixTranspose(hWorld);
-	//	hConstantBuffer.mLclBone = XMMatrixTranspose(hLcl);
-	//	hConstantBuffer.mView = XMMatrixTranspose(CSubCamera::GetConstant().mView);
-	//	hConstantBuffer.mProjection = XMMatrixTranspose(CSubCamera::GetConstant().mProjection);
-	//	hConstantBuffer.mLight = CSubCamera::GetConstant().mLight;
-	//
-	//	for (int j = 0; j < m_fbxModel[i].clusterCount; j++)
-	//	{
-	//		hConstantBuffer.mBone[j] = m_Bone[i][j].mat[m_Number][timeCnt];
-	//	}
-	//
-	//	pDeviceContext->UpdateSubresource(m_fbxModel[i].pConstantBuffer, 0, NULL, &hConstantBuffer, 0, 0);
-	//
-	//	//使用するシェーダーの登録
-	//	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
-	//	pDeviceContext->PSSetShader(m_pShadowPixelShader->GetPixelShader(), NULL, 0);
-	//
-	//	//コンテキストに設定
-	//	pDeviceContext->VSSetConstantBuffers(0, 1, &m_fbxModel[i].pConstantBuffer);
-	//
-	//	//テクスチャーをシェーダーに渡す
-	//	pDeviceContext->PSSetSamplers(0, 1, &m_fbxModel[i].pSampleLinear);
-	//
-	//	if (i < 10 && m_fbxModel[i].filename != NULL)
-	//	{
-	//		pDeviceContext->PSSetShaderResources(0, 1, &m_fbxModel[i].pTexture);
-	//	}
-	//	pDeviceContext->PSSetShaderResources(1, 1, &m_ToonTexture);
-	//	pDeviceContext->PSSetShaderResources(2, 1, &m_ShadowTexture);
-	//
-	//	//プリミティブをレンダリング
-	//	//pDeviceContext->Draw(m_fbxModel[i].PolygonVertexNum, 0);
-	//	pDeviceContext->DrawIndexed(m_fbxModel[i].PolygonVertexNum, 0, 0);
-	//}
+	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+	ID3D11Device* pDevice = pAppRenderer->GetDevice();
+	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	//バーテックスバッファーをセット
+	UINT stride = sizeof(SkinMeshModel::ModelVertex);
+	UINT offset = 0;
+	pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+	//そのインデックスバッファをコンテキストに設定
+	pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+	//プリミティブ・トポロジーをセット
+	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//頂点インプットレイアウトをセット
+	pDeviceContext->IASetInputLayout(m_pVertexShader->GetVertexLayout());
+
+	XMMATRIX hLcl = XMMatrixIdentity();
+	XMMATRIX hLclPosition = XMMatrixTranslation(m_mesh.LclPos.x, m_mesh.LclPos.y, m_mesh.LclPos.z);
+	XMMATRIX hLclRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_mesh.LclRot.x), D3DToRadian(m_mesh.LclRot.y), D3DToRadian(m_mesh.LclRot.z));
+	XMMATRIX hLclScaling = XMMatrixScaling(m_mesh.LclScl.x, m_mesh.LclScl.y, m_mesh.LclScl.z);
+
+	hLcl = XMMatrixMultiply(hLcl, hLclScaling);
+	hLcl = XMMatrixMultiply(hLcl, hLclRotate);
+	hLcl = XMMatrixMultiply(hLcl, hLclPosition);
+
+	SkinMeshModel::ModelConstant hConstant;
+
+	XMMATRIX hWorld = XMMatrixIdentity();
+	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
+	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
+	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
+
+	hWorld = XMMatrixMultiply(hWorld, hScaling);
+	hWorld = XMMatrixMultiply(hWorld, hRotate);
+	hWorld = XMMatrixMultiply(hWorld, hPosition);
+
+	hConstant.world = XMMatrixTranspose(hWorld);
+	hConstant.view = XMMatrixTranspose(m_pConstant->view);
+	hConstant.projection = XMMatrixTranspose(m_pConstant->projection);
+	hConstant.lclCluster = XMMatrixTranspose(hLcl);
+
+	if (m_pLightConstant != NULL)
+	{
+		hConstant.lightView = XMMatrixTranspose(m_pLightConstant->view);
+		hConstant.light = m_pConstant->light;
+		XMMATRIX mat = XMMatrixTranspose(hWorld * m_pLightConstant->view * m_pLightConstant->projection);
+		hConstant.lightProjection = mat;
+	}
+
+	for (int i = 0; i < m_mesh.nNumCluster; i++)
+	{
+		hConstant.cluster[i] = m_pCluster[i].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]];
+	}
+
+	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
+
+	//使用するシェーダーの登録
+	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
+	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
+
+	//コンテキストに設定
+	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+
+	//テクスチャーをシェーダーに渡す
+	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
+
+	//pDeviceContext->PSSetShaderResources(1, 1, &m_ToonTexture);
+	if (m_pTexture != NULL)
+	{
+		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+	}
+
+	if (m_pShadowMap != NULL)
+	{
+		pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+	}
+
+	if (m_pIndexBuffer != NULL)
+	{
+		//そのインデックスバッファをコンテキストに設定
+		pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		pDeviceContext->DrawIndexed(m_nNumVertexPolygon, 0, 0);
+	}
+	else
+	{
+		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
+	}
 }
 
 void CanvasRenderer::Draw(void)

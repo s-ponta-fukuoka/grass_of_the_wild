@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// [collisionmanager.h]
+// model_manager.h
 // Author : SHOTA FUKUOKA
 //
 //=============================================================================
@@ -24,7 +24,7 @@ public:
 	void AddSkinMeshModel(SkinMeshModel* model);
 
 	//モデルデータ探索
-	Model* SeekSkinMeshModel(SkinMeshModel* model);
+	SkinMeshModel* SeekSkinMeshModel(SkinMeshModel* model);
 
 };
 

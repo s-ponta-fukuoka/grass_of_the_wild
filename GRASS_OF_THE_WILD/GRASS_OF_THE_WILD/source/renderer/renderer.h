@@ -14,7 +14,7 @@
 #include "../object/object.h"
 #include "../shader/shader.h"
 #include "../texture/texture_manager.h"
-
+#include "../model/model.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -44,7 +44,7 @@ public:
 
 protected:
 	//定数バッファ設定
-	void ConfigConstantBuffer(void);
+	void ConfigConstantBuffer(UINT ByteWidth);
 
 	//サンプラーステート設定
 	void ConfigSamplerState(void);
@@ -83,6 +83,7 @@ public:
 		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
 		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightConstant,
 		int	nNumVertexPolygon,
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
@@ -100,6 +101,8 @@ public:
 private:
 	AppRenderer::Constant*				m_pConstant;
 
+	AppRenderer::Constant*				m_pLightConstant;
+
 	int									m_nNumVertexPolygon;
 
 	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
@@ -114,7 +117,22 @@ class SkinnedMeshRenderer : public Renderer
 {
 public:
 	//コンストラクタ
-	SkinnedMeshRenderer();
+	SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+		ID3D11Buffer* pIndexBuffer,
+		ShaderManager* pShaderManager,
+		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pShadowMap,
+		Object::Transform* pTransform,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightConstant,
+		int	nNumVertexPolygon,
+		int* pFrame,
+		int* pAnimeNumber,
+		D3D_PRIMITIVE_TOPOLOGY ePolygon,
+		VertexShader::VERTEX_TYPE eVsType,
+		PixelShader::PIXEL_TYPE ePsType,
+		SkinMeshModel::Cluster*	pCluster,
+		SkinMeshModel::Mesh mesh);
 
 	//デストラクタ
 	virtual ~SkinnedMeshRenderer();
@@ -124,6 +142,25 @@ public:
 
 	//描画
 	void Draw(void);
+
+private:
+	AppRenderer::Constant*				m_pConstant;
+
+	AppRenderer::Constant*				m_pLightConstant;
+
+	int									m_nNumVertexPolygon;
+
+	int*								m_pFrame;
+
+	int*								m_pAnimeNumber;
+
+	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
+
+	ID3D11ShaderResourceView*			m_pShadowMap;
+
+	SkinMeshModel::Cluster*				m_pCluster;
+
+	SkinMeshModel::Mesh					m_mesh;
 };
 
 //-----------------------------------------------------------------------------

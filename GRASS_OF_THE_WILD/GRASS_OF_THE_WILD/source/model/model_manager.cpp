@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// [manager.h]
+// model_manager.cpp
 // Author : shota fukuoka
 //
 //=============================================================================
@@ -20,14 +20,18 @@
 // グローバル変数:
 //*****************************************************************************
 
+///////////////////////////////////////////////////////////////////////////////
 //追加
+///////////////////////////////////////////////////////////////////////////////
 void ModelManager::AddSkinMeshModel(SkinMeshModel* model)
 {
 	m_SkinMeshList.push_back(model);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 //モデルデータ探索
-Model *ModelManager::SeekSkinMeshModel(SkinMeshModel* model)
+///////////////////////////////////////////////////////////////////////////////
+SkinMeshModel *ModelManager::SeekSkinMeshModel(SkinMeshModel* model)
 {
 	for (auto ite = m_SkinMeshList.begin(); ite != m_SkinMeshList.end(); ++ite)
 	{
@@ -36,6 +40,7 @@ Model *ModelManager::SeekSkinMeshModel(SkinMeshModel* model)
 			return dynamic_cast<SkinMeshModel*>(*ite);
 		}
 	}
+	model->LoadFile(model->GetFileName());
 	AddSkinMeshModel(model);
 	return  model;
 }

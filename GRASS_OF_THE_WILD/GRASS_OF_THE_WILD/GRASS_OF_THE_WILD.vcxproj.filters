@@ -138,6 +138,9 @@
     <ClCompile Include="source\model\model_manager.cpp">
       <Filter>source\model</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\character\player\player.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\object\object.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="source\model\model_manager.h">
       <Filter>source\model</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player.h">
+      <Filter>source\object\character\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

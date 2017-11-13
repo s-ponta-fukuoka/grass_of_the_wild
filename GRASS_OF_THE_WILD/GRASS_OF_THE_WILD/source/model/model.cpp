@@ -25,14 +25,13 @@ Model::Model()
 	;
 }
 
-SkinMeshModel::SkinMeshModel()
+SkinMeshModel::SkinMeshModel(char* pFileName)
 	:m_nNumAnime(0)
-	,m_nNumCluster(0)
 	,m_nNumMesh(0)
 	,m_pAnime(NULL)
 	,m_pMesh(NULL)
 {
-	;
+	m_pFileName = pFileName;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -164,11 +163,11 @@ void SkinMeshModel::LoadFile(const  char* FilenName)
 			fscanf(pFile, "%c", &buf);
 		}
 
-		fscanf(pFile, "%d", &m_nNumCluster);//クラスタ数
+		fscanf(pFile, "%d", &m_pMesh[i].nNumCluster);//クラスタ数
 		fscanf(pFile, "%c", &buf);
-		m_pMesh[i].pCluster = new Cluster[m_nNumCluster];
+		m_pMesh[i].pCluster = new Cluster[m_pMesh[i].nNumCluster];
 
-		for (int j = 0; j < m_nNumCluster; j++)
+		for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
 		{
 			m_pMesh[i].pCluster[j].pMatrix = new  XMMATRIX*[m_nNumAnime];
 			for (int k = 0; k < m_nNumAnime; k++)
@@ -256,4 +255,36 @@ void SkinMeshModel::LoadFile(const  char* FilenName)
 
 
 	fclose(pFile);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//メッシュの取得
+///////////////////////////////////////////////////////////////////////////////
+SkinMeshModel::Mesh *SkinMeshModel::GetMesh(void)
+{
+	return m_pMesh;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//アニメ―ションの取得
+///////////////////////////////////////////////////////////////////////////////
+SkinMeshModel::Anime *SkinMeshModel::GetAnime(void)
+{
+	return m_pAnime;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//メッシュ数の取得
+///////////////////////////////////////////////////////////////////////////////
+int SkinMeshModel::GetNumMesh(void)
+{
+	return m_nNumMesh;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//アニメーション数の取得
+///////////////////////////////////////////////////////////////////////////////
+int SkinMeshModel::GetNumAnime(void)
+{
+	return m_nNumAnime;
 }
