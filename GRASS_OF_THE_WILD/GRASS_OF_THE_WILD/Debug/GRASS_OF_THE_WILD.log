@@ -1,4 +1,4 @@
-﻿  renderer.cpp
+﻿  shadow_map.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -140,8 +140,8 @@ c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path
 c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(225): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(295): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(389): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\canvas\shadow_map\shadow_map.cpp(28): warning C4100: 'pTextureManager': 引数は関数の本体部で 1 度も参照されません。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\canvas\shadow_map\shadow_map.cpp(208): warning C4245: '=': 'int' から 'UINT' に変換しました。signed/unsigned が一致しません。
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.exe
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.pdb (Partial PDB)

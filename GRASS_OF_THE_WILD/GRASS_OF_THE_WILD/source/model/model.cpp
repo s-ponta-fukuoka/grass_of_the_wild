@@ -48,6 +48,20 @@ SkinMeshModel::~SkinMeshModel()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//終了
+///////////////////////////////////////////////////////////////////////////////
+void Model::Release(void)
+{
+	;
+}
+
+void SkinMeshModel::Release(void)
+{
+	;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 //ファイルネーム取得
 ///////////////////////////////////////////////////////////////////////////////
 const char* Model::GetFileName()
@@ -117,13 +131,13 @@ void SkinMeshModel::LoadFile(const  char* FilenName)
 			fscanf(pFile, "%c", &buf);
 
 			//クラスターインデックス
-			fscanf(pFile, "%d", &m_pMesh[i].pBoneIndex[j].x);
+			fscanf(pFile, "%f", &m_pMesh[i].pBoneIndex[j].x);
 			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%d", &m_pMesh[i].pBoneIndex[j].y);
+			fscanf(pFile, "%f", &m_pMesh[i].pBoneIndex[j].y);
 			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%d", &m_pMesh[i].pBoneIndex[j].z);
+			fscanf(pFile, "%f", &m_pMesh[i].pBoneIndex[j].z);
 			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%d", &m_pMesh[i].pBoneIndex[j].w);
+			fscanf(pFile, "%f", &m_pMesh[i].pBoneIndex[j].w);
 			fscanf(pFile, "%c", &buf);
 
 			//ウェイト
@@ -133,7 +147,7 @@ void SkinMeshModel::LoadFile(const  char* FilenName)
 			fscanf(pFile, "%c", &buf);
 			fscanf(pFile, "%f", &m_pMesh[i].pWeight[j].z);
 			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%f", &m_pMesh[i].pWeight[j].z);
+			fscanf(pFile, "%f", &m_pMesh[i].pWeight[j].w);
 			fscanf(pFile, "%c", &buf);
 		}
 

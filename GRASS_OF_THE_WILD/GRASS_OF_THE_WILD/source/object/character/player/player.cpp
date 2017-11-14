@@ -92,6 +92,8 @@ Player::Player(RenderManager* pRenderManager,
 			pMesh[i].pCluster,
 			pMesh[i]));
 	}
+
+	m_pTransform->rot.y = 180;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -183,4 +185,7 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	if (FAILED(pDevice->CreateBuffer(&hBufferDesc, &hSubResourceData, &m_pIndexBuffer)))
 		return;
 	
+	delete[] vertices;
+
+	delete[] hIndexData;
 }

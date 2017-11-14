@@ -25,6 +25,9 @@ public:
 	//デストラクタ
 	virtual ~Model();
 	
+	//終了
+	void Release(void);
+
 	//ファイルネーム取得
 	const char *GetFileName();
 
@@ -56,7 +59,7 @@ public:
 		XMMATRIX projection;
 		XMMATRIX lightView;
 		XMMATRIX lightProjection;
-		XMMATRIX cluster[256];
+		XMMATRIX cluster[100];
 		XMMATRIX lclCluster;
 		XMVECTOR light;
 	};
@@ -97,6 +100,9 @@ public:
 
 	//デストラクタ
 	virtual ~SkinMeshModel();
+
+	//終了
+	void Release(void);
 
 	//読み込み
 	void LoadFile(const  char* FilenName);

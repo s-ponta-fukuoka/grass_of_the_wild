@@ -42,6 +42,9 @@ public:
 
 	//’è”æ“¾
 	AppRenderer::Constant* GetConstant(void);
+private:
+	int m_ner;
+	int m_for;
 };
 
 #endif

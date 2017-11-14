@@ -66,10 +66,10 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	ID3D11Device* pDevice = m_pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = m_pAppRenderer->GetDeviceContex();
 
-	m_pCamera = new MainCamera(VECTOR3(0,100,-500), VECTOR3(0,0,0), VECTOR3(0,1,0));
+	m_pCamera = new MainCamera(VECTOR3(0.0f,100.0f,-500.0f), VECTOR3(0.0f,0.0f,0.0f), VECTOR3(0.0f,1.0f,0.0f));
 	m_pCamera->Init();
 
-	m_pLightCamera = new LightCamera(VECTOR3(-3000.0f, 8000.0f, -12000.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f));
+	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
 
 	m_pTextureManager = new TextureManager();
@@ -151,6 +151,8 @@ void App::Update(void)
 	m_pCamera->Update();
 
 	m_pMeshManager->UpdateAll();
+
+	m_pPlayer->Update();
 
 	m_pCanvasManager->UpdateAll();
 

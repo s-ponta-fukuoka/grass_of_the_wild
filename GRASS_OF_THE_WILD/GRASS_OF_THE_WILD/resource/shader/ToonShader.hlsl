@@ -33,7 +33,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4x4 Bones[100];
 	float4x4 LclBone;
 	float4 Light;
-	float4 Color;
+	//float4 Color;
 }
 
 vertexOut main(vertexIn IN)
@@ -76,7 +76,7 @@ vertexOut main(vertexIn IN)
 
 	//OUT.nrm = mul(IN.nrm, World);
 
-	OUT.col = Color;
+	OUT.col = float4(1,1,1,1);
 	OUT.tex = IN.tex;
 	OUT.tex2.x = lgtdot;
 	OUT.tex2.y = eyedot;

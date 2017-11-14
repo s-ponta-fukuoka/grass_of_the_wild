@@ -247,6 +247,10 @@ void MeshRenderer::Draw(void)
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
 
+	hConstant.world = XMMatrixIdentity();
+	hConstant.view = XMMatrixIdentity();
+	hConstant.projection = XMMatrixIdentity();
+
 	hConstant.world = XMMatrixTranspose(hWorld);
 	hConstant.view = XMMatrixTranspose(m_pConstant->view);
 	hConstant.projection = XMMatrixTranspose(m_pConstant->projection);
@@ -300,9 +304,6 @@ void SkinnedMeshRenderer::Draw()
 	UINT offset = 0;
 	pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
 
-	//そのインデックスバッファをコンテキストに設定
-	pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
 	//プリミティブ・トポロジーをセット
 	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -349,12 +350,12 @@ void SkinnedMeshRenderer::Draw()
 
 	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
 
+	//コンテキストに設定
+	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+
 	//使用するシェーダーの登録
 	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
 	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
-
-	//コンテキストに設定
-	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
 
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
@@ -367,7 +368,7 @@ void SkinnedMeshRenderer::Draw()
 
 	if (m_pShadowMap != NULL)
 	{
-		pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+		//pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
 	}
 
 	if (m_pIndexBuffer != NULL)
