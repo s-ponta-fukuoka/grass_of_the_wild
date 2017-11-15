@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "app/app.h"
+#include "gui/imgui.h"
+#include "gui/imgui_impl_dx11.h"
 
 #pragma comment (lib, "winmm.lib")
 
@@ -144,8 +146,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 //=============================================================================
 // プロシージャ
 //=============================================================================
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+		return true;
+
 	switch (uMsg)
 	{
 	case WM_CREATE:

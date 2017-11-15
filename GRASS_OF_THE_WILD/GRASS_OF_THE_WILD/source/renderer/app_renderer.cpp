@@ -7,6 +7,8 @@
 #include "app_renderer.h"
 #include "../app/app.h"
 #include "render_manager.h"
+#include "../gui/imgui.h"
+#include "../gui/imgui_impl_dx11.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -105,6 +107,8 @@ void AppRenderer::Draw(RenderManager* pRenderManager)
 	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 
 	pRenderManager->DrawAll();
+
+	ImGui::Render();
 
 	m_pSwapChain->Present(1, 0);//フリップ
 }

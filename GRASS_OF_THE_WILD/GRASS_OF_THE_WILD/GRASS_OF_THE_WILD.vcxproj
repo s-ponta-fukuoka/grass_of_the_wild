@@ -21,6 +21,10 @@
   <ItemGroup>
     <ClCompile Include="source\app\app.cpp" />
     <ClCompile Include="source\device\input.cpp" />
+    <ClCompile Include="source\gui\imgui.cpp" />
+    <ClCompile Include="source\gui\imgui_demo.cpp" />
+    <ClCompile Include="source\gui\imgui_draw.cpp" />
+    <ClCompile Include="source\gui\imgui_impl_dx11.cpp" />
     <ClCompile Include="source\lib\vector.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\model\model.cpp" />
@@ -49,6 +53,13 @@
   <ItemGroup>
     <ClInclude Include="source\app\app.h" />
     <ClInclude Include="source\device\input.h" />
+    <ClInclude Include="source\gui\imconfig.h" />
+    <ClInclude Include="source\gui\imgui.h" />
+    <ClInclude Include="source\gui\imgui_impl_dx11.h" />
+    <ClInclude Include="source\gui\imgui_internal.h" />
+    <ClInclude Include="source\gui\stb_rect_pack.h" />
+    <ClInclude Include="source\gui\stb_textedit.h" />
+    <ClInclude Include="source\gui\stb_truetype.h" />
     <ClInclude Include="source\lib\vector.h" />
     <ClInclude Include="source\model\model.h" />
     <ClInclude Include="source\model\model_manager.h" />

@@ -25,6 +25,7 @@
 // [構成プロパティ]->[リンカー]->[入力]->[追加の依存ファイル]に記述しても可能
 //*****************************************************************************
 #pragma comment(lib,"d3d11.lib")
+#pragma comment(lib,"d3dCompiler.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment (lib, "dinput8.lib")
 

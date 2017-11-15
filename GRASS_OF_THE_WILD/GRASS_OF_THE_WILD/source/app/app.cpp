@@ -24,6 +24,8 @@
 #include "../model/model_manager.h"
 #include "../object/character/player/player.h"
 #include "../device/input.h"
+#include "../gui/imgui.h"
+#include "../gui/imgui_impl_dx11.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -50,6 +52,10 @@ App::~App()
 	Release();
 }
 
+bool show_test_window = true;
+bool show_another_window = false;
+ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
 ///////////////////////////////////////////////////////////////////////////////
 //初期化
 ///////////////////////////////////////////////////////////////////////////////
@@ -62,6 +68,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	AppRenderer::CreateInstance();
 	m_pAppRenderer = AppRenderer::GetInstance();
 	m_pAppRenderer->Init(hWnd);
+
+	ImGui_ImplDX11_Init(hWnd, m_pAppRenderer->GetDevice(), m_pAppRenderer->GetDeviceContex());
 
 	ID3D11Device* pDevice = m_pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = m_pAppRenderer->GetDeviceContex();
@@ -98,6 +106,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 ///////////////////////////////////////////////////////////////////////////////
 void App::Release(void)
 {
+	ImGui_ImplDX11_Shutdown();
+
 	if (m_pInputKeybord == NULL) { return; }
 	m_pInputKeybord->Uninit();
 	delete m_pInputKeybord;
@@ -172,9 +182,38 @@ void App::Update(void)
 ///////////////////////////////////////////////////////////////////////////////
 void App::Draw(void)
 {
+	ImGui_ImplDX11_NewFrame();
+
+	// 1. Show a simple window.
+	// Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug".
+	{
+		static float f = 0.0f;
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::SliderFloat("float", &f, 0.0f, 100.0f);
+		ImGui::ColorEdit3("clear color", (float*)&clear_color);
+		if (ImGui::Button("Test Window")) show_test_window ^= 1;
+		if (ImGui::Button("Another Window")) show_another_window ^= 1;
+	}
+
+	// 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name the window.
+	if (show_another_window)
+	{
+		ImGui::Begin("Another Window", &show_another_window);
+		ImGui::Text("Hello from another window!");
+		ImGui::End();
+	}
+
+	// 3. Show the ImGui test window. Most of the sample code is in ImGui::ShowTestWindow().
+	if (show_test_window)
+	{
+		ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);     // Normally user code doesn't need/want to call it because positions are saved in .ini file anyway. Here we just want to make the demo initial state a bit more friendly!
+		ImGui::ShowTestWindow(&show_test_window);
+	}
+
 	m_pLightCamera->SetCamera();
 
 	m_pCamera->SetCamera();
 
 	m_pAppRenderer->Draw(m_pRenderManager);
+
 }
