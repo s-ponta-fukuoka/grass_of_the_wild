@@ -25,7 +25,12 @@ public:
 
 	//モデルデータ探索
 	SkinMeshModel* SeekSkinMeshModel(SkinMeshModel* model);
+	
+	//スキンメッシュ削除
+	void ReleasekSkinMeshModel(void);
 
+	//全削除
+	void ReleaseAll(void);
 };
 
 #endif

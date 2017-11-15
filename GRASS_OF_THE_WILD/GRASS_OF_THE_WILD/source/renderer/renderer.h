@@ -37,7 +37,7 @@ public:
 	virtual ~Renderer();
 
 	//I—¹
-	virtual void Release(void) = 0;
+	void Release(void);
 
 	//•`‰æ
 	virtual void Draw(void) = 0;
@@ -93,7 +93,7 @@ public:
 	virtual ~MeshRenderer();
 
 	//I—¹
-	void Release(void) {};
+	void Release(void);
 
 	//•`‰æ
 	void Draw(void);
@@ -138,7 +138,7 @@ public:
 	virtual ~SkinnedMeshRenderer();
 
 	//I—¹
-	void Release(void) {};
+	void Release(void);
 
 	//•`‰æ
 	void Draw(void);
@@ -183,7 +183,7 @@ public:
 	virtual ~CanvasRenderer();
 
 	//I—¹
-	void Release(void) {};
+	void Release(void);
 
 	//•`‰æ
 	void Draw(void);

@@ -57,7 +57,19 @@ void Model::Release(void)
 
 void SkinMeshModel::Release(void)
 {
-	;
+	for (int i = 0; i < m_nNumMesh; i++)
+	{
+		for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
+		{
+			for (int k = 0; k < m_nNumAnime; k++)
+			{
+				delete[] m_pMesh[i].pCluster[j].pMatrix[k];
+			}
+			delete[] m_pMesh[i].pCluster[j].pMatrix;
+		}
+		delete[]  m_pMesh[i].pCluster;
+	}
+	delete[] m_pMesh;
 }
 
 

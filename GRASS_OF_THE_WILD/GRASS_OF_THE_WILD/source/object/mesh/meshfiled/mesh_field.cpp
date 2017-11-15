@@ -276,6 +276,8 @@ void MeshField::MakeVertex(void)
 	
 	pDevice->CreateBuffer(&hBufferDesc, &hSubResourceData, &m_pIndexBuffer);
 
+	delete[] vertices;
+	delete[] hIndexData;
 }
 
 float MeshField::GetHeight(VECTOR3 Position)

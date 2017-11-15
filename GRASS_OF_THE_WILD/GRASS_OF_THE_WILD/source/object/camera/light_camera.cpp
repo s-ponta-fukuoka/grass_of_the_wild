@@ -31,9 +31,9 @@ LightCamera::LightCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp)
 
 	m_vectorUp = vectorUp;
 
-	m_ner = 14000;
+	m_ner = 10000;
 
-	m_for = 10000;
+	m_for = 20000;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -90,14 +90,31 @@ void LightCamera::Update(void)
 
 	if (pInputKeyboard->GetKeyPress(DIK_UP))
 	{
-		m_pTransform->position.y++;
-		//m_positionAt.y++;
+		m_pTransform->position.z++;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_DOWN))
 	{
+		m_pTransform->position.z--;
+	}
+	if (pInputKeyboard->GetKeyPress(DIK_RIGHT))
+	{
+		m_pTransform->position.x++;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_LEFT))
+	{
+		m_pTransform->position.x--;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_O))
+	{
+		m_pTransform->position.y++;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_L))
+	{
 		m_pTransform->position.y--;
-		//m_positionAt.y--;
 	}
 
 	Camera::Update();
@@ -111,16 +128,16 @@ void LightCamera::SetCamera(void)
 	XMMATRIX hView = XMMatrixIdentity();
 	XMVECTOR hEye = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 0.0f);	//カメラの位置
 	XMVECTOR hAt = XMVectorSet(m_positionAt.x, m_positionAt.y, m_positionAt.z, 0.0f);		//焦点の位置
-	XMVECTOR hUp = XMVectorSet(m_vectorUp.x, m_vectorUp.y, m_vectorUp.z, 0.0f);
+	XMVECTOR hUp = XMVectorSet(0, 1, 0, 0);
 	hView = XMMatrixLookAtLH(hEye, hAt, hUp);
 
 	XMMATRIX hProjection;	//透視射影変換行列
-	hProjection = XMMatrixOrthographicLH(4086, 4086, m_ner, m_for);
+	hProjection = XMMatrixOrthographicLH(7000* 1.414, 7000 * 1.414, m_ner, m_for);
 
 	XMVECTOR LightPos = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1);
 	m_pConstant->light = LightPos;
 
-	m_pConstant->view = hView;
+	m_pConstant->view =  hView;
 	m_pConstant->projection = hProjection;
 }
 

@@ -12,6 +12,7 @@
 #include "../../../model/model.h"
 #include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
+#include "../../../device/input.h"
 
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
@@ -118,6 +119,10 @@ HRESULT Player::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Player::Release(void)
 {
+	delete m_pModel;
+	delete m_pFrame;
+	delete m_pAnimeNumber;
+
 	Character::Release();
 }
 
@@ -126,6 +131,39 @@ void Player::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Player::Update(void)
 {
+	//ˆÚ“®ˆ—
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	if (pInputKeyboard->GetKeyPress(DIK_W))
+	{
+		m_pTransform->position.z++;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_A))
+	{
+		m_pTransform->position.x--;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_S))
+	{
+		m_pTransform->position.z--;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_D))
+	{
+		m_pTransform->position.x++;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_Y))
+	{
+		m_pTransform->position.y++;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_N))
+	{
+		m_pTransform->position.y--;
+	}
+
 	Object::Update();
 }
 
@@ -188,4 +226,11 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	delete[] vertices;
 
 	delete[] hIndexData;
+
+	delete[] pMesh[nMeshCount].pPosition;
+	delete[] pMesh[nMeshCount].pColor;
+	delete[] pMesh[nMeshCount].pNormal;
+	delete[] pMesh[nMeshCount].pTex;
+	delete[] pMesh[nMeshCount].pWeight;
+	delete[] pMesh[nMeshCount].pBoneIndex;
 }

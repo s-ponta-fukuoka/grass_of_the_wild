@@ -88,7 +88,7 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
+	//m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
 	return S_OK;
 }
@@ -123,6 +123,11 @@ void App::Release(void)
 	delete m_pShaderManager;
 	m_pShaderManager = NULL;
 
+	if (m_pModelManager == NULL) { return; }
+	m_pModelManager->ReleaseAll();
+	delete m_pModelManager;
+	m_pModelManager = NULL;
+
 	if (m_pMeshManager == NULL) { return; }
 	m_pMeshManager->ReleaseAll();
 	delete m_pMeshManager;
@@ -137,6 +142,10 @@ void App::Release(void)
 	m_pRenderManager->ReleaseAll();
 	delete m_pRenderManager;
 	m_pRenderManager = NULL;
+
+	//if (m_pPlayer == NULL) { return; }
+	//delete m_pPlayer;
+	//m_pPlayer = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,7 +161,7 @@ void App::Update(void)
 
 	m_pMeshManager->UpdateAll();
 
-	m_pPlayer->Update();
+	//m_pPlayer->Update();
 
 	m_pCanvasManager->UpdateAll();
 

@@ -9,6 +9,7 @@
 #include "../shader/shader_manager.h"
 #include "../texture/texture_manager.h"
 #include "../model/model.h"
+#include "../app/app.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -179,6 +180,44 @@ CanvasRenderer::~CanvasRenderer()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// 終了
+///////////////////////////////////////////////////////////////////////////////
+void Renderer::Release(void)
+{
+	SAFE_RELEASE(m_pBlendState);
+
+	SAFE_RELEASE(m_pSampleLinear);
+
+	SAFE_RELEASE(m_pTexture);
+
+	SAFE_RELEASE(m_pVertexBuffer);
+
+	SAFE_RELEASE(m_pConstantBuffer);
+
+	SAFE_RELEASE(m_pIndexBuffer);
+}
+
+void MeshRenderer::Release()
+{
+	SAFE_RELEASE(m_pShadowMap);
+
+	Renderer::Release();
+}
+
+void SkinnedMeshRenderer::Release()
+{
+	SAFE_RELEASE(m_pShadowMap);
+
+	Renderer::Release();
+}
+
+void CanvasRenderer::Release()
+{
+	Renderer::Release();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 //定数バッファ設定
 ///////////////////////////////////////////////////////////////////////////////
 void Renderer::ConfigConstantBuffer(UINT ByteWidth)
@@ -247,20 +286,25 @@ void MeshRenderer::Draw(void)
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
 
-	hConstant.world = XMMatrixIdentity();
-	hConstant.view = XMMatrixIdentity();
-	hConstant.projection = XMMatrixIdentity();
+	XMMATRIX hView = m_pConstant->view;
+	XMMATRIX hProj = m_pConstant->projection;
 
 	hConstant.world = XMMatrixTranspose(hWorld);
-	hConstant.view = XMMatrixTranspose(m_pConstant->view);
-	hConstant.projection = XMMatrixTranspose(m_pConstant->projection);
+
+	hConstant.view = XMMatrixTranspose(hView);
+
+	hConstant.projection = XMMatrixTranspose(hProj);
 
 	if (m_pLightConstant != NULL)
 	{
-		hConstant.lightView = XMMatrixTranspose(m_pLightConstant->view);
+		XMMATRIX hLightView = m_pLightConstant->view;
+		XMMATRIX hLightProj = m_pLightConstant->projection;
+
+		hConstant.lightView = XMMatrixTranspose(hLightView);
+
 		hConstant.light = m_pConstant->light;
 
-		XMMATRIX mat = XMMatrixTranspose(hWorld * m_pLightConstant->view * m_pLightConstant->projection);
+		XMMATRIX mat = XMMatrixTranspose(hWorld * hLightView * hLightProj);
 		hConstant.lightProjection = mat;
 	}
 
@@ -330,16 +374,25 @@ void SkinnedMeshRenderer::Draw()
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
 
+	XMMATRIX hView = m_pConstant->view;
+	XMMATRIX hProj = m_pConstant->projection;
+
 	hConstant.world = XMMatrixTranspose(hWorld);
-	hConstant.view = XMMatrixTranspose(m_pConstant->view);
-	hConstant.projection = XMMatrixTranspose(m_pConstant->projection);
-	hConstant.lclCluster = XMMatrixTranspose(hLcl);
+
+	hConstant.view = XMMatrixTranspose(hView);
+
+	hConstant.projection = XMMatrixTranspose(hProj);
 
 	if (m_pLightConstant != NULL)
 	{
-		hConstant.lightView = XMMatrixTranspose(m_pLightConstant->view);
+		XMMATRIX hLightView = m_pLightConstant->view;
+		XMMATRIX hLightProj = m_pLightConstant->projection;
+
+		hConstant.lightView = XMMatrixTranspose(hLightView);
+
 		hConstant.light = m_pConstant->light;
-		XMMATRIX mat = XMMatrixTranspose(hWorld * m_pLightConstant->view * m_pLightConstant->projection);
+
+		XMMATRIX mat = XMMatrixTranspose(hWorld * hLightView * hLightProj);
 		hConstant.lightProjection = mat;
 	}
 
