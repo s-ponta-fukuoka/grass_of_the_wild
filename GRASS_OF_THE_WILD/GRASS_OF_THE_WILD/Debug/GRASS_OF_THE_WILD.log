@@ -1,4 +1,4 @@
-﻿  app.cpp
+﻿  renderer.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -140,10 +140,8 @@ c:\program files (x86)\effekseer\include\effekseer.h(2482): warning C4100: 'path
 c:\program files (x86)\effekseer\include\effekseer.h(2491): warning C4100: 'data': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2916): warning C4100: 'path': 引数は関数の本体部で 1 度も参照されません。
 c:\program files (x86)\effekseer\include\effekseer.h(2925): warning C4100: 'source': 引数は関数の本体部で 1 度も参照されません。
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\object\camera\camera.h(53): warning C4324: 'Camera': アラインメント指定子のために構造体がパッドされました
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(77): warning C4316: 'MainCamera': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(80): warning C4316: 'LightCamera': ヒープで割り当てられたオブジェクトが 16 にアラインメントされていない可能性があります
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(74): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\app\app.cpp(75): warning C4189: 'pDeviceContext': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(264): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(343): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\grass_of_the_wild\grass_of_the_wild\source\renderer\renderer.cpp(445): warning C4189: 'pDevice': ローカル変数が初期化されましたが、参照されていません
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.exe
   GRASS_OF_THE_WILD.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\GRASS_OF_THE_WILD\Debug\GRASS_OF_THE_WILD.pdb (Partial PDB)

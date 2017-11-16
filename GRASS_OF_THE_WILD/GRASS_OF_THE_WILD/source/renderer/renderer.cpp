@@ -383,6 +383,8 @@ void SkinnedMeshRenderer::Draw()
 
 	hConstant.projection = XMMatrixTranspose(hProj);
 
+	hConstant.lclCluster = XMMatrixTranspose(hLcl);
+
 	if (m_pLightConstant != NULL)
 	{
 		XMMATRIX hLightView = m_pLightConstant->view;
