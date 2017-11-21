@@ -1,0 +1,32 @@
+﻿C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\matPixelShader.hlsl(19,21-43): warning X3206: 'dot': implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\matPixelShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\NormalPShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\NormalVShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\Pixel3DShader.cso
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\PixelShader.hlsl(24,22-44): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\PixelShader.hlsl(36,8-55): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\PixelShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\Shadow.cso
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\SkinMeshShader.hlsl(46,12-29): warning X3206: 'mul': implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\SkinMeshShader.cso
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonPixel.hlsl(26,22-44): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonPixel.hlsl(40,8-55): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\ToonPixel.cso
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonShader.hlsl(70,17-31): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonShader.hlsl(72,9-43): warning X3206: implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonShader.hlsl(75,17-33): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonShader.hlsl(85,13-27): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\ToonShader.hlsl(39,14-27): warning X3578: Output value 'main' is not completely initialized
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\ToonShader.cso
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\Vertex3DShader.cso
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\VertexShader.hlsl(66,13-27): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\resource\shader\VertexShader.hlsl(33,14-27): warning X3578: Output value 'main' is not completely initialized
+  
+  compilation object save succeeded; see C:\Users\fukuoka.shota\Desktop\Win32Project\Win32Project\bin\shader\VertexShader.cso
+  Win32Project.vcxproj -> C:\Users\fukuoka.shota\Desktop\Win32Project\Debug\Win32Project.exe
+  Win32Project.vcxproj -> C:\Users\fukuoka.shota\Desktop\Win32Project\Debug\Win32Project.pdb (Partial PDB)
