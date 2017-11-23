@@ -153,9 +153,9 @@ void App::Release(void)
 	delete m_pRenderManager;
 	m_pRenderManager = NULL;
 
-	//if (m_pPlayer == NULL) { return; }
-	//delete m_pPlayer;
-	//m_pPlayer = NULL;
+	if (m_pPlayer == NULL) { return; }
+	delete m_pPlayer;
+	m_pPlayer = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,7 +171,7 @@ void App::Update(void)
 
 	m_pMeshManager->UpdateAll();
 
-	//m_pPlayer->Update();
+	m_pPlayer->Update();
 
 	m_pCanvasManager->UpdateAll();
 

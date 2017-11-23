@@ -1,0 +1,5 @@
+﻿C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\Win32Project\resource\shader\matPixelShader.hlsl(19,21-43): warning X3206: 'dot': implicit truncation of vector type
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\Win32Project\resource\shader\matPixelShader.hlsl(15,26-36): error X4502: invalid vs_2_0 output semantic 'SV_Target'
+C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\Win32Project\resource\shader\matPixelShader.hlsl(7,13-18): error X4502: invalid vs_2_0 input semantic 'COL2'
+  
+  compilation failed; no code produced
