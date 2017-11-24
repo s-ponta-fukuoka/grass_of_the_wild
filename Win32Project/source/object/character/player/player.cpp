@@ -30,7 +30,7 @@ Player::Player(RenderManager* pRenderManager,
 	: m_pModel(NULL)
 	, m_pFrame(NULL)
 {
-	m_pModel = new SkinMeshModel("bin/model/test.TASO");
+	m_pModel = new SkinMeshModel("bin/model/naka.txt");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
@@ -41,18 +41,18 @@ Player::Player(RenderManager* pRenderManager,
 
 	PixelShader::PIXEL_TYPE ePsType;
 
-	for (int i = m_pModel->GetNumMesh()-1; i < m_pModel->GetNumMesh(); i++)
+	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
 	{
 
 		MakeVertex(i, pMesh);
 
 		ID3D11ShaderResourceView* pTextureResource = NULL;
 
-		if (pMesh[i].pFileName != "NULL")
+		if (pMesh[i].pFileName != NULL)
 		{
 			ePsType = PixelShader::PS_TOON;
-			//Texture* pTexture = new Texture(pMesh[i].pFileName, pTextureManager);
-			Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
+			Texture* pTexture = new Texture(pMesh[i].pFileName, pTextureManager);
+			//Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
 			pTextureResource = pTexture->GetTexture();
 		}
 		else

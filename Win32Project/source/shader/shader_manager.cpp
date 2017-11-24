@@ -30,6 +30,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new VertexShader("bin/shader/NormalVShader.cso", VertexShader::VS_2D, this);
 	new VertexShader("bin/shader/Vertex3DShader.cso", VertexShader::VS_3D, this);
 	new VertexShader("bin/shader/ToonShader.cso", VertexShader::VS_TOON, this);
+	new VertexShader("bin/shader/VertexGrass.cso", VertexShader::VS_GRASS, this);
 
 	new PixelShader("bin/shader/PixelShader.cso", PixelShader::PS_NORMAL, this);
 	new PixelShader("bin/shader/NormalPShader.cso", PixelShader::PS_2D, this);
@@ -37,6 +38,8 @@ HRESULT ShaderManager::GenerateShader(void)
 	new PixelShader("bin/shader/ToonPixel.cso", PixelShader::PS_TOON, this);
 	new PixelShader("bin/shader/Shadow.cso", PixelShader::PS_SHADOW, this);
 	new PixelShader("bin/shader/matPixelShader.cso", PixelShader::PS_MAT, this);
+
+	new GeometryShader("bin/shader/GeometryGrass.cso", GeometryShader::GS_GRASS, this);
 
 	return S_OK;
 }
@@ -77,6 +80,24 @@ PixelShader *ShaderManager::GetPixelShader(PixelShader::PIXEL_TYPE etype)
 	return NULL;
 }
 
+void ShaderManager::GSAdd(GeometryShader *shader)
+{
+	m_GSlist.push_back(shader);
+}
+
+GeometryShader *ShaderManager::GetGeometryShader(GeometryShader::GEOMETRY_TYPE etype)
+{
+	for (auto ite = m_GSlist.begin(); ite != m_GSlist.end(); ++ite)
+	{
+		if (*ite == NULL) { return NULL; }
+		if (dynamic_cast<GeometryShader *>(*ite)->GetType() == etype)
+		{
+			return dynamic_cast<GeometryShader *>(*ite);
+		}
+	}
+	return NULL;
+}
+
 void ShaderManager::ReleaseVS(void)
 {
 	for (auto ite = m_VSlist.begin(); ite != m_VSlist.end(); ite = m_VSlist.begin())
@@ -95,9 +116,20 @@ void ShaderManager::ReleasePS(void)
 	}
 }
 
+void ShaderManager::ReleaseGS(void)
+{
+	for (auto ite = m_GSlist.begin(); ite != m_GSlist.end(); ite = m_GSlist.begin())
+	{
+		if (*ite == NULL) { continue; }
+		m_GSlist.erase(ite);
+	}
+}
+
 void ShaderManager::ReleaseAll(void)
 {
 	ReleaseVS();
+
+	ReleaseGS();
 
 	ReleasePS();
 }

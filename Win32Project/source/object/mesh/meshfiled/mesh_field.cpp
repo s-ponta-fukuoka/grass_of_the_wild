@@ -64,6 +64,7 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												MESH_FILED_VERTEX,
 												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 												VertexShader::VS_NORMAL,
+												GeometryShader::GS_NONE,
 												PixelShader::PS_NORMAL));
 
 	pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
@@ -77,6 +78,7 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												MESH_FILED_VERTEX,
 												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 												VertexShader::VS_NORMAL,
+												GeometryShader::GS_NONE,
 												PixelShader::PS_SHADOW));
 
 	delete[] pTexture;

@@ -37,6 +37,7 @@
     <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
     <ClCompile Include="source\object\character\player\player.cpp" />
+    <ClCompile Include="source\object\mesh\grass\grass.cpp" />
     <ClCompile Include="source\object\mesh\mesh.cpp" />
     <ClCompile Include="source\object\mesh\meshfiled\mesh_field.cpp" />
     <ClCompile Include="source\object\mesh\mesh_manager.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
     <ClInclude Include="source\object\character\player\player.h" />
+    <ClInclude Include="source\object\mesh\grass\grass.h" />
     <ClInclude Include="source\object\mesh\mesh.h" />
     <ClInclude Include="source\object\mesh\meshfiled\mesh_field.h" />
     <ClInclude Include="source\object\mesh\mesh_manager.h" />
@@ -89,6 +91,16 @@
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="GeometryGrass.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="resource\shader\matPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -128,6 +140,12 @@
     <FxCompile Include="resource\shader\Vertex3DShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\VertexGrass.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="resource\shader\VertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>

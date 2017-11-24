@@ -164,3 +164,43 @@ void PixelShader::CreatePixelShader(TCHAR* csoName)
 
 	delete[] cso_data;
 }
+
+GeometryShader::GeometryShader(TCHAR* csoName, GeometryShader::GEOMETRY_TYPE psType, ShaderManager* pShaderManager)
+{
+	m_eGsType = psType;
+	m_csoName = csoName;
+	CreateGeometryShader(m_csoName);
+	pShaderManager->GSAdd(this);
+}
+
+GeometryShader::GEOMETRY_TYPE GeometryShader::GetType(void)
+{
+	return m_eGsType;
+}
+
+ID3D11GeometryShader *GeometryShader::GetGeometryShaderr(void)
+{
+	return m_pGeometryShader;
+}
+
+void GeometryShader::CreateGeometryShader(TCHAR* csoName)
+{
+	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+	ID3D11Device* pDevice = pAppRenderer->GetDevice();
+
+	//バイナリファイルを読み込む//
+	FILE* fp = _tfopen(csoName, _T("rb"));
+	if (fp == NULL) { return; }
+	fseek(fp, 0, SEEK_END);
+	long cso_sz = ftell(fp);
+	fseek(fp, 0, SEEK_SET);
+
+	unsigned char* cso_data = new unsigned char[cso_sz];
+	fread(cso_data, cso_sz, 1, fp);
+	fclose(fp);
+
+	// シェーダーオブジェクトの作成//
+	HRESULT hr = pDevice->CreateGeometryShader(cso_data, cso_sz, NULL, &m_pGeometryShader);
+
+	delete[] cso_data;
+}

@@ -26,6 +26,7 @@
 #include "../device/input.h"
 #include "../gui/imgui.h"
 #include "../gui/imgui_impl_dx11.h"
+#include "../object/mesh/grass/grass.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -94,9 +95,10 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pMeshManager = new MeshManager();
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
+	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
+	//m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
 	return S_OK;
 }
@@ -153,9 +155,9 @@ void App::Release(void)
 	delete m_pRenderManager;
 	m_pRenderManager = NULL;
 
-	if (m_pPlayer == NULL) { return; }
-	delete m_pPlayer;
-	m_pPlayer = NULL;
+	//if (m_pPlayer == NULL) { return; }
+	//delete m_pPlayer;
+	//m_pPlayer = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,7 +173,7 @@ void App::Update(void)
 
 	m_pMeshManager->UpdateAll();
 
-	m_pPlayer->Update();
+	//m_pPlayer->Update();
 
 	m_pCanvasManager->UpdateAll();
 
@@ -193,21 +195,6 @@ void App::Draw(void)
 		ImGui::ColorEdit3("clear color", (float*)&clear_color);
 		if (ImGui::Button("Test Window")) show_test_window ^= 1;
 		if (ImGui::Button("Another Window")) show_another_window ^= 1;
-	}
-
-	// 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name the window.
-	if (show_another_window)
-	{
-		ImGui::Begin("Another Window", &show_another_window);
-		ImGui::Text("Hello from another window!");
-		ImGui::End();
-	}
-
-	// 3. Show the ImGui test window. Most of the sample code is in ImGui::ShowTestWindow().
-	if (show_test_window)
-	{
-		ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);     // Normally user code doesn't need/want to call it because positions are saved in .ini file anyway. Here we just want to make the demo initial state a bit more friendly!
-		ImGui::ShowTestWindow(&show_test_window);
 	}
 
 	m_pLightCamera->SetCamera();

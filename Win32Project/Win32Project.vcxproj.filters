@@ -91,6 +91,9 @@
     <ClCompile Include="source\texture\texture_manager.cpp">
       <Filter>source\texture</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\mesh\grass\grass.cpp">
+      <Filter>source\object\mesh\glass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -192,6 +195,9 @@
     <ClInclude Include="source\texture\texture_manager.h">
       <Filter>source\texture</Filter>
     </ClInclude>
+    <ClInclude Include="source\object\mesh\grass\grass.h">
+      <Filter>source\object\mesh\glass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -254,6 +260,9 @@
     <Filter Include="resource\shader">
       <UniqueIdentifier>{75267d7b-3aa2-4108-a41b-29046fbe86c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\object\mesh\glass">
+      <UniqueIdentifier>{4000b228-498d-4a95-b287-8b35fd732af2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">
@@ -292,6 +301,12 @@
       <Filter>resource\shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\shader\VertexShader.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="GeometryGrass.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\VertexGrass.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
   </ItemGroup>

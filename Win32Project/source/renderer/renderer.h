@@ -63,6 +63,8 @@ protected:
 
 	VertexShader*						m_pVertexShader;
 
+	GeometryShader*						m_pGeometryShader;
+
 	PixelShader*						m_pPixelShader;
 
 	Object::Transform*					m_pTransform;
@@ -87,6 +89,7 @@ public:
 		int	nNumVertexPolygon,
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
+		GeometryShader::GEOMETRY_TYPE eGsType,
 		PixelShader::PIXEL_TYPE ePsType);
 
 	//デストラクタ

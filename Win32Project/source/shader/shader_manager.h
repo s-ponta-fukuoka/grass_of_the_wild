@@ -20,6 +20,7 @@ class ShaderManager
 {
 	std::list<VertexShader *>		m_VSlist;
 	std::list<PixelShader *>		m_PSlist;
+	std::list<GeometryShader *>		m_GSlist;
 public:
 
 	ShaderManager::ShaderManager();
@@ -30,13 +31,19 @@ public:
 
 	void PSAdd(PixelShader *shader);
 
+	void GSAdd(GeometryShader *shader);
+
 	VertexShader *GetVertexShader(VertexShader::VERTEX_TYPE etype);
 
 	PixelShader *GetPixelShader(PixelShader::PIXEL_TYPE etype);
 
+	GeometryShader *GetGeometryShader(GeometryShader::GEOMETRY_TYPE etype);
+
 	void ReleaseVS(void);
 
 	void ReleasePS(void);
+
+	void ReleaseGS(void);
 
 	void ReleaseAll(void);
 };

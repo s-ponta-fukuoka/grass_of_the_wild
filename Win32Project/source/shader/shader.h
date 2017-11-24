@@ -33,6 +33,7 @@ public:
 		VS_2D,
 		VS_3D,
 		VS_TOON,
+		VS_GRASS,
 		VS_MAX
 	}VERTEX_TYPE;
 
@@ -73,6 +74,27 @@ public:
 private:
 	PIXEL_TYPE m_ePsType;
 	ID3D11PixelShader *m_pPixelShader;
+};
+
+class GeometryShader : public Shader
+{
+public:
+	typedef enum
+	{
+		GS_NONE,
+		GS_GRASS,
+		GS_MAX
+	}GEOMETRY_TYPE;
+
+	GeometryShader(TCHAR* csoName, GEOMETRY_TYPE gsType, ShaderManager* pShaderManager);
+
+	void CreateGeometryShader(TCHAR* csoName);
+
+	GEOMETRY_TYPE GetType(void);
+	ID3D11GeometryShader *GetGeometryShaderr(void);
+private:
+	GEOMETRY_TYPE m_eGsType;
+	ID3D11GeometryShader *m_pGeometryShader;
 };
 
 #endif

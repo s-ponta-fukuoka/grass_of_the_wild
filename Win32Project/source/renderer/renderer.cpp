@@ -34,6 +34,9 @@ Renderer::Renderer()
 ,m_pConstantBuffer(NULL)
 ,m_pIndexBuffer(NULL)
 ,m_pTransform(NULL)
+, m_pVertexShader(NULL)
+,m_pPixelShader(NULL)
+, m_pGeometryShader(NULL)
 {
 	;
 }
@@ -49,6 +52,7 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 							int	nNumVertexPolygon,
 							D3D_PRIMITIVE_TOPOLOGY ePolygon,
 							VertexShader::VERTEX_TYPE eVsType,
+							GeometryShader::GEOMETRY_TYPE eGsType,
 							PixelShader::PIXEL_TYPE ePsType)
 {
 	m_ePolygon = ePolygon;
@@ -60,6 +64,11 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
 
 	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
+
+	if (eGsType != GeometryShader::GEOMETRY_TYPE::GS_NONE)
+	{
+		m_pGeometryShader = pShaderManager->GetGeometryShader(eGsType);
+	}
 
 	m_pTransform = pTransform;
 
@@ -315,6 +324,16 @@ void MeshRenderer::Draw(void)
 	//使用するシェーダーの登録
 	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
 	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
+
+	if (m_pGeometryShader != NULL)
+	{
+		pDeviceContext->GSSetShader(m_pGeometryShader->GetGeometryShaderr(), NULL, 0);
+	}
+	else
+	{
+		pDeviceContext->GSSetShader(NULL, NULL, 0);
+	}
+
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
 	pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
