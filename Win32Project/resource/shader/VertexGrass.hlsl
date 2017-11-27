@@ -17,8 +17,8 @@ struct vertexOut
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
-	float4x4 View;
-	float4x4 Projection;
+	float4x4 View : VIEW;
+	float4x4 Projection : PROJECTION;
 };
 
 //ïœä∑ópçsóÒ

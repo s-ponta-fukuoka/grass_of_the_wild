@@ -6,8 +6,10 @@
 //=============================================================================
 #include <stdio.h>
 #include <tchar.h>
+#include <bitset>
 #include "grass.h"
 #include "../../../renderer/render_manager.h"
+#include "../../../utility/utility.h"
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
@@ -32,7 +34,7 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 
 	m_vertex.position = VECTOR3(0.0f, 0.0f, 0.0f);
 	m_vertex.tex = VECTOR2(0.0f, 0.0f);
-	m_size = VECTOR3(20, 80, 0);
+	m_size = VECTOR3(10, 80, 0);
 	m_vertex.normal = VECTOR3(0, 0, -1);
 
 	MakeVertex();
@@ -49,10 +51,10 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		pConstant,
 		pLightCameraConstant,
 		GRASS_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 		VertexShader::VS_GRASS,
 		GeometryShader::GS_GRASS,
-		PixelShader::PS_NORMAL));
+		PixelShader::PS_GRASS));
 
 	pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
 		NULL,
@@ -63,15 +65,25 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		pLightCameraConstant,
 		NULL,
 		GRASS_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 		VertexShader::VS_NORMAL,
 		GeometryShader::GS_GRASS,
-		PixelShader::PS_SHADOW));
+		PixelShader::PS_GRASS));
 
 	delete[] pTexture;
 	pTexture = NULL;
 
 	m_pTransform->position.y = 100;
+
+	m_pTransform->rot.y = -180;
+
+	int i = Utility::DecimalConversion<int>(2, 2, 10);
+
+	float a = pow(2, -1);
+
+	i = Utility::GetReverseNumber<int>(i);
+
+	i = Utility::DecimalConversion<int>(i, 10, 2);
 }
 
 //=============================================================================
@@ -89,7 +101,7 @@ HRESULT Grass::Init( void )
 	m_vertex.position = VECTOR3(-4000.0f, 0.0f, 4000.0f);
 	m_vertex.tex = VECTOR2(0.0f, 0.0f);
 	m_size = VECTOR3(80, 0, 80);
-	m_vertex.normal = VECTOR3(0, 1, 0);
+	m_vertex.normal = VECTOR3(0, 0, -1);
 
 	MakeVertex();
 

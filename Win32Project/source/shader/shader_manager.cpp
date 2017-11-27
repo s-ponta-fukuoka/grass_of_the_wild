@@ -38,6 +38,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new PixelShader("bin/shader/ToonPixel.cso", PixelShader::PS_TOON, this);
 	new PixelShader("bin/shader/Shadow.cso", PixelShader::PS_SHADOW, this);
 	new PixelShader("bin/shader/matPixelShader.cso", PixelShader::PS_MAT, this);
+	new PixelShader("bin/shader/PixelGrass.cso", PixelShader::PS_GRASS, this);
 
 	new GeometryShader("bin/shader/GeometryGrass.cso", GeometryShader::GS_GRASS, this);
 

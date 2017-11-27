@@ -62,6 +62,7 @@ public:
 		PS_MAT,
 		PS_SHADOW,
 		PS_TOON,
+		PS_GRASS,
 		PS_MAX
 	}PIXEL_TYPE;
 

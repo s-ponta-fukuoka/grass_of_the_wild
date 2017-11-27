@@ -10,30 +10,24 @@ struct geometryInput
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
-	float4x4 View;
-	float4x4 Projection;
+	float4x4 View : VIEW;
+	float4x4 Projection : PROJECTION;
 };
 
 struct geometryOut
 {
 	float4 pos : SV_POSITION;
 	float4 nrm : NORMAL0;
-	float4 col : COLOR;
-	float2 tex : TEXCOORD0;
-	float4 col2: COL2;
-	float4 Lpos : POSITION_SM;
-	float4 Spos : TEXCOORD2;
 };
 
-[maxvertexcount(39)]
+[maxvertexcount(80)]
 void main(
-	triangle geometryInput input[3] : SV_POSITION,
-	inout TriangleStream< geometryOut > output
-)
+	triangle geometryInput input[3],
+	inout TriangleStream< geometryOut > output)
 {
-	float _Length = 100;
-	float _Width = 30;
-	float _Gravity = 1;
+	float _Length = 80;
+	float _Width = 0.5;
+	float _Gravity = 0.5;
 
 	//入力データに直接アクセスするとコードが混乱する傾向があるため、
 	//通常はすべてをクリーン変数に再パックします
@@ -52,11 +46,10 @@ void main(
 
 	geometryOut element = (geometryOut)0;
 
-	int steps = 5;
+	int steps = 2;
 
 	for (uint i = 0; i < steps; i++)
 	{
-
 		float t0 = (float)i / steps;
 		float t1 = (float)(i + 1) / steps;
 		
@@ -66,16 +59,16 @@ void main(
 		float4 w0 = T * lerp(_Width, 0, t0);
 		float4 w1 = T * lerp(_Width, 0, t1);
 
-		element.pos = mul(mul((p0 - w0), View), Projection);
+		element.pos = mul(mul((p0 - w0), input[0].View), input[0].Projection);
 		output.Append(element);
 
-		element.pos = mul(mul((p0 + w0), View), Projection);
+		element.pos = mul(mul((p0 + w0), input[0].View), input[0].Projection);
 		output.Append(element);
 
-		element.pos = mul(mul((p1 - w1), View), Projection);
+		element.pos = mul(mul((p1 - w1), input[0].View), input[0].Projection);
 		output.Append(element);
 
-		element.pos = mul(mul((p1 + w1), View), Projection);
+		element.pos = mul(mul((p1 + w1), input[0].View), input[0].Projection);
 		output.Append(element);
 	}
 

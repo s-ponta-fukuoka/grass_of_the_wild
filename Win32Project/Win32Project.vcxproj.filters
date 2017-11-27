@@ -198,6 +198,9 @@
     <ClInclude Include="source\object\mesh\grass\grass.h">
       <Filter>source\object\mesh\glass</Filter>
     </ClInclude>
+    <ClInclude Include="source\utility\utility.h">
+      <Filter>source\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -263,6 +266,9 @@
     <Filter Include="source\object\mesh\glass">
       <UniqueIdentifier>{4000b228-498d-4a95-b287-8b35fd732af2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\utility">
+      <UniqueIdentifier>{e6999009-edb5-445e-84e9-c25d1688baf2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">
@@ -307,6 +313,9 @@
       <Filter>resource\shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\shader\VertexGrass.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\PixelGrass.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
   </ItemGroup>
