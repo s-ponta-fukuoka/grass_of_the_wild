@@ -34,7 +34,7 @@ public:
 				ShaderManager* pShaderManager,
 				TextureManager* pTextureManager,
 				AppRenderer::Constant* pConstant,
-				AppRenderer::Constant* pLightCameraConstant);			//コンストラクタ
+				AppRenderer::Constant* pLightCameraConstant, int nCount);			//コンストラクタ
 
 	~Grass( );			//デストラクタ
 

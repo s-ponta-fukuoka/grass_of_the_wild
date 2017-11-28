@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <bitset>
+#include <vector>
 
 //*********************************************************
 //ƒNƒ‰ƒX
@@ -39,14 +40,15 @@ public:
 	template<typename T>
 	static T GetReverseNumber(T nNumber)
 	{
-		T nReverse = 0;
+		int nReverse = 0;
 
-		while (nNumber > 0) {
-			nReverse = nReverse * 10 + nNumber % 10;
+		while (nNumber > 0) 
+		{
+			nReverse++;
 			nNumber /= 10;
 		}
 
-		return nNumber;
+		return nReverse;
 	};
 
 protected:

@@ -26,7 +26,7 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant)
+Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant, int nCount)
 {
 	m_pVertexBuffer = NULL;
 
@@ -73,17 +73,47 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 	delete[] pTexture;
 	pTexture = NULL;
 
-	m_pTransform->position.y = 100;
+	m_pTransform->position.y = 40;
 
 	m_pTransform->rot.y = -180;
 
-	int i = Utility::DecimalConversion<int>(2, 2, 10);
+	int  n = Utility::DecimalConversion<int>(nCount, 2, 10);
 
-	float a = pow(2, -1);
+	float f = 0;
 
-	i = Utility::GetReverseNumber<int>(i);
+	int count = Utility::GetReverseNumber<int>(n);
 
-	i = Utility::DecimalConversion<int>(i, 10, 2);
+	for (int i = 0; i < count; i++)
+	{
+		int num = n;
+		 num /= pow(10,i);
+		 num %= 10;
+
+		 float nf = num * pow(2, -(i+1));
+
+		 f += nf;
+	}
+
+	m_pTransform->position.x = f * 100;
+
+	n = Utility::DecimalConversion<int>(nCount, 3, 10);
+
+	f = 0;
+
+	count = Utility::GetReverseNumber<int>(n);
+
+	for (int i = 0; i < count; i++)
+	{
+		int num = n;
+		num /= pow(10, i);
+		num %= 10;
+
+		float nf = num * pow(3, -(i + 1));
+
+		f += nf;
+	}
+
+	m_pTransform->position.z = f * 100;
 }
 
 //=============================================================================
