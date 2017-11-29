@@ -1,6 +1,5 @@
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141.pdb
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\camera.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\light_camera.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\main_camera.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\canvas.obj
@@ -8,6 +7,7 @@ c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\canvas_manag
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\shadow_map.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\character.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player.obj
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\grass.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh_field.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh_manager.obj
@@ -28,9 +28,9 @@ c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui_draw.o
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui_impl_dx11.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vector.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\main.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\model_manager.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\model.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\grass.obj
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\model_manager.obj
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\camera.obj
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\matpixelshader.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\normalpshader.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\normalvshader.cso
@@ -43,13 +43,12 @@ c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\toonsha
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertex3dshader.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertexshader.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertexgrass.cso
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\pixelgrass.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\geometrygrass.cso
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\debug\win32project.ilk
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\debug\win32project.exe
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\debug\win32project.pdb
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\icon.res
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\source.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player.obj.enc
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.command.1.tlog
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.read.1.tlog
 c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.write.1.tlog

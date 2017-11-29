@@ -13,7 +13,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define GRASS_VERTEX	(4)
+#define GRASS_VERTEX	(2)
 
 //*****************************************************************************
 // プロトタイプ宣言
@@ -26,8 +26,10 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant, int nCount)
+Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant, int cnt)
 {
+	m_pTransform = new Transform();
+
 	m_pVertexBuffer = NULL;
 
 	m_pIndexBuffer = NULL;
@@ -41,43 +43,42 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 
 	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
 
-
-	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
+	pRenderManager->AddRenderer(new GrowMeshRenderer(m_pVertexBuffer,
 		NULL,
 		pShaderManager,
 		pTexture->GetTexture(),
-		pRenderManager->GetShadowTexture(),
+		NULL,
 		m_pTransform,
 		pConstant,
-		pLightCameraConstant,
+		NULL,
 		GRASS_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		D3D_PRIMITIVE_TOPOLOGY_POINTLIST,
 		VertexShader::VS_GRASS,
 		GeometryShader::GS_GRASS,
 		PixelShader::PS_GRASS));
 
-	pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
-		NULL,
-		pShaderManager,
-		pTexture->GetTexture(),
-		NULL,
-		m_pTransform,
-		pLightCameraConstant,
-		NULL,
-		GRASS_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-		VertexShader::VS_NORMAL,
-		GeometryShader::GS_GRASS,
-		PixelShader::PS_GRASS));
+	//pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
+	//	NULL,
+	//	pShaderManager,
+	//	pTexture->GetTexture(),
+	//	NULL,
+	//	m_pTransform,
+	//	pLightCameraConstant,
+	//	NULL,
+	//	GRASS_VERTEX,
+	//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+	//	VertexShader::VS_NORMAL,
+	//	GeometryShader::GS_GRASS,
+	//	PixelShader::PS_GRASS));
 
 	delete[] pTexture;
 	pTexture = NULL;
 
-	m_pTransform->position.y = 40;
+	m_pTransform->position.y = 15;
 
-	m_pTransform->rot.y = -180;
+	m_pTransform->rot.x = -90;
 
-	int  n = Utility::DecimalConversion<int>(nCount, 2, 10);
+	int  n = Utility::DecimalConversion<int>(cnt, 3, 10);
 
 	float f = 0;
 
@@ -89,14 +90,14 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		 num /= pow(10,i);
 		 num %= 10;
 
-		 float nf = num * pow(2, -(i+1));
+		 float nf = num * pow(3, -(i+1));
 
 		 f += nf;
 	}
 
-	m_pTransform->position.x = f * 100;
+	m_pTransform->position.x = f * 200;
 
-	n = Utility::DecimalConversion<int>(nCount, 3, 10);
+	n = Utility::DecimalConversion<int>(cnt, 5, 10);
 
 	f = 0;
 
@@ -108,12 +109,12 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		num /= pow(10, i);
 		num %= 10;
 
-		float nf = num * pow(3, -(i + 1));
+		float nf = num * pow(5, -(i + 1));
 
 		f += nf;
 	}
 
-	m_pTransform->position.z = f * 100;
+	m_pTransform->position.z = f * 200;
 }
 
 //=============================================================================
@@ -163,26 +164,26 @@ void Grass::MakeVertex(void)
 
 	AppRenderer::Vertex3D* vertices = new AppRenderer::Vertex3D[GRASS_VERTEX];
 
-	vertices[0].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y - m_size.y, m_vertex.position.z);
-	vertices[1].position = VECTOR3(m_vertex.position.x, m_vertex.position.y - m_size.y, m_vertex.position.z);
-	vertices[2].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y, m_vertex.position.z);
-	vertices[3].position = VECTOR3(m_vertex.position.x, m_vertex.position.y, m_vertex.position.z);
+	vertices[0].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y, m_vertex.position.z);
+	//vertices[1].position = VECTOR3(m_vertex.position.x + m_size.x, 0, m_vertex.position.z-500);
+	//vertices[2].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y, m_vertex.position.z);
+	//vertices[3].position = VECTOR3(m_vertex.position.x, m_vertex.position.y, m_vertex.position.z);
 	
 
 	vertices[0].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
-	vertices[1].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
-	vertices[2].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
-	vertices[3].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
+	//vertices[1].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
+	//vertices[2].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
+	//vertices[3].normal = VECTOR3(m_vertex.normal.x,m_vertex.normal.y,m_vertex.normal.z);
 
 	vertices[0].color = VECTOR4(1,0,0,1);
-	vertices[1].color = VECTOR4(1,0,0,1);
-	vertices[2].color = VECTOR4(1,0,0,1);
-	vertices[3].color = VECTOR4(1,0,0,1);
+	//vertices[1].color = VECTOR4(1,0,0,1);
+	//vertices[2].color = VECTOR4(1,0,0,1);
+	//vertices[3].color = VECTOR4(1,0,0,1);
 
 	vertices[0].tex = VECTOR2(0,0);
-	vertices[1].tex = VECTOR2(1,0);
-	vertices[2].tex = VECTOR2(0,1);
-	vertices[3].tex = VECTOR2(1,1);
+	//vertices[1].tex = VECTOR2(1,0);
+	//vertices[2].tex = VECTOR2(0,1);
+	//vertices[3].tex = VECTOR2(1,1);
 
 	D3D11_BUFFER_DESC bd;
 	bd.Usage = D3D11_USAGE_DEFAULT;

@@ -29,6 +29,8 @@ Camera::Camera()
 	, m_vector(XMVectorSet(0,0,0,0))
 	, m_pConstant(NULL)
 {
+	m_pTransform = new Transform();
+
 	m_pConstant = new AppRenderer::Constant();
 }
 

@@ -30,6 +30,8 @@ Player::Player(RenderManager* pRenderManager,
 	: m_pModel(NULL)
 	, m_pFrame(NULL)
 {
+	m_pTransform = new Transform();
+
 	m_pModel = new SkinMeshModel("bin/model/naka.txt");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 

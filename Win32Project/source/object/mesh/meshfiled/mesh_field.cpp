@@ -32,6 +32,8 @@
 //=============================================================================
 MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant)
 {
+	m_pTransform = new Transform();
+
 	m_pVertexBuffer = NULL;
 
 	m_pIndexBuffer = NULL;

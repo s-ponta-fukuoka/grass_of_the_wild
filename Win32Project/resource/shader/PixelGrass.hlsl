@@ -26,15 +26,15 @@ float4 main(pixcelIn IN) : SV_Target
 	float4 diffuse = txDiffuse.Sample(samLinear, IN.tex) * lerp(float4(0.7f, 0.7f, 0.8f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
 
 	// ライト目線によるZ値の再算出
-	float ZValue = IN.Lpos.z / IN.Lpos.w;
+	//float ZValue = IN.Lpos.z / IN.Lpos.w;
 	
 	//// 射影空間のXY座標をテクスチャ座標に変換
-	float2 TransTexCoord;
-	TransTexCoord.x = (1.0f + IN.Lpos.x / IN.Lpos.w)*0.5f;
-	TransTexCoord.y = (1.0f - IN.Lpos.y / IN.Lpos.w)*0.5f;
+	//float2 TransTexCoord;
+	//TransTexCoord.x = (1.0f + IN.Lpos.x / IN.Lpos.w)*0.5f;
+	//TransTexCoord.y = (1.0f - IN.Lpos.y / IN.Lpos.w)*0.5f;
 
-	float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
-	float shadow = (shadowZ + 0.001 > IN.Lpos.z) ? 1.0 : 0.5;
+	//float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
+	//float shadow = (shadowZ + 0.001 > IN.Lpos.z) ? 1.0 : 0.5;
 
-	return diffuse * saturate(shadow) * float4(0.5,1,0.5,1);
+	return diffuse * IN.col;
 }

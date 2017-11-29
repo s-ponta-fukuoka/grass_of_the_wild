@@ -30,11 +30,19 @@ class TextureManager;
 class Grass : public Mesh
 {
 public:
+	//定数
+	struct Constant
+	{
+		XMMATRIX world[100];
+		XMMATRIX view;
+		XMMATRIX projection;
+	};
+
 	Grass( RenderManager* pRenderManager,
 				ShaderManager* pShaderManager,
 				TextureManager* pTextureManager,
 				AppRenderer::Constant* pConstant,
-				AppRenderer::Constant* pLightCameraConstant, int nCount);			//コンストラクタ
+				AppRenderer::Constant* pLightCameraConstant, int cnt);			//コンストラクタ
 
 	~Grass( );			//デストラクタ
 

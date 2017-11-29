@@ -27,6 +27,8 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 	TextureManager* pTextureManager,
 	AppRenderer::Constant* pConstant)
 {
+	m_pTransform = new Transform();
+
 	m_pVertexBuffer = NULL;
 	m_pos = VECTOR3(-10000.0f, 10000.0f, 10000.0f);
 	m_vertex.normal = VECTOR3(0.0f, 0.0f, 0.0f);			// ƒ|ƒŠƒSƒ“‚ÌˆÊ’u

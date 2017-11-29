@@ -114,6 +114,48 @@ private:
 };
 
 //-----------------------------------------------------------------------------
+// グロウメッシュレンダラー
+//-----------------------------------------------------------------------------
+class GrowMeshRenderer : public Renderer
+{
+public:
+	//コンストラクタ
+	GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
+		ID3D11Buffer* pIndexBuffer,
+		ShaderManager* pShaderManager,
+		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pShadowMap,
+		Object::Transform* pTransform,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightConstant,
+		int	nNumVertexPolygon,
+		D3D_PRIMITIVE_TOPOLOGY ePolygon,
+		VertexShader::VERTEX_TYPE eVsType,
+		GeometryShader::GEOMETRY_TYPE eGsType,
+		PixelShader::PIXEL_TYPE ePsType);
+
+	//デストラクタ
+	virtual ~GrowMeshRenderer();
+
+	//終了
+	void Release(void);
+
+	//描画
+	void Draw(void);
+
+private:
+	AppRenderer::Constant*				m_pConstant;
+
+	AppRenderer::Constant*				m_pLightConstant;
+
+	int									m_nNumVertexPolygon;
+
+	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
+
+	ID3D11ShaderResourceView*			m_pShadowMap;
+};
+
+//-----------------------------------------------------------------------------
 // スキニードレンダラー
 //-----------------------------------------------------------------------------
 class SkinnedMeshRenderer : public Renderer

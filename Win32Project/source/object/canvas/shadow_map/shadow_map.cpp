@@ -27,6 +27,8 @@ ShadowMap::ShadowMap(RenderManager* pRenderManager,
 	ShaderManager* pShaderManager,
 	TextureManager* pTextureManager)
 {
+	m_pTransform = new Transform();
+
 	m_pVertexBuffer = NULL;
 
 	m_pTexture = NULL;
