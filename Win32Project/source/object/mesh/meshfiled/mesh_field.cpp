@@ -82,9 +82,6 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 												VertexShader::VS_NORMAL,
 												GeometryShader::GS_NONE,
 												PixelShader::PS_SHADOW));
-
-	delete[] pTexture;
-	pTexture = NULL;
 }
 
 //=============================================================================

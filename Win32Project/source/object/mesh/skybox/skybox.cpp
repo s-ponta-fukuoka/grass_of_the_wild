@@ -51,9 +51,6 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 		VertexShader::VS_3D,
 		GeometryShader::GS_NONE,
 		PixelShader::PS_3D));
-
-	delete[] pTexture;
-	pTexture = NULL;
 }
 
 //=============================================================================

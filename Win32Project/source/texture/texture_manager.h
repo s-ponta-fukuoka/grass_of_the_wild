@@ -21,7 +21,7 @@ class TextureManager
 public:
 	void AddTexture(Texture* tex);
 	void DeleteTexture(Texture* tex);
-	unsigned char *GetTexture(Texture* tex);
+	Texture *GetTexture(Texture* tex);
 };
 
 #endif

@@ -23,14 +23,19 @@
 Texture::Texture(const char* name, TextureManager* m_pTextureManager)
 {
 	m_name = name;
-	m_Pixels = m_pTextureManager->GetTexture(this);
-	if (m_Pixels == NULL)
+	Texture* pTexture = m_pTextureManager->GetTexture(this);
+	if (pTexture == NULL)
 	{
 		LoadTexture(m_name);
 		CreateTextureResource();
+		m_pTextureManager->AddTexture(this);
 	}
 	else
 	{
+		m_Width = pTexture->m_Width;
+		m_Height = pTexture->m_Height;
+		m_Pixels = pTexture->m_Pixels;
+		m_pTexture = pTexture->m_pTexture;
 		CreateTextureResource();
 	}
 }

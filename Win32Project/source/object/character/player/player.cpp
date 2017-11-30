@@ -32,7 +32,7 @@ Player::Player(RenderManager* pRenderManager,
 {
 	m_pTransform = new Transform();
 
-	m_pModel = new SkinMeshModel("bin/model/naka.txt");
+	m_pModel = new SkinMeshModel("bin/model/naka.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
@@ -40,6 +40,11 @@ Player::Player(RenderManager* pRenderManager,
 	m_pFrame = new int();
 
 	m_pAnimeNumber = new int();
+
+	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
+
+	m_pAnimeNumber[0] = 0;
+	m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
 
 	PixelShader::PIXEL_TYPE ePsType;
 
@@ -138,7 +143,7 @@ void Player::Update(void)
 	//ˆÚ“®ˆ—
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
-	m_pFrame[0]++;
+	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
 
 	if (pInputKeyboard->GetKeyPress(DIK_W))
 	{
@@ -169,6 +174,30 @@ void Player::Update(void)
 	{
 		m_pTransform->position.y--;
 	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_W) || 
+		pInputKeyboard->GetKeyPress(DIK_A) ||
+		pInputKeyboard->GetKeyPress(DIK_S) ||
+		pInputKeyboard->GetKeyPress(DIK_D))
+	{
+		m_pAnimeNumber[0] = 1;
+	}
+	else
+	{
+		m_pAnimeNumber[0] = 0;
+	}
+
+	if (m_pFrame[0] >= pAnime[m_pAnimeNumber[0]].nEndTime-1)
+	{
+		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+	}
+
+	if (m_pFrame[0] < pAnime[m_pAnimeNumber[0]].nStartTime)
+	{
+		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+	}
+
+	m_pFrame[0]++;
 
 	Object::Update();
 }

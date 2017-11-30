@@ -95,14 +95,14 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pMeshManager = new MeshManager();
 
-	for (int i = 0; i < 1000; i++)
-	{
-		m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(),i));
-	}
+	//for (int i = 0; i < 1000; i++)
+	//{
+	//	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(),i));
+	//}
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	//m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
 	return S_OK;
 }
@@ -177,7 +177,7 @@ void App::Update(void)
 
 	m_pMeshManager->UpdateAll();
 
-	//m_pPlayer->Update();
+	m_pPlayer->Update();
 
 	m_pCanvasManager->UpdateAll();
 

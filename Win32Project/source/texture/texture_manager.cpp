@@ -37,13 +37,13 @@ void TextureManager::DeleteTexture(Texture* tex)
 	}
 }
 
-unsigned char *TextureManager::GetTexture(Texture* tex)
+Texture *TextureManager::GetTexture(Texture* tex)
 {
 	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
 	{
-		if (dynamic_cast<Texture *>(*ite)->GetName() == tex->GetName())
+		if (!strcmp((*ite)->GetName(), tex->GetName()))
 		{
-			return dynamic_cast<Texture *>(*ite)->GetPixels();
+			return (*ite);
 		}
 	}
 	return NULL;

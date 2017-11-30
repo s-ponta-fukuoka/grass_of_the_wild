@@ -71,9 +71,6 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 	//	GeometryShader::GS_GRASS,
 	//	PixelShader::PS_GRASS));
 
-	delete[] pTexture;
-	pTexture = NULL;
-
 	m_pTransform->position.y = 15;
 
 	m_pTransform->rot.x = -90;

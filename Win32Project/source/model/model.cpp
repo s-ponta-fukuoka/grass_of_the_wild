@@ -292,7 +292,7 @@ void SkinMeshModel::LoadFile(const  char* FileName)
 			for (int k = 0; k < m_nNumAnime; k++)
 			{
 				m_pMesh[i].pCluster[j].pMatrix[k] = new XMMATRIX[m_pAnime[k].nEndTime];
-				for (int l = 0; l < m_pAnime[k].nEndTime; l++)
+				for (int l = m_pAnime[k].nStartTime; l < m_pAnime[k].nEndTime; l++)
 				{
 					//クラスター行列
 					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._11);
