@@ -16,6 +16,8 @@
 // マクロ定義
 //*****************************************************************************
 
+class Player;
+
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -29,7 +31,7 @@ public:
 	virtual ~MainCamera();
 
 	//初期化
-	HRESULT Init(void);
+	HRESULT Init(Player* pPlayer);
 
 	//終了
 	void Release(void);
@@ -42,6 +44,19 @@ public:
 
 	//定数取得
 	AppRenderer::Constant* GetConstant(void);
+
+	//ポジション取得
+	const VECTOR3& GetPos(void) const;
+
+	//注視点取得
+	const VECTOR3& GetPosAt(void) const;
+
+	//カメラベクトル取得
+	const XMVECTOR& GetVec(void) const;
+private:
+	Player*		m_pPlayer;
+
+	VECTOR3		m_move;
 };
 
 #endif

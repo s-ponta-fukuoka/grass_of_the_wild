@@ -27,6 +27,7 @@
 #include "../gui/imgui.h"
 #include "../gui/imgui_impl_dx11.h"
 #include "../object/mesh/grass/grass.h"
+#include "../object/character/enemy/enemy_manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -41,6 +42,7 @@ App::App()
 	, m_pMeshManager(NULL)
 	, m_pInputKeybord(NULL)
 	, m_pCanvasManager(NULL)
+	, m_pEnemyManager(NULL)
 {
 	;
 }
@@ -75,9 +77,6 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	ID3D11Device* pDevice = m_pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = m_pAppRenderer->GetDeviceContex();
 
-	m_pCamera = new MainCamera(VECTOR3(0.0f,100.0f,-500.0f), VECTOR3(0.0f,0.0f,0.0f), VECTOR3(0.0f,1.0f,0.0f));
-	m_pCamera->Init();
-
 	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
 
@@ -99,10 +98,18 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	//{
 	//	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(),i));
 	//}
+
+	m_pCamera = new MainCamera(VECTOR3(0.0f, 100.0f, -500.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f));
+
 	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera);
+
+	m_pEnemyManager = new EnemyManager();
+	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera);
+
+	m_pCamera->Init(m_pPlayer);
 
 	return S_OK;
 }
@@ -159,9 +166,13 @@ void App::Release(void)
 	delete m_pRenderManager;
 	m_pRenderManager = NULL;
 
-	//if (m_pPlayer == NULL) { return; }
-	//delete m_pPlayer;
-	//m_pPlayer = NULL;
+	if (m_pPlayer == NULL) { return; }
+	delete m_pPlayer;
+	m_pPlayer = NULL;
+
+	if (m_pEnemyManager == NULL) { return; }
+	delete m_pEnemyManager;
+	m_pEnemyManager = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -178,6 +189,8 @@ void App::Update(void)
 	m_pMeshManager->UpdateAll();
 
 	m_pPlayer->Update();
+
+	m_pEnemyManager->Update();
 
 	m_pCanvasManager->UpdateAll();
 

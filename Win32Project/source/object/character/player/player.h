@@ -21,6 +21,7 @@ class ShaderManager;
 class RenderManager;
 class TextureManager;
 class ModelManager;
+class MainCamera;
 
 //*****************************************************************************
 // クラス定義
@@ -28,13 +29,22 @@ class ModelManager;
 class Player : public Character
 {
 public:
+	enum ANIME_STATE
+	{
+		ANIME_WAIT,
+		ANIME_WALK,
+		ANIME_ATTACK_001,
+		ANIME_ATTACK_002,
+	};
+
 	//コンストラクタ
 	Player(RenderManager* pRenderManager,
 		ShaderManager* pShaderManager,
 		TextureManager* pTextureManager,
 		ModelManager* pModelManager,
 		AppRenderer::Constant* pConstant,
-		AppRenderer::Constant* pLightCameraConstant);
+		AppRenderer::Constant* pLightCameraConstant,
+		MainCamera* pCamera);
 
 	//デストラクタ
 	virtual ~Player();
@@ -52,11 +62,16 @@ public:
 	void MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh);
 
 private:
-	SkinMeshModel*		m_pModel;
+	//キーボード操作
+	void InputOperation(void);
 
-	int*				m_pFrame;
+	MainCamera*			m_pCamera;
 
-	int*				m_pAnimeNumber;
+	VECTOR3				m_move;
+
+	XMVECTOR			m_CompletionPosition;
+
+	XMVECTOR			m_CompletionRot;
 };
 
 #endif

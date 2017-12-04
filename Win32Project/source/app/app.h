@@ -35,6 +35,7 @@ class CanvasManager;
 class InputKeyboard;
 class ModelManager;
 class Player;
+class EnemyManager;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -81,6 +82,8 @@ private:
 	ModelManager*					m_pModelManager;
 
 	Player*							m_pPlayer;
+
+	EnemyManager*					m_pEnemyManager;
 };
 
 #endif

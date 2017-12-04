@@ -35,9 +35,9 @@ SkinMeshModel *ModelManager::SeekSkinMeshModel(SkinMeshModel* model)
 {
 	for (auto ite = m_SkinMeshList.begin(); ite != m_SkinMeshList.end(); ++ite)
 	{
-		if ((*ite)->GetFileName() == model->GetFileName())
+		if (!strcmp((*ite)->GetFileName(), model->GetFileName()))
 		{
-			return dynamic_cast<SkinMeshModel*>(*ite);
+			return (*ite);
 		}
 	}
 	model->LoadFile(model->GetFileName());

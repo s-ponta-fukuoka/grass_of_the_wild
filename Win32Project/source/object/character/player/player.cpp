@@ -9,6 +9,7 @@
 // インクルード
 //*****************************************************************************
 #include "player.h"
+#include "../../../object/camera/main_camera.h"
 #include "../../../model/model.h"
 #include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
@@ -17,6 +18,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define PLAYER_MOVE (200)
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -26,20 +28,21 @@ Player::Player(RenderManager* pRenderManager,
 	TextureManager* pTextureManager,
 	ModelManager*	pModelManager,
 	AppRenderer::Constant* pConstant,
-	AppRenderer::Constant* pLightCameraConstant)
-	: m_pModel(NULL)
-	, m_pFrame(NULL)
+	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera)
+	: m_pCamera(NULL)
+	, m_move(VECTOR3(0,0,0))
 {
 	m_pTransform = new Transform();
+
+	m_CompletionPosition = XMVectorSet(0,0,0,0);
+	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
+
+	m_pCamera = pCamera;
 
 	m_pModel = new SkinMeshModel("bin/model/naka.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
-
-	m_pFrame = new int();
-
-	m_pAnimeNumber = new int();
 
 	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
 
@@ -53,13 +56,13 @@ Player::Player(RenderManager* pRenderManager,
 
 		MakeVertex(i, pMesh);
 
+		
 		ID3D11ShaderResourceView* pTextureResource = NULL;
 
 		if (pMesh[i].pFileName != NULL)
 		{
 			ePsType = PixelShader::PS_TOON;
 			Texture* pTexture = new Texture(pMesh[i].pFileName, pTextureManager);
-			//Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
 			pTextureResource = pTexture->GetTexture();
 		}
 		else
@@ -103,7 +106,7 @@ Player::Player(RenderManager* pRenderManager,
 			pMesh[i]));
 	}
 
-	m_pTransform->rot.y = 180;
+	m_pTransform->rot.y = 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -140,64 +143,9 @@ void Player::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Player::Update(void)
 {
-	//移動処理
-	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+	InputOperation();
 
-	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
-
-	if (pInputKeyboard->GetKeyPress(DIK_W))
-	{
-		m_pTransform->position.z++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_A))
-	{
-		m_pTransform->position.x--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_S))
-	{
-		m_pTransform->position.z--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_pTransform->position.x++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_Y))
-	{
-		m_pTransform->position.y++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_N))
-	{
-		m_pTransform->position.y--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_W) || 
-		pInputKeyboard->GetKeyPress(DIK_A) ||
-		pInputKeyboard->GetKeyPress(DIK_S) ||
-		pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_pAnimeNumber[0] = 1;
-	}
-	else
-	{
-		m_pAnimeNumber[0] = 0;
-	}
-
-	if (m_pFrame[0] >= pAnime[m_pAnimeNumber[0]].nEndTime-1)
-	{
-		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
-	}
-
-	if (m_pFrame[0] < pAnime[m_pAnimeNumber[0]].nStartTime)
-	{
-		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
-	}
-
-	m_pFrame[0]++;
+	ChangeAnime();
 
 	Object::Update();
 }
@@ -261,4 +209,66 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	delete[] vertices;
 
 	delete[] hIndexData;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//キーボード操作
+///////////////////////////////////////////////////////////////////////////////
+void Player::InputOperation(void)
+{
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	XMVECTOR StartPosition = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1.0f);
+
+	XMVECTOR vector = m_pCamera->GetVec();
+
+	XMVECTOR StartRot = XMVectorSet(0, m_pTransform->rot.y, 0, 1.0f);
+
+	if (pInputKeyboard->GetKeyPress(DIK_W))
+	{
+		m_move.x -= XMVectorGetX(vector) * PLAYER_MOVE;
+		m_move.z -= XMVectorGetZ(vector) * PLAYER_MOVE;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_A))
+	{
+		m_move.x += XMVectorGetZ(vector) * PLAYER_MOVE;
+		m_move.z -= XMVectorGetX(vector) * PLAYER_MOVE;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_S))
+	{
+		m_move.x += XMVectorGetX(vector) * PLAYER_MOVE;
+		m_move.z += XMVectorGetZ(vector) * PLAYER_MOVE;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_D))
+	{
+		m_move.x -= XMVectorGetZ(vector) * PLAYER_MOVE;
+		m_move.z += XMVectorGetX(vector) * PLAYER_MOVE;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_W) ||
+		pInputKeyboard->GetKeyPress(DIK_A) ||
+		pInputKeyboard->GetKeyPress(DIK_S) ||
+		pInputKeyboard->GetKeyPress(DIK_D))
+	{
+		m_CompletionPosition = XMVectorSet(m_pTransform->position.x + m_move.x, 0, m_pTransform->position.z + m_move.z, 0);
+		m_CompletionRot = XMVectorSet(0,atan2(-m_move.z, -m_move.x) + D3D_PI * 0.5, 0,1);
+		m_pAnimeNumber[0] = 1;
+	}
+	else
+	{
+		m_pAnimeNumber[0] = 0;
+	}
+
+	m_pTransform->position += m_move;
+	m_move *= 0.1f;
+
+	StartRot = XMVectorLerp(StartRot, m_CompletionRot, 0.1f);
+	m_pTransform->rot.y = XMVectorGetY(StartRot);
+
+	StartPosition = XMVectorLerp(StartPosition, m_CompletionPosition, 0.1f);
+	m_pTransform->position.x = XMVectorGetX(StartPosition);
+	m_pTransform->position.z = XMVectorGetZ(StartPosition);
 }

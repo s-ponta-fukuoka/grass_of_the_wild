@@ -46,6 +46,9 @@ public:
 	//更新
 	virtual void Update(void);
 
+	//トランスフォーム取得
+	Transform* GetTransform(void);
+
 protected:
 	Transform*				m_pTransform;
 };

@@ -18,8 +18,15 @@
 //コンストラクタ
 ///////////////////////////////////////////////////////////////////////////////
 Character::Character()
+	: m_pFrame(NULL)
+	, m_pAnimeNumber(NULL)
+	, m_pVertexBuffer(NULL)
+	, m_pIndexBuffer (NULL)
+	, m_pModel(NULL)
 {
-	;
+	m_pFrame = new int();
+
+	m_pAnimeNumber = new int();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,4 +60,24 @@ void Character::Release(void)
 void Character::Update(void)
 {
 	Object::Update();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//アニメーション変更
+///////////////////////////////////////////////////////////////////////////////
+void Character::ChangeAnime(void)
+{
+	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
+
+	if (m_pFrame[0] >= pAnime[m_pAnimeNumber[0]].nEndTime - 1)
+	{
+		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+	}
+
+	if (m_pFrame[0] < pAnime[m_pAnimeNumber[0]].nStartTime)
+	{
+		m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+	}
+
+	m_pFrame[0]++;
 }

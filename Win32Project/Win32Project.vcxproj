@@ -36,6 +36,8 @@
     <ClCompile Include="source\object\canvas\canvas_manager.cpp" />
     <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_manager.cpp" />
     <ClCompile Include="source\object\character\player\player.cpp" />
     <ClCompile Include="source\object\mesh\grass\grass.cpp" />
     <ClCompile Include="source\object\mesh\mesh.cpp" />
@@ -71,6 +73,8 @@
     <ClInclude Include="source\object\canvas\canvas_manager.h" />
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
+    <ClInclude Include="source\object\character\enemy\enemy.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_manager.h" />
     <ClInclude Include="source\object\character\player\player.h" />
     <ClInclude Include="source\object\mesh\grass\grass.h" />
     <ClInclude Include="source\object\mesh\mesh.h" />

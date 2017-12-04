@@ -11,7 +11,7 @@
 #include "main_camera.h"
 #include "../../../source/app/app.h"
 #include "../../device/input.h"
-
+#include "../character/player/player.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -24,6 +24,8 @@
 // コンストラクタ
 ///////////////////////////////////////////////////////////////////////////////
 MainCamera::MainCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp)
+	: m_pPlayer(NULL)
+	, m_move(VECTOR3(0,0,0))
 {
 	m_pTransform->position = position;
 
@@ -43,8 +45,10 @@ MainCamera::~MainCamera()
 ///////////////////////////////////////////////////////////////////////////////
 // 初期化
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT MainCamera::Init(void )
+HRESULT MainCamera::Init(Player *pPlayer)
 {
+	m_pPlayer = pPlayer;
+
 	Camera::Init();
 	return S_OK;
 }
@@ -66,41 +70,41 @@ void MainCamera::Update(void)
 
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
-	if (pInputKeyboard->GetKeyPress(DIK_W))
+	if (pInputKeyboard->GetKeyPress(DIK_C))// Sキー押されたら
 	{
-		m_pTransform->position.z++;
-		m_positionAt.z++;
+		m_move.x += XMVectorGetZ(m_vector) * 10;
+		m_move.z -= XMVectorGetX(m_vector) * 10;
+
+		//m_pTransform->rot.y += 0.5f;
+	}
+	if (pInputKeyboard->GetKeyPress(DIK_Z))// Sキー押されたら
+	{
+		m_move.x -= XMVectorGetZ(m_vector) * 10;
+		m_move.z += XMVectorGetX(m_vector) * 10;
+
+		//m_pTransform->rot.y -= 0.5f;
 	}
 
-	if (pInputKeyboard->GetKeyPress(DIK_A))
+	if (pInputKeyboard->GetKeyPress(DIK_Y))// Sキー押されたら
 	{
-		m_pTransform->position.x--;
-		m_positionAt.x--;
-	}
+		m_move.y += 5;
 
-	if (pInputKeyboard->GetKeyPress(DIK_S))
-	{
-		m_pTransform->position.z--;
-		m_positionAt.z--;
+		m_pTransform->rot.y += 0.5f;
 	}
+	if (pInputKeyboard->GetKeyPress(DIK_N))// Sキー押されたら
+	{
+		m_move.y -= 5;
 
-	if (pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_pTransform->position.x++;
-		m_positionAt.x++;
+		m_pTransform->rot.y -= 0.5f;
 	}
+	m_positionAt.x = m_pPlayer->GetTransform()->position.x;
+	m_positionAt.z = m_pPlayer->GetTransform()->position.z;
+	m_positionAt.y = 100;
 
-	if (pInputKeyboard->GetKeyPress(DIK_Y))
-	{
-		m_pTransform->position.y++;
-		m_positionAt.y++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_N))
-	{
-		m_pTransform->position.y--;
-		m_positionAt.y--;
-	}
+	m_pTransform->position.x = m_move.x + (350 * sinf(D3D_PI + m_pTransform->rot.y)) + m_pPlayer->GetTransform()->position.x;
+	m_pTransform->position.z = m_move.z + (500 * cosf(D3D_PI + m_pTransform->rot.y)) + m_pPlayer->GetTransform()->position.z;
+	m_pTransform->position.y = m_move.y + (350 * sinf(D3D_PI + m_pTransform->rot.y)) + 100;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -130,4 +134,28 @@ void MainCamera::SetCamera(void)
 AppRenderer::Constant* MainCamera::GetConstant(void)
 {
 	return m_pConstant;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//ポジション取得
+///////////////////////////////////////////////////////////////////////////////
+const VECTOR3& MainCamera::GetPos(void) const
+{
+	return m_pTransform->position;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//注視点取得
+///////////////////////////////////////////////////////////////////////////////
+const VECTOR3& MainCamera::GetPosAt(void) const
+{
+	return m_positionAt;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//カメラベクトル取得
+///////////////////////////////////////////////////////////////////////////////
+const XMVECTOR& MainCamera::GetVec(void) const
+{
+	return m_vector;
 }

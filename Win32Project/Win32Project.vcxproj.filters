@@ -94,6 +94,12 @@
     <ClCompile Include="source\object\mesh\grass\grass.cpp">
       <Filter>source\object\mesh\glass</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_manager.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -201,6 +207,12 @@
     <ClInclude Include="source\utility\utility.h">
       <Filter>source\utility</Filter>
     </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_manager.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -268,6 +280,9 @@
     </Filter>
     <Filter Include="source\utility">
       <UniqueIdentifier>{e6999009-edb5-445e-84e9-c25d1688baf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\character\enemy">
+      <UniqueIdentifier>{603dade5-084f-4a7f-b860-09b2c98b2a57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

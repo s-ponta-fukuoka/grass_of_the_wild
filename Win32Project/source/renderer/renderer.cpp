@@ -533,7 +533,7 @@ void SkinnedMeshRenderer::Draw()
 
 	XMMATRIX hWorld = XMMatrixIdentity();
 	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
-	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
+	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), -m_pTransform->rot.y, D3DToRadian(m_pTransform->rot.z));
 	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
 
 	hWorld = XMMatrixMultiply(hWorld, hScaling);

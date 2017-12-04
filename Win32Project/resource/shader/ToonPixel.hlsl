@@ -37,10 +37,10 @@ float4 main(pixcelIn IN) : SV_Target
 	TransTexCoord.x = (1.0f + IN.Lpos.x / IN.Lpos.w)*0.5f;
 	TransTexCoord.y = (1.0f - IN.Lpos.y / IN.Lpos.w)*0.5f;
 
-	float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
-	float shadow = (shadowZ + 0.0001 < IN.Lpos.z) ? 1.0 : 0.5;
+	//float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
+	//float shadow = (shadowZ + 0.0001 < IN.Lpos.z) ? 1.0 : 0.5;
 
-	OUT.col = diffuse * saturate(shadow);
+	OUT.col = diffuse /* saturate(shadow)*/;
 
 	//OUT.col = saturate(IN.col2) * txDiffuse.Sample(samLinear, IN.tex) * lerp(1, 0.7, shadow);
 
