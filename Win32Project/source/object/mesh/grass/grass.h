@@ -23,6 +23,7 @@
 class ShaderManager;
 class RenderManager;
 class TextureManager;
+class MainCamera;
 
 //*****************************************************************************
 // クラス定義
@@ -42,7 +43,7 @@ public:
 				ShaderManager* pShaderManager,
 				TextureManager* pTextureManager,
 				AppRenderer::Constant* pConstant,
-				AppRenderer::Constant* pLightCameraConstant, int cnt);			//コンストラクタ
+				AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, int cnt);			//コンストラクタ
 
 	~Grass( );			//デストラクタ
 
@@ -55,6 +56,7 @@ public:
 	void MakeVertex(void);
 
 private:
+	MainCamera* m_pCamera;
 	VECTOR3 m_size;
 };
 

@@ -27,7 +27,7 @@ float4 main(pixcelIn IN) : SV_Target
 	
 	//float4 shadow = lerp(float4(0.7f, 0.7f, 0.8f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
 	
-	float4 diffuse = txDiffuse2.Sample(samLinear, IN.tex2) * txDiffuse.Sample(samLinear, IN.tex) * lerp(IN.col, float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
+	float4 diffuse =txDiffuse.Sample(samLinear, IN.tex) * lerp(IN.col, float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
 
 	// ライト目線によるZ値の再算出
 	float ZValue = IN.Lpos.z / IN.Lpos.w;

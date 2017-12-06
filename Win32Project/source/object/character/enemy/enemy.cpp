@@ -115,6 +115,8 @@ Enemy::Enemy(
 	}
 
 	m_pTransform->position.z = 500;
+
+	SetObjectType(Object::TYPE_ENEMY);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

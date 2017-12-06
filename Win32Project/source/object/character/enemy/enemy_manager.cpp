@@ -33,11 +33,11 @@ HRESULT EnemyManager::GenerateEnemy(RenderManager* pRenderManager,
 	EnemyAdd(new Enemy(VECTOR3(100,0,100),VECTOR3(0,0,0), VECTOR3(1,1,1),
 		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
 
-	EnemyAdd(new Enemy(VECTOR3(0, 0, -100), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
-
-	EnemyAdd(new Enemy(VECTOR3(-300, 0, 0), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
+	//EnemyAdd(new Enemy(VECTOR3(0, 0, -100), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
+	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
+	//
+	//EnemyAdd(new Enemy(VECTOR3(-300, 0, 0), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
+	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
 
 	return S_OK;
 }

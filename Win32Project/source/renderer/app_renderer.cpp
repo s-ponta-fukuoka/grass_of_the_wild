@@ -71,6 +71,8 @@ HRESULT AppRenderer::Init(HWND hWnd)
 
 	ConfigViewPort();
 
+	ConfigRasterizerState();
+
 	return S_OK;
 }
 
@@ -231,4 +233,26 @@ void AppRenderer::ConfigViewPort(void)
 	m_ViewPort.MaxDepth = 1.0f;
 	m_ViewPort.TopLeftX = 0;
 	m_ViewPort.TopLeftY = 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//ラスタライザー設定
+///////////////////////////////////////////////////////////////////////////////
+void AppRenderer::ConfigRasterizerState(void)
+{
+	D3D11_RASTERIZER_DESC rs;
+	ZeroMemory(&rs, sizeof(rs));
+	rs.FillMode = D3D11_FILL_SOLID;
+	rs.CullMode = D3D11_CULL_BACK;
+	rs.FrontCounterClockwise = FALSE;
+	rs.DepthBias = 0;
+	rs.SlopeScaledDepthBias = 0.f;
+	rs.DepthBiasClamp = 0.f;
+	rs.DepthClipEnable = TRUE;
+	rs.ScissorEnable = FALSE;
+	rs.MultisampleEnable = FALSE;
+	rs.AntialiasedLineEnable = FALSE;
+	m_pDevice->CreateRasterizerState(&rs, &m_pRasterizerState);
+
+	m_pDeviceContext->RSSetState(m_pRasterizerState);
 }

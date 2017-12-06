@@ -28,6 +28,7 @@
 #include "../gui/imgui_impl_dx11.h"
 #include "../object/mesh/grass/grass.h"
 #include "../object/character/enemy/enemy_manager.h"
+#include "../collision/collision_manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -43,6 +44,7 @@ App::App()
 	, m_pInputKeybord(NULL)
 	, m_pCanvasManager(NULL)
 	, m_pEnemyManager(NULL)
+	, m_pCollisionManager(NULL)
 {
 	;
 }
@@ -82,6 +84,8 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pTextureManager = new TextureManager();
 
+	m_pCollisionManager = new CollisionManager();
+
 	m_pShaderManager = new ShaderManager();
 	m_pShaderManager->GenerateShader();
 
@@ -94,23 +98,23 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 
 	m_pMeshManager = new MeshManager();
 
-	//for (int i = 0; i < 1000; i++)
-	//{
-	//	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(),i));
-	//}
-
 	m_pCamera = new MainCamera(VECTOR3(0.0f, 100.0f, -500.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f));
 
-	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
+	for (int i = 0; i < 100; i++)
+	{
+		m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, i));
+	}
+
+	//m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera);
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
 
 	m_pEnemyManager = new EnemyManager();
 	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera);
 
 	m_pCamera->Init(m_pPlayer);
-
+	
 	return S_OK;
 }
 
@@ -173,6 +177,10 @@ void App::Release(void)
 	if (m_pEnemyManager == NULL) { return; }
 	delete m_pEnemyManager;
 	m_pEnemyManager = NULL;
+
+	if (m_pCollisionManager == NULL) { return; }
+	delete m_pCollisionManager;
+	m_pCollisionManager = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -194,6 +202,7 @@ void App::Update(void)
 
 	m_pCanvasManager->UpdateAll();
 
+	m_pCollisionManager->Update();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

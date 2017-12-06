@@ -14,11 +14,13 @@
 #include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
 #include "../../../device/input.h"
+#include "../../../collision/collider.h"
+#include "../../../collision/collision_manager.h"
 
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define PLAYER_MOVE (200)
+#define PLAYER_MOVE (50)
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -28,11 +30,14 @@ Player::Player(RenderManager* pRenderManager,
 	TextureManager* pTextureManager,
 	ModelManager*	pModelManager,
 	AppRenderer::Constant* pConstant,
-	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera)
+	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, CollisionManager* pCollisionManager)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0,0,0))
+	, m_pCollider(NULL)
 {
 	m_pTransform = new Transform();
+
+	m_pCollider = new SphereCollider(this,pCollisionManager,  pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
 	m_CompletionPosition = XMVectorSet(0,0,0,0);
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
@@ -71,40 +76,42 @@ Player::Player(RenderManager* pRenderManager,
 			ePsType = PixelShader::PS_MAT;
 		}
 
-		pRenderManager->AddRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
-			m_pIndexBuffer,
-			pShaderManager,
-			pTextureResource,
-			pRenderManager->GetShadowTexture(),
-			m_pTransform,
-			pConstant,
-			pLightCameraConstant,
-			pMesh[i].nNumPolygonVertex,
-			m_pFrame,
-			m_pAnimeNumber,
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			VertexShader::VS_TOON,
-			ePsType,
-			pMesh[i].pCluster,
-			pMesh[i]));
-
-		pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
-			m_pIndexBuffer,
-			pShaderManager,
-			pTextureResource,
-			NULL,
-			m_pTransform,
-			pLightCameraConstant,
-			NULL,
-			pMesh[i].nNumPolygonVertex,
-			m_pFrame,
-			m_pAnimeNumber,
-			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-			VertexShader::VS_TOON,
-			ePsType = PixelShader::PS_SHADOW,
-			pMesh[i].pCluster,
-			pMesh[i]));
+		//pRenderManager->AddRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+		//	m_pIndexBuffer,
+		//	pShaderManager,
+		//	pTextureResource,
+		//	pRenderManager->GetShadowTexture(),
+		//	m_pTransform,
+		//	pConstant,
+		//	pLightCameraConstant,
+		//	pMesh[i].nNumPolygonVertex,
+		//	m_pFrame,
+		//	m_pAnimeNumber,
+		//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		//	VertexShader::VS_TOON,
+		//	ePsType,
+		//	pMesh[i].pCluster,
+		//	pMesh[i]));
+		//
+		//pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+		//	m_pIndexBuffer,
+		//	pShaderManager,
+		//	pTextureResource,
+		//	NULL,
+		//	m_pTransform,
+		//	pLightCameraConstant,
+		//	NULL,
+		//	pMesh[i].nNumPolygonVertex,
+		//	m_pFrame,
+		//	m_pAnimeNumber,
+		//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		//	VertexShader::VS_TOON,
+		//	ePsType = PixelShader::PS_SHADOW,
+		//	pMesh[i].pCluster,
+		//	pMesh[i]));
 	}
+
+	SetObjectType(Object::TYPE_PLAYER);
 
 	m_pTransform->rot.y = 0;
 }
@@ -271,4 +278,20 @@ void Player::InputOperation(void)
 	StartPosition = XMVectorLerp(StartPosition, m_CompletionPosition, 0.1f);
 	m_pTransform->position.x = XMVectorGetX(StartPosition);
 	m_pTransform->position.z = XMVectorGetZ(StartPosition);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//あたり判定
+///////////////////////////////////////////////////////////////////////////////
+void Player::OnCollision(Collider* col)
+{
+	
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//コライダー取得
+///////////////////////////////////////////////////////////////////////////////
+SphereCollider* Player::GetSphereCollider(void)
+{
+	return m_pCollider;
 }

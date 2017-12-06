@@ -129,6 +129,9 @@ private:
 	//ビューポート設定
 	void ConfigViewPort(void);
 
+	//ラスタライザー設定
+	void ConfigRasterizerState(void);
+
 	static AppRenderer*				m_pAppRenderer;
 
 	ID3D11Device*					m_pDevice;
@@ -142,6 +145,8 @@ private:
 	ID3D11DepthStencilView*			m_pDepthStencilView;
 
 	D3D11_VIEWPORT					m_ViewPort;
+
+	ID3D11RasterizerState*			m_pRasterizerState;
 };
 
 #endif

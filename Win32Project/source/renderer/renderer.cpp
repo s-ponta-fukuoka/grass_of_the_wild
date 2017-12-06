@@ -435,12 +435,20 @@ void GrowMeshRenderer::Draw(void)
 
 	XMMATRIX hWorld = XMMatrixIdentity();
 	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
-	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
+	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(0.0f), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
 	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
 
 	hWorld = XMMatrixMultiply(hWorld, hScaling);
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
+
+	//XMMATRIX mtxInvView = XMMatrixIdentity();
+	//XMVECTOR Determinant;
+	//mtxInvView = XMMatrixInverse(&Determinant, m_pConstant->view);
+	//mtxInvView._41 = 0.0f;
+	//mtxInvView._42 = 0.0f;
+	//mtxInvView._43 = 0.0f;
+	//mtxInvView._44 = 1.0f;
 
 	XMMATRIX hView = m_pConstant->view;
 	XMMATRIX hProj = m_pConstant->projection;

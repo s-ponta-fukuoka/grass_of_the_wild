@@ -17,6 +17,7 @@ struct vertexOut
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
+	float4x4  World : WORLD;
 	float4x4 View : VIEW;
 	float4x4 Projection : PROJECTION;
 };
@@ -37,9 +38,11 @@ vertexOut main(vertexIn IN)
 	vertexOut OUT;
 
 	float4 posWorld;
-	posWorld = mul(IN.pos, World);
+	posWorld = IN.pos;
 
 	OUT.pos = posWorld;
+
+	OUT.World = World;
 
 	OUT.View = View;
 	OUT.Projection = Projection;

@@ -36,6 +36,7 @@ class InputKeyboard;
 class ModelManager;
 class Player;
 class EnemyManager;
+class CollisionManager;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -84,6 +85,8 @@ private:
 	Player*							m_pPlayer;
 
 	EnemyManager*					m_pEnemyManager;
+
+	CollisionManager*				m_pCollisionManager;
 };
 
 #endif

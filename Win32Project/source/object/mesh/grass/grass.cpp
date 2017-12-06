@@ -10,6 +10,7 @@
 #include "grass.h"
 #include "../../../renderer/render_manager.h"
 #include "../../../utility/utility.h"
+#include "../../camera/main_camera.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -26,13 +27,15 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant, int cnt)
+Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, TextureManager* pTextureManager, AppRenderer::Constant* pConstant, AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, int cnt)
 {
 	m_pTransform = new Transform();
 
 	m_pVertexBuffer = NULL;
 
 	m_pIndexBuffer = NULL;
+
+	m_pCamera = pCamera;
 
 	m_vertex.position = VECTOR3(0.0f, 0.0f, 0.0f);
 	m_vertex.tex = VECTOR2(0.0f, 0.0f);
@@ -92,7 +95,7 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		 f += nf;
 	}
 
-	m_pTransform->position.x = f * 200;
+	m_pTransform->position.x = f * 100;
 
 	n = Utility::DecimalConversion<int>(cnt, 5, 10);
 
@@ -111,7 +114,7 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		f += nf;
 	}
 
-	m_pTransform->position.z = f * 200;
+	m_pTransform->position.z = f * 100;
 }
 
 //=============================================================================
@@ -150,7 +153,9 @@ void Grass::Release(void)
 //=============================================================================
 void Grass::Update( void )
 {
-
+	//float angle = atan2( m_pTransform->position.x - m_pCamera->GetPos().x, m_pTransform->position.z - m_pCamera->GetPos().z) * (180.0 / D3D_PI);
+	//
+	//m_pTransform->rot.y = angle;
 }
 
 void Grass::MakeVertex(void)

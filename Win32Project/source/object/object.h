@@ -17,12 +17,22 @@
 // マクロ定義
 //*****************************************************************************
 
+class Collider;
+class SphereCollider;
+
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
 class Object
 {
 public:
+	enum ObjectType
+	{
+		TYPE_NONE,
+		TYPE_PLAYER,
+		TYPE_ENEMY,
+	};
+
 	//transform
 	struct Transform
 	{
@@ -49,7 +59,16 @@ public:
 	//トランスフォーム取得
 	Transform* GetTransform(void);
 
+	//タイプ取得・設定
+	void SetObjectType(ObjectType objtype);
+	ObjectType GetObjectType(void);
+
+	virtual void OnCollision(Collider* col) {};
+	virtual SphereCollider* GetSphereCollider(void) { return NULL; };
+
 protected:
+	ObjectType				m_eObjectType;
+
 	Transform*				m_pTransform;
 };
 

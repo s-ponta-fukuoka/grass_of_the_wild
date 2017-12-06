@@ -10,6 +10,7 @@ struct geometryInput
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
+	float4x4  World : WORLD;
 	float4x4 View : VIEW;
 	float4x4 Projection : PROJECTION;
 };
@@ -26,8 +27,8 @@ void main(
 	point geometryInput input[1],
 	inout TriangleStream< geometryOut > output)
 {
-	float _Length = 80;
-	float _Width = 1;
+	float _Length = 200;
+	float _Width = 5;
 	float _Gravity = 0.5;
 
 	//入力データに直接アクセスするとコードが混乱する傾向があるため、
@@ -63,25 +64,41 @@ void main(
 			float4 pos;
 
 			pos = (p0 - w0);
-			pos.x *= j;
 			pos.y *= -1;
-			element.pos = mul(mul(pos, input[0].View), input[0].Projection);
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
 			element.col = float4(0, 0.5, 0, 1);
 			output.Append(element);
 
 			pos = (p0 + w0);
-			pos.x *= j;
 			pos.y *= -1;
-			element.pos = mul(mul(pos, input[0].View), input[0].Projection);
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
 			element.col = float4(0, 0.5, 0, 1);
 			output.Append(element);
 
 			pos = (p1 - w1);
-			pos.x *= j;
 			pos.y *= -1;
-			element.pos = mul(mul(pos, input[0].View), input[0].Projection);
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
 			element.col = float4(1, 1, 0, 1);
 			output.Append(element);
+
+			pos = (p0 - w0);
+			pos.y *= -1;
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
+			element.col = float4(0, 0.5, 0, 1);
+			output.Append(element);
+
+			pos = (p1 - w1);
+			pos.y *= -1;
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
+			element.col = float4(1, 1, 0, 1);
+			output.Append(element);
+
+			pos = (p0 + w0);
+			pos.y *= -1;
+			element.pos = mul(mul(mul(pos, input[0].World), input[0].View), input[0].Projection);
+			element.col = float4(0, 0.5, 0, 1);
+			output.Append(element);
+
 		}
 
 		output.RestartStrip();
