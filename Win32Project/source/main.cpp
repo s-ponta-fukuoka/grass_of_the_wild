@@ -126,6 +126,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				// •`‰æˆ—
 				pApp->Draw();
 
+				pApp->SceneChange();
+
 				dwFrameCount++;
 			}
 		}

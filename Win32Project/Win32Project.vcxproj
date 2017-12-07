@@ -50,6 +50,11 @@
     <ClCompile Include="source\renderer\app_renderer.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\renderer\render_manager.cpp" />
+    <ClCompile Include="source\scene\game_scene.cpp" />
+    <ClCompile Include="source\scene\next_scene.cpp" />
+    <ClCompile Include="source\scene\result_scene.cpp" />
+    <ClCompile Include="source\scene\title_scene.cpp" />
+    <ClCompile Include="source\scene\tutorial_scene.cpp" />
     <ClCompile Include="source\shader\shader.cpp" />
     <ClCompile Include="source\shader\shader_manager.cpp" />
     <ClCompile Include="source\texture\texture.cpp" />
@@ -89,6 +94,12 @@
     <ClInclude Include="source\renderer\app_renderer.h" />
     <ClInclude Include="source\renderer\renderer.h" />
     <ClInclude Include="source\renderer\render_manager.h" />
+    <ClInclude Include="source\scene\game_scene.h" />
+    <ClInclude Include="source\scene\next_scene.h" />
+    <ClInclude Include="source\scene\result_scene.h" />
+    <ClInclude Include="source\scene\scene.h" />
+    <ClInclude Include="source\scene\title_scene.h" />
+    <ClInclude Include="source\scene\tutorial_scene.h" />
     <ClInclude Include="source\shader\shader.h" />
     <ClInclude Include="source\shader\shader_manager.h" />
     <ClInclude Include="source\texture\stb_image.h" />

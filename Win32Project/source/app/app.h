@@ -37,6 +37,8 @@ class ModelManager;
 class Player;
 class EnemyManager;
 class CollisionManager;
+class Scene;
+class NextScene;
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -61,32 +63,17 @@ public:
 	//描画
 	void Draw(void);
 
+	//シーン入れ替え
+	void SceneChange(void);
+
 private:
+	Scene*							m_pScene;
+
+	NextScene*						m_pNextScene;
+
 	AppRenderer*					m_pAppRenderer;
 
-	MainCamera*						m_pCamera;
-
-	LightCamera*					m_pLightCamera;
-
-	TextureManager*					m_pTextureManager;
-
-	ShaderManager*					m_pShaderManager;
-
-	RenderManager*					m_pRenderManager;
-
-	MeshManager*					m_pMeshManager;
-
-	CanvasManager*					m_pCanvasManager;
-
 	InputKeyboard*					m_pInputKeybord;
-
-	ModelManager*					m_pModelManager;
-
-	Player*							m_pPlayer;
-
-	EnemyManager*					m_pEnemyManager;
-
-	CollisionManager*				m_pCollisionManager;
 };
 
 #endif
