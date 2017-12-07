@@ -73,7 +73,11 @@ private:
 	//キーボード操作
 	void InputOperation(void);
 
+	VECTOR3				m_oldPos;
+
 	SphereCollider*		m_pCollider;
+
+	SphereCollider*		m_pAttackCollider;
 
 	MainCamera*			m_pCamera;
 

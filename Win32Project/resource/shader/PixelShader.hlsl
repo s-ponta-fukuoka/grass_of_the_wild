@@ -36,7 +36,7 @@ float4 main(pixcelIn IN) : SV_Target
 	float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
 	float shadow = (shadowZ + 0.001 > IN.Lpos.z) ? 1.0 : 0.5;
 
-	return diffuse * saturate(shadow);
+	return diffuse * saturate(shadow) * IN.col;
 }
 
 float4 ps_main2(pixcelIn IN) : SV_Target

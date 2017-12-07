@@ -37,8 +37,6 @@ Player::Player(RenderManager* pRenderManager,
 {
 	m_pTransform = new Transform();
 
-	m_pCollider = new SphereCollider(this,pCollisionManager,  pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
-
 	m_CompletionPosition = XMVectorSet(0,0,0,0);
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
 
@@ -76,40 +74,46 @@ Player::Player(RenderManager* pRenderManager,
 			ePsType = PixelShader::PS_MAT;
 		}
 
-		//pRenderManager->AddRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
-		//	m_pIndexBuffer,
-		//	pShaderManager,
-		//	pTextureResource,
-		//	pRenderManager->GetShadowTexture(),
-		//	m_pTransform,
-		//	pConstant,
-		//	pLightCameraConstant,
-		//	pMesh[i].nNumPolygonVertex,
-		//	m_pFrame,
-		//	m_pAnimeNumber,
-		//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-		//	VertexShader::VS_TOON,
-		//	ePsType,
-		//	pMesh[i].pCluster,
-		//	pMesh[i]));
-		//
-		//pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
-		//	m_pIndexBuffer,
-		//	pShaderManager,
-		//	pTextureResource,
-		//	NULL,
-		//	m_pTransform,
-		//	pLightCameraConstant,
-		//	NULL,
-		//	pMesh[i].nNumPolygonVertex,
-		//	m_pFrame,
-		//	m_pAnimeNumber,
-		//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
-		//	VertexShader::VS_TOON,
-		//	ePsType = PixelShader::PS_SHADOW,
-		//	pMesh[i].pCluster,
-		//	pMesh[i]));
+		pRenderManager->AddRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+			m_pIndexBuffer,
+			pShaderManager,
+			pTextureResource,
+			pRenderManager->GetShadowTexture(),
+			m_pTransform,
+			pConstant,
+			pLightCameraConstant,
+			pMesh[i].nNumPolygonVertex,
+			m_pFrame,
+			m_pAnimeNumber,
+			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+			VertexShader::VS_TOON,
+			ePsType,
+			pMesh[i].pCluster,
+			pMesh[i],
+			FALSE));
+		
+		pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+			m_pIndexBuffer,
+			pShaderManager,
+			pTextureResource,
+			NULL,
+			m_pTransform,
+			pLightCameraConstant,
+			NULL,
+			pMesh[i].nNumPolygonVertex,
+			m_pFrame,
+			m_pAnimeNumber,
+			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+			VertexShader::VS_TOON,
+			ePsType = PixelShader::PS_SHADOW,
+			pMesh[i].pCluster,
+			pMesh[i],
+			FALSE));
 	}
+
+	m_pCollider = new SphereCollider(VECTOR3(0,70,0), 20, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
+
+	m_pAttackCollider = new SphereCollider(VECTOR3(50, 70, 0), 20, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
 	SetObjectType(Object::TYPE_PLAYER);
 
@@ -153,6 +157,40 @@ void Player::Update(void)
 	InputOperation();
 
 	ChangeAnime();
+
+	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
+
+	//XMMATRIX hWorld = XMMatrixIdentity();
+	//XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
+	//XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), -m_pTransform->rot.y, D3DToRadian(m_pTransform->rot.z));
+	//XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
+	//
+	//hWorld = XMMatrixMultiply(hWorld, hScaling);
+	//hWorld = XMMatrixMultiply(hWorld, hRotate);
+	//hWorld = XMMatrixMultiply(hWorld, hPosition);
+	//
+	//VECTOR3 pos = VECTOR3(0,0,0);
+	//
+	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].x;
+	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].y;
+	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].z;
+	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].w;
+	//
+	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].x;
+	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].y;
+	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].z;
+	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].w;
+	//
+	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].x;
+	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].y;
+	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].z;
+	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].w;
+
+	m_pAttackCollider->GetTransform()->position.x = m_pTransform->position.x;
+	m_pAttackCollider->GetTransform()->position.y = m_pTransform->position.y;
+	m_pAttackCollider->GetTransform()->position.z = m_pTransform->position.z;
+
+
 
 	Object::Update();
 }
@@ -223,6 +261,8 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 ///////////////////////////////////////////////////////////////////////////////
 void Player::InputOperation(void)
 {
+	m_oldPos = m_pTransform->position;
+
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
 	XMVECTOR StartPosition = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1.0f);
@@ -269,6 +309,11 @@ void Player::InputOperation(void)
 		m_pAnimeNumber[0] = 0;
 	}
 
+	if (pInputKeyboard->GetKeyPress(DIK_SPACE))
+	{
+		m_pAnimeNumber[0] = 2;
+	}
+
 	m_pTransform->position += m_move;
 	m_move *= 0.1f;
 
@@ -278,6 +323,8 @@ void Player::InputOperation(void)
 	StartPosition = XMVectorLerp(StartPosition, m_CompletionPosition, 0.1f);
 	m_pTransform->position.x = XMVectorGetX(StartPosition);
 	m_pTransform->position.z = XMVectorGetZ(StartPosition);
+	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
+	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -285,7 +332,18 @@ void Player::InputOperation(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Player::OnCollision(Collider* col)
 {
-	
+	Object::ObjectType eType = col->GetGameObject()->GetObjectType();
+	if (eType == Object::TYPE_ENEMY)
+	{
+		VECTOR3 pos = m_oldPos - m_pTransform->position;
+
+		XMVECTOR Dot = XMVectorSet(pos.x, pos.y, pos.z,1.0);
+
+		XMVector3Dot(Dot,Dot);
+
+		m_pTransform->position.x += XMVectorGetX(Dot);
+		m_pTransform->position.z += XMVectorGetZ(Dot);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

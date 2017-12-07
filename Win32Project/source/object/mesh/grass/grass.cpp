@@ -58,7 +58,8 @@ Grass::Grass(RenderManager* pRenderManager, ShaderManager* pShaderManager, Textu
 		D3D_PRIMITIVE_TOPOLOGY_POINTLIST,
 		VertexShader::VS_GRASS,
 		GeometryShader::GS_GRASS,
-		PixelShader::PS_GRASS));
+		PixelShader::PS_GRASS,
+		FALSE));
 
 	//pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
 	//	NULL,

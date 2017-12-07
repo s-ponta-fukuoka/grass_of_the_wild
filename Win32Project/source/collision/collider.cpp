@@ -48,7 +48,9 @@ BoxCollider::BoxCollider(Object *pObject, CollisionManager* pCollisionManager)
 	pCollisionManager->AddCollider(this);
 }
 
-SphereCollider::SphereCollider(Object *pObject,
+SphereCollider::SphereCollider(VECTOR3 pos,
+	float fLength,
+	Object *pObject,
 	CollisionManager* pCollisionManager,
 	RenderManager* pRenderManager,
 	ShaderManager* pShaderManager,
@@ -60,12 +62,14 @@ SphereCollider::SphereCollider(Object *pObject,
 	SetType(TYPE::TYPE_SPHERE);
 	pCollisionManager->AddCollider(this);
 
-	m_vertex.position = VECTOR3(0.0f, 5.0f, 0.0f);
-	m_vertex.tex = VECTOR2(0.0f, 0.0f);
+	m_pTransform = new Object::Transform();
+
+	m_pTransform->position = pos;
+	m_pTransform->rot = VECTOR3(0.0f, 0.0f, 0.0f);
+
 	m_rot = VECTOR3(0, 0, 0);
-	m_vertex.normal = VECTOR3(0, 1, 0);
 	m_NumPolygon = VECTOR3(8, 0.0f, 8);
-	m_nLength = 50.0f;
+	m_fLength = fLength;
 
 	m_NumVertexPolygon = (2 + 2 * m_NumPolygon.x) * m_NumPolygon.z + (m_NumPolygon.x - 1) * 2;
 	m_nNumAllPolygon = m_NumVertexPolygon - 2;
@@ -80,14 +84,15 @@ SphereCollider::SphereCollider(Object *pObject,
 		pShaderManager,
 		pTexture->GetTexture(),
 		pRenderManager->GetShadowTexture(),
-		pObject->GetTransform(),
+		m_pTransform,
 		pConstant,
-		pLightCameraConstant,
+		NULL,
 		m_NumVertexPolygon,
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 		VertexShader::VS_NORMAL,
 		GeometryShader::GS_NONE,
-		PixelShader::PS_NORMAL));
+		PixelShader::PS_NORMAL,
+		TRUE));
 }
 
 void SphereCollider::MakeVertex(void)
@@ -108,9 +113,9 @@ void SphereCollider::MakeVertex(void)
 		{
 			if (PosCnt != ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)))
 			{
-				vertices[PosCnt].position = VECTOR3(m_nLength * sinf(m_rot.z) * cosf(m_rot.y),
-					m_nLength * cosf(m_rot.z),
-					m_nLength * sinf(m_rot.z) * sinf(m_rot.y));
+				vertices[PosCnt].position = VECTOR3(m_fLength * sinf(m_rot.z) * cosf(m_rot.y),
+					m_fLength * cosf(m_rot.z),
+					m_fLength * sinf(m_rot.z) * sinf(m_rot.y));
 			}
 			m_rot.y += 0.786f;
 		}
@@ -119,7 +124,7 @@ void SphereCollider::MakeVertex(void)
 	for (int nLoop = 0; nLoop < ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)); nLoop++)
 	{
 		vertices[nLoop].normal = VECTOR3(0, 1, 0);
-		vertices[nLoop].color = VECTOR4(255, 255, 255, 255);
+		vertices[nLoop].color = VECTOR4(0.5, 0.5, 1, 0.5);
 	}
 
 	for (int nLoop = 0; nLoop < (m_NumPolygon.z + 1); nLoop++)

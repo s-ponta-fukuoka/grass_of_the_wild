@@ -55,7 +55,9 @@ public:
 class SphereCollider : public Collider
 {
 public:
-	SphereCollider(Object *pObject, 
+	SphereCollider( VECTOR3 pos,
+		float fLength,
+		Object *pObject, 
 		CollisionManager* pCollisionManager,
 		RenderManager* pRenderManager,
 		ShaderManager* pShaderManager,
@@ -63,17 +65,18 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant);
 
-	XMFLOAT4X4 m_mtx;
-	float m_radius;
-
 	void MakeVertex(void);
 
+	Object::Transform* GetTransform(void) { return m_pTransform; }
+
+	float GetLength(void) { return m_fLength; }
+
 private:
+	Object::Transform*				m_pTransform;
 	ID3D11Buffer*					m_pIndexBuffer;
 	ID3D11Buffer*					m_pVertexBuffer;
-	AppRenderer::Vertex3D			m_vertex;
 	VECTOR3							m_rot;
-	int								m_nLength;
+	float							m_fLength;
 	int								m_nNumVertex;
 	int								m_nNumAllPolygon;
 	VECTOR3							m_NumPolygon;

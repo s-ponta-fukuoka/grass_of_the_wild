@@ -28,10 +28,12 @@ HRESULT EnemyManager::GenerateEnemy(RenderManager* pRenderManager,
 	TextureManager* pTextureManager,
 	ModelManager*	pModelManager,
 	AppRenderer::Constant* pConstant,
-	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera)
+	AppRenderer::Constant* pLightCameraConstant,
+	MainCamera *pCamera,
+	CollisionManager* pCollisionManager)
 {
 	EnemyAdd(new Enemy(VECTOR3(100,0,100),VECTOR3(0,0,0), VECTOR3(1,1,1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
 
 	//EnemyAdd(new Enemy(VECTOR3(0, 0, -100), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
 	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));

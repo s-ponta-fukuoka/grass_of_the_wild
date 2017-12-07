@@ -13,7 +13,8 @@
 #include "../../../model/model.h"
 #include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
-#include "../../../device/input.h"
+#include "../../../collision/collider.h"
+#include "../../../collision/collision_manager.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -32,9 +33,12 @@ Enemy::Enemy(
 	TextureManager* pTextureManager,
 	ModelManager*	pModelManager,
 	AppRenderer::Constant* pConstant,
-	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera)
+	AppRenderer::Constant* pLightCameraConstant, 
+	MainCamera *pCamera,
+	CollisionManager* pCollisionManager)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0,0,0))
+	, m_pCollider(NULL)
 {
 	m_pTransform = new Transform();
 
@@ -94,7 +98,8 @@ Enemy::Enemy(
 			VertexShader::VS_TOON,
 			ePsType,
 			pMesh[i].pCluster,
-			pMesh[i]));
+			pMesh[i],
+			FALSE));
 
 		pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
 			m_pIndexBuffer,
@@ -111,8 +116,11 @@ Enemy::Enemy(
 			VertexShader::VS_TOON,
 			ePsType = PixelShader::PS_SHADOW,
 			pMesh[i].pCluster,
-			pMesh[i]));
+			pMesh[i],
+			FALSE));
 	}
+
+	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
 	m_pTransform->position.z = 500;
 
@@ -153,6 +161,9 @@ void Enemy::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Enemy::Update(void)
 {
+	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
+	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
+
 	ChangeAnime();
 
 	Object::Update();
@@ -217,4 +228,20 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	delete[] vertices;
 
 	delete[] hIndexData;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//あたり判定
+///////////////////////////////////////////////////////////////////////////////
+void Enemy::OnCollision(Collider* col)
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//コライダー取得
+///////////////////////////////////////////////////////////////////////////////
+SphereCollider* Enemy::GetSphereCollider(void)
+{
+	return m_pCollider;
 }

@@ -28,7 +28,9 @@ public:
 		TextureManager* pTextureManager,
 		ModelManager*	pModelManager,
 		AppRenderer::Constant* pConstant,
-		AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera);
+		AppRenderer::Constant* pLightCameraConstant,
+		MainCamera *pCamera,
+		CollisionManager* pCollisionManager);
 
 	void EnemyAdd(Enemy* enemy);
 

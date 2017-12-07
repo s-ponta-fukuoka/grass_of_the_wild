@@ -50,7 +50,8 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 		VertexShader::VS_3D,
 		GeometryShader::GS_NONE,
-		PixelShader::PS_3D));
+		PixelShader::PS_3D,
+		FALSE));
 }
 
 //=============================================================================

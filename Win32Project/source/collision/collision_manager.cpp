@@ -88,9 +88,15 @@ bool CollisionManager::isCollision(Collider* Source, Collider* Dest)
 
 bool CollisionManager::CollisionSphereSphere(SphereCollider* Source, SphereCollider* Dest)
 {
-	if ((Source->m_mtx._41 - Dest->m_mtx._41)*(Source->m_mtx._41 - Dest->m_mtx._41) +
-		(Source->m_mtx._42 - Dest->m_mtx._42)*(Source->m_mtx._42 - Dest->m_mtx._42) +
-		(Source->m_mtx._43 - Dest->m_mtx._43)*(Source->m_mtx._43 - Dest->m_mtx._43) <= (Source->m_radius + Dest->m_radius)*(Source->m_radius + Dest->m_radius))
+	VECTOR3 SourcePos = Source->GetTransform()->position;
+	VECTOR3 DestPos = Dest->GetTransform()->position;
+
+	float SourceLength = Source->GetLength();
+	float DestLength = Dest->GetLength();
+
+	if ((SourcePos.x - DestPos.x)*(SourcePos.x - DestPos.x) +
+		(SourcePos.y - DestPos.y)*(SourcePos.y - DestPos.y) +
+		(SourcePos.z - DestPos.z)*(SourcePos.z - DestPos.z) <= (SourceLength + DestLength)*(SourceLength + DestLength))
 	{
 		return true;
 	}

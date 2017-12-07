@@ -49,6 +49,9 @@ protected:
 	//サンプラーステート設定
 	void ConfigSamplerState(void);
 
+	//ブレンドステート設定
+	void ConfigBlendState(BOOL bBlend);
+
 	ID3D11BlendState*					m_pBlendState;
 
 	ID3D11SamplerState*					m_pSampleLinear;
@@ -90,7 +93,8 @@ public:
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
 		GeometryShader::GEOMETRY_TYPE eGsType,
-		PixelShader::PIXEL_TYPE ePsType);
+		PixelShader::PIXEL_TYPE ePsType,
+		BOOL bBlend);
 
 	//デストラクタ
 	virtual ~MeshRenderer();
@@ -132,7 +136,8 @@ public:
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
 		GeometryShader::GEOMETRY_TYPE eGsType,
-		PixelShader::PIXEL_TYPE ePsType);
+		PixelShader::PIXEL_TYPE ePsType,
+		BOOL bBlend);
 
 	//デストラクタ
 	virtual ~GrowMeshRenderer();
@@ -177,7 +182,8 @@ public:
 		VertexShader::VERTEX_TYPE eVsType,
 		PixelShader::PIXEL_TYPE ePsType,
 		SkinMeshModel::Cluster*	pCluster,
-		SkinMeshModel::Mesh mesh);
+		SkinMeshModel::Mesh mesh,
+		BOOL bBlend);
 
 	//デストラクタ
 	virtual ~SkinnedMeshRenderer();
@@ -222,7 +228,8 @@ public:
 		int	nNumVertexPolygon,
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
-		PixelShader::PIXEL_TYPE ePsType);
+		PixelShader::PIXEL_TYPE ePsType,
+		BOOL bBlend);
 
 	//デストラクタ
 	virtual ~CanvasRenderer();

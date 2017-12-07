@@ -42,18 +42,19 @@ Renderer::Renderer()
 }
 
 MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
-							ID3D11Buffer* pIndexBuffer,
-							ShaderManager* pShaderManager,
-							ID3D11ShaderResourceView* pTexture,
-							ID3D11ShaderResourceView* pShadowMap,
-							Object::Transform* pTransform,
-							AppRenderer::Constant* pConstant,
-							AppRenderer::Constant* pLightConstant,
-							int	nNumVertexPolygon,
-							D3D_PRIMITIVE_TOPOLOGY ePolygon,
-							VertexShader::VERTEX_TYPE eVsType,
-							GeometryShader::GEOMETRY_TYPE eGsType,
-							PixelShader::PIXEL_TYPE ePsType)
+	ID3D11Buffer* pIndexBuffer,
+	ShaderManager* pShaderManager,
+	ID3D11ShaderResourceView* pTexture,
+	ID3D11ShaderResourceView* pShadowMap,
+	Object::Transform* pTransform,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightConstant,
+	int	nNumVertexPolygon,
+	D3D_PRIMITIVE_TOPOLOGY ePolygon,
+	VertexShader::VERTEX_TYPE eVsType,
+	GeometryShader::GEOMETRY_TYPE eGsType,
+	PixelShader::PIXEL_TYPE ePsType,
+	BOOL bBlend)
 {
 	m_ePolygon = ePolygon;
 
@@ -85,6 +86,8 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ConfigConstantBuffer(sizeof(AppRenderer::Constant));
 
 	ConfigSamplerState();
+
+	ConfigBlendState(bBlend);
 }
 
 GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
@@ -99,7 +102,8 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	D3D_PRIMITIVE_TOPOLOGY ePolygon,
 	VertexShader::VERTEX_TYPE eVsType,
 	GeometryShader::GEOMETRY_TYPE eGsType,
-	PixelShader::PIXEL_TYPE ePsType)
+	PixelShader::PIXEL_TYPE ePsType,
+	BOOL bBlend)
 {
 	m_ePolygon = ePolygon;
 
@@ -131,6 +135,8 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ConfigConstantBuffer(sizeof(AppRenderer::Constant));
 
 	ConfigSamplerState();
+
+	ConfigBlendState(bBlend);
 }
 
 SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
@@ -148,7 +154,8 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	VertexShader::VERTEX_TYPE eVsType,
 	PixelShader::PIXEL_TYPE ePsType,
 	SkinMeshModel::Cluster*	pCluster,
-	SkinMeshModel::Mesh mesh)
+	SkinMeshModel::Mesh mesh,
+	BOOL bBlend)
 {
 	m_ePolygon = ePolygon;
 
@@ -183,6 +190,8 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ConfigConstantBuffer(sizeof(SkinMeshModel::ModelConstant));
 
 	ConfigSamplerState();
+
+	ConfigBlendState(bBlend);
 }
 
 CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
@@ -192,7 +201,8 @@ CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
 	int	nNumVertexPolygon,
 	D3D_PRIMITIVE_TOPOLOGY ePolygon,
 	VertexShader::VERTEX_TYPE eVsType,
-	PixelShader::PIXEL_TYPE ePsType)
+	PixelShader::PIXEL_TYPE ePsType,
+	BOOL bBlend)
 {
 	m_ePolygon = ePolygon;
 
@@ -209,6 +219,8 @@ CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
 	m_pTexture = pTexture;
 
 	ConfigSamplerState();
+
+	ConfigBlendState(bBlend);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -323,6 +335,31 @@ void Renderer::ConfigSamplerState(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+//ブレンドステート設定
+///////////////////////////////////////////////////////////////////////////////
+void Renderer::ConfigBlendState(BOOL bBlend)
+{
+	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+	ID3D11Device* pDevice = pAppRenderer->GetDevice();
+
+	D3D11_BLEND_DESC BlendStateDesc;
+	BlendStateDesc.AlphaToCoverageEnable = FALSE;
+	BlendStateDesc.IndependentBlendEnable = FALSE;
+	for (int i = 0; i < 8; i++)
+	{
+		BlendStateDesc.RenderTarget[i].BlendEnable = bBlend;
+		BlendStateDesc.RenderTarget[i].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		BlendStateDesc.RenderTarget[i].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		BlendStateDesc.RenderTarget[i].BlendOp = D3D11_BLEND_OP_ADD;
+		BlendStateDesc.RenderTarget[i].SrcBlendAlpha = D3D11_BLEND_ONE;
+		BlendStateDesc.RenderTarget[i].DestBlendAlpha = D3D11_BLEND_ZERO;
+		BlendStateDesc.RenderTarget[i].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		BlendStateDesc.RenderTarget[i].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	}
+	pDevice->CreateBlendState(&BlendStateDesc, &m_pBlendState);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // 描画
 ///////////////////////////////////////////////////////////////////////////////
 void MeshRenderer::Draw(void)
@@ -330,6 +367,10 @@ void MeshRenderer::Draw(void)
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	//ブレンディングをコンテキストに設定
+	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
 
 	//バーテックスバッファーをセット
 	UINT stride = sizeof(AppRenderer::Vertex3D);
@@ -420,6 +461,10 @@ void GrowMeshRenderer::Draw(void)
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
 
+	//ブレンディングをコンテキストに設定
+	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
+
 	//バーテックスバッファーをセット
 	UINT stride = sizeof(AppRenderer::Vertex3D);
 	UINT offset = 0;
@@ -441,14 +486,6 @@ void GrowMeshRenderer::Draw(void)
 	hWorld = XMMatrixMultiply(hWorld, hScaling);
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
-
-	//XMMATRIX mtxInvView = XMMatrixIdentity();
-	//XMVECTOR Determinant;
-	//mtxInvView = XMMatrixInverse(&Determinant, m_pConstant->view);
-	//mtxInvView._41 = 0.0f;
-	//mtxInvView._42 = 0.0f;
-	//mtxInvView._43 = 0.0f;
-	//mtxInvView._44 = 1.0f;
 
 	XMMATRIX hView = m_pConstant->view;
 	XMMATRIX hProj = m_pConstant->projection;
@@ -516,6 +553,10 @@ void SkinnedMeshRenderer::Draw()
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	//ブレンディングをコンテキストに設定
+	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
 
 	//バーテックスバッファーをセット
 	UINT stride = sizeof(SkinMeshModel::ModelVertex);
@@ -618,6 +659,10 @@ void CanvasRenderer::Draw(void)
 
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	//ブレンディングをコンテキストに設定
+	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
 
 	//バーテックスバッファーをセット
 	UINT stride = sizeof(AppRenderer::Vertex2D);

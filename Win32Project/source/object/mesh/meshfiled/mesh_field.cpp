@@ -56,32 +56,34 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 
 
 	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
-												m_pIndexBuffer,
-												pShaderManager,
-												pTexture->GetTexture(),
-												pRenderManager->GetShadowTexture(),
-												m_pTransform,
-												pConstant,
-												pLightCameraConstant,
-												MESH_FILED_VERTEX,
-												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
-												VertexShader::VS_NORMAL,
-												GeometryShader::GS_NONE,
-												PixelShader::PS_NORMAL));
+		m_pIndexBuffer,
+		pShaderManager,
+		pTexture->GetTexture(),
+		pRenderManager->GetShadowTexture(),
+		m_pTransform,
+		pConstant,
+		pLightCameraConstant,
+		MESH_FILED_VERTEX,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		VertexShader::VS_NORMAL,
+		GeometryShader::GS_NONE,
+		PixelShader::PS_NORMAL,
+		FALSE));
 
 	pRenderManager->AddShadowRenderer(new MeshRenderer(m_pVertexBuffer,
-												m_pIndexBuffer,
-												pShaderManager,
-												pTexture->GetTexture(),
-												NULL,
-												m_pTransform,
-												pLightCameraConstant,
-												NULL,
-												MESH_FILED_VERTEX,
-												D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
-												VertexShader::VS_NORMAL,
-												GeometryShader::GS_NONE,
-												PixelShader::PS_SHADOW));
+		m_pIndexBuffer,
+		pShaderManager,
+		pTexture->GetTexture(),
+		NULL,
+		m_pTransform,
+		pLightCameraConstant,
+		NULL,
+		MESH_FILED_VERTEX,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		VertexShader::VS_NORMAL,
+		GeometryShader::GS_NONE,
+		PixelShader::PS_SHADOW,
+		FALSE));
 }
 
 //=============================================================================
@@ -202,7 +204,7 @@ void MeshField::MakeVertex(void)
 
 	for (int nLoop = 0; nLoop < ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)); nLoop++)
 	{
-		vertices[nLoop].color = VECTOR4(255, 255, 255, 255);
+		vertices[nLoop].color = VECTOR4(1, 1, 1, 1);
 	}
 
 	for (int nLoop = 0; nLoop < (m_NumPolygon.z + 1); nLoop++)

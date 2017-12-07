@@ -63,14 +63,15 @@ ShadowMap::ShadowMap(RenderManager* pRenderManager,
 
 	pRenderManager->SetShadowTexture(m_pTexture);
 
-	//pRenderManager->AddRenderer(new CanvasRenderer(m_pVertexBuffer,
-	//	NULL,
-	//	pShaderManager,
-	//	m_pTexture,
-	//	SHADOW_MAP_VERTEX,
-	//	D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
-	//	VertexShader::VS_2D,
-	//	PixelShader::PS_2D));
+	pRenderManager->AddRenderer(new CanvasRenderer(m_pVertexBuffer,
+		NULL,
+		pShaderManager,
+		m_pTexture,
+		SHADOW_MAP_VERTEX,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		VertexShader::VS_2D,
+		PixelShader::PS_2D,
+		FALSE));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

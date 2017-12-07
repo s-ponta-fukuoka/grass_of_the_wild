@@ -20,6 +20,7 @@
 class ShaderManager;
 class RenderManager;
 class TextureManager;
+class CollisionManager;
 class ModelManager;
 class MainCamera;
 
@@ -40,7 +41,8 @@ public:
 		ModelManager* pModelManager,
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant,
-		MainCamera* pCamera);
+		MainCamera* pCamera,
+		CollisionManager* pCollisionManager);
 
 	//デストラクタ
 	virtual ~Enemy();
@@ -57,7 +59,15 @@ public:
 	//バッファ作成
 	void MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh);
 
+	//あたり判定
+	void OnCollision(Collider* col);
+
+	//コライダー取得
+	SphereCollider* GetSphereCollider(void);
+
 private:
+
+	SphereCollider*		m_pCollider;
 
 	MainCamera*			m_pCamera;
 
