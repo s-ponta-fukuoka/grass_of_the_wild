@@ -41,6 +41,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new PixelShader("bin/shader/PixelGrass.cso", PixelShader::PS_GRASS, this);
 
 	new GeometryShader("bin/shader/GeometryGrass.cso", GeometryShader::GS_GRASS, this);
+	new GeometryShader("bin/shader/outline.cso", GeometryShader::GS_OUTLINE, this);
 
 	return S_OK;
 }

@@ -17,12 +17,16 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define PLAYER_MOVE (50)
+
 class ShaderManager;
 class RenderManager;
 class TextureManager;
 class CollisionManager;
 class ModelManager;
 class MainCamera;
+class PlayerPattern;
+class PlayerAttack;
 
 //*****************************************************************************
 // クラス定義
@@ -58,7 +62,11 @@ public:
 	void Release(void);
 
 	//更新
-	void Update(void);
+	void Update(RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager);
 
 	//バッファ作成
 	void MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh);
@@ -69,15 +77,28 @@ public:
 	//コライダー取得
 	SphereCollider* GetSphereCollider(void);
 
+	//プレイヤーステート変更
+	void ChangePlayerPattern(PlayerPattern* pPlayerPattern);
+
+	VECTOR3 GetMove(void) { return m_move; }
+
+	MainCamera* GetCamera(void) { return m_pCamera; }
+
+	void SetCompletionPosition(XMVECTOR CompletionPosition) { m_CompletionPosition = CompletionPosition; }
+	
+	void SetCompletionRot(XMVECTOR CompletionRot) { m_CompletionRot = CompletionRot; }
+
+	XMVECTOR GetCompletionPosition(void) { return m_CompletionPosition; }
+
+	XMVECTOR GetCompletionRot(void) { return m_CompletionRot; }
+
+	PlayerAttack* GetPlayerAttack(void) { return m_pPlayerAttack; }
+
 private:
-	//キーボード操作
-	void InputOperation(void);
 
 	VECTOR3				m_oldPos;
 
 	SphereCollider*		m_pCollider;
-
-	SphereCollider*		m_pAttackCollider;
 
 	MainCamera*			m_pCamera;
 
@@ -86,6 +107,10 @@ private:
 	XMVECTOR			m_CompletionPosition;
 
 	XMVECTOR			m_CompletionRot;
+
+	PlayerPattern*		m_pPlayerPattern;
+
+	PlayerAttack*		m_pPlayerAttack;
 };
 
 #endif

@@ -9,6 +9,11 @@
 // インクルード
 //*****************************************************************************
 #include "player.h"
+#include "player_attack.h"
+#include "player_pattern.h"
+#include "player_pattern_attack.h"
+#include "player_pattern_wait.h"
+#include "player_pattern_walk.h"
 #include "../../../object/camera/main_camera.h"
 #include "../../../model/model.h"
 #include "../../../model/model_manager.h"
@@ -20,7 +25,6 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define PLAYER_MOVE (50)
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -32,8 +36,9 @@ Player::Player(RenderManager* pRenderManager,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, CollisionManager* pCollisionManager)
 	: m_pCamera(NULL)
-	, m_move(VECTOR3(0,0,0))
+	, m_move(VECTOR3(0, 0, 0))
 	, m_pCollider(NULL)
+	, m_pPlayerPattern(new PlayerPatternWait)
 {
 	m_pTransform = new Transform();
 
@@ -53,6 +58,8 @@ Player::Player(RenderManager* pRenderManager,
 	m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
 
 	PixelShader::PIXEL_TYPE ePsType;
+
+	Texture* pToonTexture = new Texture("resource/sprite/toon.png", pTextureManager);
 
 	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
 	{
@@ -78,6 +85,7 @@ Player::Player(RenderManager* pRenderManager,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
+			pToonTexture->GetTexture(),
 			pRenderManager->GetShadowTexture(),
 			m_pTransform,
 			pConstant,
@@ -87,6 +95,7 @@ Player::Player(RenderManager* pRenderManager,
 			m_pAnimeNumber,
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 			VertexShader::VS_TOON,
+			GeometryShader::GS_NONE,
 			ePsType,
 			pMesh[i].pCluster,
 			pMesh[i],
@@ -96,6 +105,7 @@ Player::Player(RenderManager* pRenderManager,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
+			pToonTexture->GetTexture(),
 			NULL,
 			m_pTransform,
 			pLightCameraConstant,
@@ -105,6 +115,7 @@ Player::Player(RenderManager* pRenderManager,
 			m_pAnimeNumber,
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 			VertexShader::VS_TOON,
+			GeometryShader::GS_NONE,
 			ePsType = PixelShader::PS_SHADOW,
 			pMesh[i].pCluster,
 			pMesh[i],
@@ -113,7 +124,7 @@ Player::Player(RenderManager* pRenderManager,
 
 	m_pCollider = new SphereCollider(VECTOR3(0,70,0), 20, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
-	m_pAttackCollider = new SphereCollider(VECTOR3(50, 70, 0), 20, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
+	m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
 
 	SetObjectType(Object::TYPE_PLAYER);
 
@@ -152,45 +163,24 @@ void Player::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 //更新
 ///////////////////////////////////////////////////////////////////////////////
-void Player::Update(void)
+void Player::Update(RenderManager* pRenderManager,
+	ShaderManager* pShaderManager,
+	TextureManager* pTextureManager,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
-	InputOperation();
+	m_oldPos = m_pTransform->position;
 
-	ChangeAnime();
+	m_pPlayerPattern->Update(this);
 
-	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
+	m_pPlayerAttack->Update();
 
-	//XMMATRIX hWorld = XMMatrixIdentity();
-	//XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
-	//XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), -m_pTransform->rot.y, D3DToRadian(m_pTransform->rot.z));
-	//XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
-	//
-	//hWorld = XMMatrixMultiply(hWorld, hScaling);
-	//hWorld = XMMatrixMultiply(hWorld, hRotate);
-	//hWorld = XMMatrixMultiply(hWorld, hPosition);
-	//
-	//VECTOR3 pos = VECTOR3(0,0,0);
-	//
-	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].x;
-	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].y;
-	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].z;
-	//pos.x += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._41 * pMesh[0].pWeight[0].w;
-	//
-	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].x;
-	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].y;
-	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].z;
-	//pos.y += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._42 * pMesh[0].pWeight[0].w;
-	//
-	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].x].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].x;
-	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].y].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].y;
-	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].z].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].z;
-	//pos.z += pMesh[0].pCluster[(int)pMesh[0].pBoneIndex[0].w].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]]._43 * pMesh[0].pWeight[0].w;
+	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
+	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
 
-	m_pAttackCollider->GetTransform()->position.x = m_pTransform->position.x;
-	m_pAttackCollider->GetTransform()->position.y = m_pTransform->position.y;
-	m_pAttackCollider->GetTransform()->position.z = m_pTransform->position.z;
-
-
+	//m_pAttackCollider->GetTransform()->position.x = m_pTransform->position.x;
+	//m_pAttackCollider->GetTransform()->position.y = m_pTransform->position.y;
+	//m_pAttackCollider->GetTransform()->position.z = m_pTransform->position.z;
 
 	Object::Update();
 }
@@ -257,77 +247,6 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-//キーボード操作
-///////////////////////////////////////////////////////////////////////////////
-void Player::InputOperation(void)
-{
-	m_oldPos = m_pTransform->position;
-
-	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
-
-	XMVECTOR StartPosition = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1.0f);
-
-	XMVECTOR vector = m_pCamera->GetVec();
-
-	XMVECTOR StartRot = XMVectorSet(0, m_pTransform->rot.y, 0, 1.0f);
-
-	if (pInputKeyboard->GetKeyPress(DIK_W))
-	{
-		m_move.x -= XMVectorGetX(vector) * PLAYER_MOVE;
-		m_move.z -= XMVectorGetZ(vector) * PLAYER_MOVE;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_A))
-	{
-		m_move.x += XMVectorGetZ(vector) * PLAYER_MOVE;
-		m_move.z -= XMVectorGetX(vector) * PLAYER_MOVE;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_S))
-	{
-		m_move.x += XMVectorGetX(vector) * PLAYER_MOVE;
-		m_move.z += XMVectorGetZ(vector) * PLAYER_MOVE;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_move.x -= XMVectorGetZ(vector) * PLAYER_MOVE;
-		m_move.z += XMVectorGetX(vector) * PLAYER_MOVE;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_W) ||
-		pInputKeyboard->GetKeyPress(DIK_A) ||
-		pInputKeyboard->GetKeyPress(DIK_S) ||
-		pInputKeyboard->GetKeyPress(DIK_D))
-	{
-		m_CompletionPosition = XMVectorSet(m_pTransform->position.x + m_move.x, 0, m_pTransform->position.z + m_move.z, 0);
-		m_CompletionRot = XMVectorSet(0,atan2(-m_move.z, -m_move.x) + D3D_PI * 0.5, 0,1);
-		m_pAnimeNumber[0] = 1;
-	}
-	else
-	{
-		m_pAnimeNumber[0] = 0;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_SPACE))
-	{
-		m_pAnimeNumber[0] = 2;
-	}
-
-	m_pTransform->position += m_move;
-	m_move *= 0.1f;
-
-	StartRot = XMVectorLerp(StartRot, m_CompletionRot, 0.1f);
-	m_pTransform->rot.y = XMVectorGetY(StartRot);
-
-	StartPosition = XMVectorLerp(StartPosition, m_CompletionPosition, 0.1f);
-	m_pTransform->position.x = XMVectorGetX(StartPosition);
-	m_pTransform->position.z = XMVectorGetZ(StartPosition);
-	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
-	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 //あたり判定
 ///////////////////////////////////////////////////////////////////////////////
 void Player::OnCollision(Collider* col)
@@ -352,4 +271,14 @@ void Player::OnCollision(Collider* col)
 SphereCollider* Player::GetSphereCollider(void)
 {
 	return m_pCollider;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//プレイヤーステート変更
+///////////////////////////////////////////////////////////////////////////////
+void Player::ChangePlayerPattern(PlayerPattern* pPlayerPattern)
+{
+	if (pPlayerPattern == NULL) { return; }
+	delete m_pPlayerPattern;
+	m_pPlayerPattern = pPlayerPattern;
 }

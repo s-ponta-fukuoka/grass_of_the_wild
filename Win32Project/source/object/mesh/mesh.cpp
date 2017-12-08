@@ -44,6 +44,7 @@ HRESULT Mesh::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Mesh::Release(void)
 {
+	ES_SAFE_RELEASE(m_pVertexBuffer);
 	Object::Release();
 }
 

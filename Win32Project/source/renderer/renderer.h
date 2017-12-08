@@ -171,6 +171,7 @@ public:
 		ID3D11Buffer* pIndexBuffer,
 		ShaderManager* pShaderManager,
 		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pToonTexture,
 		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
 		AppRenderer::Constant* pConstant,
@@ -180,6 +181,7 @@ public:
 		int* pAnimeNumber,
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
+		GeometryShader::GEOMETRY_TYPE eGsType,
 		PixelShader::PIXEL_TYPE ePsType,
 		SkinMeshModel::Cluster*	pCluster,
 		SkinMeshModel::Mesh mesh,
@@ -212,6 +214,8 @@ private:
 	SkinMeshModel::Cluster*				m_pCluster;
 
 	SkinMeshModel::Mesh					m_mesh;
+
+	ID3D11ShaderResourceView*			m_pToonTexture;
 };
 
 //-----------------------------------------------------------------------------

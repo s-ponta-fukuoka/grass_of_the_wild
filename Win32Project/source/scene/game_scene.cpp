@@ -16,6 +16,8 @@
 #include "../object/mesh/skybox/skybox.h"
 #include "../object/canvas/canvas_manager.h"
 #include "../object/canvas/shadow_map/shadow_map.h"
+#include "../object/canvas/player_life/player_life.h"
+#include "../object/canvas/logo/logo.h"
 #include "../model/model_manager.h"
 #include "../object/character/player/player.h"
 #include "../device/input.h"
@@ -59,6 +61,9 @@ Game::Game()
 	, m_pCanvasManager(NULL)
 	, m_pEnemyManager(NULL)
 	, m_pCollisionManager(NULL)
+	, m_pPlayerLife(NULL)
+	, m_pNextScene(NULL)
+	, m_pPlayer(NULL)
 {
 	;
 }
@@ -76,10 +81,14 @@ Game::~Game()
 ///////////////////////////////////////////////////////////////////////////////
 HRESULT Game::Init(NextScene* pScene)
 {
+	m_pNextScene = pScene;
+
 	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
 
 	m_pTextureManager = new TextureManager();
+
+	new Texture("resource/sprite/toon.png", m_pTextureManager);
 
 	m_pCollisionManager = new CollisionManager();
 
@@ -109,6 +118,9 @@ HRESULT Game::Init(NextScene* pScene)
 	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
 
 	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
+
+	m_pCanvasManager->AddCanvas(new PlayerLife(m_pRenderManager, m_pShaderManager, m_pTextureManager));
+	//m_pCanvasManager->AddCanvas(new Logo(m_pRenderManager, m_pShaderManager, m_pTextureManager));
 
 	m_pCamera->Init(m_pPlayer);
 
@@ -179,13 +191,20 @@ void Game::Update(void)
 
 	m_pMeshManager->UpdateAll();
 
-	m_pPlayer->Update();
+	m_pPlayer->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
 
 	m_pEnemyManager->Update();
 
 	m_pCanvasManager->UpdateAll();
 
 	m_pCollisionManager->Update();
+
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_RETURN))
+	{
+		m_pNextScene->NextSceneUpdate(new Title);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

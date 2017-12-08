@@ -30,6 +30,7 @@ public:
 	{
 		TYPE_NONE,
 		TYPE_PLAYER,
+		TYPE_PLAYER_ATTACK,
 		TYPE_ENEMY,
 	};
 
@@ -58,6 +59,8 @@ public:
 
 	//トランスフォーム取得
 	Transform* GetTransform(void);
+
+	void SetTransform(Transform* pTransform) { m_pTransform = pTransform; }
 
 	//タイプ取得・設定
 	void SetObjectType(ObjectType objtype);

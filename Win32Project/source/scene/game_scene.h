@@ -25,6 +25,7 @@ class Player;
 class EnemyManager;
 class CollisionManager;
 class NextScene;
+class PlayerLife;
 
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
@@ -65,6 +66,8 @@ private:
 	EnemyManager*					m_pEnemyManager;
 
 	CollisionManager*				m_pCollisionManager;
+
+	PlayerLife*						m_pPlayerLife;
 };
 
 #endif

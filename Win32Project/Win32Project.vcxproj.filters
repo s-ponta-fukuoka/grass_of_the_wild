@@ -121,6 +121,27 @@
     <ClCompile Include="source\scene\next_scene.cpp">
       <Filter>source\scene</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\canvas\player_life\player_life.cpp">
+      <Filter>source\object\canvas\player_life</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\logo\logo.cpp">
+      <Filter>source\object\canvas\logo</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_attack.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_wait.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_walk.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_attack.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_attack.h">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -258,6 +279,24 @@
     <ClInclude Include="source\scene\next_scene.h">
       <Filter>source\scene</Filter>
     </ClInclude>
+    <ClInclude Include="source\object\canvas\player_life\player_life.h">
+      <Filter>source\object\canvas\player_life</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\logo\logo.h">
+      <Filter>source\object\canvas\logo</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_attack.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_wait.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_walk.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -335,6 +374,12 @@
     <Filter Include="source\scene">
       <UniqueIdentifier>{f5c1ed2e-7450-47e8-8110-2f622bee1d99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\object\canvas\player_life">
+      <UniqueIdentifier>{328af145-be18-45ab-8ed3-96baf8310794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\logo">
+      <UniqueIdentifier>{9f499b41-8e5f-4a99-bc0c-1fdb21867ba4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">
@@ -382,6 +427,9 @@
       <Filter>resource\shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\shader\PixelGrass.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\outline.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
   </ItemGroup>

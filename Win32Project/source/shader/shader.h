@@ -84,6 +84,7 @@ public:
 	{
 		GS_NONE,
 		GS_GRASS,
+		GS_OUTLINE,
 		GS_MAX
 	}GEOMETRY_TYPE;
 

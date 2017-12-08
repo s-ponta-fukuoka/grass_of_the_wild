@@ -62,6 +62,7 @@ public:
 		XMMATRIX cluster[100];
 		XMMATRIX lclCluster;
 		XMVECTOR light;
+		XMMATRIX wit;
 	};
 
 	struct Cluster

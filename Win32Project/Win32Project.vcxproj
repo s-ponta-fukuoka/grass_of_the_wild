@@ -36,11 +36,18 @@
     <ClCompile Include="source\object\camera\main_camera.cpp" />
     <ClCompile Include="source\object\canvas\canvas.cpp" />
     <ClCompile Include="source\object\canvas\canvas_manager.cpp" />
+    <ClCompile Include="source\object\canvas\logo\logo.cpp" />
+    <ClCompile Include="source\object\canvas\player_life\player_life.cpp" />
     <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_manager.cpp" />
     <ClCompile Include="source\object\character\player\player.cpp" />
+    <ClCompile Include="source\object\character\player\player_attack.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_attack.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_wait.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_walk.cpp" />
+    <ClCompile Include="source\object\character\player\player_attack.h" />
     <ClCompile Include="source\object\mesh\grass\grass.cpp" />
     <ClCompile Include="source\object\mesh\mesh.cpp" />
     <ClCompile Include="source\object\mesh\meshfiled\mesh_field.cpp" />
@@ -80,11 +87,17 @@
     <ClInclude Include="source\object\camera\main_camera.h" />
     <ClInclude Include="source\object\canvas\canvas.h" />
     <ClInclude Include="source\object\canvas\canvas_manager.h" />
+    <ClInclude Include="source\object\canvas\logo\logo.h" />
+    <ClInclude Include="source\object\canvas\player_life\player_life.h" />
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
     <ClInclude Include="source\object\character\enemy\enemy.h" />
     <ClInclude Include="source\object\character\enemy\enemy_manager.h" />
     <ClInclude Include="source\object\character\player\player.h" />
+    <ClInclude Include="source\object\character\player\player_pattern.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_attack.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_wait.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_walk.h" />
     <ClInclude Include="source\object\mesh\grass\grass.h" />
     <ClInclude Include="source\object\mesh\mesh.h" />
     <ClInclude Include="source\object\mesh\meshfiled\mesh_field.h" />
@@ -132,6 +145,16 @@
     <FxCompile Include="resource\shader\NormalVShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\outline.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="resource\shader\Pixel3DShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>

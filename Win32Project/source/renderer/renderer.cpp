@@ -143,6 +143,7 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ID3D11Buffer* pIndexBuffer,
 	ShaderManager* pShaderManager,
 	ID3D11ShaderResourceView* pTexture,
+	ID3D11ShaderResourceView* pToonTexture,
 	ID3D11ShaderResourceView* pShadowMap,
 	Object::Transform* pTransform,
 	AppRenderer::Constant* pConstant,
@@ -152,6 +153,7 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	int* pAnimeNumber,
 	D3D_PRIMITIVE_TOPOLOGY ePolygon,
 	VertexShader::VERTEX_TYPE eVsType,
+	GeometryShader::GEOMETRY_TYPE eGsType,
 	PixelShader::PIXEL_TYPE ePsType,
 	SkinMeshModel::Cluster*	pCluster,
 	SkinMeshModel::Mesh mesh,
@@ -164,6 +166,8 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	m_pIndexBuffer = pIndexBuffer;
 
 	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
+
+	m_pGeometryShader = pShaderManager->GetGeometryShader(eGsType);
 
 	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
 
@@ -184,6 +188,8 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	m_pShadowMap = pShadowMap;
 
 	m_pCluster = pCluster;
+
+	m_pToonTexture = pToonTexture;
 
 	m_mesh = mesh;
 
@@ -327,10 +333,16 @@ void Renderer::ConfigSamplerState(void)
 	D3D11_SAMPLER_DESC SamDesc;
 	ZeroMemory(&SamDesc, sizeof(D3D11_SAMPLER_DESC));
 
-	SamDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	SamDesc.Filter = D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT;
 	SamDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	SamDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	SamDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	SamDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	SamDesc.MaxAnisotropy = 2;
+	SamDesc.MipLODBias = 0;
+	SamDesc.MinLOD = -FLT_MAX;
+	SamDesc.MaxLOD = FLT_MAX;
+
 	pDevice->CreateSamplerState(&SamDesc, &m_pSampleLinear);
 }
 
@@ -589,10 +601,18 @@ void SkinnedMeshRenderer::Draw()
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
 	hWorld = XMMatrixMultiply(hWorld, hPosition);
 
+	XMMATRIX hWit = XMMatrixIdentity();
+
+	XMVECTOR dir;
+
+	hWit = XMMatrixInverse(&dir, hWorld);
+
 	XMMATRIX hView = m_pConstant->view;
 	XMMATRIX hProj = m_pConstant->projection;
 
 	hConstant.world = XMMatrixTranspose(hWorld);
+
+	hConstant.wit = XMMatrixTranspose(hWit);
 
 	hConstant.view = XMMatrixTranspose(hView);
 
@@ -627,13 +647,22 @@ void SkinnedMeshRenderer::Draw()
 	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
 	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
 
+	if (m_pGeometryShader != NULL)
+	{
+		pDeviceContext->GSSetShader(m_pGeometryShader->GetGeometryShaderr(), NULL, 0);
+	}
+	else
+	{
+		pDeviceContext->GSSetShader(NULL, NULL, 0);
+	}
+
 	//テクスチャーをシェーダーに渡す
 	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
 
-	//pDeviceContext->PSSetShaderResources(1, 1, &m_ToonTexture);
 	if (m_pTexture != NULL)
 	{
 		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+		pDeviceContext->PSSetShaderResources(1, 1, &m_pToonTexture);
 	}
 
 	if (m_pShadowMap != NULL)
@@ -659,6 +688,9 @@ void CanvasRenderer::Draw(void)
 
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	ID3D11DepthStencilView* pDSV = pAppRenderer->GetDepthStencilView();
+	pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	//ブレンディングをコンテキストに設定
 	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
@@ -695,4 +727,6 @@ void CanvasRenderer::Draw(void)
 	{
 		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
 	}
+
+	pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }

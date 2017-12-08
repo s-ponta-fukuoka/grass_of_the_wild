@@ -53,6 +53,8 @@ Enemy::Enemy(
 
 	m_pModel = new SkinMeshModel("bin/model/enemy_000.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
+	
+	Texture* pToonTexture = new Texture("resource/sprite/toon.png", pTextureManager);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
 
@@ -87,6 +89,7 @@ Enemy::Enemy(
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
+			pToonTexture->GetTexture(),
 			pRenderManager->GetShadowTexture(),
 			m_pTransform,
 			pConstant,
@@ -96,6 +99,7 @@ Enemy::Enemy(
 			m_pAnimeNumber,
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 			VertexShader::VS_TOON,
+			GeometryShader::GS_NONE,
 			ePsType,
 			pMesh[i].pCluster,
 			pMesh[i],
@@ -105,6 +109,7 @@ Enemy::Enemy(
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
+			pToonTexture->GetTexture(),
 			NULL,
 			m_pTransform,
 			pLightCameraConstant,
@@ -114,6 +119,7 @@ Enemy::Enemy(
 			m_pAnimeNumber,
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
 			VertexShader::VS_TOON,
+			GeometryShader::GS_NONE,
 			ePsType = PixelShader::PS_SHADOW,
 			pMesh[i].pCluster,
 			pMesh[i],
@@ -121,8 +127,6 @@ Enemy::Enemy(
 	}
 
 	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
-
-	m_pTransform->position.z = 500;
 
 	SetObjectType(Object::TYPE_ENEMY);
 }

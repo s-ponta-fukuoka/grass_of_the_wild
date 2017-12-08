@@ -28,7 +28,7 @@ public:
 
 private:
 	ID3D11ShaderResourceView* m_pTexture;//テクスチャー
-	const char* m_name;
+	std::string m_name;
 	unsigned char* m_Pixels;
 	int m_Width;
 	int m_Height;

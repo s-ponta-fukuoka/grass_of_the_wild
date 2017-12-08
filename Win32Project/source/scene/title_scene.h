@@ -12,6 +12,15 @@
 //*****************************************************************************
 #include "scene.h"
 
+class MainCamera;
+class LightCamera;
+class TextureManager;
+class RenderManager;
+class ShaderManager;
+class MeshManager;
+class CanvasManager;
+class ModelManager;
+class Player;
 class NextScene;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
@@ -19,7 +28,7 @@ class NextScene;
 class Title : public Scene
 {
 public:
-	Title(){};
+	Title();
 	virtual ~Title() {};
 	HRESULT Init(NextScene* pScene);
 	void Release(void);
@@ -27,6 +36,24 @@ public:
 	void Draw(void);
 private:
 	NextScene*						m_pNextScene;
+
+	MainCamera*						m_pCamera;
+
+	LightCamera*					m_pLightCamera;
+
+	TextureManager*					m_pTextureManager;
+
+	ShaderManager*					m_pShaderManager;
+
+	RenderManager*					m_pRenderManager;
+
+	MeshManager*					m_pMeshManager;
+
+	CanvasManager*					m_pCanvasManager;
+
+	ModelManager*					m_pModelManager;
+
+	Player*							m_pPlayer;
 };
 
 #endif

@@ -21,10 +21,15 @@ float3 g_lightVec = { 0.71,-0.71,0.0 };
 
 float4 main(pixcelIn IN) : SV_Target
 {
+	
 	pixcelIn OUT;
 	
-	float bright = max(-dot(IN.nrm, g_lightVec), 0);
+	float bright = dot(IN.nrm, -float3(0,-1,1));
 	
+	bright = bright * 0.5f + 0.5;
+
+	bright = bright * bright;
+
 	//float4 shadow = lerp(float4(0.7f, 0.7f, 0.8f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
 	
 	float4 diffuse =txDiffuse.Sample(samLinear, IN.tex) * lerp(IN.col, float4(1.0f, 1.0f, 1.0f, 1.0f), bright);
@@ -40,7 +45,7 @@ float4 main(pixcelIn IN) : SV_Target
 	//float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
 	//float shadow = (shadowZ + 0.0001 < IN.Lpos.z) ? 1.0 : 0.5;
 
-	OUT.col = diffuse /* saturate(shadow)*/;
+	OUT.col = diffuse  * txDiffuse2.Sample(samLinear, float2(bright, 0.0f))/* saturate(shadow)*/;
 
 	//OUT.col = saturate(IN.col2) * txDiffuse.Sample(samLinear, IN.tex) * lerp(1, 0.7, shadow);
 

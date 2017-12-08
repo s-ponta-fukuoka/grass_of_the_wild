@@ -42,6 +42,10 @@ public:
 	//アニメーション変更
 	void ChangeAnime(void);
 
+	int* GetFrame(void) { return m_pFrame; }
+	int* GetAnimeNumber(void) { return m_pAnimeNumber; }
+	SkinMeshModel* GetSkinMeshModel(void) { return m_pModel; }
+
 protected:
 
 	ID3D11Buffer*			m_pIndexBuffer;

@@ -70,6 +70,30 @@ void MainCamera::Update(void)
 
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
+	if (pInputKeyboard->GetKeyPress(DIK_UP))
+	{
+		m_move.x -= XMVectorGetX(m_vector) * 10;
+		m_move.z -= XMVectorGetZ(m_vector) * 10;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_LEFT))
+	{
+		m_move.x += XMVectorGetZ(m_vector) * 10;
+		m_move.z -= XMVectorGetX(m_vector) * 10;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_DOWN))
+	{
+		m_move.x += XMVectorGetX(m_vector) * 10;
+		m_move.z += XMVectorGetZ(m_vector) * 10;
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_RIGHT))
+	{
+		m_move.x -= XMVectorGetZ(m_vector) * 10;
+		m_move.z += XMVectorGetX(m_vector) * 10;
+	}
+
 	if (pInputKeyboard->GetKeyPress(DIK_C))// SƒL[‰Ÿ‚³‚ê‚½‚ç
 	{
 		m_move.x += XMVectorGetZ(m_vector) * 10;

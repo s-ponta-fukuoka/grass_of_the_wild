@@ -25,14 +25,15 @@ struct vertexOut
 //変換用行列
 cbuffer ConstantBuffer : register(b0)
 {
-	float4x4  World;		//ワールド変換行列
-	float4x4 View;		//ビュー変換行列
-	float4x4 Projection;		//プロジェクション変換行列
-	float4x4 LView;		//ビュー変換行列
-	float4x4 LProjection;		//プロジェクション変換行列
+	float4x4 World;
+	float4x4 View;
+	float4x4 Projection;
+	float4x4 LView;
+	float4x4 LProjection;
 	float4x4 Bones[100];
 	float4x4 LclBone;
 	float4 Light;
+	float4x4 WIT;
 	//float4 Color;
 }
 
@@ -63,8 +64,8 @@ vertexOut main(vertexIn IN)
 	float3 L = normalize(Light.xyz);
 
 	//ワールド変換
-	float4 nrm = mul(IN.nrm, World * pos0);
-	OUT.nrm = nrm;
+	float4 nrm = mul(IN.nrm, pos0 * World);
+	OUT.nrm = normalize(nrm);
 
 	//ライトと法線の内積
 	float lgtdot = dot(L, OUT.nrm);

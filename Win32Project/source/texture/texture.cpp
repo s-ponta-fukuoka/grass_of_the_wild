@@ -26,7 +26,7 @@ Texture::Texture(const char* name, TextureManager* m_pTextureManager)
 	Texture* pTexture = m_pTextureManager->GetTexture(this);
 	if (pTexture == NULL)
 	{
-		LoadTexture(m_name);
+		LoadTexture(m_name.data());
 		CreateTextureResource();
 		m_pTextureManager->AddTexture(this);
 	}
@@ -42,7 +42,7 @@ Texture::Texture(const char* name, TextureManager* m_pTextureManager)
 
 const char *Texture::GetName(void)
 {
-	return m_name;
+	return m_name.data();
 }
 
 unsigned char *Texture::GetPixels(void)

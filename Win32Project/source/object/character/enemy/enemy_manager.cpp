@@ -32,14 +32,14 @@ HRESULT EnemyManager::GenerateEnemy(RenderManager* pRenderManager,
 	MainCamera *pCamera,
 	CollisionManager* pCollisionManager)
 {
-	EnemyAdd(new Enemy(VECTOR3(100,0,100),VECTOR3(0,0,0), VECTOR3(1,1,1),
+	EnemyAdd(new Enemy(VECTOR3(100,0,700),VECTOR3(0,180,0), VECTOR3(1,1,1),
 		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
 
-	//EnemyAdd(new Enemy(VECTOR3(0, 0, -100), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
-	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
-	//
-	//EnemyAdd(new Enemy(VECTOR3(-300, 0, 0), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
-	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera));
+	EnemyAdd(new Enemy(VECTOR3(0, 0, -900), VECTOR3(0, 90, 0), VECTOR3(1, 1, 1),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
+	
+	EnemyAdd(new Enemy(VECTOR3(-1000, 0, 0), VECTOR3(0, -45, 0), VECTOR3(1, 1, 1),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
 
 	return S_OK;
 }
