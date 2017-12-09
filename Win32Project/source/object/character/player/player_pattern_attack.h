@@ -23,7 +23,12 @@ class PlayerPatternAttack : public PlayerPattern
 public:
 	PlayerPatternAttack();
 	virtual ~PlayerPatternAttack();
-	virtual void Update(Player* pPlayer) override;
+	virtual void Update(Player* pPlayer,
+		RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager) override;
 	virtual void InputOperation(Player* pPlayer);
 	void ChangeAttackAnime(Player* pPlayer);
 };

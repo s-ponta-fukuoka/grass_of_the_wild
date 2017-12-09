@@ -32,7 +32,12 @@ PlayerPatternWait::~PlayerPatternWait()
 {
 }
 
-void PlayerPatternWait::Update(Player* pPlayer)
+void PlayerPatternWait::Update(Player* pPlayer,
+	RenderManager* pRenderManager,
+	ShaderManager* pShaderManager,
+	TextureManager* pTextureManager,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
 	InputOperation(pPlayer);
 

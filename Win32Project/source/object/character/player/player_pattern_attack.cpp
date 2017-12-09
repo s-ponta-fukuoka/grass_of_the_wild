@@ -32,7 +32,12 @@ PlayerPatternAttack::~PlayerPatternAttack()
 {
 }
 
-void PlayerPatternAttack::Update(Player* pPlayer)
+void PlayerPatternAttack::Update(Player* pPlayer,
+	RenderManager* pRenderManager,
+	ShaderManager* pShaderManager,
+	TextureManager* pTextureManager,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
 	InputOperation(pPlayer);
 

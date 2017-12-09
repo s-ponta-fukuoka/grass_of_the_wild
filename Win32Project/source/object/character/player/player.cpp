@@ -171,7 +171,13 @@ void Player::Update(RenderManager* pRenderManager,
 {
 	m_oldPos = m_pTransform->position;
 
-	m_pPlayerPattern->Update(this);
+	m_pPlayerPattern->Update(this, 
+		pRenderManager,
+		pShaderManager, 
+		pTextureManager,
+		pConstant,
+		pLightCameraConstant, 
+		pCollisionManager);
 
 	m_pPlayerAttack->Update();
 

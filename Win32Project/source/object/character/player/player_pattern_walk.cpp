@@ -31,7 +31,12 @@ PlayerPatternWalk::~PlayerPatternWalk()
 {
 }
 
-void PlayerPatternWalk::Update(Player* pPlayer)
+void PlayerPatternWalk::Update(Player* pPlayer,
+	RenderManager* pRenderManager,
+	ShaderManager* pShaderManager,
+	TextureManager* pTextureManager,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
 	InputOperation(pPlayer);
 
@@ -87,9 +92,6 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 		pInputKeyboard->GetKeyPress(DIK_S) ||
 		pInputKeyboard->GetKeyPress(DIK_D))
 	{
-		PlayerAttack* pPlayerAttack = pPlayer->GetPlayerAttack();
-		pPlayerAttack->GetTransform()->position.x = pTransform->position.x + move.x * 1.5f;
-		pPlayerAttack->GetTransform()->position.z = pTransform->position.z + move.z * 1.5f;
 		CompletionPosition = XMVectorSet(pTransform->position.x + move.x, 0, pTransform->position.z + move.z, 0);
 		CompletionRot = XMVectorSet(0, atan2(-move.z, -move.x) + D3D_PI * 0.5, 0, 1);
 		pAnimeNumber[0] = 1;
@@ -102,6 +104,9 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 
 	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE))
 	{
+		PlayerAttack* pPlayerAttack = pPlayer->GetPlayerAttack();
+		pPlayerAttack->GetTransform()->position.x = pTransform->position.x + move.x * 1.5f;
+		pPlayerAttack->GetTransform()->position.z = pTransform->position.z + move.z * 1.5f;
 		pAnimeNumber[0] = 2;
 		pPlayer->ChangePlayerPattern(new PlayerPatternAttack);
 	}

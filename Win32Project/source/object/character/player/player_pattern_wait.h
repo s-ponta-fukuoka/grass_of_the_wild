@@ -23,7 +23,12 @@ class PlayerPatternWait : public PlayerPattern
 public:
 	PlayerPatternWait();
 	virtual ~PlayerPatternWait();
-	virtual void Update(Player* pPlayer) override;
+	virtual void Update(Player* pPlayer,
+		RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager) override;
 	virtual void InputOperation(Player* pPlayer);
 };
 
