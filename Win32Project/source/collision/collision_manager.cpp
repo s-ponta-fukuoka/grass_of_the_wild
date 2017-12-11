@@ -34,25 +34,30 @@ void CollisionManager::Update(void)
 					if ((*iteSource) != NULL && (*iteDest) != NULL)
 					{
 						(*iteSource)->GetGameObject()->OnCollision((*iteDest));
-						(*iteDest)->GetGameObject()->OnCollision((*iteSource));
+						if (!(*iteSource)->isColliderDelete())
+						{
+							(*iteDest)->GetGameObject()->OnCollision((*iteSource));
+						}
+						else
+						{
+							(*iteSource)->RendererDelete();
+							(*iteSource) = NULL;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	auto ite = m_listCollider.begin();
-	while (ite != m_listCollider.end())
+	for (auto ite = m_listCollider.begin(); ite != m_listCollider.end(); ++ite)
 	{
-		for (ite = m_listCollider.begin(); ite != m_listCollider.end(); ++ite)
+		if (*ite == NULL)
 		{
-			if (*ite == NULL)
-			{
-				m_listCollider.erase(ite);
-				break;
-			}
+			m_listCollider.erase(ite);
+			break;
 		}
 	}
+	
 }
 
 void CollisionManager::AddCollider(Collider* col)
@@ -68,7 +73,6 @@ void CollisionManager::DeleteCollider(Collider* col)
 		{
 			m_listCollider.erase(ite);
 			break;
-
 		}
 	}
 }

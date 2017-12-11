@@ -9,6 +9,7 @@
 // インクルード
 //*****************************************************************************
 #include "enemy.h"
+#include "enemy_manager.h"
 #include "../../../object/camera/main_camera.h"
 #include "../../../model/model.h"
 #include "../../../model/model_manager.h"
@@ -35,10 +36,12 @@ Enemy::Enemy(
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, 
 	MainCamera *pCamera,
-	CollisionManager* pCollisionManager)
+	CollisionManager* pCollisionManager,
+	EnemyManager* pEnemyManager)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0,0,0))
 	, m_pCollider(NULL)
+	, m_bUse(false)
 {
 	m_pTransform = new Transform();
 
@@ -50,6 +53,8 @@ Enemy::Enemy(
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
 
 	m_pCamera = pCamera;
+
+	m_pModelManager = pModelManager;
 
 	m_pModel = new SkinMeshModel("bin/model/enemy_000.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
@@ -64,6 +69,11 @@ Enemy::Enemy(
 	m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
 
 	PixelShader::PIXEL_TYPE ePsType;
+	
+	m_pRenderer = new Renderer*[m_pModel->GetNumMesh()];
+	m_pShadowRenderer = new Renderer*[m_pModel->GetNumMesh()];
+
+	m_pEnemyManager = pEnemyManager;
 
 	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
 	{
@@ -85,7 +95,9 @@ Enemy::Enemy(
 			ePsType = PixelShader::PS_MAT;
 		}
 
-		pRenderManager->AddRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+		m_pRenderManager = pRenderManager;
+
+		m_pRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
@@ -103,9 +115,9 @@ Enemy::Enemy(
 			ePsType,
 			pMesh[i].pCluster,
 			pMesh[i],
-			FALSE));
+			FALSE);
 
-		pRenderManager->AddShadowRenderer(new SkinnedMeshRenderer(m_pVertexBuffer,
+		m_pShadowRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
@@ -123,8 +135,14 @@ Enemy::Enemy(
 			ePsType = PixelShader::PS_SHADOW,
 			pMesh[i].pCluster,
 			pMesh[i],
-			FALSE));
+			FALSE);
+
+		m_pRenderManager->AddRenderer(m_pRenderer[i]);
+
+		m_pRenderManager->AddShadowRenderer(m_pShadowRenderer[i]);
 	}
+
+	m_pCollisionManager = pCollisionManager;
 
 	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
@@ -153,9 +171,15 @@ HRESULT Enemy::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Enemy::Release(void)
 {
-	delete m_pModel;
-	delete m_pFrame;
-	delete m_pAnimeNumber;
+	m_pCollider->SetColliderDelete(true);
+
+	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
+	{
+		m_pRenderManager->DeleteRenderer(m_pRenderer[i]);
+		m_pRenderManager->DeleteShadowRenderer(m_pShadowRenderer[i]);
+		delete[] m_pRenderer[i];
+		delete[] m_pShadowRenderer[i];
+	}
 
 	Character::Release();
 }
@@ -171,6 +195,12 @@ void Enemy::Update(void)
 	ChangeAnime();
 
 	Object::Update();
+
+	if (m_bUse)
+	{
+		//Release();
+		m_bUse = false;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -239,7 +269,13 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 ///////////////////////////////////////////////////////////////////////////////
 void Enemy::OnCollision(Collider* col)
 {
+	Object::ObjectType eObjectType = col->GetGameObject()->GetObjectType();
 
+	if (eObjectType == Object::TYPE_PLAYER_ATTACK)
+	{
+		m_pEnemyManager->EnemyDelete(this);
+		m_bUse = true;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

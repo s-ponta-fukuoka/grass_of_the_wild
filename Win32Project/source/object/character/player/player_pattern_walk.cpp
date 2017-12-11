@@ -104,12 +104,11 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 
 	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE))
 	{
-		PlayerAttack* pPlayerAttack = pPlayer->GetPlayerAttack();
-		pPlayerAttack->GetTransform()->position.x = pTransform->position.x + move.x * 1.5f;
-		pPlayerAttack->GetTransform()->position.z = pTransform->position.z + move.z * 1.5f;
 		pAnimeNumber[0] = 2;
 		pPlayer->ChangePlayerPattern(new PlayerPatternAttack);
 	}
+
+	//pPlayer->SetMoveVector(move);
 
 	pTransform->position += move;
 	move *= 0.1f;

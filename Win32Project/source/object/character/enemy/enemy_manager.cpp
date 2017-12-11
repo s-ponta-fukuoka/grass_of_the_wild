@@ -33,13 +33,13 @@ HRESULT EnemyManager::GenerateEnemy(RenderManager* pRenderManager,
 	CollisionManager* pCollisionManager)
 {
 	EnemyAdd(new Enemy(VECTOR3(100,0,700),VECTOR3(0,180,0), VECTOR3(1,1,1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
 
 	EnemyAdd(new Enemy(VECTOR3(0, 0, -900), VECTOR3(0, 90, 0), VECTOR3(1, 1, 1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
 	
 	EnemyAdd(new Enemy(VECTOR3(-1000, 0, 0), VECTOR3(0, -45, 0), VECTOR3(1, 1, 1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager));
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
 
 	return S_OK;
 }
@@ -53,10 +53,10 @@ void EnemyManager::EnemyDelete(Enemy *enemy)
 {
 	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
 	{
-		if ((*ite) == enemy)
-		{
-			m_list.erase(ite);
-		}
+		if ((*ite) != enemy) { continue; }
+		(*ite)->Release();
+		m_list.erase(ite);
+		return;
 	}
 }
 
@@ -64,6 +64,7 @@ void EnemyManager::Update(void)
 {
 	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
 	{
+		if ((*ite) == NULL) { continue; }
 		(*ite)->Update();
 	}
 }

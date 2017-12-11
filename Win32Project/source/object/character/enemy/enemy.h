@@ -23,6 +23,7 @@ class TextureManager;
 class CollisionManager;
 class ModelManager;
 class MainCamera;
+class EnemyManager;
 
 //*****************************************************************************
 // クラス定義
@@ -42,7 +43,8 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera* pCamera,
-		CollisionManager* pCollisionManager);
+		CollisionManager* pCollisionManager,
+		EnemyManager* pEnemyManager);
 
 	//デストラクタ
 	virtual ~Enemy();
@@ -67,7 +69,21 @@ public:
 
 private:
 
+	bool				m_bUse;
+
+	Renderer**			m_pRenderer;
+
+	Renderer**			m_pShadowRenderer;
+
+	RenderManager*		m_pRenderManager;
+
+	CollisionManager*	m_pCollisionManager;
+
 	SphereCollider*		m_pCollider;
+
+	EnemyManager*		m_pEnemyManager;
+
+	ModelManager*		m_pModelManager;
 
 	MainCamera*			m_pCamera;
 

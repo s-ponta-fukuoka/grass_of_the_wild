@@ -32,7 +32,7 @@ PlayerAttack::PlayerAttack(
 {
 	m_pTransform = new Transform();
 
-	m_pCollider = new SphereCollider(VECTOR3(0, 70, 100), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
+	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
 	SetObjectType(Object::TYPE_PLAYER_ATTACK);
 
@@ -65,6 +65,10 @@ void PlayerAttack::Release(void)
 	delete m_pFrame;
 	delete m_pAnimeNumber;
 
+	delete m_pTransform;
+
+	delete	m_pCollider;
+
 	Character::Release();
 }
 
@@ -73,9 +77,6 @@ void PlayerAttack::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void PlayerAttack::Update(void)
 {
-	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
-	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
-
 	Object::Update();
 }
 

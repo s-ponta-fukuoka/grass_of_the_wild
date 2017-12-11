@@ -29,16 +29,25 @@ public:
 	}TYPE;
 
 	Collider();
+	virtual ~Collider();
 	void SetType(TYPE type);
 	TYPE GetType(void);
 
 	virtual void MakeVertex(void) {};
 
+	void SetColliderDelete(bool bDelete) { m_bDelete = bDelete; };
+	bool isColliderDelete(void) { return m_bDelete; };
+
+	void RendererDelete(void);
+
 	Object* GetGameObject(void);
 
 private:
-	TYPE eColType;
+	bool							m_bDelete;
+	TYPE							eColType;
 protected:
+	Renderer*						m_pRenderer;
+	RenderManager*					m_pRenderManager;
 	Object* m_pObject;
 };
 
@@ -64,6 +73,8 @@ public:
 		TextureManager* pTextureManager,
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant);
+
+	virtual ~SphereCollider();
 
 	void MakeVertex(void);
 

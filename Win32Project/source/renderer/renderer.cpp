@@ -727,6 +727,4 @@ void CanvasRenderer::Draw(void)
 	{
 		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
 	}
-
-	pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }

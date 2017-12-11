@@ -1,4 +1,4 @@
-﻿  player_pattern_walk.cpp
+﻿  player_life.cpp
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(52937): note: 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
@@ -93,6 +93,7 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathconvert.
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathvector.inl(1269): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(518): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\xnamathmisc.inl(519): warning C4838: 'unsigned int' から 'INT' への変換には縮小変換が必要です
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\source\object\character\player\player_pattern_walk.cpp(96): warning C4244: '引数': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\source\object\canvas\player_life\player_life.cpp(113): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\source\object\canvas\player_life\player_life.cpp(188): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
   Win32Project.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\Debug\Win32Project.exe
   Win32Project.vcxproj -> C:\Users\fukuoka.shota\Desktop\grass_of_the_wild\Debug\Win32Project.pdb (Partial PDB)

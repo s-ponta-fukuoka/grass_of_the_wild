@@ -46,7 +46,17 @@ public:
 	//バッファ
 	void MakeVertex(ID3D11Device* pDevice);
 
+	//ライフ増減・減少
+	void Add(int nLife) { m_nLife += nLife; }
+	void Sub(int nLife) { m_nLife -= nLife; }
+
+	//ライフ取得・設定
+	void SetLife(int nLife) { m_nLife = nLife; }
+	int GetLife(void) { return m_nLife; }
+
 private:
+	int								m_nLife;
+
 	VECTOR3							m_size;
 };
 

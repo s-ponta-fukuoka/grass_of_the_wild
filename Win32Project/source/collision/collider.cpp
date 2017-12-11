@@ -23,6 +23,11 @@
 
 Collider::Collider()
 {
+	m_bDelete = false;
+}
+
+Collider::~Collider()
+{
 
 }
 
@@ -34,6 +39,12 @@ void Collider::SetType(TYPE type)
 Collider::TYPE  Collider::GetType(void)
 {
 	return eColType;
+}
+
+
+void Collider::RendererDelete(void)
+{
+	m_pRenderManager->DeleteRenderer(m_pRenderer);
 }
 
 Object *Collider::GetGameObject(void)
@@ -79,7 +90,7 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 
 	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
 
-	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
+	m_pRenderer = new MeshRenderer(m_pVertexBuffer,
 		m_pIndexBuffer,
 		pShaderManager,
 		pTexture->GetTexture(),
@@ -92,7 +103,16 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 		VertexShader::VS_NORMAL,
 		GeometryShader::GS_NONE,
 		PixelShader::PS_NORMAL,
-		TRUE));
+		FALSE);
+
+	m_pRenderManager = pRenderManager;
+
+	m_pRenderManager->AddRenderer(m_pRenderer);
+}
+
+SphereCollider::~SphereCollider()
+{
+	m_pRenderManager->DeleteRenderer(m_pRenderer);
 }
 
 void SphereCollider::MakeVertex(void)

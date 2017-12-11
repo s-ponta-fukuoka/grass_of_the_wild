@@ -74,7 +74,7 @@ void RenderManager::AddShadowRenderer(Renderer* renderer)
 ///////////////////////////////////////////////////////////////////////////////
 void RenderManager::DeleteShadowRenderer(const Renderer* renderer)
 {
-	for (auto ite = m_listRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
 	{
 		if ((*ite) != renderer) { continue; }
 		m_listShadowRenderer.erase(ite);

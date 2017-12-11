@@ -80,7 +80,11 @@ public:
 	//プレイヤーステート変更
 	void ChangePlayerPattern(PlayerPattern* pPlayerPattern);
 
+	VECTOR3 GetMoveVector(void) { return m_moveVector; }
+	void SetMoveVector(VECTOR3 move) { m_moveVector = move; }
+
 	VECTOR3 GetMove(void) { return m_move; }
+	void SetMove(VECTOR3 move) { m_move = move; }
 
 	MainCamera* GetCamera(void) { return m_pCamera; }
 
@@ -92,8 +96,6 @@ public:
 
 	XMVECTOR GetCompletionRot(void) { return m_CompletionRot; }
 
-	PlayerAttack* GetPlayerAttack(void) { return m_pPlayerAttack; }
-
 private:
 
 	VECTOR3				m_oldPos;
@@ -103,6 +105,8 @@ private:
 	MainCamera*			m_pCamera;
 
 	VECTOR3				m_move;
+
+	VECTOR3				m_moveVector;
 
 	XMVECTOR			m_CompletionPosition;
 

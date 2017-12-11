@@ -124,8 +124,6 @@ Player::Player(RenderManager* pRenderManager,
 
 	m_pCollider = new SphereCollider(VECTOR3(0,70,0), 20, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
-	m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
-
 	SetObjectType(Object::TYPE_PLAYER);
 
 	m_pTransform->rot.y = 0;
@@ -179,14 +177,8 @@ void Player::Update(RenderManager* pRenderManager,
 		pLightCameraConstant, 
 		pCollisionManager);
 
-	m_pPlayerAttack->Update();
-
 	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
 	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
-
-	//m_pAttackCollider->GetTransform()->position.x = m_pTransform->position.x;
-	//m_pAttackCollider->GetTransform()->position.y = m_pTransform->position.y;
-	//m_pAttackCollider->GetTransform()->position.z = m_pTransform->position.z;
 
 	Object::Update();
 }
