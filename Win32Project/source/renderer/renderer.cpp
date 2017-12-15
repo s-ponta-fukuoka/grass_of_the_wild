@@ -10,6 +10,7 @@
 #include "../texture/texture_manager.h"
 #include "../model/model.h"
 #include "../app/app.h"
+#include "../device/input.h"
 
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
@@ -727,4 +728,6 @@ void CanvasRenderer::Draw(void)
 	{
 		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
 	}
+
+	//pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL | D3D11_CLEAR_DEPTH, 1.0f, 0);
 }

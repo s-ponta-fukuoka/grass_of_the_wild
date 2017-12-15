@@ -32,6 +32,7 @@
 PlayerPatternAttack::PlayerPatternAttack()
 {
 	m_pPlayerAttack = NULL;
+	m_nWait = 0;
 }
 
 
@@ -127,15 +128,28 @@ void PlayerPatternAttack::ChangeAttackAnime(Player* pPlayer, CollisionManager* p
 
 	if (pFrame[0] >= pAnime[pAnimeNumber[0]].nEndTime - 1 )
 	{
-		if (pAnimeNumber[0] == 2 || pAnimeNumber[0] == 3)
+		if (m_nWait > 10)
 		{
-			pAnimeNumber[0] = 0;
-			pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
-			m_pPlayerAttack->Release();
-			m_pPlayerAttack = NULL;
-			pPlayer->ChangePlayerPattern(new PlayerPatternWait);
+			m_nWait = 0;
+			if (pAnimeNumber[0] == 2 || pAnimeNumber[0] == 3)
+			{
+				pAnimeNumber[0] = 0;
+				pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
+				m_pPlayerAttack->Release();
+				m_pPlayerAttack = NULL;
+				pPlayer->ChangePlayerPattern(new PlayerPatternWait);
+			}
+			pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
 		}
-		pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
+		else
+		{
+			m_nWait++;
+			pFrame[0] = pAnime[pAnimeNumber[0]].nEndTime - 1;
+		}
+	}
+	else
+	{
+		pFrame[0]++;
 	}
 
 	if (pFrame[0] < pAnime[pAnimeNumber[0]].nStartTime)
@@ -143,5 +157,4 @@ void PlayerPatternAttack::ChangeAttackAnime(Player* pPlayer, CollisionManager* p
 		pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
 	}
 
-	pFrame[0]++;
 }

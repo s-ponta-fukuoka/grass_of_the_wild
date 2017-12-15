@@ -61,6 +61,8 @@ void Texture::CreateTextureResource(void)
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 
+	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
 	ID3D11Texture2D* pTex2D = NULL;
 
 	D3D11_TEXTURE2D_DESC tex2D;
@@ -90,13 +92,15 @@ void Texture::CreateTextureResource(void)
 	D3D11_SHADER_RESOURCE_VIEW_DESC SRVDesc = {};
 	SRVDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-	SRVDesc.Texture2D.MipLevels = 1;
+	SRVDesc.Texture2D.MipLevels = -1;
 
 	hr = pDevice->CreateShaderResourceView(pTex2D, &SRVDesc, &m_pTexture);
 	if (FAILED(hr))
 	{
 		return;
 	}
+
+	pDeviceContext->GenerateMips(m_pTexture);
 }
 
 void Texture::LoadTexture(const char* name)

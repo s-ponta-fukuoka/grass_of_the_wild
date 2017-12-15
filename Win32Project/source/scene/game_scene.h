@@ -35,13 +35,13 @@ class Game : public Scene
 public:
 	Game();
 	virtual ~Game();
-	HRESULT Init(NextScene* pScene);
+	HRESULT Init(NextScene* pNextScene, Fade* pFade);
 	void Release(void);
 	void Update(void);
 	void Draw(void);
 
 private:
-	NextScene*						m_pNextScene;
+	Fade*							m_pFade;
 
 	MainCamera*						m_pCamera;
 

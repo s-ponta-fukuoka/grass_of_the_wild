@@ -20,7 +20,7 @@ class Result : public Scene
 public:
 	Result(){};
 	virtual ~Result() {};
-	HRESULT Init(NextScene* pScene);
+	HRESULT Init(Fade* pFade);
 	void Release(void);
 	void Update(void);
 	void Draw(void);

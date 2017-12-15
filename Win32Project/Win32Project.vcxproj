@@ -57,6 +57,7 @@
     <ClCompile Include="source\renderer\app_renderer.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\renderer\render_manager.cpp" />
+    <ClCompile Include="source\scene\fade_scene.cpp" />
     <ClCompile Include="source\scene\game_scene.cpp" />
     <ClCompile Include="source\scene\next_scene.cpp" />
     <ClCompile Include="source\scene\result_scene.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="source\renderer\app_renderer.h" />
     <ClInclude Include="source\renderer\renderer.h" />
     <ClInclude Include="source\renderer\render_manager.h" />
+    <ClInclude Include="source\scene\fade_scene.h" />
     <ClInclude Include="source\scene\game_scene.h" />
     <ClInclude Include="source\scene\next_scene.h" />
     <ClInclude Include="source\scene\result_scene.h" />

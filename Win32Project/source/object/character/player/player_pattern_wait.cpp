@@ -14,7 +14,7 @@
 #include "player.h"
 #include "../../../device/input.h"
 #include "../../camera/main_camera.h"
-
+#include "../../canvas/player_life/player_life.h"
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
@@ -58,6 +58,11 @@ void PlayerPatternWait::InputOperation(Player* pPlayer)
 	{
 		pAnimeNumber[0] = 1;
 		pPlayer->ChangePlayerPattern(new PlayerPatternWalk);
+	}
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_E))
+	{
+		pPlayer->GetPlayerLife()->Sub(1);
 	}
 
 	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE))

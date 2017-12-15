@@ -19,7 +19,7 @@
 #include "../scene/tutorial_scene.h"
 #include "../scene/game_scene.h"
 #include "../scene/result_scene.h"
-
+#include "../scene/fade_scene.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -29,6 +29,7 @@ App::App()
 	, m_pScene(NULL)
 	, m_pNextScene(NULL)
 	, m_pInputKeybord(NULL)
+	, m_pFade(NULL)
 {
 	;
 }
@@ -64,10 +65,12 @@ HRESULT App::Init(const HWND hWnd, HINSTANCE hInstance)
 	ID3D11DeviceContext* pDeviceContext = m_pAppRenderer->GetDeviceContex();
 
 	m_pNextScene = new NextScene();
-	m_pScene = new Game();
-
-	m_pScene->Init(m_pNextScene);
 	
+	m_pFade = new Fade();
+
+	m_pScene = new Game();
+	m_pScene->Init(m_pNextScene, m_pFade);
+
 	return S_OK;
 }
 
@@ -79,6 +82,11 @@ void App::Release(void)
 	ImGui_ImplDX11_Shutdown();
 
 	m_pScene->Release();
+
+	if (m_pFade == NULL) { return; }
+	m_pFade->Uninit();
+	delete m_pFade;
+	m_pFade = NULL;
 
 	if (m_pInputKeybord == NULL) { return; }
 	m_pInputKeybord->Uninit();
@@ -99,6 +107,8 @@ void App::Update(void)
 	m_pInputKeybord->Update();
 
 	m_pScene->Update();
+
+	m_pFade->Update();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -136,6 +146,6 @@ void App::SceneChange(void)
 	{
 		m_pScene->Release();
 		m_pScene = pNextScene;
-		m_pScene->Init(m_pNextScene);
+		m_pScene->Init(m_pNextScene, m_pFade);
 	}
 }

@@ -146,10 +146,10 @@ void PlayerLife::Update( void )
 
 	for (int i = 0; i < PLAYER_LIFE_NUM - m_nLife; i++)
 	{
-		vertices[(16 * 5) - (i + 1) * 4 + 0].color = VECTOR4(0, 0, 0, 1);
-		vertices[(16 * 5) - (i + 1) * 4 + 1].color = VECTOR4(0, 0, 0, 1);
-		vertices[(16 * 5) - (i + 1) * 4 + 2].color = VECTOR4(0, 0, 0, 1);
-		vertices[(16 * 5) - (i + 1) * 4 + 3].color = VECTOR4(0, 0, 0, 1);
+		vertices[(PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX) - (i + 1) * 4 + 0].color = VECTOR4(0, 0, 0, 1);
+		vertices[(PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX) - (i + 1) * 4 + 1].color = VECTOR4(0, 0, 0, 1);
+		vertices[(PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX) - (i + 1) * 4 + 2].color = VECTOR4(0, 0, 0, 1);
+		vertices[(PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX) - (i + 1) * 4 + 3].color = VECTOR4(0, 0, 0, 1);
 	}
 
 	memcpy(msr.pData, vertices, sizeof(AppRenderer::Vertex2D) * (PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX)); // 3頂点分コピー

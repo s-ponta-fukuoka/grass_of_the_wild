@@ -33,6 +33,7 @@
 #include "../scene/tutorial_scene.h"
 #include "../scene/game_scene.h"
 #include "../scene/result_scene.h"
+#include "../scene/fade_scene.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -59,7 +60,6 @@ Title::Title()
 	, m_pRenderManager(NULL)
 	, m_pMeshManager(NULL)
 	, m_pCanvasManager(NULL)
-	, m_pNextScene(NULL)
 {
 	;
 }
@@ -67,9 +67,9 @@ Title::Title()
 ///////////////////////////////////////////////////////////////////////////////
 // 初期化処理
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT Title::Init(NextScene* pScene)
+HRESULT Title::Init(NextScene* pNextScene, Fade* pFade)
 {
-	m_pNextScene = pScene;
+	m_pFade = pFade;
 
 	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
@@ -105,6 +105,8 @@ HRESULT Title::Init(NextScene* pScene)
 	m_pCanvasManager->AddCanvas(new Logo(m_pRenderManager, m_pShaderManager, m_pTextureManager));
 
 	m_pCamera->Init(m_pPlayer);
+
+	m_pFade->Init(pNextScene, m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
 	return S_OK;
 }
@@ -157,13 +159,14 @@ void Title::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 // 更新処理
 ///////////////////////////////////////////////////////////////////////////////
-void Title::Update(void)
+void Title::Update()
 {
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
 	if (pInputKeyboard->GetKeyTrigger(DIK_RETURN))
 	{
-		m_pNextScene->NextSceneUpdate(new Game);
+		m_pFade->SetFade(Fade::FADE_OUT, new Game);
+		//m_pNextScene->NextSceneUpdate(new Game);
 	}
 
 	m_pLightCamera->Update();

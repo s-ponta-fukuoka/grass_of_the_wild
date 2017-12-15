@@ -114,6 +114,7 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 	move *= 0.1f;
 
 	StartRot = XMVectorLerp(StartRot, CompletionRot, 0.1f);
+
 	pTransform->rot.y = XMVectorGetY(StartRot);
 
 	StartPosition = XMVectorLerp(StartPosition, CompletionPosition, 0.1f);

@@ -11,5 +11,9 @@ SamplerState samLinear : register(s0);
 
 float4 main(pixcelIn IN) : SV_Target
 {
-	return txDiffuse.Sample(samLinear, IN.tex) * IN.color;
+	float4 color = txDiffuse.Sample(samLinear, IN.tex) * IN.color;
+
+	if (color.a <= 0.0)discard;
+
+	return color;
 }

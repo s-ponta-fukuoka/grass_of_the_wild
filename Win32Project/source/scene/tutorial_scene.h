@@ -20,7 +20,7 @@ class Tutorial : public Scene
 public:
 	Tutorial(){};
 	virtual ~Tutorial(){};
-	HRESULT Init(NextScene* pScene);
+	HRESULT Init(Fade* pFade);
 	void Release(void);
 	void Update(void);
 	void Draw(void);

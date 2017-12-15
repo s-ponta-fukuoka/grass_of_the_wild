@@ -27,6 +27,7 @@ class ModelManager;
 class MainCamera;
 class PlayerPattern;
 class PlayerAttack;
+class PlayerLife;
 
 //*****************************************************************************
 // クラス定義
@@ -50,7 +51,8 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera* pCamera,
-		CollisionManager* pCollisionManager);
+		CollisionManager* pCollisionManager,
+		PlayerLife* pPlayerLife);
 
 	//デストラクタ
 	virtual ~Player();
@@ -96,7 +98,11 @@ public:
 
 	XMVECTOR GetCompletionRot(void) { return m_CompletionRot; }
 
+	PlayerLife *GetPlayerLife(void) { return m_pPlayerLife; }
+
 private:
+
+	PlayerLife*			m_pPlayerLife;
 
 	VECTOR3				m_oldPos;
 

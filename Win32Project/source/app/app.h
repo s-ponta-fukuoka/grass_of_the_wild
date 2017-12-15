@@ -39,6 +39,7 @@ class EnemyManager;
 class CollisionManager;
 class Scene;
 class NextScene;
+class Fade;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -74,6 +75,8 @@ private:
 	AppRenderer*					m_pAppRenderer;
 
 	InputKeyboard*					m_pInputKeybord;
+
+	Fade*							m_pFade;
 };
 
 #endif

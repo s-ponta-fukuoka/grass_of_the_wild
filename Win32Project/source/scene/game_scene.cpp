@@ -32,7 +32,7 @@
 #include "../scene/tutorial_scene.h"
 #include "../scene/game_scene.h"
 #include "../scene/result_scene.h"
-
+#include "../scene/fade_scene.h"
 
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
@@ -62,7 +62,6 @@ Game::Game()
 	, m_pEnemyManager(NULL)
 	, m_pCollisionManager(NULL)
 	, m_pPlayerLife(NULL)
-	, m_pNextScene(NULL)
 	, m_pPlayer(NULL)
 {
 	;
@@ -79,9 +78,9 @@ Game::~Game()
 ///////////////////////////////////////////////////////////////////////////////
 // ‰Šú‰»ˆ—
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT Game::Init(NextScene* pScene)
+HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
 {
-	m_pNextScene = pScene;
+	m_pFade = pFade;
 
 	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
@@ -117,12 +116,15 @@ HRESULT Game::Init(NextScene* pScene)
 	m_pEnemyManager = new EnemyManager();
 	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
+	m_pPlayerLife = new PlayerLife(m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
-	m_pCanvasManager->AddCanvas(new PlayerLife(m_pRenderManager, m_pShaderManager, m_pTextureManager));
-	//m_pCanvasManager->AddCanvas(new Logo(m_pRenderManager, m_pShaderManager, m_pTextureManager));
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayerLife);
+
+	m_pCanvasManager->AddCanvas(m_pPlayerLife);
 
 	m_pCamera->Init(m_pPlayer);
+
+	m_pFade->Init(pNextScene, m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
 	return S_OK;
 }
@@ -203,7 +205,8 @@ void Game::Update(void)
 
 	if (pInputKeyboard->GetKeyTrigger(DIK_RETURN))
 	{
-		m_pNextScene->NextSceneUpdate(new Title);
+		m_pFade->SetFade(Fade::FADE_OUT, new Title);
+		//m_pNextScene->NextSceneUpdate(new Title);
 	}
 }
 

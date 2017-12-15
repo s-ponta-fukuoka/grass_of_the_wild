@@ -23,6 +23,8 @@ class PlayerAttack;
 class PlayerPatternAttack : public PlayerPattern
 {
 	PlayerAttack* m_pPlayerAttack;
+
+	int			m_nWait;
 public:
 
 	PlayerPatternAttack();

@@ -21,7 +21,7 @@
 #include "../../../device/input.h"
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
-
+#include "../../canvas/player_life/player_life.h"
 //*****************************************************************************
 // É}ÉNÉçíËã`
 //*****************************************************************************
@@ -34,13 +34,19 @@ Player::Player(RenderManager* pRenderManager,
 	TextureManager* pTextureManager,
 	ModelManager*	pModelManager,
 	AppRenderer::Constant* pConstant,
-	AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, CollisionManager* pCollisionManager)
+	AppRenderer::Constant* pLightCameraConstant,
+	MainCamera *pCamera,
+	CollisionManager* pCollisionManager,
+	PlayerLife* pPlayerLife)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0, 0, 0))
 	, m_pCollider(NULL)
 	, m_pPlayerPattern(new PlayerPatternWait)
+	, m_pPlayerLife(NULL)
 {
 	m_pTransform = new Transform();
+
+	m_pPlayerLife = pPlayerLife;
 
 	m_CompletionPosition = XMVectorSet(0,0,0,0);
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);

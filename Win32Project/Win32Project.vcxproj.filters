@@ -142,6 +142,9 @@
     <ClCompile Include="source\object\character\player\player_attack.h">
       <Filter>source\object\character\player</Filter>
     </ClCompile>
+    <ClCompile Include="source\scene\fade_scene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -296,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="source\object\character\player\player_pattern_walk.h">
       <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene\fade_scene.h">
+      <Filter>source\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
