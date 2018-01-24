@@ -34,6 +34,7 @@ public:
 		VS_3D,
 		VS_TOON,
 		VS_GRASS,
+		VS_MODEL,
 		VS_MAX
 	}VERTEX_TYPE;
 

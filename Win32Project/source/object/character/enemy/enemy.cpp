@@ -16,6 +16,12 @@
 #include "../../../renderer/render_manager.h"
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
+#include "../../mesh/meshfiled/mesh_field.h"
+#include "enemy_pattern.h"
+#include "enemy_pattern_attack.h"
+#include "enemy_pattern_wait.h"
+#include "enemy_pattern_walk.h"
+#include "enemy_pattern_run.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -37,11 +43,15 @@ Enemy::Enemy(
 	AppRenderer::Constant* pLightCameraConstant, 
 	MainCamera *pCamera,
 	CollisionManager* pCollisionManager,
-	EnemyManager* pEnemyManager)
+	EnemyManager* pEnemyManager,
+	Object::Transform* pPlayerTransform,
+	MeshField* pMeshField)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0,0,0))
 	, m_pCollider(NULL)
 	, m_bUse(false)
+	, m_pEnemyPattern(new EnemyPatternWait)
+	, m_nTime(0)
 {
 	m_pTransform = new Transform();
 
@@ -52,11 +62,15 @@ Enemy::Enemy(
 	m_CompletionPosition = XMVectorSet(0,0,0,0);
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
 
+	m_pPlayerTransform = pPlayerTransform;
+
+	m_pMeshField = pMeshField;
+
 	m_pCamera = pCamera;
 
 	m_pModelManager = pModelManager;
 
-	m_pModel = new SkinMeshModel("bin/model/enemy_000.taso");
+	m_pModel = new SkinMeshModel("bin/model/enemy_001.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 	
 	Texture* pToonTexture = new Texture("resource/sprite/toon.png", pTextureManager);
@@ -65,7 +79,7 @@ Enemy::Enemy(
 
 	SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
 
-	m_pAnimeNumber[0] = 1;
+	m_pAnimeNumber[0] = 0;
 	m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
 
 	PixelShader::PIXEL_TYPE ePsType;
@@ -187,16 +201,31 @@ void Enemy::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 //更新
 ///////////////////////////////////////////////////////////////////////////////
-void Enemy::Update(void)
+void Enemy::Update(RenderManager* pRenderManager,
+	ShaderManager* pShaderManager,
+	TextureManager* pTextureManager,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
+	m_pTransform->position.y -= 0.1f;
+	m_pTransform->position.y = m_pMeshField->GetHeight(m_pTransform->position);
+
 	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
 	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
 
-	ChangeAnime();
+	m_oldPos = m_pTransform->position;
+
+	m_pEnemyPattern->Update(this,
+		pRenderManager,
+		pShaderManager,
+		pTextureManager,
+		pConstant,
+		pLightCameraConstant,
+		pCollisionManager);
 
 	Object::Update();
 
-	if (m_bUse)
+	if(m_bUse)
 	{
 		//Release();
 		m_bUse = false;
@@ -216,6 +245,8 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	for (int j = 0; j < pMesh[nMeshCount].nNumVertex; j++)
 	{
 		vertices[j].position = VECTOR3(pMesh[nMeshCount].pPosition[j].x, pMesh[nMeshCount].pPosition[j].y, pMesh[nMeshCount].pPosition[j].z);
+		vertices[j].normal = VECTOR3(pMesh[nMeshCount].pNormal[j].x, pMesh[nMeshCount].pNormal[j].y, pMesh[nMeshCount].pNormal[j].z);
+		vertices[j].tex = VECTOR2(pMesh[nMeshCount].pTex[j].x, pMesh[nMeshCount].pTex[j].y);
 		vertices[j].color = VECTOR4(pMesh[nMeshCount].pColor[j].x, pMesh[nMeshCount].pColor[j].y, pMesh[nMeshCount].pColor[j].z, pMesh[nMeshCount].pColor[j].w);
 		vertices[j].boneIndex = VECTOR4(pMesh[nMeshCount].pBoneIndex[j].x, pMesh[nMeshCount].pBoneIndex[j].y, pMesh[nMeshCount].pBoneIndex[j].z, pMesh[nMeshCount].pBoneIndex[j].w);
 		vertices[j].weight = VECTOR4(pMesh[nMeshCount].pWeight[j].x, pMesh[nMeshCount].pWeight[j].y, pMesh[nMeshCount].pWeight[j].z, pMesh[nMeshCount].pWeight[j].w);
@@ -225,8 +256,6 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 
 	for (int j = 0; j < pMesh[nMeshCount].nNumPolygonVertex; j++)
 	{
-		vertices[pMesh[nMeshCount].pIndexNumber[j]].normal = VECTOR3(pMesh[nMeshCount].pNormal[j].x, pMesh[nMeshCount].pNormal[j].y, pMesh[nMeshCount].pNormal[j].z);
-		vertices[pMesh[nMeshCount].pIndexNumber[j]].tex = VECTOR2(pMesh[nMeshCount].pTex[j].x, 1 - pMesh[nMeshCount].pTex[j].y);
 		hIndexData[j] = pMesh[nMeshCount].pIndexNumber[j];
 	}
 
@@ -240,7 +269,6 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	InitData.pSysMem = vertices;
 	if (FAILED(pDevice->CreateBuffer(&bd, &InitData, &m_pVertexBuffer)))
 		return;
-
 
 	//インデックスバッファ作成
 	D3D11_BUFFER_DESC hBufferDesc;
@@ -258,7 +286,7 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 
 	if (FAILED(pDevice->CreateBuffer(&hBufferDesc, &hSubResourceData, &m_pIndexBuffer)))
 		return;
-	
+
 	delete[] vertices;
 
 	delete[] hIndexData;
@@ -276,6 +304,18 @@ void Enemy::OnCollision(Collider* col)
 		m_pEnemyManager->EnemyDelete(this);
 		m_bUse = true;
 	}
+
+	if (eObjectType == Object::TYPE_PLAYER)
+	{
+		VECTOR3 pos = m_oldPos - m_pTransform->position;
+
+		XMVECTOR Dot = XMVectorSet(pos.x, pos.y, pos.z, 1.0);
+
+		XMVector3Dot(Dot, Dot);
+
+		m_pTransform->position.x += XMVectorGetX(Dot) * 1.5f;
+		m_pTransform->position.z += XMVectorGetZ(Dot) * 1.5f;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -284,4 +324,14 @@ void Enemy::OnCollision(Collider* col)
 SphereCollider* Enemy::GetSphereCollider(void)
 {
 	return m_pCollider;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//エネミーステート変更
+///////////////////////////////////////////////////////////////////////////////
+void Enemy::ChangeEnemyPattern(EnemyPattern* pEnemyPattern)
+{
+	if (pEnemyPattern == NULL) { return; }
+	delete m_pEnemyPattern;
+	m_pEnemyPattern = pEnemyPattern;
 }

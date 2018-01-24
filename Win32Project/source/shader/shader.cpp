@@ -71,13 +71,31 @@ void VertexShader::CreateVertexShader(TCHAR* csoName)
 	{
 	case VS_NORMAL:
 	case VS_3D:
-	case VS_GRASS:
 	{
 		D3D11_INPUT_ELEMENT_DESC layout[] = {
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "NORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 3 + 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 3 + 4 * 3 + 4 * 4, D3D11_INPUT_PER_VERTEX_DATA, 0 } };
+
+		UINT numElements = sizeof(layout) / sizeof(layout[0]);
+
+		//頂点インプットレイアウトを作成
+		if (FAILED(pDevice->CreateInputLayout(layout, numElements, cso_data, cso_sz, &m_pVertexLayout))) { return; };
+
+		break;
+	}
+	case VS_GRASS:
+	{
+		D3D11_INPUT_ELEMENT_DESC layout[] = {
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "NORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 3 + 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 3 + 4 * 3 + 4 * 4, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "MATRIX", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_INSTANCE_DATA, 1 }, 
+			{ "MATRIX", 1, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 16, D3D11_INPUT_PER_INSTANCE_DATA, 1 }, 
+			{ "MATRIX", 2, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 32, D3D11_INPUT_PER_INSTANCE_DATA, 1 }, 
+			{ "MATRIX", 3, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 48, D3D11_INPUT_PER_INSTANCE_DATA, 1 }};
 
 		UINT numElements = sizeof(layout) / sizeof(layout[0]);
 
@@ -101,6 +119,7 @@ void VertexShader::CreateVertexShader(TCHAR* csoName)
 		break;
 	}
 	case VS_TOON:
+	case VS_MODEL:
 	{
 		D3D11_INPUT_ELEMENT_DESC layout[] = {
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },

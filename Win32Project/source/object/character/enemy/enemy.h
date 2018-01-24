@@ -24,6 +24,8 @@ class CollisionManager;
 class ModelManager;
 class MainCamera;
 class EnemyManager;
+class EnemyPattern;
+class MeshField;
 
 //*****************************************************************************
 // クラス定義
@@ -44,7 +46,9 @@ public:
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera* pCamera,
 		CollisionManager* pCollisionManager,
-		EnemyManager* pEnemyManager);
+		EnemyManager* pEnemyManager,
+		Object::Transform* pPlayerTransform,
+		MeshField* pMeshField);
 
 	//デストラクタ
 	virtual ~Enemy();
@@ -56,7 +60,11 @@ public:
 	void Release(void);
 
 	//更新
-	void Update(void);
+	void Update(RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager);
 
 	//バッファ作成
 	void MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh);
@@ -67,7 +75,32 @@ public:
 	//コライダー取得
 	SphereCollider* GetSphereCollider(void);
 
+	//エネミーステート変更
+	void ChangeEnemyPattern(EnemyPattern* pEnemyPattern);
+
+	//VECTOR3 GetMoveVector(void) { return m_moveVector; }
+	//void SetMoveVector(VECTOR3 move) { m_moveVector = move; }
+
+	VECTOR3 GetMove(void) { return m_move; }
+	void SetMove(VECTOR3 move) { m_move = move; }
+
+	MainCamera* GetCamera(void) { return m_pCamera; }
+
+	void SetCompletionPosition(XMVECTOR CompletionPosition) { m_CompletionPosition = CompletionPosition; }
+
+	void SetCompletionRot(XMVECTOR CompletionRot) { m_CompletionRot = CompletionRot; }
+
+	XMVECTOR GetCompletionPosition(void) { return m_CompletionPosition; }
+
+	XMVECTOR GetCompletionRot(void) { return m_CompletionRot; }
+
+	Object::Transform* GetPlayerTransform(void) { return m_pPlayerTransform; }
+
+	//PlayerLife *GetPlayerLife(void) { return m_pPlayerLife; }
+
 private:
+
+	EnemyPattern*		m_pEnemyPattern;
 
 	bool				m_bUse;
 
@@ -92,6 +125,14 @@ private:
 	XMVECTOR			m_CompletionPosition;
 
 	XMVECTOR			m_CompletionRot;
+
+	Object::Transform*	m_pPlayerTransform;
+
+	MeshField*			m_pMeshField;
+
+	VECTOR3				m_oldPos;
+
+	int				    m_nTime;
 };
 
 #endif

@@ -145,6 +145,42 @@
     <ClCompile Include="source\scene\fade_scene.cpp">
       <Filter>source\scene</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\camera\camera_pattern_compliance.cpp">
+      <Filter>source\object\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\camera\camera_pattern_lock_on.cpp">
+      <Filter>source\object\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_attack.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_wait.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_walk.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_attack.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\terrain\tree\tree.cpp">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\terrain\tree\tree_manager.cpp">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\terrain\terrain.cpp">
+      <Filter>source\object\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_run.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_search .cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_step.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -303,6 +339,48 @@
     <ClInclude Include="source\scene\fade_scene.h">
       <Filter>source\scene</Filter>
     </ClInclude>
+    <ClInclude Include="source\object\camera\camera_pattern.h">
+      <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\camera\camera_pattern_compliance.h">
+      <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\camera\camera_pattern_lock_on.h">
+      <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_attack.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_wait.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_walk.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_attack.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\terrain\tree\tree.h">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\terrain\tree\tree_manager.h">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\terrain\terrain.h">
+      <Filter>source\object\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_run.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_search .h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_step.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -386,6 +464,12 @@
     <Filter Include="source\object\canvas\logo">
       <UniqueIdentifier>{9f499b41-8e5f-4a99-bc0c-1fdb21867ba4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\object\terrain">
+      <UniqueIdentifier>{614946b0-0faf-45ae-8278-18c806a234db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\terrain\tree">
+      <UniqueIdentifier>{99420fb6-81a1-4b80-b72f-f906ece0b077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">
@@ -436,6 +520,9 @@
       <Filter>resource\shader</Filter>
     </FxCompile>
     <FxCompile Include="resource\shader\outline.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\ModelVertexShader.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -133,6 +133,7 @@ void LightCamera::SetCamera(void)
 
 	XMMATRIX hProjection;	//“§Ž‹ŽË‰e•ÏŠ·s—ñ
 	hProjection = XMMatrixOrthographicLH(7000* 1.414, 7000 * 1.414, m_ner, m_for);
+	//hProjection = XMMatrixPerspectiveFovLH(D3D_PI / 3, (float)2048 / 2048, 5000.0f, 20000);
 
 	XMVECTOR LightPos = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1);
 	m_pConstant->light = LightPos;

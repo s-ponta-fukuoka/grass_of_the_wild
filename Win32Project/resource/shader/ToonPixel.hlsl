@@ -9,6 +9,7 @@ struct pixcelIn
 	float2 tex2 : TEX2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
+	float fogFactor : FOG;
 };
 
 Texture2D txDiffuse : register(t0);
@@ -45,7 +46,12 @@ float4 main(pixcelIn IN) : SV_Target
 	//float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
 	//float shadow = (shadowZ + 0.0001 < IN.Lpos.z) ? 1.0 : 0.5;
 
-	OUT.col = diffuse  * txDiffuse2.Sample(samLinear, float2(bright, 0.0f))/* saturate(shadow)*/;
+	if (diffuse.a <= 0.0)discard;
+
+	float4 fogColor;
+	fogColor = float4(0.5f, 0.5f, 0.6f, 0.1f);
+
+	OUT.col = diffuse  * txDiffuse2.Sample(samLinear, float2(bright, 0.0f)) * IN.fogFactor +(1.0 - IN.fogFactor) * fogColor/* saturate(shadow)*/;
 
 	//OUT.col = saturate(IN.col2) * txDiffuse.Sample(samLinear, IN.tex) * lerp(1, 0.7, shadow);
 

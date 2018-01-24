@@ -32,6 +32,7 @@ public:
 		TYPE_PLAYER,
 		TYPE_PLAYER_ATTACK,
 		TYPE_ENEMY,
+		TYPE_TREE,
 	};
 
 	//transform

@@ -16,6 +16,7 @@
 #include "../../../device/input.h"
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
+#include "../../../shader/shader_manager.h"
 //*****************************************************************************
 // É}ÉNÉçíËã`
 //*****************************************************************************

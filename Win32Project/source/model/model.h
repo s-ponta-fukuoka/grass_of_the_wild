@@ -68,6 +68,7 @@ public:
 	struct Cluster
 	{
 		XMMATRIX**	pMatrix;
+		XMMATRIX	pBlendMatrix;
 	};
 
 	struct Mesh

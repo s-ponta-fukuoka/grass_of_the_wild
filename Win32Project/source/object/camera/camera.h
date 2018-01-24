@@ -17,7 +17,6 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -38,6 +37,18 @@ public:
 
 	//更新
 	void Update(void);
+
+	//注視点設定・取得
+	void SetPositionAt(VECTOR3 posAt) { m_positionAt = posAt; }
+	VECTOR3 GetPositionAt(void) { return m_positionAt; }
+
+	//上方向設定・取得
+	void SetVecUp(VECTOR3 vecUp) { m_vectorUp = vecUp; }
+	VECTOR3 GetVecUp(void) { return m_vectorUp; }
+
+	//方向設定・取得
+	void SetVec(XMVECTOR vec) { m_vector = vec; }
+	XMVECTOR GetVec(void) { return m_vector; }
 
 protected:
 	AppRenderer::Constant*				m_pConstant;

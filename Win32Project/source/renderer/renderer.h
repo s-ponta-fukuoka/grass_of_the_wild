@@ -15,6 +15,7 @@
 #include "../shader/shader.h"
 #include "../texture/texture_manager.h"
 #include "../model/model.h"
+#include "../object/camera/main_camera.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -125,13 +126,16 @@ class GrowMeshRenderer : public Renderer
 public:
 	//コンストラクタ
 	GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
+		ID3D11Buffer* pInstanceBuffer,
 		ID3D11Buffer* pIndexBuffer,
 		ShaderManager* pShaderManager,
 		ID3D11ShaderResourceView* pTexture,
 		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
+		Object::Transform* pPlayerTransform,
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightConstant,
+		MainCamera* pCamera,
 		int	nNumVertexPolygon,
 		D3D_PRIMITIVE_TOPOLOGY ePolygon,
 		VertexShader::VERTEX_TYPE eVsType,
@@ -155,9 +159,17 @@ private:
 
 	int									m_nNumVertexPolygon;
 
+	Object::Transform*					m_pPlayerTransform;
+
+	MainCamera*							m_pCamera;
+
 	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
 
 	ID3D11ShaderResourceView*			m_pShadowMap;
+
+	ID3D11Buffer*						m_pInstanceBuffer;
+
+	float								m_fTime;
 };
 
 //-----------------------------------------------------------------------------

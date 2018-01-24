@@ -59,15 +59,18 @@ void SkinMeshModel::Release(void)
 {
 	for (int i = 0; i < m_nNumMesh; i++)
 	{
-		for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
+		if (m_pMesh[i].pCluster != NULL)
 		{
-			for (int k = 0; k < m_nNumAnime; k++)
+			for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
 			{
-				delete[] m_pMesh[i].pCluster[j].pMatrix[k];
+				for (int k = 0; k < m_nNumAnime; k++)
+				{
+					delete[] m_pMesh[i].pCluster[j].pMatrix[k];
+				}
+				delete[] m_pMesh[i].pCluster[j].pMatrix;
 			}
-			delete[] m_pMesh[i].pCluster[j].pMatrix;
+			delete[]  m_pMesh[i].pCluster;
 		}
-		delete[]  m_pMesh[i].pCluster;
 	}
 	delete[] m_pMesh;
 }
@@ -215,6 +218,8 @@ void SkinMeshModel::LoadFile(const  char* FileName)
 		m_pMesh[i].pColor = new VECTOR4[m_pMesh[i].nNumVertex];
 		m_pMesh[i].pBoneIndex = new VECTOR4[m_pMesh[i].nNumVertex];
 		m_pMesh[i].pWeight = new VECTOR4[m_pMesh[i].nNumVertex];
+		m_pMesh[i].pNormal = new VECTOR3[m_pMesh[i].nNumVertex];
+		m_pMesh[i].pTex = new VECTOR2[m_pMesh[i].nNumVertex];
 		for (int j = 0; j < m_pMesh[i].nNumVertex; j++)
 		{
 			//座標
@@ -223,6 +228,20 @@ void SkinMeshModel::LoadFile(const  char* FileName)
 			fscanf(pFile, "%f", &m_pMesh[i].pPosition[j].y);
 			fscanf(pFile, "%c", &buf);
 			fscanf(pFile, "%f", &m_pMesh[i].pPosition[j].z);
+			fscanf(pFile, "%c", &buf);
+
+			//法線
+			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].x);
+			fscanf(pFile, "%c", &buf);
+			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].y);
+			fscanf(pFile, "%c", &buf);
+			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].z);
+			fscanf(pFile, "%c", &buf);
+
+			//UV
+			fscanf(pFile, "%f", &m_pMesh[i].pTex[j].x);
+			fscanf(pFile, "%c", &buf);
+			fscanf(pFile, "%f", &m_pMesh[i].pTex[j].y);
 			fscanf(pFile, "%c", &buf);
 
 			//色
@@ -258,80 +277,71 @@ void SkinMeshModel::LoadFile(const  char* FileName)
 
 		fscanf(pFile, "%d", &m_pMesh[i].nNumPolygonVertex);//頂点数
 		fscanf(pFile, "%c", &buf);
-		m_pMesh[i].pNormal = new VECTOR3[m_pMesh[i].nNumPolygonVertex];
-		m_pMesh[i].pTex = new VECTOR2[m_pMesh[i].nNumPolygonVertex];
 		m_pMesh[i].pIndexNumber = new int[m_pMesh[i].nNumPolygonVertex];
 		for (int j = 0; j < m_pMesh[i].nNumPolygonVertex; j++)
 		{
-			//法線
-			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].x);
-			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].y);
-			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%f", &m_pMesh[i].pNormal[j].z);
-			fscanf(pFile, "%c", &buf);
-
-			//UV
-			fscanf(pFile, "%f", &m_pMesh[i].pTex[j].x);
-			fscanf(pFile, "%c", &buf);
-			fscanf(pFile, "%f", &m_pMesh[i].pTex[j].y);
-			fscanf(pFile, "%c", &buf);
-
 			//インデックスナンバー
 			fscanf(pFile, "%d", &m_pMesh[i].pIndexNumber[j]);
 			fscanf(pFile, "%c", &buf);
 		}
 
-		fscanf(pFile, "%d", &m_pMesh[i].nNumCluster);//クラスタ数
-		fscanf(pFile, "%c", &buf);
-		m_pMesh[i].pCluster = new Cluster[m_pMesh[i].nNumCluster];
-
-		for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
+		if (m_nNumAnime != 0)
 		{
-			m_pMesh[i].pCluster[j].pMatrix = new  XMMATRIX*[m_nNumAnime];
-			for (int k = 0; k < m_nNumAnime; k++)
+			fscanf(pFile, "%d", &m_pMesh[i].nNumCluster);//クラスタ数
+			fscanf(pFile, "%c", &buf);
+			m_pMesh[i].pCluster = new Cluster[m_pMesh[i].nNumCluster];
+
+			for (int j = 0; j < m_pMesh[i].nNumCluster; j++)
 			{
-				m_pMesh[i].pCluster[j].pMatrix[k] = new XMMATRIX[m_pAnime[k].nEndTime];
-				for (int l = m_pAnime[k].nStartTime; l < m_pAnime[k].nEndTime; l++)
+				m_pMesh[i].pCluster[j].pMatrix = new  XMMATRIX*[m_nNumAnime];
+				for (int k = 0; k < m_nNumAnime; k++)
 				{
-					//クラスター行列
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._11);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._12);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._13);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._14);
-					fscanf(pFile, "%c", &buf);
+					m_pMesh[i].pCluster[j].pMatrix[k] = new XMMATRIX[m_pAnime[k].nEndTime];
+					for (int l = m_pAnime[k].nStartTime; l < m_pAnime[k].nEndTime; l++)
+					{
+						//クラスター行列
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._11);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._12);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._13);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._14);
+						fscanf(pFile, "%c", &buf);
 
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._21);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._22);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._23);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._24);
-					fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._21);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._22);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._23);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._24);
+						fscanf(pFile, "%c", &buf);
 
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._31);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._32);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._33);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._34);
-					fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._31);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._32);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._33);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._34);
+						fscanf(pFile, "%c", &buf);
 
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._41);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._42);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._43);
-					fscanf(pFile, "%c", &buf);
-					fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._44);
-					fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._41);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._42);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._43);
+						fscanf(pFile, "%c", &buf);
+						fscanf(pFile, "%f", &m_pMesh[i].pCluster[j].pMatrix[k][l]._44);
+						fscanf(pFile, "%c", &buf);
+					}
 				}
 			}
+		}
+		else
+		{
+			m_pMesh[i].pCluster = NULL;
 		}
 
 		//変換行列

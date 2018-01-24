@@ -74,7 +74,7 @@ void Texture::CreateTextureResource(void)
 	tex2D.Format = DXGI_FORMAT_R8G8B8A8_TYPELESS;
 	tex2D.SampleDesc.Count = 1;
 	tex2D.SampleDesc.Quality = 0;
-	tex2D.Usage = D3D11_USAGE_DEFAULT;
+	tex2D.Usage = D3D11_USAGE_IMMUTABLE;
 	tex2D.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	tex2D.CPUAccessFlags = 0;
 	tex2D.MiscFlags = 0;

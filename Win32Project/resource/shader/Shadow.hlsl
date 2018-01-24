@@ -15,5 +15,7 @@ SamplerState samLinear : register(s0);
 
 float4 main(pixcelIn IN) : SV_Target
 {
+	if (txDiffuse.Sample(samLinear, IN.tex).a <= 0.0)discard;
+
 	return IN.Spos.z / IN.Spos.w;
 }

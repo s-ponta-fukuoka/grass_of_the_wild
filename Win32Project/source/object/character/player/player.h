@@ -17,7 +17,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define PLAYER_MOVE (50)
+#define PLAYER_MOVE (30)
 
 class ShaderManager;
 class RenderManager;
@@ -28,6 +28,7 @@ class MainCamera;
 class PlayerPattern;
 class PlayerAttack;
 class PlayerLife;
+class MeshField;
 
 //*****************************************************************************
 // クラス定義
@@ -52,7 +53,8 @@ public:
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera* pCamera,
 		CollisionManager* pCollisionManager,
-		PlayerLife* pPlayerLife);
+		PlayerLife* pPlayerLife,
+		MeshField* pMeshFiled);
 
 	//デストラクタ
 	virtual ~Player();
@@ -102,6 +104,8 @@ public:
 
 private:
 
+	MeshField*			m_pMeshField;
+
 	PlayerLife*			m_pPlayerLife;
 
 	VECTOR3				m_oldPos;
@@ -121,6 +125,8 @@ private:
 	PlayerPattern*		m_pPlayerPattern;
 
 	PlayerAttack*		m_pPlayerAttack;
+
+	float					m_nTime;
 };
 
 #endif

@@ -22,6 +22,8 @@
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
 #include "../../canvas/player_life/player_life.h"
+#include "../../../utility/utility.h"
+#include "../../mesh/meshfiled/mesh_field.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -37,14 +39,19 @@ Player::Player(RenderManager* pRenderManager,
 	AppRenderer::Constant* pLightCameraConstant,
 	MainCamera *pCamera,
 	CollisionManager* pCollisionManager,
-	PlayerLife* pPlayerLife)
+	PlayerLife* pPlayerLife,
+	MeshField* pMeshField)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0, 0, 0))
 	, m_pCollider(NULL)
 	, m_pPlayerPattern(new PlayerPatternWait)
 	, m_pPlayerLife(NULL)
+	, m_nTime(0)
+	, m_pMeshField(NULL)
 {
 	m_pTransform = new Transform();
+
+	m_pMeshField = pMeshField;
 
 	m_pPlayerLife = pPlayerLife;
 
@@ -132,6 +139,11 @@ Player::Player(RenderManager* pRenderManager,
 
 	SetObjectType(Object::TYPE_PLAYER);
 
+	m_pTransform->scale = VECTOR3(1,1,1);
+
+	m_pTransform->position.y = 30;
+	m_pTransform->position.z = -2000;
+
 	m_pTransform->rot.y = 0;
 }
 
@@ -173,6 +185,36 @@ void Player::Update(RenderManager* pRenderManager,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	m_pTransform->position.y -= 0.1f;
+
+	m_pTransform->position.y = m_pMeshField->GetHeight(m_pTransform->position);
+
+	if (pInputKeyboard->GetKeyPress(DIK_I))
+	{
+		if (m_nTime < 1)
+		{
+			m_nTime += 0.1f;
+		}
+		else
+		{
+			m_nTime = 1;
+		}
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_K))
+	{
+		if (m_nTime > 0)
+		{
+			m_nTime -= 0.1f;
+		}
+		else
+		{
+			m_nTime = 0;
+		}
+	}
+
 	m_oldPos = m_pTransform->position;
 
 	m_pPlayerPattern->Update(this, 
@@ -182,6 +224,54 @@ void Player::Update(RenderManager* pRenderManager,
 		pConstant,
 		pLightCameraConstant, 
 		pCollisionManager);
+
+	/*
+	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
+
+	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
+	{
+		for (int k = 0; k < pMesh[i].nNumCluster; k++)
+		{
+			VECTOR3 pos1 = VECTOR3(pMesh[i].pCluster[k].pMatrix[0][0]._41,
+				pMesh[i].pCluster[k].pMatrix[0][0]._42, 
+				pMesh[i].pCluster[k].pMatrix[0][0]._43);
+
+			VECTOR3 pos2 = VECTOR3(pMesh[i].pCluster[k].pMatrix[1][121]._41,
+				pMesh[i].pCluster[k].pMatrix[1][121]._42,
+				pMesh[i].pCluster[k].pMatrix[1][121]._43);
+
+			//A*（1 - 影響率）　 + B*影響率
+
+			VECTOR3 outPos =  pos1 * (1 - m_nTime) + pos2 * m_nTime;
+
+			XMMATRIX mtxBone = XMMatrixIdentity();
+			XMMATRIX mtxPos = XMMatrixIdentity();
+			XMMATRIX mtxRot = XMMatrixIdentity();
+			XMMATRIX mtxScl = XMMatrixIdentity();
+
+			mtxPos = XMMatrixTranslation(outPos.x, outPos.y, outPos.z);
+
+			// 始点・終点のクォータニオンを算出
+			XMVECTOR Q, Q1, Q2;
+			Q1 = XMQuaternionRotationMatrix(pMesh[i].pCluster[k].pMatrix[0][0]);
+			Q2 = XMQuaternionRotationMatrix(pMesh[i].pCluster[k].pMatrix[1][121]);
+
+			// クォータニオン間の球面線形補間
+			Q = XMQuaternionSlerp(Q1, Q2, m_nTime);
+
+			// 回転行列に戻す
+			mtxRot = XMMatrixRotationQuaternion(Q);
+
+			mtxScl = XMMatrixScaling(1, 1, 1);
+
+			mtxBone = XMMatrixMultiply(mtxBone, mtxScl);
+			mtxBone = XMMatrixMultiply(mtxBone, mtxRot);
+			mtxBone = XMMatrixMultiply(mtxBone, mtxPos);
+
+			pMesh[i].pCluster[k].pBlendMatrix = mtxBone;
+		}
+	}
+	*/
 
 	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
 	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
@@ -202,6 +292,8 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	for (int j = 0; j < pMesh[nMeshCount].nNumVertex; j++)
 	{
 		vertices[j].position = VECTOR3(pMesh[nMeshCount].pPosition[j].x, pMesh[nMeshCount].pPosition[j].y, pMesh[nMeshCount].pPosition[j].z);
+		vertices[j].normal = VECTOR3(pMesh[nMeshCount].pNormal[j].x, pMesh[nMeshCount].pNormal[j].y, pMesh[nMeshCount].pNormal[j].z);
+		vertices[j].tex = VECTOR2(pMesh[nMeshCount].pTex[j].x, pMesh[nMeshCount].pTex[j].y);
 		vertices[j].color = VECTOR4(pMesh[nMeshCount].pColor[j].x, pMesh[nMeshCount].pColor[j].y, pMesh[nMeshCount].pColor[j].z, pMesh[nMeshCount].pColor[j].w);
 		vertices[j].boneIndex = VECTOR4(pMesh[nMeshCount].pBoneIndex[j].x, pMesh[nMeshCount].pBoneIndex[j].y, pMesh[nMeshCount].pBoneIndex[j].z, pMesh[nMeshCount].pBoneIndex[j].w);
 		vertices[j].weight = VECTOR4(pMesh[nMeshCount].pWeight[j].x, pMesh[nMeshCount].pWeight[j].y, pMesh[nMeshCount].pWeight[j].z, pMesh[nMeshCount].pWeight[j].w);
@@ -211,8 +303,6 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 
 	for (int j = 0; j < pMesh[nMeshCount].nNumPolygonVertex; j++)
 	{
-		vertices[pMesh[nMeshCount].pIndexNumber[j]].normal = VECTOR3(pMesh[nMeshCount].pNormal[j].x, pMesh[nMeshCount].pNormal[j].y, pMesh[nMeshCount].pNormal[j].z);
-		vertices[pMesh[nMeshCount].pIndexNumber[j]].tex = VECTOR2(pMesh[nMeshCount].pTex[j].x, 1 - pMesh[nMeshCount].pTex[j].y);
 		hIndexData[j] = pMesh[nMeshCount].pIndexNumber[j];
 	}
 
@@ -226,7 +316,6 @@ void Player::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	InitData.pSysMem = vertices;
 	if (FAILED(pDevice->CreateBuffer(&bd, &InitData, &m_pVertexBuffer)))
 		return;
-
 
 	//インデックスバッファ作成
 	D3D11_BUFFER_DESC hBufferDesc;

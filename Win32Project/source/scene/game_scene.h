@@ -23,6 +23,7 @@ class InputKeyboard;
 class ModelManager;
 class Player;
 class EnemyManager;
+class TreeManager;
 class CollisionManager;
 class NextScene;
 class PlayerLife;
@@ -64,6 +65,8 @@ private:
 	Player*							m_pPlayer;
 
 	EnemyManager*					m_pEnemyManager;
+
+	TreeManager*					m_pTreeManager;
 
 	CollisionManager*				m_pCollisionManager;
 

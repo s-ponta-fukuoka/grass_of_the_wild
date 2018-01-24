@@ -62,7 +62,7 @@ public:
 	void Update(void);
 
 	//•`‰æ
-	void Draw(void);
+	void Draw(int nCountFPS);
 
 	//ƒV[ƒ““ü‚ê‘Ö‚¦
 	void SceneChange(void);

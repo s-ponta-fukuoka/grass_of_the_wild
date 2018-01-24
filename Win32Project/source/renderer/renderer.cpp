@@ -11,7 +11,7 @@
 #include "../model/model.h"
 #include "../app/app.h"
 #include "../device/input.h"
-
+#include "../object/mesh/grass/grass.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -92,13 +92,16 @@ MeshRenderer::MeshRenderer(ID3D11Buffer* pVertexBuffer,
 }
 
 GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
+	ID3D11Buffer* pInstanceBuffer,
 	ID3D11Buffer* pIndexBuffer,
 	ShaderManager* pShaderManager,
 	ID3D11ShaderResourceView* pTexture,
 	ID3D11ShaderResourceView* pShadowMap,
 	Object::Transform* pTransform,
+	Object::Transform* pPlayerTransform,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightConstant,
+	MainCamera*		pCamera,
 	int	nNumVertexPolygon,
 	D3D_PRIMITIVE_TOPOLOGY ePolygon,
 	VertexShader::VERTEX_TYPE eVsType,
@@ -106,11 +109,17 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	PixelShader::PIXEL_TYPE ePsType,
 	BOOL bBlend)
 {
+	m_pCamera = pCamera;
+
 	m_ePolygon = ePolygon;
+
+	m_pInstanceBuffer = pInstanceBuffer;
 
 	m_pVertexBuffer = pVertexBuffer;
 
 	m_pIndexBuffer = pIndexBuffer;
+
+	m_pPlayerTransform = pPlayerTransform;
 
 	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
 
@@ -133,7 +142,9 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 
 	m_pShadowMap = pShadowMap;
 
-	ConfigConstantBuffer(sizeof(AppRenderer::Constant));
+	m_fTime = 0.0f;
+
+	ConfigConstantBuffer(sizeof(Grass::Constant));
 
 	ConfigSamplerState();
 
@@ -468,96 +479,136 @@ void MeshRenderer::Draw(void)
 
 }
 
+bool buse = false;
+
 void GrowMeshRenderer::Draw(void)
 {
-	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
-	ID3D11Device* pDevice = pAppRenderer->GetDevice();
-	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
-
-	//ブレンディングをコンテキストに設定
-	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
-	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
-
-	//バーテックスバッファーをセット
-	UINT stride = sizeof(AppRenderer::Vertex3D);
-	UINT offset = 0;
-	pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
-
-	//プリミティブ・トポロジーをセット
-	pDeviceContext->IASetPrimitiveTopology(m_ePolygon);
-
-	//頂点インプットレイアウトをセット
-	pDeviceContext->IASetInputLayout(m_pVertexShader->GetVertexLayout());
-
-	AppRenderer::Constant hConstant;
-
-	XMMATRIX hWorld = XMMatrixIdentity();
-	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
-	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(0.0f), D3DToRadian(m_pTransform->rot.y), D3DToRadian(m_pTransform->rot.z));
-	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
-
-	hWorld = XMMatrixMultiply(hWorld, hScaling);
-	hWorld = XMMatrixMultiply(hWorld, hRotate);
-	hWorld = XMMatrixMultiply(hWorld, hPosition);
-
-	XMMATRIX hView = m_pConstant->view;
-	XMMATRIX hProj = m_pConstant->projection;
-
-	hConstant.world = XMMatrixTranspose(hWorld);
-
-	hConstant.view = XMMatrixTranspose(hView);
-
-	hConstant.projection = XMMatrixTranspose(hProj);
-
-	if (m_pLightConstant != NULL)
+	//if (distance < 1000)
 	{
-		XMMATRIX hLightView = m_pLightConstant->view;
-		XMMATRIX hLightProj = m_pLightConstant->projection;
+		//std::vector<Object::Transform> Transform;
+		//
+		//for (int nCnt = 0; nCnt < GRASS_MAX; nCnt++)
+		//{
+		//
+		//	float distance = sqrt((m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) * (m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) +
+		//		(m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) * (m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) +
+		//		(m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z) * (m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z));
+		//
+		//	if (distance <= 1000)
+		//	{
+		//		Transform.push_back(m_pTransform[nCnt]);
+		//	}
+		//}
 
-		hConstant.lightView = XMMatrixTranspose(hLightView);
 
-		hConstant.light = m_pConstant->light;
+		AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+		ID3D11Device* pDevice = pAppRenderer->GetDevice();
+		ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
 
-		XMMATRIX mat = XMMatrixTranspose(hWorld * hLightView * hLightProj);
-		hConstant.lightProjection = mat;
+		pAppRenderer->ConfigRasterizerState(D3D11_FILL_SOLID, D3D11_CULL_NONE);
+
+		//ブレンディングをコンテキストに設定
+		float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+		pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
+
+		//バーテックスバッファーをセット
+		UINT stride = sizeof(XMMATRIX);
+		UINT offset = 0;
+		pDeviceContext->IASetVertexBuffers(1, 1, &m_pInstanceBuffer, &stride, &offset);
+
+		//バーテックスバッファーをセット
+		stride = sizeof(AppRenderer::Vertex3D);
+		offset = 0;
+		pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+		//プリミティブ・トポロジーをセット
+		pDeviceContext->IASetPrimitiveTopology(m_ePolygon);
+
+		//頂点インプットレイアウトをセット
+		pDeviceContext->IASetInputLayout(m_pVertexShader->GetVertexLayout());
+
+		Grass::Constant hConstant;
+
+		XMMATRIX hView = m_pConstant->view;
+		XMMATRIX hProj = m_pConstant->projection;
+
+		hConstant.view = XMMatrixTranspose(hView);
+
+		hConstant.projection = XMMatrixTranspose(hProj);
+
+		//hConstant.posEye.x = m_pCamera->GetTransform()->position.x;
+		//hConstant.posEye.y = m_pCamera->GetTransform()->position.y;
+		//hConstant.posEye.z = m_pCamera->GetTransform()->position.z;
+		//
+		hConstant.posPlayer.x = m_pPlayerTransform->position.x;
+		hConstant.posPlayer.y = m_pPlayerTransform->position.y;
+		hConstant.posPlayer.z = m_pPlayerTransform->position.z;
+
+		if (!buse)
+		{
+			m_fTime += 0.01f;
+			if (m_fTime > 40)
+			{
+				buse = true;
+			}
+		}
+		else if (buse)
+		{
+			m_fTime -= 0.01f;
+			if (m_fTime < -40)
+			{
+				buse = false;
+			}
+		}
+
+		hConstant.time = m_fTime;
+
+		pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
+
+		//コンテキストに設定
+		pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+		//使用するシェーダーの登録
+		pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
+		pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
+
+		if (m_pGeometryShader != NULL)
+		{
+			pDeviceContext->GSSetShader(m_pGeometryShader->GetGeometryShaderr(), NULL, 0);
+		}
+		else
+		{
+			pDeviceContext->GSSetShader(NULL, NULL, 0);
+		}
+
+		// Calculate linear fog.    
+		float fogFactor = (5000 - m_pTransform->position.z) / (5000 - 0);
+
+		//テクスチャーをシェーダーに渡す
+		pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
+		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+
+		if (m_pShadowMap != NULL)
+		{
+			pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+		}
+
+		if (fogFactor != 0)
+		{
+			if (m_pIndexBuffer != NULL)
+			{
+				//そのインデックスバッファをコンテキストに設定
+				pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+				pDeviceContext->DrawIndexed(m_nNumVertexPolygon, 0, 0);
+			}
+			else
+			{
+				pDeviceContext->DrawInstanced(m_nNumVertexPolygon, GRASS_MAX, 0, 0);
+			}
+		}
+
+		pAppRenderer->ConfigRasterizerState(D3D11_FILL_SOLID, D3D11_CULL_BACK);
 	}
 
-	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
-
-	//コンテキストに設定
-	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
-	//使用するシェーダーの登録
-	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
-	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
-
-	if (m_pGeometryShader != NULL)
-	{
-		pDeviceContext->GSSetShader(m_pGeometryShader->GetGeometryShaderr(), NULL, 0);
-	}
-	else
-	{
-		pDeviceContext->GSSetShader(NULL, NULL, 0);
-	}
-
-	//テクスチャーをシェーダーに渡す
-	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
-	pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
-
-	if (m_pShadowMap != NULL)
-	{
-		pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
-	}
-
-	if (m_pIndexBuffer != NULL)
-	{
-		//そのインデックスバッファをコンテキストに設定
-		pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
-		pDeviceContext->DrawIndexed(m_nNumVertexPolygon, 0, 0);
-	}
-	else
-	{
-		pDeviceContext->DrawInstanced(m_nNumVertexPolygon, 10, 0, 0);
-	}
 
 }
 
@@ -596,7 +647,7 @@ void SkinnedMeshRenderer::Draw()
 	XMMATRIX hWorld = XMMatrixIdentity();
 	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
 	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), -m_pTransform->rot.y, D3DToRadian(m_pTransform->rot.z));
-	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
+	XMMATRIX hScaling = XMMatrixScaling(m_pTransform->scale.x, m_pTransform->scale.y, m_pTransform->scale.z);
 
 	hWorld = XMMatrixMultiply(hWorld, hScaling);
 	hWorld = XMMatrixMultiply(hWorld, hRotate);
@@ -634,9 +685,12 @@ void SkinnedMeshRenderer::Draw()
 		hConstant.lightProjection = mat;
 	}
 
-	for (int i = 0; i < m_mesh.nNumCluster; i++)
+	if (m_pCluster != NULL)
 	{
-		hConstant.cluster[i] = m_pCluster[i].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]];
+		for (int i = 0; i < m_mesh.nNumCluster; i++)
+		{
+			hConstant.cluster[i] = m_pCluster[i].pMatrix[m_pAnimeNumber[0]][m_pFrame[0]];
+		}
 	}
 
 	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);

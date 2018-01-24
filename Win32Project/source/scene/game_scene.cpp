@@ -25,6 +25,7 @@
 #include "../gui/imgui_impl_dx11.h"
 #include "../object/mesh/grass/grass.h"
 #include "../object/character/enemy/enemy_manager.h"
+#include "../object/terrain/tree/tree_manager.h"
 #include "../collision/collision_manager.h"
 #include "../scene/next_scene.h"
 #include "../scene/scene.h"
@@ -63,6 +64,7 @@ Game::Game()
 	, m_pCollisionManager(NULL)
 	, m_pPlayerLife(NULL)
 	, m_pPlayer(NULL)
+	, m_pTreeManager(NULL)
 {
 	;
 }
@@ -105,24 +107,26 @@ HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
 
 	m_pCamera = new MainCamera(VECTOR3(0.0f, 100.0f, -500.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f));
 
-	for (int i = 0; i < 100; i++)
-	{
-		m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, i));
-	}
+	MeshField* pMeshField = new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
-	m_pMeshManager->AddMesh(new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant()));
+	m_pMeshManager->AddMesh(pMeshField);
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
-	m_pEnemyManager = new EnemyManager();
-	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
+	m_pTreeManager = new TreeManager();
+	m_pTreeManager->GenerateTree(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
 
 	m_pPlayerLife = new PlayerLife(m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayerLife);
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayerLife, pMeshField);
+
+	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), pMeshField, m_pCamera, VECTOR3(-4000, 0, -4000), m_pPlayer->GetTransform()));
+
+	m_pEnemyManager = new EnemyManager();
+	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayer->GetTransform(),pMeshField);
 
 	m_pCanvasManager->AddCanvas(m_pPlayerLife);
 
-	m_pCamera->Init(m_pPlayer);
+	m_pCamera->Init(m_pPlayer, m_pEnemyManager);
 
 	m_pFade->Init(pNextScene, m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
@@ -177,6 +181,10 @@ void Game::Release(void)
 	delete m_pEnemyManager;
 	m_pEnemyManager = NULL;
 
+	if (m_pTreeManager == NULL) { return; }
+	delete m_pTreeManager;
+	m_pTreeManager = NULL;
+
 	if (m_pCollisionManager == NULL) { return; }
 	delete m_pCollisionManager;
 	m_pCollisionManager = NULL;
@@ -195,7 +203,9 @@ void Game::Update(void)
 
 	m_pPlayer->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
 
-	m_pEnemyManager->Update();
+	m_pTreeManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
+
+	m_pEnemyManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
 
 	m_pCanvasManager->UpdateAll();
 

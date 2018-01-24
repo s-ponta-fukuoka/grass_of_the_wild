@@ -28,6 +28,8 @@
 //*****************************************************************************
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+int g_nCountFPS;
+
 //=============================================================================
 // ƒƒCƒ“ŠÖ”
 //=============================================================================
@@ -112,6 +114,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			dwCurrentTime = timeGetTime();
 			if ((dwCurrentTime - dwFPSLastTime) >= 500)	// 0.5•b‚²‚Æ‚ÉŽÀs
 			{
+				g_nCountFPS = dwFrameCount * 1000 / (dwCurrentTime - dwFPSLastTime);
 				dwFPSLastTime = dwCurrentTime;
 				dwFrameCount = 0;
 			}
@@ -124,7 +127,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				pApp->Update();
 
 				// •`‰æˆ—
-				pApp->Draw();
+				pApp->Draw(g_nCountFPS);
 
 				pApp->SceneChange();
 

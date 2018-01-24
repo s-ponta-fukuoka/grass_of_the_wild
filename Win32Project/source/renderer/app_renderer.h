@@ -113,6 +113,9 @@ public:
 	//ステンシルビュー取得
 	ID3D11DepthStencilView* GetDepthStencilView(void) const;
 
+	//ラスタライザー設定
+	void ConfigRasterizerState(D3D11_FILL_MODE fmode, D3D11_CULL_MODE cmode);
+
 private:
 	//コンストラクタ
 	AppRenderer();
@@ -128,9 +131,6 @@ private:
 
 	//ビューポート設定
 	void ConfigViewPort(void);
-
-	//ラスタライザー設定
-	void ConfigRasterizerState(void);
 
 	static AppRenderer*				m_pAppRenderer;
 

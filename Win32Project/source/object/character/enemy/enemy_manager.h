@@ -13,12 +13,16 @@
 #include <list>
 #include "enemy.h"
 
+class Player;
+
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
 class EnemyManager
 {
 	std::list<Enemy *>		m_list;
+
+	float					m_distance;
 public:
 
 	EnemyManager::EnemyManager();
@@ -30,15 +34,23 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera *pCamera,
-		CollisionManager* pCollisionManager);
+		CollisionManager* pCollisionManager, 
+		Object::Transform* pPlayerTransform,
+		MeshField* pMeshField);
 
 	void EnemyAdd(Enemy* enemy);
 
 	void EnemyDelete(Enemy* enemy);
 
-	void Update(void);
+	void Update(RenderManager* pRenderManager,
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager);
 
 	void Release(void);
+
+	Enemy* GetDistanceEnemy(Player* pPlayer);
 };
 
 #endif

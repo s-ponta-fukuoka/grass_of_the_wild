@@ -63,6 +63,9 @@ ShadowMap::ShadowMap(RenderManager* pRenderManager,
 
 	pRenderManager->SetShadowTexture(m_pTexture);
 
+
+#ifdef _DEBUG
+
 	pRenderManager->AddRenderer(new CanvasRenderer(m_pVertexBuffer,
 		NULL,
 		pShaderManager,
@@ -72,6 +75,8 @@ ShadowMap::ShadowMap(RenderManager* pRenderManager,
 		VertexShader::VS_2D,
 		PixelShader::PS_2D,
 		FALSE));
+
+#endif // DEBUG
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -9,6 +9,7 @@
 // インクルード
 //*****************************************************************************
 #include "player_pattern_walk.h"
+#include "player_pattern_step.h"
 #include "player_pattern_attack.h"
 #include "player_pattern_wait.h"
 #include "player.h"
@@ -71,18 +72,30 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 
 	if (pInputKeyboard->GetKeyPress(DIK_A))
 	{
+		if (pInputKeyboard->GetKeyPress(DIK_LSHIFT))
+		{
+			pAnimeNumber[0] = 12;
+		}
 		move.x += XMVectorGetZ(vector) * PLAYER_MOVE;
 		move.z -= XMVectorGetX(vector) * PLAYER_MOVE;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_S))
 	{
+		if (pInputKeyboard->GetKeyPress(DIK_LSHIFT))
+		{
+			pAnimeNumber[0] = 11;
+		}
 		move.x += XMVectorGetX(vector) * PLAYER_MOVE;
 		move.z += XMVectorGetZ(vector) * PLAYER_MOVE;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_D))
 	{
+		if (pInputKeyboard->GetKeyPress(DIK_LSHIFT))
+		{
+			pAnimeNumber[0] = 11;
+		}
 		move.x -= XMVectorGetZ(vector) * PLAYER_MOVE;
 		move.z += XMVectorGetX(vector) * PLAYER_MOVE;
 	}
@@ -106,6 +119,11 @@ void PlayerPatternWalk::InputOperation(Player* pPlayer)
 	{
 		pAnimeNumber[0] = 2;
 		pPlayer->ChangePlayerPattern(new PlayerPatternAttack);
+	}
+
+	if (pInputKeyboard->GetKeyPress(DIK_LSHIFT))
+	{
+		pPlayer->ChangePlayerPattern(new PlayerPatternStep);
 	}
 
 	//pPlayer->SetMoveVector(move);

@@ -12,6 +12,11 @@
 #include "../../../source/app/app.h"
 #include "../../device/input.h"
 #include "../character/player/player.h"
+#include "camera_pattern.h"
+#include "camera_pattern_compliance.h"
+#include "camera_pattern_lock_on.h"
+#include "../character/enemy/enemy.h"
+#include "../character/enemy/enemy_manager.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -26,6 +31,9 @@
 MainCamera::MainCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp)
 	: m_pPlayer(NULL)
 	, m_move(VECTOR3(0,0,0))
+	, m_pCameraPattern(new CameraPatternCompliance)
+	, m_pEnemy(NULL)
+	, m_pEnemyManager(NULL)
 {
 	m_pTransform->position = position;
 
@@ -45,9 +53,11 @@ MainCamera::~MainCamera()
 ///////////////////////////////////////////////////////////////////////////////
 // 初期化
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT MainCamera::Init(Player *pPlayer)
+HRESULT MainCamera::Init(Player *pPlayer, EnemyManager* pEnemyManager)
 {
 	m_pPlayer = pPlayer;
+	
+	m_pEnemyManager = pEnemyManager;
 
 	Camera::Init();
 	return S_OK;
@@ -58,6 +68,8 @@ HRESULT MainCamera::Init(Player *pPlayer)
 ///////////////////////////////////////////////////////////////////////////////
 void MainCamera::Release(void)
 {
+	delete m_pCameraPattern;
+
 	Camera::Release();
 }
 
@@ -66,69 +78,17 @@ void MainCamera::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void MainCamera::Update(void)
 {
-	Camera::Update();
-
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
-	if (pInputKeyboard->GetKeyPress(DIK_UP))
+	Camera::Update();
+
+	m_pCameraPattern->Update(this);
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_LSHIFT))
 	{
-		m_move.x -= XMVectorGetX(m_vector) * 10;
-		m_move.z -= XMVectorGetZ(m_vector) * 10;
+		m_pEnemy = m_pEnemyManager->GetDistanceEnemy(m_pPlayer);
+		ChangeCameraPattern(new CameraPatternLockOn);
 	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_LEFT))
-	{
-		m_move.x += XMVectorGetZ(m_vector) * 10;
-		m_move.z -= XMVectorGetX(m_vector) * 10;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_DOWN))
-	{
-		m_move.x += XMVectorGetX(m_vector) * 10;
-		m_move.z += XMVectorGetZ(m_vector) * 10;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_RIGHT))
-	{
-		m_move.x -= XMVectorGetZ(m_vector) * 10;
-		m_move.z += XMVectorGetX(m_vector) * 10;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_C))// Sキー押されたら
-	{
-		m_move.x += XMVectorGetZ(m_vector) * 10;
-		m_move.z -= XMVectorGetX(m_vector) * 10;
-
-		//m_pTransform->rot.y += 0.5f;
-	}
-	if (pInputKeyboard->GetKeyPress(DIK_Z))// Sキー押されたら
-	{
-		m_move.x -= XMVectorGetZ(m_vector) * 10;
-		m_move.z += XMVectorGetX(m_vector) * 10;
-
-		//m_pTransform->rot.y -= 0.5f;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_Y))// Sキー押されたら
-	{
-		m_move.y += 5;
-
-		m_pTransform->rot.y += 0.5f;
-	}
-	if (pInputKeyboard->GetKeyPress(DIK_N))// Sキー押されたら
-	{
-		m_move.y -= 5;
-
-		m_pTransform->rot.y -= 0.5f;
-	}
-	m_positionAt.x = m_pPlayer->GetTransform()->position.x;
-	m_positionAt.z = m_pPlayer->GetTransform()->position.z;
-	m_positionAt.y = 100;
-
-	m_pTransform->position.x = m_move.x + (350 * sinf(D3D_PI + m_pTransform->rot.y)) + m_pPlayer->GetTransform()->position.x;
-	m_pTransform->position.z = m_move.z + (500 * cosf(D3D_PI + m_pTransform->rot.y)) + m_pPlayer->GetTransform()->position.z;
-	m_pTransform->position.y = m_move.y + (350 * sinf(D3D_PI + m_pTransform->rot.y)) + 100;
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -182,4 +142,14 @@ const VECTOR3& MainCamera::GetPosAt(void) const
 const XMVECTOR& MainCamera::GetVec(void) const
 {
 	return m_vector;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//カメラステート変更
+///////////////////////////////////////////////////////////////////////////////
+void MainCamera::ChangeCameraPattern(CameraPattern* pCameraPattern)
+{
+	if (pCameraPattern == NULL) { return; }
+	delete m_pCameraPattern;
+	m_pCameraPattern = pCameraPattern;
 }

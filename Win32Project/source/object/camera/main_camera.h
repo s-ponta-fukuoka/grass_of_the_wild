@@ -15,8 +15,10 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-
+class CameraPattern;
 class Player;
+class Enemy;
+class EnemyManager;
 
 //*****************************************************************************
 // クラス定義
@@ -31,7 +33,7 @@ public:
 	virtual ~MainCamera();
 
 	//初期化
-	HRESULT Init(Player* pPlayer);
+	HRESULT Init(Player* pPlayer, EnemyManager* pEnemyManager);
 
 	//終了
 	void Release(void);
@@ -53,8 +55,28 @@ public:
 
 	//カメラベクトル取得
 	const XMVECTOR& GetVec(void) const;
+
+	//カメラステート変更
+	void ChangeCameraPattern(CameraPattern* pCameraPattern);
+
+	//移動量取得・設定
+	void SetMove(VECTOR3 move) { m_move = move; }
+	VECTOR3 GetMove(void) { return m_move; }
+
+	//プレイヤー取得
+	Player* GetPlayer(void) { return m_pPlayer; }
+
+	//エネミー取得
+	Enemy* GetEnemy(void) { return m_pEnemy; }
+
 private:
-	Player*		m_pPlayer;
+	Player*				m_pPlayer;
+
+	Enemy*				m_pEnemy;
+
+	EnemyManager*		m_pEnemyManager;
+
+	CameraPattern*	m_pCameraPattern;
 
 	VECTOR3		m_move;
 };

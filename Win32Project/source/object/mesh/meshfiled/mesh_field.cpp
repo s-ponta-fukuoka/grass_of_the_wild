@@ -139,12 +139,15 @@ void MeshField::MakeVertex(void)
 	int nCnt = 0;
 	int PosCnt = 0;
 	int NrmCnt = 0;
-	int y = 0;
+	float y = 0;
 
 	VECTOR3	 Position[101][101];
 	VECTOR3	 Normal[101][101];
 	VECTOR3 directionX, directionZ;
 	VECTOR3 normalX, normalZ;
+
+	FILE* pFile;
+	pFile = fopen("bin/map/MapData.txt", "r");
 
 	AppRenderer::Vertex3D* vertices = new AppRenderer::Vertex3D[m_nNumVertex];
 	for (int z = 0; z < (m_NumPolygon.z + 1); z++)
@@ -153,7 +156,7 @@ void MeshField::MakeVertex(void)
 		{
 			if (PosCnt != ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)))
 			{
-				y = 0;
+				fscanf(pFile,"%f", &y);
 				vertices[PosCnt].position = VECTOR3(m_vertex.position.x + (m_size.x * x), m_vertex.position.y + y, m_vertex.position.z - (m_size.z * z));
 				m_Polygon[PosCnt] = VECTOR3(m_vertex.position.x + (m_size.x * x), m_vertex.position.y + y, m_vertex.position.z - (m_size.z * z));
 				Position[z][x] = VECTOR3(m_vertex.position.x + (m_size.x * x), m_vertex.position.y + y, m_vertex.position.z - (m_size.z * z));
@@ -161,6 +164,7 @@ void MeshField::MakeVertex(void)
 		}
 	}
 
+	fclose(pFile);
 
 	for (int z = 0; z < (m_NumPolygon.z + 1); z++)
 	{
@@ -180,14 +184,13 @@ void MeshField::MakeVertex(void)
 			normalZ.y = directionX.z;
 			normalZ.z = -directionX.y;
 
-			VECTOR3 normal;
-			normal.x = normalX.x + normalZ.x;
-			normal.y = normalX.y + normalZ.y;
-			normal.z = normalX.z + normalZ.z;
+			XMVECTOR normal;
+			normal = XMVectorSet(normalX.x + normalZ.x, normalX.y + normalZ.y, normalX.z + normalZ.z, 1.0f);
+			normal = XMVector3Normalize(normal);
 
-			XMVector3Normalize((XMVECTOR&)normal);
-
-			Normal[z][x] = normal;
+			Normal[z][x].x = XMVectorGetX(normal);
+			Normal[z][x].y = XMVectorGetY(normal);
+			Normal[z][x].z = XMVectorGetZ(normal);
 		}
 	}
 
@@ -204,7 +207,7 @@ void MeshField::MakeVertex(void)
 
 	for (int nLoop = 0; nLoop < ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)); nLoop++)
 	{
-		vertices[nLoop].color = VECTOR4(1, 1, 1, 1);
+		vertices[nLoop].color = VECTOR4(0.7, 1, 0, 1);
 	}
 
 	for (int nLoop = 0; nLoop < (m_NumPolygon.z + 1); nLoop++)
@@ -351,7 +354,7 @@ float MeshField::GetHeight(VECTOR3 Position)
 		VECTOR3 v02 = p1 - p3;
 		VECTOR3::Cross(&vn, &v32, &v02);
 		VECTOR3::Normalize(&vn, &vn);
-		Position.y = p0.y - ((Position.x - p3.x) * vn.x + (Position.z - p3.z) * vn.z) / vn.y;
+		Position.y = p3.y - ((Position.x - p3.x) * vn.x + (Position.z - p3.z) * vn.z) / vn.y;
 		return Position.y;
 	}
 	return Position.y;

@@ -88,6 +88,8 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 
 	MakeVertex();
 
+#ifdef _DEBUG
+
 	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
 
 	m_pRenderer = new MeshRenderer(m_pVertexBuffer,
@@ -108,11 +110,16 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 	m_pRenderManager = pRenderManager;
 
 	m_pRenderManager->AddRenderer(m_pRenderer);
+
+#endif // DEBUG
 }
 
 SphereCollider::~SphereCollider()
 {
-	m_pRenderManager->DeleteRenderer(m_pRenderer);
+	if (m_pRenderer != NULL)
+	{
+		m_pRenderManager->DeleteRenderer(m_pRenderer);
+	}
 }
 
 void SphereCollider::MakeVertex(void)

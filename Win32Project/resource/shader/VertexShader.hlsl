@@ -17,6 +17,7 @@ struct vertexOut
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
+	float fogFactor : FOG;
 };
 
 //ïœä∑ópçsóÒ
@@ -66,6 +67,15 @@ vertexOut main(vertexIn IN)
 	OUT.col2 = dot(OUT.nrm, L);
 
 	OUT.col2.a = 1.0f;
+	
+	float4 cameraPosition;
+
+	// Calculate the camera position.
+	cameraPosition = mul(IN.pos, World);
+	cameraPosition = mul(cameraPosition, View);
+
+	// Calculate linear fog.    
+	OUT.fogFactor = saturate((5000 - cameraPosition.z) / (5000 - 0));
 
 	return OUT;
 }

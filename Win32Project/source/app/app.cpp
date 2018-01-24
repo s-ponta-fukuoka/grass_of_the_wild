@@ -82,21 +82,22 @@ void App::Release(void)
 	ImGui_ImplDX11_Shutdown();
 
 	m_pScene->Release();
-
-	if (m_pFade == NULL) { return; }
-	m_pFade->Uninit();
-	delete m_pFade;
-	m_pFade = NULL;
-
-	if (m_pInputKeybord == NULL) { return; }
-	m_pInputKeybord->Uninit();
-	delete m_pInputKeybord;
-	m_pInputKeybord = NULL;
-
-	if (m_pAppRenderer == NULL) { return; }
-	m_pAppRenderer->Release();
-	delete[] m_pAppRenderer;
-	m_pAppRenderer = NULL;
+	/*
+	if (m_pFade != NULL) {
+		m_pFade->Uninit();
+		delete m_pFade;
+		m_pFade = NULL;
+	}
+	*/
+	//if (m_pInputKeybord == NULL) { return; }
+	//m_pInputKeybord->Uninit();
+	//delete m_pInputKeybord;
+	//m_pInputKeybord = NULL;
+	//
+	//if (m_pAppRenderer == NULL) { return; }
+	//m_pAppRenderer->Release();
+	//delete[] m_pAppRenderer;
+	//m_pAppRenderer = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -114,7 +115,7 @@ void App::Update(void)
 ///////////////////////////////////////////////////////////////////////////////
 //•`‰æ
 ///////////////////////////////////////////////////////////////////////////////
-void App::Draw(void)
+void App::Draw(int nCountFPS)
 {
 	ImGui_ImplDX11_NewFrame();
 
@@ -122,7 +123,7 @@ void App::Draw(void)
 	// Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug".
 	{
 		static float f = 0.0f;
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Text("fps", &nCountFPS);
 		ImGui::SliderFloat("float", &f, 0.0f, 100.0f);
 		ImGui::ColorEdit3("clear color", (float*)&clear_color);
 		if (ImGui::Button("Test Window")) show_test_window ^= 1;

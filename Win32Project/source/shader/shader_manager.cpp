@@ -31,6 +31,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new VertexShader("bin/shader/Vertex3DShader.cso", VertexShader::VS_3D, this);
 	new VertexShader("bin/shader/ToonShader.cso", VertexShader::VS_TOON, this);
 	new VertexShader("bin/shader/VertexGrass.cso", VertexShader::VS_GRASS, this);
+	new VertexShader("bin/shader/ModelVertexShader.cso", VertexShader::VS_MODEL, this);
 
 	new PixelShader("bin/shader/PixelShader.cso", PixelShader::PS_NORMAL, this);
 	new PixelShader("bin/shader/NormalPShader.cso", PixelShader::PS_2D, this);

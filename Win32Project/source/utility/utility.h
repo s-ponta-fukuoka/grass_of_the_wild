@@ -51,6 +51,15 @@ public:
 		return nReverse;
 	};
 
+	static float Distance(VECTOR3 pos1, VECTOR3 pos2)
+	{
+		float distance = sqrt((pos1.x - pos2.x) * (pos1.x - pos2.x) +
+			(pos1.y - pos2.y) * (pos1.y - pos2.y) +
+			(pos1.z - pos2.z) * (pos1.z - pos2.z));
+
+		return distance;
+	}
+
 protected:
 	const char* m_pFileName;
 };

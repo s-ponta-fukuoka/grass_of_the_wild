@@ -32,6 +32,8 @@
     <ClCompile Include="source\model\model.cpp" />
     <ClCompile Include="source\model\model_manager.cpp" />
     <ClCompile Include="source\object\camera\camera.cpp" />
+    <ClCompile Include="source\object\camera\camera_pattern_compliance.cpp" />
+    <ClCompile Include="source\object\camera\camera_pattern_lock_on.cpp" />
     <ClCompile Include="source\object\camera\light_camera.cpp" />
     <ClCompile Include="source\object\camera\main_camera.cpp" />
     <ClCompile Include="source\object\canvas\canvas.cpp" />
@@ -41,10 +43,17 @@
     <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_attack.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_manager.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_attack.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_run.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_wait.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_walk.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_search .cpp" />
     <ClCompile Include="source\object\character\player\player.cpp" />
     <ClCompile Include="source\object\character\player\player_attack.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_attack.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_step.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_wait.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_walk.cpp" />
     <ClCompile Include="source\object\character\player\player_attack.h" />
@@ -54,6 +63,9 @@
     <ClCompile Include="source\object\mesh\mesh_manager.cpp" />
     <ClCompile Include="source\object\mesh\skybox\skybox.cpp" />
     <ClCompile Include="source\object\object.cpp" />
+    <ClCompile Include="source\object\terrain\terrain.cpp" />
+    <ClCompile Include="source\object\terrain\tree\tree.cpp" />
+    <ClCompile Include="source\object\terrain\tree\tree_manager.cpp" />
     <ClCompile Include="source\renderer\app_renderer.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\renderer\render_manager.cpp" />
@@ -84,6 +96,9 @@
     <ClInclude Include="source\model\model.h" />
     <ClInclude Include="source\model\model_manager.h" />
     <ClInclude Include="source\object\camera\camera.h" />
+    <ClInclude Include="source\object\camera\camera_pattern.h" />
+    <ClInclude Include="source\object\camera\camera_pattern_compliance.h" />
+    <ClInclude Include="source\object\camera\camera_pattern_lock_on.h" />
     <ClInclude Include="source\object\camera\light_camera.h" />
     <ClInclude Include="source\object\camera\main_camera.h" />
     <ClInclude Include="source\object\canvas\canvas.h" />
@@ -93,10 +108,18 @@
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
     <ClInclude Include="source\object\character\enemy\enemy.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_attack.h" />
     <ClInclude Include="source\object\character\enemy\enemy_manager.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_attack.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_run.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_wait.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_walk.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_search .h" />
     <ClInclude Include="source\object\character\player\player.h" />
     <ClInclude Include="source\object\character\player\player_pattern.h" />
     <ClInclude Include="source\object\character\player\player_pattern_attack.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_step.h" />
     <ClInclude Include="source\object\character\player\player_pattern_wait.h" />
     <ClInclude Include="source\object\character\player\player_pattern_walk.h" />
     <ClInclude Include="source\object\mesh\grass\grass.h" />
@@ -105,6 +128,9 @@
     <ClInclude Include="source\object\mesh\mesh_manager.h" />
     <ClInclude Include="source\object\mesh\skybox\skybox.h" />
     <ClInclude Include="source\object\object.h" />
+    <ClInclude Include="source\object\terrain\terrain.h" />
+    <ClInclude Include="source\object\terrain\tree\tree.h" />
+    <ClInclude Include="source\object\terrain\tree\tree_manager.h" />
     <ClInclude Include="source\renderer\app_renderer.h" />
     <ClInclude Include="source\renderer\renderer.h" />
     <ClInclude Include="source\renderer\render_manager.h" />
@@ -139,6 +165,10 @@
     <FxCompile Include="resource\shader\matPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\ModelVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="resource\shader\NormalPShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>

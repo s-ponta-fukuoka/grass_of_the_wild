@@ -104,7 +104,7 @@ HRESULT Title::Init(NextScene* pNextScene, Fade* pFade)
 
 	m_pCanvasManager->AddCanvas(new Logo(m_pRenderManager, m_pShaderManager, m_pTextureManager));
 
-	m_pCamera->Init(m_pPlayer);
+	m_pCamera->Init(m_pPlayer, NULL);
 
 	m_pFade->Init(pNextScene, m_pRenderManager, m_pShaderManager, m_pTextureManager);
 

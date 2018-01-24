@@ -17,6 +17,8 @@
 // [構成プロパティ]->[リンカー]->[入力]->[追加の依存ファイル]に記述しても可能
 //*****************************************************************************
 
+#define GRASS_MAX (100000)
+
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -24,6 +26,7 @@ class ShaderManager;
 class RenderManager;
 class TextureManager;
 class MainCamera;
+class MeshField;
 
 //*****************************************************************************
 // クラス定義
@@ -34,16 +37,22 @@ public:
 	//定数
 	struct Constant
 	{
-		XMMATRIX world[100];
 		XMMATRIX view;
 		XMMATRIX projection;
+		//XMFLOAT3 posEye;
+		float time;
+		XMFLOAT3 posPlayer;
 	};
 
 	Grass( RenderManager* pRenderManager,
-				ShaderManager* pShaderManager,
-				TextureManager* pTextureManager,
-				AppRenderer::Constant* pConstant,
-				AppRenderer::Constant* pLightCameraConstant, MainCamera *pCamera, int cnt);			//コンストラクタ
+		ShaderManager* pShaderManager,
+		TextureManager* pTextureManager,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightCameraConstant, 
+		MeshField* pMeshField,
+		MainCamera *pCamera, 
+		VECTOR3 pos,
+		Object::Transform* pPlayerTransform);			//コンストラクタ
 
 	~Grass( );			//デストラクタ
 
@@ -58,6 +67,8 @@ public:
 private:
 	MainCamera* m_pCamera;
 	VECTOR3 m_size;
+	MeshField* m_pMeshField;
+	ID3D11Buffer* m_pInstanceBuffer;
 };
 
 #endif

@@ -71,7 +71,7 @@ HRESULT AppRenderer::Init(HWND hWnd)
 
 	ConfigViewPort();
 
-	ConfigRasterizerState();
+	ConfigRasterizerState(D3D11_FILL_SOLID, D3D11_CULL_BACK);
 
 	return S_OK;
 }
@@ -166,6 +166,7 @@ void AppRenderer::ConfigDeviceAndSwapChain(const HWND hWnd)
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
 	sd.Windowed = TRUE;
+	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	D3D_FEATURE_LEVEL  FeatureLevel = D3D_FEATURE_LEVEL_11_0;
 
@@ -191,7 +192,7 @@ void AppRenderer::ConfigDepthStencilView(const DXGI_SWAP_CHAIN_DESC sd)
 	hTexture2dDesc.Height = SCREEN_WIDTH;
 	hTexture2dDesc.MipLevels = 1;
 	hTexture2dDesc.ArraySize = 1;
-	hTexture2dDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	hTexture2dDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	hTexture2dDesc.SampleDesc = sd.SampleDesc;
 	hTexture2dDesc.Usage = D3D11_USAGE_DEFAULT;
 	hTexture2dDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
@@ -238,12 +239,12 @@ void AppRenderer::ConfigViewPort(void)
 ///////////////////////////////////////////////////////////////////////////////
 //ラスタライザー設定
 ///////////////////////////////////////////////////////////////////////////////
-void AppRenderer::ConfigRasterizerState(void)
+void AppRenderer::ConfigRasterizerState(D3D11_FILL_MODE fmode, D3D11_CULL_MODE cmode)
 {
 	D3D11_RASTERIZER_DESC rs;
 	ZeroMemory(&rs, sizeof(rs));
-	rs.FillMode = D3D11_FILL_SOLID;
-	rs.CullMode = D3D11_CULL_BACK;
+	rs.FillMode = fmode;
+	rs.CullMode = cmode;
 	rs.FrontCounterClockwise = FALSE;
 	rs.DepthBias = 0;
 	rs.SlopeScaledDepthBias = 0.f;

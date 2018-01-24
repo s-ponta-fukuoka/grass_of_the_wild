@@ -18,6 +18,7 @@
 #include "../../../device/input.h"
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
+#include "../../../shader/shader_manager.h"
 #include "player_attack.h"
 
 
@@ -49,12 +50,10 @@ void PlayerPatternAttack::Update(Player* pPlayer,
 {
 	if (m_pPlayerAttack == NULL)
 	{
-		m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+		//m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
 	}
-	else
-	{
-		m_pPlayerAttack->Update();
-	}
+	
+	m_pPlayerAttack->Update();
 
 	InputOperation(pPlayer);
 
