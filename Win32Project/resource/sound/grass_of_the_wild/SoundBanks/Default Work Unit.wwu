@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{41629100-8757-4039-BDEE-87DE22C99085}" SchemaVersion="80">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{41629100-8757-4039-BDEE-87DE22C99085}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Main" ID="{CF2DF5D8-5B6D-4BCB-8845-B19771C1BEB9}">
+					<ObjectInclusionList>
+						<ObjectRef Name="TITLE" ID="{0436F897-F1D3-40D5-9169-8704C4FE6936}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="ATTACK" ID="{EF38CDE1-7DD0-440E-A97A-C088616B90C8}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="HIT" ID="{AE402C17-6CB3-44AB-ADBA-54D6BE9B49EE}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="GAME_OVER" ID="{C442AE1F-B81B-4629-98FB-18AF2B1C7759}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="WALK" ID="{10CB56BB-CDCF-47A9-919F-5B8F039BDCB8}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="GAME" ID="{11C7E364-2814-4D60-8F1C-B64B90C937FF}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="GAME_CLEAR" ID="{EA9CC2B7-9830-4E1C-9F5D-E33526D6E425}" WorkUnitID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

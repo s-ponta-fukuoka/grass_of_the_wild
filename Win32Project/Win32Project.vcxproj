@@ -23,6 +23,8 @@
     <ClCompile Include="source\collision\collider.cpp" />
     <ClCompile Include="source\collision\collision_manager.cpp" />
     <ClCompile Include="source\device\input.cpp" />
+    <ClCompile Include="source\device\xbox_controller.cpp" />
+    <ClCompile Include="source\effect\effect_manager.cpp" />
     <ClCompile Include="source\gui\imgui.cpp" />
     <ClCompile Include="source\gui\imgui_demo.cpp" />
     <ClCompile Include="source\gui\imgui_draw.cpp" />
@@ -34,25 +36,39 @@
     <ClCompile Include="source\object\camera\camera.cpp" />
     <ClCompile Include="source\object\camera\camera_pattern_compliance.cpp" />
     <ClCompile Include="source\object\camera\camera_pattern_lock_on.cpp" />
+    <ClCompile Include="source\object\camera\camera_pattern_title.cpp" />
     <ClCompile Include="source\object\camera\light_camera.cpp" />
     <ClCompile Include="source\object\camera\main_camera.cpp" />
     <ClCompile Include="source\object\canvas\canvas.cpp" />
     <ClCompile Include="source\object\canvas\canvas_manager.cpp" />
+    <ClCompile Include="source\object\canvas\cursor\cursor.cpp" />
+    <ClCompile Include="source\object\canvas\game_clear\game_clear.cpp" />
+    <ClCompile Include="source\object\canvas\game_over\game_over.cpp" />
     <ClCompile Include="source\object\canvas\logo\logo.cpp" />
+    <ClCompile Include="source\object\canvas\operation\operation.cpp" />
+    <ClCompile Include="source\object\canvas\pause_menu\pause_menu.cpp" />
     <ClCompile Include="source\object\canvas\player_life\player_life.cpp" />
+    <ClCompile Include="source\object\canvas\press_start\press_start.cpp" />
     <ClCompile Include="source\object\canvas\shadow_map\shadow_map.cpp" />
     <ClCompile Include="source\object\character\character.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_attack.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_life.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_manager.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_pattern_attack.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_deth.cpp" />
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_hit.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_pattern_run.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_pattern_wait.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_pattern_walk.cpp" />
     <ClCompile Include="source\object\character\enemy\enemy_search .cpp" />
     <ClCompile Include="source\object\character\player\player.cpp" />
     <ClCompile Include="source\object\character\player\player_attack.cpp" />
+    <ClCompile Include="source\object\character\player\player_attack_jump.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_attack.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_avoid.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_deth.cpp" />
+    <ClCompile Include="source\object\character\player\player_pattern_attack_jump.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_step.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_wait.cpp" />
     <ClCompile Include="source\object\character\player\player_pattern_walk.cpp" />
@@ -65,26 +81,40 @@
     <ClCompile Include="source\object\object.cpp" />
     <ClCompile Include="source\object\terrain\terrain.cpp" />
     <ClCompile Include="source\object\terrain\tree\tree.cpp" />
+    <ClCompile Include="source\object\terrain\tree\tree_collider.cpp" />
     <ClCompile Include="source\object\terrain\tree\tree_manager.cpp" />
     <ClCompile Include="source\renderer\app_renderer.cpp" />
+    <ClCompile Include="source\renderer\deferred _renderer.cpp" />
     <ClCompile Include="source\renderer\renderer.cpp" />
     <ClCompile Include="source\renderer\render_manager.cpp" />
     <ClCompile Include="source\scene\fade_scene.cpp" />
+    <ClCompile Include="source\scene\game_clear_scene.cpp" />
     <ClCompile Include="source\scene\game_scene.cpp" />
     <ClCompile Include="source\scene\next_scene.cpp" />
-    <ClCompile Include="source\scene\result_scene.cpp" />
+    <ClCompile Include="source\scene\game_over_scene.cpp" />
+    <ClCompile Include="source\scene\pause_scene.cpp" />
     <ClCompile Include="source\scene\title_scene.cpp" />
     <ClCompile Include="source\scene\tutorial_scene.cpp" />
     <ClCompile Include="source\shader\shader.cpp" />
     <ClCompile Include="source\shader\shader_manager.cpp" />
     <ClCompile Include="source\texture\texture.cpp" />
     <ClCompile Include="source\texture\texture_manager.cpp" />
+    <ClCompile Include="source\wwise\Wwise.cpp" />
+    <ClCompile Include="source\Wwise_Common\AkDefaultLowLevelIODispatcher.cpp" />
+    <ClCompile Include="source\Wwise_Common\AkFileLocationBase.cpp" />
+    <ClCompile Include="source\Wwise_Common\AkFilePackage.cpp" />
+    <ClCompile Include="source\Wwise_Common\AkFilePackageLUT.cpp" />
+    <ClCompile Include="source\Wwise_Win32\AkDefaultIOHookBlocking.cpp" />
+    <ClCompile Include="source\Wwise_Win32\AkDefaultIOHookDeferred.cpp" />
+    <ClCompile Include="source\Wwise_Win32\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h" />
     <ClInclude Include="source\collision\collider.h" />
     <ClInclude Include="source\collision\collision_manager.h" />
     <ClInclude Include="source\device\input.h" />
+    <ClInclude Include="source\device\xbox_controller.h" />
+    <ClInclude Include="source\effect\effect_manager.h" />
     <ClInclude Include="source\gui\imconfig.h" />
     <ClInclude Include="source\gui\imgui.h" />
     <ClInclude Include="source\gui\imgui_impl_dx11.h" />
@@ -99,26 +129,40 @@
     <ClInclude Include="source\object\camera\camera_pattern.h" />
     <ClInclude Include="source\object\camera\camera_pattern_compliance.h" />
     <ClInclude Include="source\object\camera\camera_pattern_lock_on.h" />
+    <ClInclude Include="source\object\camera\camera_pattern_title.h" />
     <ClInclude Include="source\object\camera\light_camera.h" />
     <ClInclude Include="source\object\camera\main_camera.h" />
     <ClInclude Include="source\object\canvas\canvas.h" />
     <ClInclude Include="source\object\canvas\canvas_manager.h" />
+    <ClInclude Include="source\object\canvas\cursor\cursor.h" />
+    <ClInclude Include="source\object\canvas\game_clear\game_clear.h" />
+    <ClInclude Include="source\object\canvas\game_over\game_over.h" />
     <ClInclude Include="source\object\canvas\logo\logo.h" />
+    <ClInclude Include="source\object\canvas\operation\operation.h" />
+    <ClInclude Include="source\object\canvas\pause_menu\pause_menu.h" />
     <ClInclude Include="source\object\canvas\player_life\player_life.h" />
+    <ClInclude Include="source\object\canvas\press_start\press_start.h" />
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h" />
     <ClInclude Include="source\object\character\character.h" />
     <ClInclude Include="source\object\character\enemy\enemy.h" />
     <ClInclude Include="source\object\character\enemy\enemy_attack.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_life.h" />
     <ClInclude Include="source\object\character\enemy\enemy_manager.h" />
     <ClInclude Include="source\object\character\enemy\enemy_pattern.h" />
     <ClInclude Include="source\object\character\enemy\enemy_pattern_attack.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_deth.h" />
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_hit.h" />
     <ClInclude Include="source\object\character\enemy\enemy_pattern_run.h" />
     <ClInclude Include="source\object\character\enemy\enemy_pattern_wait.h" />
     <ClInclude Include="source\object\character\enemy\enemy_pattern_walk.h" />
     <ClInclude Include="source\object\character\enemy\enemy_search .h" />
     <ClInclude Include="source\object\character\player\player.h" />
+    <ClInclude Include="source\object\character\player\player_attack_jump.h" />
     <ClInclude Include="source\object\character\player\player_pattern.h" />
     <ClInclude Include="source\object\character\player\player_pattern_attack.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_avoid.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_deth.h" />
+    <ClInclude Include="source\object\character\player\player_pattern_attack_jump.h" />
     <ClInclude Include="source\object\character\player\player_pattern_step.h" />
     <ClInclude Include="source\object\character\player\player_pattern_wait.h" />
     <ClInclude Include="source\object\character\player\player_pattern_walk.h" />
@@ -130,14 +174,18 @@
     <ClInclude Include="source\object\object.h" />
     <ClInclude Include="source\object\terrain\terrain.h" />
     <ClInclude Include="source\object\terrain\tree\tree.h" />
+    <ClInclude Include="source\object\terrain\tree\tree_collider.h" />
     <ClInclude Include="source\object\terrain\tree\tree_manager.h" />
     <ClInclude Include="source\renderer\app_renderer.h" />
+    <ClInclude Include="source\renderer\deferred _renderer.h" />
     <ClInclude Include="source\renderer\renderer.h" />
     <ClInclude Include="source\renderer\render_manager.h" />
     <ClInclude Include="source\scene\fade_scene.h" />
+    <ClInclude Include="source\scene\game_clear_scene.h" />
     <ClInclude Include="source\scene\game_scene.h" />
     <ClInclude Include="source\scene\next_scene.h" />
-    <ClInclude Include="source\scene\result_scene.h" />
+    <ClInclude Include="source\scene\game_over_scene.h" />
+    <ClInclude Include="source\scene\pause_scene.h" />
     <ClInclude Include="source\scene\scene.h" />
     <ClInclude Include="source\scene\title_scene.h" />
     <ClInclude Include="source\scene\tutorial_scene.h" />
@@ -147,6 +195,20 @@
     <ClInclude Include="source\texture\texture.h" />
     <ClInclude Include="source\texture\texture_manager.h" />
     <ClInclude Include="source\utility\utility.h" />
+    <ClInclude Include="source\wwise\Wwise.h" />
+    <ClInclude Include="source\wwise\Wwise_IDs.h" />
+    <ClInclude Include="source\Wwise_Common\AkDefaultLowLevelIODispatcher.h" />
+    <ClInclude Include="source\Wwise_Common\AkFileLocationBase.h" />
+    <ClInclude Include="source\Wwise_Common\AkFilePackage.h" />
+    <ClInclude Include="source\Wwise_Common\AkFilePackageLowLevelIO.h" />
+    <ClInclude Include="source\Wwise_Common\AkFilePackageLUT.h" />
+    <ClInclude Include="source\Wwise_Common\AkMultipleFileLocation.h" />
+    <ClInclude Include="source\Wwise_Win32\AkDefaultIOHookBlocking.h" />
+    <ClInclude Include="source\Wwise_Win32\AkDefaultIOHookDeferred.h" />
+    <ClInclude Include="source\Wwise_Win32\AkFileHelpers.h" />
+    <ClInclude Include="source\Wwise_Win32\AkFilePackageLowLevelIOBlocking.h" />
+    <ClInclude Include="source\Wwise_Win32\AkFilePackageLowLevelIODeferred.h" />
+    <ClInclude Include="source\Wwise_Win32\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
@@ -161,6 +223,26 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="resource\shader\bureHPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\bureVPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\DeferredPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="resource\shader\DeferredVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="resource\shader\matPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -177,16 +259,6 @@
     <FxCompile Include="resource\shader\NormalVShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-    </FxCompile>
-    <FxCompile Include="resource\shader\outline.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="resource\shader\Pixel3DShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -230,6 +302,10 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source\Wwise_Common\AkFilePackageLowLevelIO.inl" />
+    <None Include="source\Wwise_Common\AkMultipleFileLocation.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -285,8 +361,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Effekseer\include;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Effekseer\lib\VS2017\Debug;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\Win32_vc150\Debug%28StaticCRT%29\lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\include;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\lib\VS2015\Debug;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\Win32_vc150\Debug%28StaticCRT%29\lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -294,8 +370,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)</OutDir>
-    <IncludePath>C:\Program Files %28x86%29\Effekseer\include;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Effekseer\lib\VS2017\Release;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\Win32_vc150\Release%28StaticCRT%29\lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\include;C:\Program Files %28x86%29\Effekseer\include;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\lib\VS2015\Release;C:\Program Files %28x86%29\Audiokinetic\Wwise 2017.1.1.6340\SDK\Win32_vc150\Release%28StaticCRT%29\lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -313,7 +389,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2016.1.2\lib\vs2015\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libfbxsdk-mt.lib;AkSoundEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libfbxsdk-mt.lib;AkSoundEngine.lib;AkMemoryMgr.lib;AkStreamMgr.lib;AkMusicEngine.lib;CommunicationCentral.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>

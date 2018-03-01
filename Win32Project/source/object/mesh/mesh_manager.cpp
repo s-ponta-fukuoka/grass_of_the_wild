@@ -70,6 +70,10 @@ void MeshManager::ReleaseAll(void)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
 	}
+
+	m_list.clear();
 }
 

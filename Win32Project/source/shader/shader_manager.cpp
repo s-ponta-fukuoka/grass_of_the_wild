@@ -32,6 +32,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new VertexShader("bin/shader/ToonShader.cso", VertexShader::VS_TOON, this);
 	new VertexShader("bin/shader/VertexGrass.cso", VertexShader::VS_GRASS, this);
 	new VertexShader("bin/shader/ModelVertexShader.cso", VertexShader::VS_MODEL, this);
+	new VertexShader("bin/shader/DeferredVS.cso", VertexShader::VS_DEFERRED, this);
 
 	new PixelShader("bin/shader/PixelShader.cso", PixelShader::PS_NORMAL, this);
 	new PixelShader("bin/shader/NormalPShader.cso", PixelShader::PS_2D, this);
@@ -40,6 +41,7 @@ HRESULT ShaderManager::GenerateShader(void)
 	new PixelShader("bin/shader/Shadow.cso", PixelShader::PS_SHADOW, this);
 	new PixelShader("bin/shader/matPixelShader.cso", PixelShader::PS_MAT, this);
 	new PixelShader("bin/shader/PixelGrass.cso", PixelShader::PS_GRASS, this);
+	new PixelShader("bin/shader/DeferredPS.cso", PixelShader::PS_DEFERRED, this);
 
 	new GeometryShader("bin/shader/GeometryGrass.cso", GeometryShader::GS_GRASS, this);
 	new GeometryShader("bin/shader/outline.cso", GeometryShader::GS_OUTLINE, this);
@@ -108,6 +110,8 @@ void ShaderManager::ReleaseVS(void)
 		if (*ite == NULL) { continue; }
 		m_VSlist.erase(ite);
 	}
+
+	m_VSlist.clear();
 }
 
 void ShaderManager::ReleasePS(void)
@@ -117,6 +121,8 @@ void ShaderManager::ReleasePS(void)
 		if (*ite == NULL) { continue; }
 		m_PSlist.erase(ite);
 	}
+
+	m_PSlist.clear();
 }
 
 void ShaderManager::ReleaseGS(void)
@@ -126,6 +132,8 @@ void ShaderManager::ReleaseGS(void)
 		if (*ite == NULL) { continue; }
 		m_GSlist.erase(ite);
 	}
+
+	m_GSlist.clear();
 }
 
 void ShaderManager::ReleaseAll(void)

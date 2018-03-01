@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// îªíËèàóù [collider.h]
+// collider.h
 // Author : SHOTA FUKUOKA
 //
 //=============================================================================
@@ -8,6 +8,7 @@
 #define _COLLIDER_H_
 
 #include "../renderer/app_renderer.h"
+
 
 class Object;
 class CollisionManager;
@@ -35,7 +36,7 @@ public:
 
 	virtual void MakeVertex(void) {};
 
-	void SetColliderDelete(bool bDelete) { m_bDelete = bDelete; };
+ 	void SetColliderDelete(bool bDelete) { m_bDelete = bDelete; };
 	bool isColliderDelete(void) { return m_bDelete; };
 
 	void RendererDelete(void);

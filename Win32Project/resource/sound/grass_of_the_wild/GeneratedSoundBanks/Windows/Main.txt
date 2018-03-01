@@ -1,0 +1,18 @@
+Event	ID	Name			Wwise Object Path	Notes
+	180661997	ATTACK			\Default Work Unit\ATTACK	
+	702482391	GAME			\Default Work Unit\GAME	
+	1116398592	HIT			\Default Work Unit\HIT	
+	1432716332	GAME_OVER			\Default Work Unit\GAME_OVER	
+	2108779966	WALK			\Default Work Unit\WALK	
+	2825307669	GAME_CLEAR			\Default Work Unit\GAME_CLEAR	
+	3705726509	TITLE			\Default Work Unit\TITLE	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	55267758	game_clear	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\clear_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\game_clear		3999808
+	237904017	attack	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\attack_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\attack		72032
+	288458330	title	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\title_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\title		11994688
+	637244378	hit	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\enemy_hit_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\hit		211776
+	640822465	game	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\game_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\game		30117952
+	849798269	walk	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\walk_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\walk		405568
+	865641520	game_over	C:\Users\60120\Desktop\grass_of_the_wild\Win32Project\resource\sound\grass_of_the_wild\.cache\Windows\SFX\game_over_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\game_over		1419328
+

@@ -86,6 +86,7 @@ void VertexShader::CreateVertexShader(TCHAR* csoName)
 		break;
 	}
 	case VS_GRASS:
+	case VS_MODEL:
 	{
 		D3D11_INPUT_ELEMENT_DESC layout[] = {
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -105,6 +106,7 @@ void VertexShader::CreateVertexShader(TCHAR* csoName)
 		break;
 	}
 	case VS_2D:
+	case VS_DEFERRED:
 	{
 		D3D11_INPUT_ELEMENT_DESC layout[] = {
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -119,7 +121,6 @@ void VertexShader::CreateVertexShader(TCHAR* csoName)
 		break;
 	}
 	case VS_TOON:
-	case VS_MODEL:
 	{
 		D3D11_INPUT_ELEMENT_DESC layout[] = {
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },

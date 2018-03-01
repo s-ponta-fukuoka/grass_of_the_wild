@@ -35,6 +35,7 @@ public:
 		VS_TOON,
 		VS_GRASS,
 		VS_MODEL,
+		VS_DEFERRED,
 		VS_MAX
 	}VERTEX_TYPE;
 
@@ -64,6 +65,7 @@ public:
 		PS_SHADOW,
 		PS_TOON,
 		PS_GRASS,
+		PS_DEFERRED,
 		PS_MAX
 	}PIXEL_TYPE;
 

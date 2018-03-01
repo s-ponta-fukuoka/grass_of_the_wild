@@ -103,12 +103,6 @@
     <ClCompile Include="source\collision\collider.cpp">
       <Filter>source\collision</Filter>
     </ClCompile>
-    <ClCompile Include="source\collision\collision_manager.cpp">
-      <Filter>source\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="source\scene\result_scene.cpp">
-      <Filter>source\scene</Filter>
-    </ClCompile>
     <ClCompile Include="source\scene\title_scene.cpp">
       <Filter>source\scene</Filter>
     </ClCompile>
@@ -181,6 +175,96 @@
     <ClCompile Include="source\object\character\player\player_pattern_step.cpp">
       <Filter>source\object\character\player</Filter>
     </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_avoid.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\deferred _renderer.cpp">
+      <Filter>source\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_life.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\effect\effect_manager.cpp">
+      <Filter>source\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_hit.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\enemy\enemy_pattern_deth.cpp">
+      <Filter>source\object\character\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\camera\camera_pattern_title.cpp">
+      <Filter>source\object\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\press_start\press_start.cpp">
+      <Filter>source\object\canvas\press_start</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\terrain\tree\tree_collider.cpp">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_deth.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\game_over\game_over.cpp">
+      <Filter>source\object\canvas\game_over</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scene\game_over_scene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scene\game_clear_scene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\game_clear\game_clear.cpp">
+      <Filter>source\object\canvas\game_clear</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_attack_jump.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\character\player\player_pattern_attack_jump.cpp">
+      <Filter>source\object\character\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Common\AkFileLocationBase.cpp">
+      <Filter>source\Wwise_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Common\AkFilePackage.cpp">
+      <Filter>source\Wwise_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Common\AkFilePackageLUT.cpp">
+      <Filter>source\Wwise_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Common\AkDefaultLowLevelIODispatcher.cpp">
+      <Filter>source\Wwise_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Win32\AkDefaultIOHookBlocking.cpp">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Win32\AkDefaultIOHookDeferred.cpp">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wwise_Win32\stdafx.cpp">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="source\wwise\Wwise.cpp">
+      <Filter>source\wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="source\collision\collision_manager.cpp">
+      <Filter>source\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\scene\pause_scene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\cursor\cursor.cpp">
+      <Filter>source\object\canvas\cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\pause_menu\pause_menu.cpp">
+      <Filter>source\object\canvas\pause_menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object\canvas\operation\operation.cpp">
+      <Filter>source\object\canvas\operation</Filter>
+    </ClCompile>
+    <ClCompile Include="source\device\xbox_controller.cpp">
+      <Filter>source\device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\app\app.h">
@@ -226,9 +310,6 @@
       <Filter>source\object\camera</Filter>
     </ClInclude>
     <ClInclude Include="source\object\canvas\canvas.h">
-      <Filter>source\object\canvas</Filter>
-    </ClInclude>
-    <ClInclude Include="source\object\canvas\canvas_manager.h">
       <Filter>source\object\canvas</Filter>
     </ClInclude>
     <ClInclude Include="source\object\canvas\shadow_map\shadow_map.h">
@@ -303,9 +384,6 @@
     <ClInclude Include="source\scene\scene.h">
       <Filter>source\scene</Filter>
     </ClInclude>
-    <ClInclude Include="source\scene\result_scene.h">
-      <Filter>source\scene</Filter>
-    </ClInclude>
     <ClInclude Include="source\scene\game_scene.h">
       <Filter>source\scene</Filter>
     </ClInclude>
@@ -320,9 +398,6 @@
     </ClInclude>
     <ClInclude Include="source\object\canvas\player_life\player_life.h">
       <Filter>source\object\canvas\player_life</Filter>
-    </ClInclude>
-    <ClInclude Include="source\object\canvas\logo\logo.h">
-      <Filter>source\object\canvas\logo</Filter>
     </ClInclude>
     <ClInclude Include="source\object\character\player\player_pattern.h">
       <Filter>source\object\character\player</Filter>
@@ -380,6 +455,117 @@
     </ClInclude>
     <ClInclude Include="source\object\character\player\player_pattern_step.h">
       <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_avoid.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\renderer\deferred _renderer.h">
+      <Filter>source\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\canvas_manager.h">
+      <Filter>source\object\canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_life.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\effect\effect_manager.h">
+      <Filter>source\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_hit.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\enemy\enemy_pattern_deth.h">
+      <Filter>source\object\character\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\camera\camera_pattern_title.h">
+      <Filter>source\object\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\press_start\press_start.h">
+      <Filter>source\object\canvas\press_start</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\terrain\tree\tree_collider.h">
+      <Filter>source\object\terrain\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_deth.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\game_over\game_over.h">
+      <Filter>source\object\canvas\game_over</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene\game_over_scene.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene\game_clear_scene.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\game_clear\game_clear.h">
+      <Filter>source\object\canvas\game_clear</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_attack_jump.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\character\player\player_pattern_attack_jump.h">
+      <Filter>source\object\character\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkFileLocationBase.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkFilePackage.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkFilePackageLowLevelIO.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkFilePackageLUT.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkMultipleFileLocation.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Common\AkDefaultLowLevelIODispatcher.h">
+      <Filter>source\Wwise_Common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\AkDefaultIOHookBlocking.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\AkDefaultIOHookDeferred.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\AkFileHelpers.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\AkFilePackageLowLevelIOBlocking.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\AkFilePackageLowLevelIODeferred.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Wwise_Win32\stdafx.h">
+      <Filter>source\Wwise_Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="source\wwise\Wwise.h">
+      <Filter>source\wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="source\wwise\Wwise_IDs.h">
+      <Filter>source\wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\logo\logo.h">
+      <Filter>source\object\canvas\logo</Filter>
+    </ClInclude>
+    <ClInclude Include="source\scene\pause_scene.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\cursor\cursor.h">
+      <Filter>source\object\canvas\cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\pause_menu\pause_menu.h">
+      <Filter>source\object\canvas\pause_menu</Filter>
+    </ClInclude>
+    <ClInclude Include="source\object\canvas\operation\operation.h">
+      <Filter>source\object\canvas\operation</Filter>
+    </ClInclude>
+    <ClInclude Include="source\device\xbox_controller.h">
+      <Filter>source\device</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,6 +656,36 @@
     <Filter Include="source\object\terrain\tree">
       <UniqueIdentifier>{99420fb6-81a1-4b80-b72f-f906ece0b077}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\effect">
+      <UniqueIdentifier>{bfae1d45-6bea-4893-96f3-315fd7195eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\press_start">
+      <UniqueIdentifier>{73a57e15-9b11-4a21-8082-10bd69085d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\game_over">
+      <UniqueIdentifier>{3015c005-49f2-4aa1-be45-4cc9574e409b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\game_clear">
+      <UniqueIdentifier>{8e49148d-4216-4df7-b8c2-7d6044366a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\wwise">
+      <UniqueIdentifier>{1b185a77-c634-4818-8591-e7ff20aecd5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Wwise_Common">
+      <UniqueIdentifier>{99f3b449-96b3-4999-abfe-61ae709e3a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Wwise_Win32">
+      <UniqueIdentifier>{3e50de95-c349-4bfc-be37-ba91c4ccb124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\cursor">
+      <UniqueIdentifier>{30f7e79a-5715-4779-8e00-3b5b4f426407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\pause_menu">
+      <UniqueIdentifier>{f29432a0-819e-49e5-9d79-d0da93410e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\object\canvas\operation">
+      <UniqueIdentifier>{86a4ecf7-7b86-4b77-88ff-aa9d5e44b4bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">
@@ -519,11 +735,28 @@
     <FxCompile Include="resource\shader\PixelGrass.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
-    <FxCompile Include="resource\shader\outline.hlsl">
-      <Filter>resource\shader</Filter>
-    </FxCompile>
     <FxCompile Include="resource\shader\ModelVertexShader.hlsl">
       <Filter>resource\shader</Filter>
     </FxCompile>
+    <FxCompile Include="resource\shader\DeferredVS.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\DeferredPS.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\bureHPS.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="resource\shader\bureVPS.hlsl">
+      <Filter>resource\shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source\Wwise_Common\AkFilePackageLowLevelIO.inl">
+      <Filter>source\Wwise_Common</Filter>
+    </None>
+    <None Include="source\Wwise_Common\AkMultipleFileLocation.inl">
+      <Filter>source\Wwise_Common</Filter>
+    </None>
   </ItemGroup>
 </Project>

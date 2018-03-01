@@ -33,6 +33,7 @@ class ShaderManager;
 class MeshManager;
 class CanvasManager;
 class InputKeyboard;
+class Wwise;
 class ModelManager;
 class Player;
 class EnemyManager;
@@ -40,6 +41,9 @@ class CollisionManager;
 class Scene;
 class NextScene;
 class Fade;
+class DeferredRenderer;
+class EffectManager;
+class XboxController;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -76,7 +80,21 @@ private:
 
 	InputKeyboard*					m_pInputKeybord;
 
+	XboxController*					m_pXboxController;
+
+	Wwise*							m_pWwise;
+
 	Fade*							m_pFade;
+
+	ShaderManager*					m_pShaderManager;
+
+	ModelManager*					m_pModelManager;
+
+	TextureManager*					m_pTextureManager;
+
+	DeferredRenderer*				m_pDeferredRenderer;
+
+	EffectManager*					m_pEffectManager;
 };
 
 #endif

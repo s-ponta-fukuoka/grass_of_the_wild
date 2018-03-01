@@ -18,6 +18,9 @@ struct vertexOut
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
 	float fogFactor : FOG;
+	float3 posEye : TEXCOORD3;
+	float3 posW : TEXCOORD4;
+	float Depth : TEXCOORD5;
 };
 
 //ïœä∑ópçsóÒ
@@ -50,10 +53,6 @@ vertexOut main(vertexIn IN)
 	OUT.Lpos.y = (-posL.y + 1.0) / 2.0;
 	OUT.Lpos.z = posL.z;
 
-	//matrix LightWVP = mul(LView, LProjection);
-	//float4 posL = mul(mul(IN.pos, World), LightWVP);
-	//OUT.Lpos = posL;
-
 	//åıåπèàóù
 	float3 L = normalize(Light.xyz);
 
@@ -76,6 +75,12 @@ vertexOut main(vertexIn IN)
 
 	// Calculate linear fog.    
 	OUT.fogFactor = saturate((5000 - cameraPosition.z) / (5000 - 0));
+
+	OUT.posEye = cameraPosition;
+	OUT.posW = posWorld;
+
+
+	OUT.Depth = (length(posL.xyz - posWorld.xyz) / 100);
 
 	return OUT;
 }

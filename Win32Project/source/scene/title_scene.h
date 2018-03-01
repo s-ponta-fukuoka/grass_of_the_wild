@@ -22,6 +22,7 @@ class CanvasManager;
 class ModelManager;
 class Player;
 class NextScene;
+class EffectManager;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -30,13 +31,15 @@ class Title : public Scene
 public:
 	Title();
 	virtual ~Title() {};
-	HRESULT Init(NextScene* pNextScene, Fade* pFade);
+	HRESULT Init(NextScene* pNextScene,
+		ShaderManager* pShaderManager,
+		ModelManager* pModelManager,
+		TextureManager* pTextureManager,
+		EffectManager* pEffectManager);
 	void Release(void);
 	void Update(void);
 	void Draw(void);
 private:
-	Fade*							m_pFade;
-
 	MainCamera*						m_pCamera;
 
 	LightCamera*					m_pLightCamera;

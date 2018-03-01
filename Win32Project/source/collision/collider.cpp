@@ -1,57 +1,70 @@
 //=============================================================================
 //
-// [manager.h]
+// collider.cpp
 // Author : shota fukuoka
 //
 //=============================================================================
+
+//*****************************************************************************
+// インクルード
+//*****************************************************************************
 #include "../object/object.h"
 #include "collider.h"
 #include "collision_manager.h"
 #include "../renderer/renderer.h"
 #include "../renderer/render_manager.h"
-//*****************************************************************************
-// マクロ定義
-//*****************************************************************************
 
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
-
-//*****************************************************************************
-// グローバル変数:
-//*****************************************************************************
-
+///////////////////////////////////////////////////////////////////////////////
+//コンストラクタ
+///////////////////////////////////////////////////////////////////////////////
 Collider::Collider()
 {
 	m_bDelete = false;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//デストラクタ
+///////////////////////////////////////////////////////////////////////////////
 Collider::~Collider()
 {
-
+	;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//タイプ設定
+///////////////////////////////////////////////////////////////////////////////
 void Collider::SetType(TYPE type)
 {
 	eColType = type;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//タイプ取得
+///////////////////////////////////////////////////////////////////////////////
 Collider::TYPE  Collider::GetType(void)
 {
 	return eColType;
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
+//描画削除
+///////////////////////////////////////////////////////////////////////////////
 void Collider::RendererDelete(void)
 {
-	m_pRenderManager->DeleteRenderer(m_pRenderer);
+	m_pRenderManager->DeleteDeferredRenderer(m_pRenderer);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//オブジェクト取得
+///////////////////////////////////////////////////////////////////////////////
 Object *Collider::GetGameObject(void)
 {
 	return m_pObject;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//ボックスコライダーコンストラクタ
+///////////////////////////////////////////////////////////////////////////////
 BoxCollider::BoxCollider(Object *pObject, CollisionManager* pCollisionManager)
 {
 	m_pObject = pObject;
@@ -59,6 +72,9 @@ BoxCollider::BoxCollider(Object *pObject, CollisionManager* pCollisionManager)
 	pCollisionManager->AddCollider(this);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//スフィアコライダーコンストラクタ
+///////////////////////////////////////////////////////////////////////////////
 SphereCollider::SphereCollider(VECTOR3 pos,
 	float fLength,
 	Object *pObject,
@@ -88,15 +104,17 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 
 	MakeVertex();
 
-#ifdef _DEBUG
-
 	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
+
+	m_pRenderer = NULL;
+
+#ifdef DEBUG
 
 	m_pRenderer = new MeshRenderer(m_pVertexBuffer,
 		m_pIndexBuffer,
 		pShaderManager,
 		pTexture->GetTexture(),
-		pRenderManager->GetShadowTexture(),
+		NULL,
 		m_pTransform,
 		pConstant,
 		NULL,
@@ -107,21 +125,28 @@ SphereCollider::SphereCollider(VECTOR3 pos,
 		PixelShader::PS_NORMAL,
 		FALSE);
 
+#endif // DEBUG
 	m_pRenderManager = pRenderManager;
 
-	m_pRenderManager->AddRenderer(m_pRenderer);
-
-#endif // DEBUG
+	m_pRenderManager->AddDeferredRenderer(m_pRenderer);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//スフィアコライダーデストラクタ
+///////////////////////////////////////////////////////////////////////////////
 SphereCollider::~SphereCollider()
 {
 	if (m_pRenderer != NULL)
 	{
-		m_pRenderManager->DeleteRenderer(m_pRenderer);
+		m_pRenderManager->DeleteDeferredRenderer(m_pRenderer);
+		delete m_pRenderer;
+		m_pRenderer = NULL;
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//スフィアコライダー頂点生成
+///////////////////////////////////////////////////////////////////////////////
 void SphereCollider::MakeVertex(void)
 {
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();

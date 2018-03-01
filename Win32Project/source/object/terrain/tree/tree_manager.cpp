@@ -6,10 +6,11 @@
 //=============================================================================
 #include "tree_manager.h"
 #include "tree.h"
+#include "../../mesh/meshfiled/mesh_field.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define TREE_SIZE (100)
+#define TREE_SIZE (3)
 
 //*****************************************************************************
 // プロトタイプ宣言
@@ -31,11 +32,12 @@ HRESULT TreeManager::GenerateTree(RenderManager* pRenderManager,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant,
 	MainCamera *pCamera,
-	CollisionManager* pCollisionManager)
+	CollisionManager* pCollisionManager,
+	MeshField* pMeshField)
 {
-	//TreeAdd(new Tree(VECTOR3(100,20,700),VECTOR3(90,0,0), VECTOR3(TREE_SIZE, TREE_SIZE, TREE_SIZE),
-	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
-	//
+	TreeAdd(new Tree(VECTOR3(100,50,700),VECTOR3(0,0,0), VECTOR3(TREE_SIZE, TREE_SIZE, TREE_SIZE),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this,pMeshField));
+	
 	//TreeAdd(new Tree(VECTOR3(0, 20, -900), VECTOR3(90, 90, 0), VECTOR3(TREE_SIZE, TREE_SIZE, TREE_SIZE),
 	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
 	//

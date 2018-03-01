@@ -25,6 +25,7 @@ public:
 	const char *GetName();
 	unsigned char *GetPixels();
 	ID3D11ShaderResourceView *GetTexture(void);
+	void Release(void);
 
 private:
 	ID3D11ShaderResourceView* m_pTexture;//テクスチャー

@@ -36,9 +36,24 @@ SkyBox::SkyBox(RenderManager* pRenderManager,
 
 	MakeVertex();
 
-	Texture* pTexture = new Texture("resource/sprite/skybox_000.png", pTextureManager);
+	Texture* pTexture = new Texture("resource/sprite/skybox_001.png", pTextureManager);
 
 	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
+		NULL,
+		pShaderManager,
+		pTexture->GetTexture(),
+		NULL,
+		m_pTransform,
+		pConstant,
+		NULL,
+		0,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		VertexShader::VS_3D,
+		GeometryShader::GS_NONE,
+		PixelShader::PS_3D,
+		FALSE));
+
+	pRenderManager->AddDeferredRenderer(new MeshRenderer(m_pVertexBuffer,
 		NULL,
 		pShaderManager,
 		pTexture->GetTexture(),
@@ -140,4 +155,5 @@ void SkyBox::Release(void)
 //=============================================================================
 void SkyBox::Update(void)
 {
+	m_pTransform->rot.y += 0.01f;
 }

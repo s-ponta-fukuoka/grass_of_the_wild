@@ -60,6 +60,25 @@ public:
 		return distance;
 	}
 
+	static float Hulton(int X, int n)
+	{
+		float Y = 0;
+		float digit = 0;
+
+		float half = 1.0f / 2.0f;
+
+		do {
+			digit = X%n;
+
+			Y = Y + digit * half;
+			X = (X - digit) / n;
+			half = half / n;
+
+		} while (X != 0);
+
+		return Y;
+	}
+
 protected:
 	const char* m_pFileName;
 };

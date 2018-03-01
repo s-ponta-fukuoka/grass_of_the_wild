@@ -22,7 +22,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 // ‰Šú‰»ˆ—
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT Tutorial::Init(Fade* pFade)
+HRESULT Tutorial::Init(NextScene* pNextScene,
+	ShaderManager* pShaderManager,
+	ModelManager* pModelManager,
+	TextureManager* pTextureManager,
+	EffectManager* pEffectManager)
 {
 	return S_OK;
 }

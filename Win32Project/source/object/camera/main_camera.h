@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// camera.h
+// main_camera.h
 // Author : SHOTA FUKUOKA
 //
 //=============================================================================
@@ -13,12 +13,13 @@
 #include "camera.h"
 
 //*****************************************************************************
-// マクロ定義
+// 前方宣言
 //*****************************************************************************
 class CameraPattern;
 class Player;
 class Enemy;
 class EnemyManager;
+class EffectManager;
 
 //*****************************************************************************
 // クラス定義
@@ -27,7 +28,7 @@ class MainCamera : public Camera
 {
 public:
 	//コンストラクタ
-	MainCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp);
+	MainCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp, EffectManager* pEffectManager, CameraPattern* pCameraPattern);
 
 	//デストラクタ
 	virtual ~MainCamera();
@@ -68,6 +69,10 @@ public:
 
 	//エネミー取得
 	Enemy* GetEnemy(void) { return m_pEnemy; }
+	void SetEnemy(Enemy* pEnemy) { m_pEnemy = pEnemy; }
+
+	//エネミー取得
+	EnemyManager* GetEnemyManager(void) { return m_pEnemyManager; }
 
 private:
 	Player*				m_pPlayer;
@@ -77,6 +82,8 @@ private:
 	EnemyManager*		m_pEnemyManager;
 
 	CameraPattern*	m_pCameraPattern;
+
+	EffectManager*	m_pEffectManager;
 
 	VECTOR3		m_move;
 };

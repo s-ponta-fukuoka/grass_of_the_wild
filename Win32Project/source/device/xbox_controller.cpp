@@ -1,0 +1,151 @@
+//=============================================================================
+//
+// 入力処理 [xbox_controller.cpp]
+// Author : SHOTA FUKUOKA
+//
+//=============================================================================
+#include "xbox_controller.h"
+
+
+//*****************************************************************************
+// 静的変数
+//*****************************************************************************
+XboxController* XboxController::m_pXboxController = NULL;
+
+///////////////////////////////////////////////////////////////////////////////
+// コンストラスタ
+///////////////////////////////////////////////////////////////////////////////
+XboxController::XboxController()
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// デストラスタ
+///////////////////////////////////////////////////////////////////////////////
+XboxController::~XboxController()
+{
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//インスタンス生成
+///////////////////////////////////////////////////////////////////////////////
+void XboxController::CreateInstance(void)
+{
+	if (m_pXboxController != NULL) { return; }
+	m_pXboxController = new XboxController();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//インスタンス取得
+///////////////////////////////////////////////////////////////////////////////
+XboxController* XboxController::GetInstance(void)
+{
+	return m_pXboxController;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// 初期化処理
+///////////////////////////////////////////////////////////////////////////////
+HRESULT XboxController::Init(void)
+{
+	for (int nCntXInput = 0; nCntXInput < MAX_XINPUT; nCntXInput++)
+	{
+		if (XInputGetState(0, &m_Input[nCntXInput]) != ERROR_SUCCESS){return E_FAIL;}
+	}
+
+	return S_OK;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// 終了処理
+///////////////////////////////////////////////////////////////////////////////
+void XboxController::Uninit(void)
+{
+	XInputEnable(false);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// 更新処理
+///////////////////////////////////////////////////////////////////////////////
+void XboxController::Update(void)
+{
+	XINPUT_STATE	xInput[MAX_XINPUT];
+
+	for (int nCntXInput = 0; nCntXInput < MAX_XINPUT; nCntXInput++)
+	{
+		if (XInputGetState(0, &xInput[nCntXInput]) != ERROR_SUCCESS)
+		{
+			return;
+		}
+
+		// キートリガー情報を保存
+		m_InputTrigger[nCntXInput].Gamepad.wButtons = 
+			(m_Input[nCntXInput].Gamepad.wButtons ^ xInput[nCntXInput].Gamepad.wButtons) & xInput[nCntXInput].Gamepad.wButtons;
+
+		// キープレス情報を保存
+		m_Input[nCntXInput] = xInput[nCntXInput];
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// データ取得(プレス)
+///////////////////////////////////////////////////////////////////////////////
+BOOL XboxController::GetButtonPress(int nIndex, int nButton)
+{
+	if (m_Input[nIndex].Gamepad.wButtons == nButton)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// データ取得(トリガー)
+///////////////////////////////////////////////////////////////////////////////
+BOOL XboxController::GetButtonTrigger(int nIndex, int nButton)
+{
+	if (m_InputTrigger[nIndex].Gamepad.wButtons == nButton)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// データ取得
+///////////////////////////////////////////////////////////////////////////////
+int XboxController::GetStick(int nIndex, STICK eStick)
+{
+	switch (eStick)
+	{
+	case STICK_LX:
+	{
+		return m_Input[nIndex].Gamepad.sThumbLX;
+
+		break;
+	}
+	case STICK_LY:
+	{
+		return m_Input[nIndex].Gamepad.sThumbLY;
+
+		break;
+	}
+	case STICK_RX:
+	{
+
+		return m_Input[nIndex].Gamepad.sThumbRX;
+
+		break;
+	}
+	case STICK_RY:
+	{
+		return m_Input[nIndex].Gamepad.sThumbRY;
+
+		break;
+	}
+	}
+
+	return 0;
+}

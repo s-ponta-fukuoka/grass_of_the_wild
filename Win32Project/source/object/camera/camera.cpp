@@ -12,14 +12,6 @@
 #include "../../../source/app/app.h"
 #include "../../device/input.h"
 
-//*****************************************************************************
-// マクロ定義
-//*****************************************************************************
-
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
-
 ///////////////////////////////////////////////////////////////////////////////
 // コンストラクタ
 ///////////////////////////////////////////////////////////////////////////////
@@ -55,7 +47,17 @@ HRESULT Camera::Init(void )
 ///////////////////////////////////////////////////////////////////////////////
 void Camera::Release(void)
 {
-	delete m_pConstant;
+	if (m_pTransform != NULL)
+	{
+		delete m_pTransform;
+		m_pTransform = NULL;
+	}
+
+	if (m_pConstant != NULL)
+	{
+		delete m_pConstant;
+		m_pConstant = NULL;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -63,5 +65,8 @@ void Camera::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Camera::Update(void)
 {
-	m_vector = XMVector3Normalize(XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1) - XMVectorSet(m_positionAt.x, m_positionAt.y, m_positionAt.z, 1));
+	m_vector = XMVector3Normalize(XMVectorSet(m_pTransform->position.x,
+		m_pTransform->position.y,
+		m_pTransform->position.z, 1)
+		- XMVectorSet(m_positionAt.x, m_positionAt.y, m_positionAt.z, 1));
 }

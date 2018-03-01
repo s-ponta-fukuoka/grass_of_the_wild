@@ -48,3 +48,16 @@ Texture *TextureManager::GetTexture(Texture* tex)
 	}
 	return NULL;
 }
+
+void TextureManager::ReleaseAll(void)
+{
+	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
+	{
+		if (*ite == NULL) { continue; }
+		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
+	}
+
+	m_list.clear();
+}

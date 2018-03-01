@@ -20,7 +20,8 @@ struct vertexOut
 	float2 tex2 : TEX2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
-	float fogFactor : FOG;
+	float2 fogFactor : FOG;
+	float Depth : TEXCOORD5;
 };
 
 //ïœä∑ópçsóÒ
@@ -35,7 +36,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4x4 LclBone;
 	float4 Light;
 	float4x4 WIT;
-	//float4 Color;
+	float4 Color;
 }
 
 vertexOut main(vertexIn IN)
@@ -52,6 +53,8 @@ vertexOut main(vertexIn IN)
 	pos0 += Bones[int(IN.BoneIndices.w)] * IN.weight.w;
 
 	OUT.pos = mul(mul(mul(mul(pos0, pos), World), View), Projection);
+
+	float4 posWorld = mul(mul(pos0, pos), World);
 
 	OUT.Spos = OUT.pos;
 
@@ -78,7 +81,7 @@ vertexOut main(vertexIn IN)
 
 	//OUT.nrm = mul(IN.nrm, World);
 
-	OUT.col = float4(1,1,1,1);
+	OUT.col = Color;
 	OUT.tex = IN.tex;
 	OUT.tex2.x = lgtdot;
 	OUT.tex2.y = eyedot;
@@ -95,7 +98,11 @@ vertexOut main(vertexIn IN)
 	cameraPosition = mul(cameraPosition, View);
 
 	// Calculate linear fog.    
-	OUT.fogFactor = saturate((5000 - cameraPosition.z) / (5000 - 0));
+	OUT.fogFactor.x = saturate(1.0 - (cameraPosition.z - 200) / (0 - 200));
+
+	OUT.fogFactor.y = saturate((cameraPosition.z - 5000) / (0 - 5000));
+
+	OUT.Depth = (length(posL.xyz - posWorld.xyz) / 20000);
 
 	return OUT;
 }

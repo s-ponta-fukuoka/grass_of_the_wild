@@ -52,10 +52,9 @@ MeshField::MeshField(RenderManager* pRenderManager, ShaderManager* pShaderManage
 
 	MakeVertex();
 
-	Texture* pTexture = new Texture("resource/sprite/field000.jpg", pTextureManager);
+	Texture* pTexture = new Texture("resource/sprite/field002.tga", pTextureManager);
 
-
-	pRenderManager->AddRenderer(new MeshRenderer(m_pVertexBuffer,
+	pRenderManager->AddDeferredRenderer(new MeshRenderer(m_pVertexBuffer,
 		m_pIndexBuffer,
 		pShaderManager,
 		pTexture->GetTexture(),
@@ -207,7 +206,7 @@ void MeshField::MakeVertex(void)
 
 	for (int nLoop = 0; nLoop < ((m_NumPolygon.x + 1) * (m_NumPolygon.z + 1)); nLoop++)
 	{
-		vertices[nLoop].color = VECTOR4(0.7, 1, 0, 1);
+		vertices[nLoop].color = VECTOR4(0.5, 1.0, 0.0, 1);
 	}
 
 	for (int nLoop = 0; nLoop < (m_NumPolygon.z + 1); nLoop++)

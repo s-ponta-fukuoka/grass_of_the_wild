@@ -14,7 +14,8 @@
 #include "enemy.h"
 
 class Player;
-
+class CollisionManager;
+class EffectManager;
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
 //*****************************************************************************
@@ -23,6 +24,8 @@ class EnemyManager
 	std::list<Enemy *>		m_list;
 
 	float					m_distance;
+
+	CollisionManager* m_pCollisionManager;
 public:
 
 	EnemyManager::EnemyManager();
@@ -36,7 +39,8 @@ public:
 		MainCamera *pCamera,
 		CollisionManager* pCollisionManager, 
 		Object::Transform* pPlayerTransform,
-		MeshField* pMeshField);
+		MeshField* pMeshField,
+		EffectManager* pEffectManager);
 
 	void EnemyAdd(Enemy* enemy);
 
@@ -51,6 +55,8 @@ public:
 	void Release(void);
 
 	Enemy* GetDistanceEnemy(Player* pPlayer);
+
+	int GetNumEnemy(void) { return m_list.size(); }
 };
 
 #endif

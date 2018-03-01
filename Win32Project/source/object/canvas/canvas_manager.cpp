@@ -44,7 +44,7 @@ void CanvasManager::DeleteCanvas(const Canvas* canvas)
 	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
 	{
 		if ((*ite) != canvas) { continue; }
-		m_list.erase(ite);
+		(*ite) = NULL;
 		return;
 	}
 }
@@ -59,6 +59,11 @@ void CanvasManager::UpdateAll(void)
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Update();
 	}
+
+	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
+	{
+		if ((*ite) == NULL) { m_list.erase(ite); return; }
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -70,6 +75,10 @@ void CanvasManager::ReleaseAll(void)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
 	}
+
+	m_list.clear();
 }
 

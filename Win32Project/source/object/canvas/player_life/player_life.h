@@ -48,16 +48,40 @@ public:
 
 	//ライフ増減・減少
 	void Add(int nLife) { m_nLife += nLife; }
-	void Sub(int nLife) { m_nLife -= nLife; }
+	void Sub(int nLife) { 
+		if (m_nCoolTime == 0)
+		{
+			m_nLife -= nLife;
+		}
+		CoolTimeCount(0);
+	}
+
+	void CoolTimeCount(int nCoolCnt) {
+		if (nCoolCnt != m_nCoolTime)
+		{
+			m_nCoolTime++;
+		}
+		else if(nCoolCnt == m_nCoolTime)
+		{
+			m_nCoolTime = 0;
+		}
+	}
+
+	void SetLifeZero(bool bUse) { m_bLifeZero = bUse; };
+	bool GetLifeZero(void) { return m_bLifeZero; };
 
 	//ライフ取得・設定
 	void SetLife(int nLife) { m_nLife = nLife; }
 	int GetLife(void) { return m_nLife; }
 
 private:
+	bool							m_bLifeZero;
+
 	int								m_nLife;
 
 	VECTOR3							m_size;
+
+	int								m_nCoolTime;
 };
 
 #endif

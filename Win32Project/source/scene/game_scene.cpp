@@ -21,6 +21,7 @@
 #include "../model/model_manager.h"
 #include "../object/character/player/player.h"
 #include "../device/input.h"
+#include "../device/xbox_controller.h"
 #include "../gui/imgui.h"
 #include "../gui/imgui_impl_dx11.h"
 #include "../object/mesh/grass/grass.h"
@@ -32,8 +33,13 @@
 #include "../scene/title_scene.h"
 #include "../scene/tutorial_scene.h"
 #include "../scene/game_scene.h"
-#include "../scene/result_scene.h"
+#include "../scene/game_over_scene.h"
+#include "../scene/game_clear_scene.h"
 #include "../scene/fade_scene.h"
+#include "../effect/effect_manager.h"
+#include "../object/camera/camera_pattern_compliance.h"
+#include "../wwise/Wwise.h"
+#include "pause_scene.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -65,6 +71,9 @@ Game::Game()
 	, m_pPlayerLife(NULL)
 	, m_pPlayer(NULL)
 	, m_pTreeManager(NULL)
+	, m_pModelManager(NULL)
+	, m_bPause(NULL)
+	, m_pPause(NULL)
 {
 	;
 }
@@ -80,23 +89,28 @@ Game::~Game()
 ///////////////////////////////////////////////////////////////////////////////
 // 初期化処理
 ///////////////////////////////////////////////////////////////////////////////
-HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
+HRESULT Game::Init(NextScene* pNextScene,
+	ShaderManager* pShaderManager,
+	ModelManager* pModelManager,
+	TextureManager* pTextureManager,
+	EffectManager* pEffectManager)
 {
-	m_pFade = pFade;
+	Wwise* pWwise = Wwise::GetInstance();
+	pWwise->MainListenerGameObjEvent(EVENTS::GAME);
 
 	m_pLightCamera = new LightCamera(VECTOR3(-3000, 8000, -12000), VECTOR3(0, 0, 0), VECTOR3(0, 1, 0));
 	m_pLightCamera->Init();
 
-	m_pTextureManager = new TextureManager();
+	m_pTextureManager = pTextureManager;
 
 	new Texture("resource/sprite/toon.png", m_pTextureManager);
+	new Texture("resource/sprite/bayer.png", m_pTextureManager);
 
 	m_pCollisionManager = new CollisionManager();
 
-	m_pShaderManager = new ShaderManager();
-	m_pShaderManager->GenerateShader();
+	m_pShaderManager = pShaderManager;
 
-	m_pModelManager = new ModelManager();
+	m_pModelManager = pModelManager;
 
 	m_pRenderManager = new RenderManager();
 
@@ -105,7 +119,7 @@ HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
 
 	m_pMeshManager = new MeshManager();
 
-	m_pCamera = new MainCamera(VECTOR3(0.0f, 100.0f, -500.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f));
+	m_pCamera = new MainCamera(VECTOR3(0.0f, 100.0f, -500.0f), VECTOR3(0.0f, 0.0f, 0.0f), VECTOR3(0.0f, 1.0f, 0.0f), pEffectManager, new CameraPatternCompliance());
 
 	MeshField* pMeshField = new MeshField(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant());
 
@@ -113,22 +127,20 @@ HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
 	m_pMeshManager->AddMesh(new SkyBox(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant()));
 
 	m_pTreeManager = new TreeManager();
-	m_pTreeManager->GenerateTree(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager);
+	m_pTreeManager->GenerateTree(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, pMeshField);
 
 	m_pPlayerLife = new PlayerLife(m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
-	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayerLife, pMeshField);
+	m_pPlayer = new Player(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayerLife, pMeshField, pEffectManager);
 
 	m_pMeshManager->AddMesh(new Grass(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), pMeshField, m_pCamera, VECTOR3(-4000, 0, -4000), m_pPlayer->GetTransform()));
-
+	
 	m_pEnemyManager = new EnemyManager();
-	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayer->GetTransform(),pMeshField);
+	m_pEnemyManager->GenerateEnemy(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pModelManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCamera, m_pCollisionManager, m_pPlayer->GetTransform(),pMeshField, pEffectManager);
 
 	m_pCanvasManager->AddCanvas(m_pPlayerLife);
 
 	m_pCamera->Init(m_pPlayer, m_pEnemyManager);
-
-	m_pFade->Init(pNextScene, m_pRenderManager, m_pShaderManager, m_pTextureManager);
 
 	return S_OK;
 }
@@ -138,85 +150,113 @@ HRESULT Game::Init(NextScene* pNextScene, Fade* pFade)
 ///////////////////////////////////////////////////////////////////////////////
 void Game::Release(void)
 {
-	if (m_pCamera == NULL) { return; }
-	m_pCamera->Release();
-	delete[] m_pCamera;
-	m_pCamera = NULL;
+	if (m_pCamera != NULL)
+	{
+		m_pCamera->Release();
+		delete m_pCamera;
+		m_pCamera = NULL;
+	}
 
-	if (m_pLightCamera == NULL) { return; }
-	m_pLightCamera->Release();
-	delete[] m_pCamera;
-	m_pLightCamera = NULL;
+	if (m_pLightCamera != NULL)
+	{
+		m_pLightCamera->Release();
+		delete m_pLightCamera;
+		m_pLightCamera = NULL;
+	}
 
-	if (m_pShaderManager == NULL) { return; }
-	m_pShaderManager->ReleaseAll();
-	delete m_pShaderManager;
-	m_pShaderManager = NULL;
+	if (m_pMeshManager != NULL)
+	{
+		m_pMeshManager->ReleaseAll();
+		delete m_pMeshManager;
+		m_pMeshManager = NULL;
+	}
 
-	if (m_pModelManager == NULL) { return; }
-	m_pModelManager->ReleaseAll();
-	delete m_pModelManager;
-	m_pModelManager = NULL;
+	if (m_pCanvasManager != NULL)
+	{
+		m_pCanvasManager->ReleaseAll();
+		delete m_pCanvasManager;
+		m_pCanvasManager = NULL;
+	}
+	
+	if (m_pPlayer != NULL)
+	{
+		m_pPlayer->Release();
+		delete m_pPlayer;
+		m_pPlayer = NULL;
+	}
 
-	if (m_pMeshManager == NULL) { return; }
-	m_pMeshManager->ReleaseAll();
-	delete m_pMeshManager;
-	m_pMeshManager = NULL;
+	if (m_pEnemyManager != NULL)
+	{
+		m_pEnemyManager->Release();
+		delete m_pEnemyManager;
+		m_pEnemyManager = NULL;
+	}
 
-	if (m_pCanvasManager == NULL) { return; }
-	m_pCanvasManager->ReleaseAll();
-	delete m_pCanvasManager;
-	m_pCanvasManager = NULL;
+	if (m_pTreeManager != NULL)
+	{
+		m_pTreeManager->Release();
+		delete m_pTreeManager;
+		m_pTreeManager = NULL;
+	}
 
-	if (m_pRenderManager == NULL) { return; }
-	m_pRenderManager->ReleaseAll();
-	delete m_pRenderManager;
-	m_pRenderManager = NULL;
+	if (m_pCollisionManager != NULL)
+	{
+		delete m_pCollisionManager;
+		m_pCollisionManager = NULL;
+	}
 
-	if (m_pPlayer == NULL) { return; }
-	delete m_pPlayer;
-	m_pPlayer = NULL;
+	if (m_pRenderManager != NULL)
+	{
+		m_pRenderManager->ReleaseAll();
+		delete m_pRenderManager;
+		m_pRenderManager = NULL;
+	}
 
-	if (m_pEnemyManager == NULL) { return; }
-	delete m_pEnemyManager;
-	m_pEnemyManager = NULL;
-
-	if (m_pTreeManager == NULL) { return; }
-	delete m_pTreeManager;
-	m_pTreeManager = NULL;
-
-	if (m_pCollisionManager == NULL) { return; }
-	delete m_pCollisionManager;
-	m_pCollisionManager = NULL;
+	Wwise* pWwise = Wwise::GetInstance();
+	pWwise->StopMainListener();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // 更新処理
 ///////////////////////////////////////////////////////////////////////////////
 void Game::Update(void)
-{
-	m_pLightCamera->Update();
-
-	m_pCamera->Update();
-
-	m_pMeshManager->UpdateAll();
-
-	m_pPlayer->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
-
-	m_pTreeManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
-
-	m_pEnemyManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
-
-	m_pCanvasManager->UpdateAll();
-
-	m_pCollisionManager->Update();
-
+{	
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
-	if (pInputKeyboard->GetKeyTrigger(DIK_RETURN))
+	if (!isPause())
 	{
-		m_pFade->SetFade(Fade::FADE_OUT, new Title);
-		//m_pNextScene->NextSceneUpdate(new Title);
+		m_pLightCamera->Update();
+
+		m_pCamera->Update();
+
+		m_pMeshManager->UpdateAll();
+
+		m_pTreeManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
+
+		m_pEnemyManager->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
+
+		m_pPlayer->Update(m_pRenderManager, m_pShaderManager, m_pTextureManager, m_pCamera->GetConstant(), m_pLightCamera->GetConstant(), m_pCollisionManager);
+
+		m_pCollisionManager->Update();
+
+		Fade* pFade = Fade::GetInstance();
+
+		if (m_pPlayerLife->GetLifeZero())
+		{
+			pFade->SetFade(Fade::FADE_OUT, new GameOverScene);
+		}
+
+		if (m_pEnemyManager->GetNumEnemy() <= 0)
+		{
+			pFade->SetFade(Fade::FADE_OUT, new GameClearScene);
+		}
+
+	}
+	m_pCanvasManager->UpdateAll();
+
+	if (m_pPause != NULL)
+	{
+		m_pPause->Update();
 	}
 }
 
@@ -231,4 +271,53 @@ void Game::Draw(void)
 
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	pAppRenderer->Draw(m_pRenderManager);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// ポーズ画面にするか
+///////////////////////////////////////////////////////////////////////////////
+bool Game::isPause(void)
+{
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	XboxController* pXboxController = XboxController::GetInstance();
+
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_P) || pXboxController->GetButtonTrigger(0, XINPUT_GAMEPAD_START))
+	{
+		m_bPause = !m_bPause;
+
+		if (m_bPause)
+		{
+			m_pPause = new Pause();
+			m_pPause->Init(m_pShaderManager, m_pCanvasManager, m_pTextureManager, m_pRenderManager);
+		}
+		else
+		{
+			if (m_pPause != NULL)
+			{
+				m_pPause->Release();
+				delete m_pPause;
+				m_pPause = NULL;
+			}
+		}
+	}
+
+	if (m_pPause != NULL)
+	{
+		if (m_pPause->GetBackGame())
+		{
+			if (m_pPause != NULL)
+			{
+				m_pPause->Release();
+				delete m_pPause;
+				m_pPause = NULL;
+			}
+			m_bPause = false;
+		}
+	}
+
+	return m_bPause;
 }

@@ -22,7 +22,13 @@
 #include "enemy_pattern_wait.h"
 #include "enemy_pattern_walk.h"
 #include "enemy_pattern_run.h"
-
+#include "enemy_pattern_deth.h"
+#include "enemy_attack.h"
+#include "enemy_pattern_hit.h"
+#include "../../../device/input.h"
+#include "enemy_life.h"
+#include "../../../effect/effect_manager.h"
+#include "../../../wwise/Wwise.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -45,15 +51,25 @@ Enemy::Enemy(
 	CollisionManager* pCollisionManager,
 	EnemyManager* pEnemyManager,
 	Object::Transform* pPlayerTransform,
-	MeshField* pMeshField)
+	MeshField* pMeshField,
+	EffectManager* pEffectManager)
 	: m_pCamera(NULL)
 	, m_move(VECTOR3(0,0,0))
 	, m_pCollider(NULL)
 	, m_bUse(false)
 	, m_pEnemyPattern(new EnemyPatternWait)
 	, m_nTime(0)
+	, m_pEnemyAttack(NULL)
+	, m_pEnemyLife(NULL)
+	, m_pEffectManager(NULL)
 {
+	m_nCounterCnt = 0;
+
+	m_eMode = MODE_DEFENSE;
+
 	m_pTransform = new Transform();
+
+	m_pEffectManager = pEffectManager;
 
 	m_pTransform->position = position;
 	m_pTransform->rot = rot;
@@ -66,14 +82,20 @@ Enemy::Enemy(
 
 	m_pMeshField = pMeshField;
 
+	m_pEnemyLife = new EnemyLife(pRenderManager, pShaderManager, pTextureManager);
+
 	m_pCamera = pCamera;
 
 	m_pModelManager = pModelManager;
+
+	m_pColor = new VECTOR4();
+	m_pColor[0] = VECTOR4(1, 1, 1, 1);
 
 	m_pModel = new SkinMeshModel("bin/model/enemy_001.taso");
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 	
 	Texture* pToonTexture = new Texture("resource/sprite/toon.png", pTextureManager);
+	Texture* pBayerTexture = new Texture("resource/sprite/bayer.png", pTextureManager);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
 
@@ -94,13 +116,12 @@ Enemy::Enemy(
 
 		MakeVertex(i, pMesh);
 
-		
 		ID3D11ShaderResourceView* pTextureResource = NULL;
 
-		if (pMesh[i].pFileName != NULL)
+		if (strcmp(pMesh[i].fileName.data(), "") != 0)
 		{
 			ePsType = PixelShader::PS_TOON;
-			Texture* pTexture = new Texture(pMesh[i].pFileName, pTextureManager);
+			Texture* pTexture = new Texture(pMesh[i].fileName.data(), pTextureManager);
 			pTextureResource = pTexture->GetTexture();
 		}
 		else
@@ -111,11 +132,12 @@ Enemy::Enemy(
 
 		m_pRenderManager = pRenderManager;
 
-		m_pRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
+		m_pRenderer[i]  = new SkinnedMeshRenderer(m_pVertexBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
 			pToonTexture->GetTexture(),
+			pBayerTexture->GetTexture(),
 			pRenderManager->GetShadowTexture(),
 			m_pTransform,
 			pConstant,
@@ -129,13 +151,15 @@ Enemy::Enemy(
 			ePsType,
 			pMesh[i].pCluster,
 			pMesh[i],
-			FALSE);
+			FALSE,
+			m_pColor);
 
 		m_pShadowRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
 			pToonTexture->GetTexture(),
+			pBayerTexture->GetTexture(),
 			NULL,
 			m_pTransform,
 			pLightCameraConstant,
@@ -149,16 +173,17 @@ Enemy::Enemy(
 			ePsType = PixelShader::PS_SHADOW,
 			pMesh[i].pCluster,
 			pMesh[i],
-			FALSE);
+			FALSE,
+			m_pColor);
 
-		m_pRenderManager->AddRenderer(m_pRenderer[i]);
+		m_pRenderManager->AddDeferredRenderer(m_pRenderer[i]);
 
 		m_pRenderManager->AddShadowRenderer(m_pShadowRenderer[i]);
 	}
 
 	m_pCollisionManager = pCollisionManager;
 
-	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
+	m_pCollider = new SphereCollider(VECTOR3(0, 150, 0), 100, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
 	SetObjectType(Object::TYPE_ENEMY);
 }
@@ -185,16 +210,59 @@ HRESULT Enemy::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Enemy::Release(void)
 {
-	m_pCollider->SetColliderDelete(true);
-
-	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
+	if (m_pCollider != NULL)
 	{
-		m_pRenderManager->DeleteRenderer(m_pRenderer[i]);
-		m_pRenderManager->DeleteShadowRenderer(m_pShadowRenderer[i]);
-		delete[] m_pRenderer[i];
-		delete[] m_pShadowRenderer[i];
+		delete m_pCollider;
+		m_pCollider = NULL;
 	}
 
+	if(m_pEnemyAttack != NULL)
+	{
+		m_pEnemyAttack->Release();
+		delete m_pEnemyAttack;
+		m_pEnemyAttack = NULL;
+	}
+
+	if (m_pRenderer != NULL)
+	{
+		for (int i = 0; i < m_pModel->GetNumMesh(); i++)
+		{
+			m_pRenderManager->DeleteDeferredRenderer(m_pRenderer[i]);
+
+			m_pRenderManager->DeleteShadowRenderer(m_pShadowRenderer[i]);
+
+			if (m_pRenderer[i] != NULL)
+			{
+				delete m_pRenderer[i];
+				m_pRenderer[i] = NULL;
+			}
+
+			if (m_pShadowRenderer[i] != NULL)
+			{
+				delete m_pShadowRenderer[i];
+				m_pShadowRenderer[i] = NULL;
+			}
+
+		}
+	}
+
+	if (m_pTransform != NULL)
+	{
+		delete m_pTransform;
+		m_pTransform = NULL;
+	}
+
+	if (m_pFrame != NULL)
+	{
+		delete m_pFrame;
+		m_pFrame = NULL;
+	}
+
+	if (m_pAnimeNumber != NULL)
+	{
+		delete m_pAnimeNumber;
+		m_pAnimeNumber = NULL;
+	}
 	Character::Release();
 }
 
@@ -209,9 +277,10 @@ void Enemy::Update(RenderManager* pRenderManager,
 {
 	m_pTransform->position.y -= 0.1f;
 	m_pTransform->position.y = m_pMeshField->GetHeight(m_pTransform->position);
-
+ 
 	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
 	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
+	m_pCollider->GetTransform()->position.y = m_pTransform->position.y + 100;
 
 	m_oldPos = m_pTransform->position;
 
@@ -224,12 +293,6 @@ void Enemy::Update(RenderManager* pRenderManager,
 		pCollisionManager);
 
 	Object::Update();
-
-	if(m_bUse)
-	{
-		//Release();
-		m_bUse = false;
-	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -268,7 +331,11 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	D3D11_SUBRESOURCE_DATA InitData;
 	InitData.pSysMem = vertices;
 	if (FAILED(pDevice->CreateBuffer(&bd, &InitData, &m_pVertexBuffer)))
+	{
+		delete[] vertices;
+		delete[] hIndexData;
 		return;
+	}
 
 	//インデックスバッファ作成
 	D3D11_BUFFER_DESC hBufferDesc;
@@ -285,7 +352,11 @@ void Enemy::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	hSubResourceData.SysMemSlicePitch = 0;
 
 	if (FAILED(pDevice->CreateBuffer(&hBufferDesc, &hSubResourceData, &m_pIndexBuffer)))
+	{
+		delete[] vertices;
+		delete[] hIndexData;
 		return;
+	}
 
 	delete[] vertices;
 
@@ -299,22 +370,112 @@ void Enemy::OnCollision(Collider* col)
 {
 	Object::ObjectType eObjectType = col->GetGameObject()->GetObjectType();
 
-	if (eObjectType == Object::TYPE_PLAYER_ATTACK)
+	if (eObjectType == Object::TYPE_PLAYER_ATTACK || eObjectType == Object::TYPE_PLAYER_ATTACK_JUMP)
 	{
-		m_pEnemyManager->EnemyDelete(this);
-		m_bUse = true;
+		if (m_eMode == MODE_ATTACK)
+		{
+			int nlife = m_pEnemyLife->GetLife();
+
+			Wwise* pWwise = Wwise::GetInstance();
+			pWwise->MainListenerGameObjEvent(EVENTS::ATTACK);
+			pWwise->MainListenerGameObjEvent(EVENTS::HIT);
+
+			if (eObjectType == Object::TYPE_PLAYER_ATTACK)
+			{
+				m_pEnemyLife->Sub(1);
+			}
+			else if (eObjectType == Object::TYPE_PLAYER_ATTACK_JUMP)
+			{
+				m_pEnemyLife->Sub(2);
+			}
+
+			if (nlife != m_pEnemyLife->GetLife() && m_pEnemyLife->GetLife() > 0)
+			{
+					// エフェクトの再生
+					::Effekseer::Handle handle;
+					handle = m_pEffectManager->GetEManager()->Play(m_pEffectManager->GetEffect(EffectManager::EFFECT_HIT),
+						m_pTransform->position.x + cosf(-m_pTransform->rot.y - D3DToRadian(85)),
+						m_pTransform->position.y + 150,
+						m_pTransform->position.z - sinf(m_pTransform->rot.y - D3DToRadian(85)));
+					m_pEffectManager->GetEManager()->SetScale(handle, 50, 50, 50);
+
+				if (m_pAnimeNumber[0] != 3)
+				{
+					m_pAnimeNumber[0] = 5;
+					SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
+					m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime + 100;
+					ChangeEnemyPattern(new EnemyPatternHit);
+				}
+			}
+		}
+		else
+		{
+
+			// エフェクトの再生
+			::Effekseer::Handle handle;
+			handle = m_pEffectManager->GetEManager()->Play(m_pEffectManager->GetEffect(EffectManager::EFFECT_ENEMY_DEFFENCE),
+				m_pTransform->position.x + cosf(-m_pTransform->rot.y - D3DToRadian(90)) * 100,
+				m_pTransform->position.y + 150,
+				m_pTransform->position.z - sinf(m_pTransform->rot.y - D3DToRadian(90))* 100);
+			m_pEffectManager->GetEManager()->SetScale(handle, 50, 50, 50);
+			m_pEffectManager->GetEManager()->SetRotation(handle, 0, -m_pTransform->rot.y, 0);
+			m_pAnimeNumber[0] = 0;
+			SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
+			m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+			m_nCounterCnt++;
+			ChangeEnemyPattern(new EnemyPatternWait);
+		}
+
+		if (m_pEnemyLife->GetLife() <= 0 && !m_bUse)
+		{
+			m_pAnimeNumber[0] = 7;
+			SkinMeshModel::Anime* pAnime = m_pModel->GetAnime();
+			m_pFrame[0] = pAnime[m_pAnimeNumber[0]].nStartTime;
+			ChangeEnemyPattern(new EnemyPatternDeth);
+			m_bUse = true;
+		}
 	}
 
 	if (eObjectType == Object::TYPE_PLAYER)
 	{
-		VECTOR3 pos = m_oldPos - m_pTransform->position;
+		VECTOR3 pos = m_pTransform->position - col->GetGameObject()->GetTransform()->position;
+
+		VECTOR3::Normalize(&pos, &pos);
 
 		XMVECTOR Dot = XMVectorSet(pos.x, pos.y, pos.z, 1.0);
 
 		XMVector3Dot(Dot, Dot);
 
-		m_pTransform->position.x += XMVectorGetX(Dot) * 1.5f;
-		m_pTransform->position.z += XMVectorGetZ(Dot) * 1.5f;
+		m_pTransform->position.x += XMVectorGetX(Dot);
+		m_pTransform->position.z += XMVectorGetZ(Dot);
+	}
+
+	if (eObjectType == Object::TYPE_ENEMY)
+	{
+		VECTOR3 pos = m_pTransform->position - col->GetGameObject()->GetTransform()->position;
+
+		VECTOR3::Normalize(&pos, &pos);
+
+		XMVECTOR Dot = XMVectorSet(pos.x, pos.y, pos.z, 1.0);
+
+		XMVector3Dot(Dot, Dot);
+
+		m_pTransform->position.x += XMVectorGetX(Dot);
+		m_pTransform->position.z += XMVectorGetZ(Dot);
+	}
+
+	if (eObjectType == Object::TYPE_TREE)
+	{
+		VECTOR3 pos = m_pTransform->position - col->GetGameObject()->GetSphereCollider()->GetTransform()->position;
+
+		VECTOR3::Normalize(&pos, &pos);
+
+		XMVECTOR Dot = XMVectorSet(pos.x, pos.y, pos.z, 1.0);
+
+		XMVector3Dot(Dot, Dot);
+
+		m_pTransform->position.x += XMVectorGetX(Dot) * 10;
+		m_pTransform->position.z += XMVectorGetZ(Dot) * 10;
 	}
 }
 

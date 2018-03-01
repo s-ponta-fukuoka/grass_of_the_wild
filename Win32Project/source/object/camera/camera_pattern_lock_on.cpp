@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// player.cpp
+// camera_pattern_lock_on.cpp
 // Author : SHOTA FUKUOKA
 //
 //=============================================================================
@@ -12,11 +12,15 @@
 #include "camera_pattern_compliance.h"
 #include "main_camera.h"
 #include "../../device/input.h"
+#include "../../device/xbox_controller.h"
 #include "../character/player/player.h"
 #include "../character/enemy/enemy.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define CAMERA_LOCK_X (300)
+#define CAMERA_LOCK_Z (350)
+#define CAMERA_LOCK_HEIGT (150)
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
@@ -25,10 +29,6 @@ CameraPatternLockOn::CameraPatternLockOn()
 {
 	;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-//デストラクタ
-///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 //更新
@@ -49,15 +49,24 @@ void CameraPatternLockOn::Update(MainCamera* pMainCamera)
 
 	Player*	pPlayer = pMainCamera->GetPlayer();
 
-	if (pInputKeyboard->GetKeyPress(DIK_LSHIFT))
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
+
+	if (pInputKeyboard->GetKeyPress(DIK_LSHIFT) ||
+		Xinput.Gamepad.bLeftTrigger > XINPUT_TRIGGER)
 	{
-		posAt.x = pMainCamera->GetEnemy()->GetTransform()->position.x;
-		posAt.z = pMainCamera->GetEnemy()->GetTransform()->position.z;
+		if (pMainCamera->GetEnemy() != NULL) { 
+			if (pMainCamera->GetEnemy()->GetTransform() != NULL) {
+				posAt.x = pMainCamera->GetEnemy()->GetTransform()->position.x;
+				posAt.y = pMainCamera->GetEnemy()->GetTransform()->position.y + CAMERA_LOCK_HEIGT;
+				posAt.z = pMainCamera->GetEnemy()->GetTransform()->position.z;
+			}
+		}
 
 		pMainCamera->GetTransform()->position = pPlayer->GetTransform()->position;
-		pMainCamera->GetTransform()->position.z += XMVectorGetZ(vector) * 350;
-		pMainCamera->GetTransform()->position.x += XMVectorGetX(vector) * 300;
-		pMainCamera->GetTransform()->position.y += 150;
+		pMainCamera->GetTransform()->position.z += XMVectorGetZ(vector) * CAMERA_LOCK_Z;
+		pMainCamera->GetTransform()->position.x += XMVectorGetX(vector) * CAMERA_LOCK_X;
+		pMainCamera->GetTransform()->position.y += CAMERA_LOCK_HEIGT;
 
 		pos = XMVectorSet(pMainCamera->GetTransform()->position.x,
 			pMainCamera->GetTransform()->position.y,
@@ -73,5 +82,6 @@ void CameraPatternLockOn::Update(MainCamera* pMainCamera)
 		pMainCamera->ChangeCameraPattern(new CameraPatternCompliance);
 	}
 
+	pMainCamera->SetMove(move);
 	pMainCamera->SetPositionAt(posAt);
 }

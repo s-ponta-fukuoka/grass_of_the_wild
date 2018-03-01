@@ -1,121 +1,194 @@
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui_demo.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui_draw.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\imgui_impl_dx11.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vector.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\input.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\collision_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\collider.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\main.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\app.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player_life.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\shadow_map.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\canvas.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\main_camera.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\camera.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\model.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\model_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\camera_pattern_compliance.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\camera_pattern_lock_on.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_attack.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\character.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_attack.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_walk.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\object.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player_pattern_walk.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player_pattern_wait.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player_pattern_attack.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_wait.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh_field.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\mesh_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\skybox.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\terrain.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\render_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\player_attack.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\fade_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\grass.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\tree.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\result_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\next_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\tutorial_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\app_renderer.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\renderer.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\tree_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\shader.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\shader_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\title_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\canvas_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\light_camera.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\logo.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\texture_manager.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\game_scene.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\texture.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_run.obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\enemy_search .obj
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\matpixelshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\modelvertexshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\normalpshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\normalvshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\outline.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\pixel3dshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\pixelshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\shadow.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\skinmeshshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\toonpixel.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\toonshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertex3dshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertexshader.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\pixelgrass.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\vertexgrass.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\bin\shader\geometrygrass.cso
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\icon.res
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_1.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_11.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_12.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_14.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_15.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_17.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_2.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_4.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_5.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_6.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_7.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_8.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_9.idb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_1.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_11.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_12.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_14.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_15.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_17.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_2.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_4.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_5.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_6.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_7.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_8.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\vc141_ib_9.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\debug\win32project.pdb
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.command.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.command.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-cvtres.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-cvtres.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-rc.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-rc.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.command.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.command.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.read.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.write.1.tlog
-c:\users\fukuoka.shota\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\win32project.write.1u.tlog
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\vc141.pdb
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\vc141.idb
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\mesh_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\skybox.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\object.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\terrain.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\tree.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\tree_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\app_renderer.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\deferred _renderer.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\renderer.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\render_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\fade_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\game_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\next_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\result_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\title_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\tutorial_scene.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\shader.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\shader_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\texture.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\texture_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\character.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_attack.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_pattern_attack.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_pattern_run.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_pattern_wait.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_pattern_walk.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_search .obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_attack.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_pattern_attack.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_pattern_avoid.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_pattern_step.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_pattern_wait.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_pattern_walk.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\grass.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\mesh.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\mesh_field.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\collision_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\input.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\imgui.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\imgui_demo.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\imgui_draw.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\imgui_impl_dx11.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\vector.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\main.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\model.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\model_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\camera.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\camera_pattern_compliance.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\camera_pattern_lock_on.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\light_camera.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\main_camera.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\canvas.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\canvas_manager.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\logo.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\player_life.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\shadow_map.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\app.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\collider.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\enemy_life.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\effect_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\vc141.pdb
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\vc141.idb
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\mesh_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\skybox.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\object.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\terrain.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\tree.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\tree_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\app_renderer.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\deferred _renderer.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\renderer.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\render_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\fade_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\game_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\next_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\result_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\title_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\tutorial_scene.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\shader.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\shader_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\texture.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\texture_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_attack.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_life.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_attack.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_run.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_wait.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_pattern_walk.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_search .obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_attack.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_pattern_attack.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_pattern_avoid.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_pattern_step.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_pattern_wait.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_pattern_walk.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\grass.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\mesh.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\mesh_field.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\effect_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\imgui.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\imgui_demo.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\imgui_draw.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\imgui_impl_dx11.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\vector.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\main.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\model.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\model_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\camera.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\camera_pattern_compliance.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\camera_pattern_lock_on.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\light_camera.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\main_camera.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\canvas.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\canvas_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\logo.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\player_life.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\shadow_map.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\character.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\app.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\collider.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\collision_manager.obj
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\input.obj
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\matpixelshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\modelvertexshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\outline.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\pixel3dshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\shadow.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\skinmeshshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\toonpixel.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\toonshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\vertex3dshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\vertexblendcomputeshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\vertexshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\deferredvs.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\normalpshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\normalvshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\deferredps.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\pixelshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\vertexgrass.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\pixelgrass.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\bin\shader\geometrygrass.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\geometrygrass.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\deferredps.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\deferredvs.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\matpixelshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\modelvertexshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\normalpshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\normalvshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\outline.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\pixel3dshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\pixelgrass.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\pixelshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\shadow.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\skinmeshshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\toonpixel.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\toonshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\vertex3dshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\vertexblendcomputeshader.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\vertexgrass.cso
+c:\users\60120\desktop\grass_of_the_wild\win32project\bin\shader\vertexshader.cso
+c:\users\60120\desktop\grass_of_the_wild - コピー\debug\win32project.exe
+c:\users\60120\desktop\grass_of_the_wild - コピー\debug\win32project.ilk
+c:\users\60120\desktop\grass_of_the_wild - コピー\debug\win32project.pdb
+c:\users\60120\desktop\grass_of_the_wild - コピー\win32project\debug\icon.res
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\icon.res
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\collision_manager.obj.enc
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy.obj.enc
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\enemy_manager.obj.enc
+c:\users\60120\desktop\grass_of_the_wild\debug\win32project.pdb
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.command.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\cl.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.command.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\fxc.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-cvtres.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-cvtres.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-rc.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link-rc.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.command.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\link.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.command.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.read.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\rc.write.1.tlog
+c:\users\60120\desktop\grass_of_the_wild\win32project\debug\win32project.tlog\win32project.write.1u.tlog

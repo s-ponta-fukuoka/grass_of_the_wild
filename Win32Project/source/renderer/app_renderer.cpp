@@ -5,10 +5,14 @@
 //
 //=============================================================================
 #include "app_renderer.h"
+#include "deferred _renderer.h"
 #include "../app/app.h"
 #include "render_manager.h"
 #include "../gui/imgui.h"
 #include "../gui/imgui_impl_dx11.h"
+#include "../device/input.h"
+#include "..//effect/effect_manager.h"
+#include "../scene/fade_scene.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -31,6 +35,8 @@ AppRenderer::AppRenderer( )
 	, m_pSwapChain( NULL )
 	, m_pRenderTargetView( NULL )
 	, m_pDepthStencilView( NULL )
+	, m_pDeferredRenderer(NULL)
+	, m_pEffectManager(NULL)
 {
 	ConfigViewPort();
 }
@@ -90,6 +96,20 @@ void AppRenderer::Release(void)
 	SAFE_RELEASE(m_pRenderTargetView);
 
 	SAFE_RELEASE(m_pDepthStencilView);
+
+	if (m_pDeferredRenderer != NULL)
+	{
+		m_pDeferredRenderer->Release();
+		delete m_pDeferredRenderer;
+		m_pDeferredRenderer = NULL;
+	}
+
+	if (m_pEffectManager != NULL)
+	{
+		m_pEffectManager->Release();
+		delete m_pEffectManager;
+		m_pEffectManager = NULL;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -99,18 +119,73 @@ void AppRenderer::Draw(RenderManager* pRenderManager)
 {
 	pRenderManager->ShadowDrawAll();
 
-	float ClearColor[4] = { 0,0,1,1 }; //消去色
-	m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);//画面クリア 
+	ID3D11RenderTargetView* pRenderTargetView[4];
+	pRenderTargetView[0] = m_pDeferredRenderer->GetRenderTargetView(0);
+	pRenderTargetView[1] = m_pDeferredRenderer->GetRenderTargetView(1);
+	pRenderTargetView[2] = m_pDeferredRenderer->GetRenderTargetView(2);
+	pRenderTargetView[3] = m_pDeferredRenderer->GetRenderTargetView(3);
+
+	float ClearColor[4] = { 0,0,0,1 }; //消去色
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[0], ClearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[1], ClearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[2], ClearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[3], ClearColor);//画面クリア 
 
 	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	m_pDeviceContext->RSSetViewports(1, &m_ViewPort);
 
-	m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+	m_pDeviceContext->OMSetRenderTargets(4, pRenderTargetView, m_pDepthStencilView);
 
+	pRenderManager->DeferredDrawAll();
+
+	m_pEffectManager->Draw();
+
+	float clearColor[4] = { 0,0,0,1 }; //消去色
+	pRenderTargetView[0] = m_pRenderTargetView;
+	pRenderTargetView[1] = NULL;
+	pRenderTargetView[2] = NULL;
+	pRenderTargetView[3] = NULL;
+
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[0], clearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[1], clearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[2], clearColor);//画面クリア 
+	m_pDeviceContext->ClearRenderTargetView(pRenderTargetView[3], clearColor);//画面クリア 
+
+	m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+	m_pDeviceContext->RSSetViewports(4, &m_ViewPort);
+
+	m_pDeviceContext->OMSetRenderTargets(4, pRenderTargetView, m_pDepthStencilView);
+
+	//ここにOnRenderImage	
+	pRenderManager->DrawAll();
+	m_pDeferredRenderer->Draw();
 	pRenderManager->DrawAll();
 
-	ImGui::Render();
+	Fade* pFade = Fade::GetInstance();
+	pFade->Draw();
+
+	ImGui::Begin("Deferred");
+	{
+		if (ImGui::TreeNode("G-Buffer"))
+		{
+			ImGui::Text("Diffuse");
+			ImGui::Image((ImTextureID)m_pDeferredRenderer->GetShaderResourceView(0), ImVec2(220, 120), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
+			ImGui::Text("\nNormal");
+			ImGui::Image((ImTextureID)m_pDeferredRenderer->GetShaderResourceView(1), ImVec2(220, 120), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
+			ImGui::Text("\nDepth");
+			ImGui::Image((ImTextureID)m_pDeferredRenderer->GetShaderResourceView(2), ImVec2(220, 120), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
+			ImGui::Text("\nShadow");
+			ImGui::Image((ImTextureID)m_pDeferredRenderer->GetShaderResourceView(3), ImVec2(220, 120), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
+		}
+	}
+	ImGui::End();
+
+	if (isDebugMode())
+	{
+		ImGui::Render();
+	}
 
 	m_pSwapChain->Present(1, 0);//フリップ
 }
@@ -177,13 +252,13 @@ void AppRenderer::ConfigDeviceAndSwapChain(const HWND hWnd)
 		return;
 	}
 
-	ConfigDepthStencilView(sd);
+	ConfigDepthStencilView(sd.SampleDesc);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //ステンシルターゲット設定
 ///////////////////////////////////////////////////////////////////////////////
-void AppRenderer::ConfigDepthStencilView(const DXGI_SWAP_CHAIN_DESC sd)
+void AppRenderer::ConfigDepthStencilView(const DXGI_SAMPLE_DESC sd)
 {
 	//ステンシル用テクスチャー作成
 	ID3D11Texture2D* hpTexture2dDepth = NULL;
@@ -192,8 +267,8 @@ void AppRenderer::ConfigDepthStencilView(const DXGI_SWAP_CHAIN_DESC sd)
 	hTexture2dDesc.Height = SCREEN_WIDTH;
 	hTexture2dDesc.MipLevels = 1;
 	hTexture2dDesc.ArraySize = 1;
-	hTexture2dDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-	hTexture2dDesc.SampleDesc = sd.SampleDesc;
+	hTexture2dDesc.Format = DXGI_FORMAT_R32_TYPELESS;
+	hTexture2dDesc.SampleDesc = sd;
 	hTexture2dDesc.Usage = D3D11_USAGE_DEFAULT;
 	hTexture2dDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	hTexture2dDesc.CPUAccessFlags = 0;
@@ -202,7 +277,7 @@ void AppRenderer::ConfigDepthStencilView(const DXGI_SWAP_CHAIN_DESC sd)
 
 	//ステンシルターゲット作成
 	D3D11_DEPTH_STENCIL_VIEW_DESC hDepthStencilViewDesc;
-	hDepthStencilViewDesc.Format = hTexture2dDesc.Format;
+	hDepthStencilViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	hDepthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
 	hDepthStencilViewDesc.Flags = 0;
 	m_pDevice->CreateDepthStencilView(hpTexture2dDepth, &hDepthStencilViewDesc, &m_pDepthStencilView);
@@ -256,4 +331,18 @@ void AppRenderer::ConfigRasterizerState(D3D11_FILL_MODE fmode, D3D11_CULL_MODE c
 	m_pDevice->CreateRasterizerState(&rs, &m_pRasterizerState);
 
 	m_pDeviceContext->RSSetState(m_pRasterizerState);
+}
+
+bool AppRenderer::isDebugMode(void)
+{
+	static bool use = false;
+
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_F1))
+	{
+		return use = !use;
+	}
+
+	return use;
 }

@@ -38,7 +38,9 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager) override;
 
-	virtual void InputOperation(Player* pPlayer);
+	virtual void InputOperation(Player* pPlayer) {};
+
+	void InputAttackOperation(Player* pPlayer, CollisionManager* pCollisionManager);
 
 	void ChangeAttackAnime(Player* pPlayer, CollisionManager* pCollisionManager);
 };

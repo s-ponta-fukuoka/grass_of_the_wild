@@ -51,6 +51,9 @@ HRESULT Character::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Character::Release(void)
 {
+	ES_SAFE_RELEASE(m_pVertexBuffer);
+	ES_SAFE_RELEASE(m_pIndexBuffer);
+
 	Object::Release();
 }
 

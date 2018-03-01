@@ -47,11 +47,31 @@ void EnemyPatternWait::Update(Enemy* pEnemy,
 	Object::Transform* pPlayerTransform = pEnemy->GetPlayerTransform();
 
 	if (Utility::Distance(pTransform->position, pPlayerTransform->position) < 1000 &&
-		Utility::Distance(pTransform->position, pPlayerTransform->position) >= 100)
+		Utility::Distance(pTransform->position, pPlayerTransform->position) >= 500)
 	{
 		pAnimeNumber[0] = 6;
 		pEnemy->ChangeEnemyPattern(new EnemyPatternRun);
 	}
+
+	int nCounterCnt = pEnemy->GetCounterCnt();
+
+	if (nCounterCnt >= 10)
+	{
+		pAnimeNumber[0] = 3;
+		pEnemy->SetMode(Enemy::MODE_ATTACK);
+		pEnemy->ChangeEnemyPattern(new EnemyPatternAttack);
+		nCounterCnt = 0;
+	}
+
+	pEnemy->SetCounterCnt(nCounterCnt);
+
+	VECTOR3 pos;
+	pos.x = pTransform->position.x - pPlayerTransform->position.x;
+	pos.z = pTransform->position.z - pPlayerTransform->position.z;
+
+	pTransform->rot.y = atan2(pos.z, pos.x);
+
+	pTransform->rot.y = atan2(pos.z, pos.x) + D3D_PI * 0.5;
 
 	pEnemy->ChangeAnime();
 }

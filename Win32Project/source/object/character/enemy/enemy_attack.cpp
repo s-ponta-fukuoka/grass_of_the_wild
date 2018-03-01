@@ -36,7 +36,7 @@ EnemyAttack::EnemyAttack(
 
 	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
 
-	SetObjectType(Object::TYPE_PLAYER_ATTACK);
+	SetObjectType(Object::TYPE_ENEMY_ATTACK);
 
 	m_pTransform->rot.y = 0;
 }
@@ -63,13 +63,42 @@ HRESULT EnemyAttack::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void EnemyAttack::Release(void)
 {
-	delete m_pModel;
-	delete m_pFrame;
-	delete m_pAnimeNumber;
 
-	delete m_pTransform;
+	if (m_pCollider != NULL)
+	{
+		delete m_pCollider;
+		m_pCollider = NULL;
+	}
 
-	delete	m_pCollider;
+	if (m_pTransform != NULL)
+	{
+		delete m_pTransform;
+		m_pTransform = NULL;
+	}
+
+	if (m_pModel != NULL)
+	{
+		delete m_pModel;
+		m_pModel = NULL;
+	}
+
+	if (m_pFrame != NULL)
+	{
+		delete m_pFrame;
+		m_pFrame = NULL;
+	}
+
+	if (m_pAnimeNumber != NULL)
+	{
+		delete m_pAnimeNumber;
+		m_pAnimeNumber = NULL;
+	}
+
+	if (m_pModel != NULL)
+	{
+		delete m_pModel;
+		m_pModel = NULL;
+	}
 
 	Character::Release();
 }

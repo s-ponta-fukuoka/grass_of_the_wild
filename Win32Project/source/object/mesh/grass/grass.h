@@ -39,9 +39,9 @@ public:
 	{
 		XMMATRIX view;
 		XMMATRIX projection;
-		//XMFLOAT3 posEye;
 		float time;
 		XMFLOAT3 posPlayer;
+		XMFLOAT3 posEye;
 	};
 
 	Grass( RenderManager* pRenderManager,
@@ -69,6 +69,9 @@ private:
 	VECTOR3 m_size;
 	MeshField* m_pMeshField;
 	ID3D11Buffer* m_pInstanceBuffer;
+	int* m_pNumInstance;
+
+	ID3D11Buffer* m_ComputeBuffer;
 };
 
 #endif

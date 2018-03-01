@@ -24,6 +24,8 @@ class EnemyPatternAttack : public EnemyPattern
 {
 	EnemyAttack* m_pEnemyAttack;
 
+	CollisionManager* m_pCollisionManager;
+
 	int			m_nWait;
 public:
 
@@ -37,6 +39,8 @@ public:
 		TextureManager* pTextureManager,
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager) override;
+
+	void ChangeAttackAnime(Enemy* pEnemy, CollisionManager* pCollisionManager);
 };
 
 #endif

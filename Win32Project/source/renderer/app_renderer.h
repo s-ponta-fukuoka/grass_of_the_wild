@@ -29,25 +29,19 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment (lib, "dinput8.lib")
 
-#ifdef _DEBUG
-#pragma comment(lib, "Effekseer.Debug.lib" )
-#pragma comment(lib, "EffekseerRendererDX11.Debug.lib" )
-#else
-#pragma comment(lib, "Effekseer.Release.lib" )
-#pragma comment(lib, "EffekseerRendererDX11.Release.lib" )
-#endif
-
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
 #define D3D_PI ((FLOAT) 3.141592654f) 
 #define D3DToRadian( degree ) ((degree) * (D3D_PI / 180.0f))
 #define D3DToDegree( radian ) ((radian) * (180.0f / D3D_PI))
-
+#define NUM_VERTEX (4)
 //*****************************************************************************
 //構造体定義
 //*****************************************************************************
 class RenderManager;
+class DeferredRenderer;
+class EffectManager;
 
 //*****************************************************************************
 // クラス定義
@@ -81,6 +75,7 @@ public:
 		XMMATRIX lightView;		
 		XMMATRIX lightProjection;
 		XMVECTOR light;
+		VECTOR4	 color;
 	};
 
 	//デストラクタ
@@ -116,6 +111,9 @@ public:
 	//ラスタライザー設定
 	void ConfigRasterizerState(D3D11_FILL_MODE fmode, D3D11_CULL_MODE cmode);
 
+	void SetDeferredRenderer(DeferredRenderer* pDeferredRenderer) { m_pDeferredRenderer = pDeferredRenderer; }
+	void SetEffectManager(EffectManager* pEffectManager) { m_pEffectManager = pEffectManager; }
+
 private:
 	//コンストラクタ
 	AppRenderer();
@@ -124,7 +122,7 @@ private:
 	void ConfigDeviceAndSwapChain(const HWND hWnd);
 
 	//ステンシルターゲット設定
-	void ConfigDepthStencilView(const DXGI_SWAP_CHAIN_DESC sd);
+	void ConfigDepthStencilView(const DXGI_SAMPLE_DESC sd);
 
 	//レンダーターゲットビュー設定
 	void ConfigRenderTargets(void);
@@ -132,7 +130,13 @@ private:
 	//ビューポート設定
 	void ConfigViewPort(void);
 
+	bool isDebugMode(void);
+
 	static AppRenderer*				m_pAppRenderer;
+
+	DeferredRenderer*				m_pDeferredRenderer;
+
+	EffectManager*					m_pEffectManager;
 
 	ID3D11Device*					m_pDevice;
 

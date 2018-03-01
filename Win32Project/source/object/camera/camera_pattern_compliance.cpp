@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// player.cpp
+// camera_pattern_compliance.cpp
 // Author : SHOTA FUKUOKA
 //
 //=============================================================================
@@ -8,25 +8,34 @@
 //*****************************************************************************
 // インクルード
 //*****************************************************************************
-#include "camera_pattern_compliance.h"
 #include "main_camera.h"
+#include "../../device/xbox_controller.h"
 #include "../../device/input.h"
 #include "../character/player/player.h"
+#include "camera_pattern.h"
+#include "camera_pattern_compliance.h"
+#include "camera_pattern_lock_on.h"
+#include "../character/enemy/enemy.h"
+#include "../character/enemy/enemy_manager.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define CAMERA_COMP_MOVE (10)
+#define CAMERA_COMP_MAX_UP (1000)
+#define CAMERA_COMP_MAX_DOWN (0)
+#define CAMERA_COMP_MOVE_Y (5)
+#define CAMERA_COMP_X (350)
+#define CAMERA_COMP_Y (350)
+#define CAMERA_COMP_Z (500)
+#define CAMERA_COMP_HEIGT (185)
 
 ///////////////////////////////////////////////////////////////////////////////
 //コンストラクタ
 ///////////////////////////////////////////////////////////////////////////////
 CameraPatternCompliance::CameraPatternCompliance()
 {
-	;
+	m_bUse = false;
 }
-
-///////////////////////////////////////////////////////////////////////////////
-//デストラクタ
-///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 //更新
@@ -35,70 +44,95 @@ void CameraPatternCompliance::Update(MainCamera* pMainCamera)
 {
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
+
 	VECTOR3 move = pMainCamera->GetMove();
 	XMVECTOR vector = pMainCamera->GetVec();
 
-	VECTOR3 posAt = pMainCamera->GetPosAt();
+	VECTOR3 posAt;
+	VECTOR3 posPlayer;
 
 	Player*	pPlayer = pMainCamera->GetPlayer();
 
+	XMVECTOR pos;
+	XMVECTOR startPos = XMVectorSet(pMainCamera->GetTransform()->position.x,
+		pMainCamera->GetTransform()->position.y,
+		pMainCamera->GetTransform()->position.z, 1.0f);
+
 	if (pInputKeyboard->GetKeyPress(DIK_UP))
 	{
-		move.x -= XMVectorGetX(vector) * 10;
-		move.z -= XMVectorGetZ(vector) * 10;
+		move.x -= XMVectorGetX(vector) * CAMERA_COMP_MOVE;
+		move.z -= XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_LEFT))
 	{
-		move.x += XMVectorGetZ(vector) * 10;
-		move.z -= XMVectorGetX(vector) * 10;
+		move.x += XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
+		move.z -= XMVectorGetX(vector) * CAMERA_COMP_MOVE;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_DOWN))
 	{
-		move.x += XMVectorGetX(vector) * 10;
-		move.z += XMVectorGetZ(vector) * 10;
+		move.x += XMVectorGetX(vector) * CAMERA_COMP_MOVE;
+		move.z += XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
 	}
 
 	if (pInputKeyboard->GetKeyPress(DIK_RIGHT))
 	{
-		move.x -= XMVectorGetZ(vector) * 10;
-		move.z += XMVectorGetX(vector) * 10;
+		move.x -= XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
+		move.z += XMVectorGetX(vector) * CAMERA_COMP_MOVE;
 	}
 
-	if (pInputKeyboard->GetKeyPress(DIK_C))// Sキー押されたら
+	if (pInputKeyboard->GetKeyPress(DIK_C) || 
+		Xinput.Gamepad.sThumbRX > XINPUT_VECTOR)
 	{
-		move.x += XMVectorGetZ(vector) * 10;
-		move.z -= XMVectorGetX(vector) * 10;
+		move.x += XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
+		move.z -= XMVectorGetX(vector) * CAMERA_COMP_MOVE;
 	}
 
-	if (pInputKeyboard->GetKeyPress(DIK_Z))// Sキー押されたら
+	if (pInputKeyboard->GetKeyPress(DIK_Z) ||
+		Xinput.Gamepad.sThumbRX < -XINPUT_VECTOR)
 	{
-		move.x -= XMVectorGetZ(vector) * 10;
-		move.z += XMVectorGetX(vector) * 10;
+		move.x -= XMVectorGetZ(vector) * CAMERA_COMP_MOVE;
+		move.z += XMVectorGetX(vector) * CAMERA_COMP_MOVE;
 	}
 
-	if (pInputKeyboard->GetKeyPress(DIK_Y))// Sキー押されたら
+	if (pMainCamera->GetTransform()->position.y > CAMERA_COMP_MAX_DOWN)
 	{
-		move.y += 5;
-
-		pMainCamera->GetTransform()->rot.y += 0.5f;
+		if (pInputKeyboard->GetKeyPress(DIK_N) ||
+			Xinput.Gamepad.sThumbRY < -XINPUT_VECTOR)
+		{
+			move.y -= CAMERA_COMP_MOVE_Y;
+		}
 	}
-	if (pInputKeyboard->GetKeyPress(DIK_N))// Sキー押されたら
-	{
-		move.y -= 5;
 
-		pMainCamera->GetTransform()->rot.y -= 0.5f;
+	if (pMainCamera->GetTransform()->position.y < CAMERA_COMP_MAX_UP)
+	{
+		if (pInputKeyboard->GetKeyPress(DIK_Y) ||
+			Xinput.Gamepad.sThumbRY > XINPUT_VECTOR)
+		{
+			move.y += CAMERA_COMP_MOVE_Y;
+		}
 	}
 	
-	posAt.x = pPlayer->GetTransform()->position.x;
-	posAt.z = pPlayer->GetTransform()->position.z;
-	posAt.y = 100 + pPlayer->GetTransform()->position.y;
+	posPlayer.x = pPlayer->GetTransform()->position.x;
+	posPlayer.y = pPlayer->GetTransform()->position.y;
+	posPlayer.z = pPlayer->GetTransform()->position.z;
 
-	pMainCamera->GetTransform()->position.x = move.x + (350 * sinf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + pPlayer->GetTransform()->position.x;
-	pMainCamera->GetTransform()->position.z = move.z + (500 * cosf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + pPlayer->GetTransform()->position.z;
-	pMainCamera->GetTransform()->position.y = move.y + (350 * sinf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + 100 + pPlayer->GetTransform()->position.y;
+	pMainCamera->GetTransform()->position.x = move.x + (CAMERA_COMP_X * sinf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + pPlayer->GetTransform()->position.x;
+	pMainCamera->GetTransform()->position.z = move.z + (CAMERA_COMP_Z * cosf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + pPlayer->GetTransform()->position.z;
+	pMainCamera->GetTransform()->position.y = move.y + (CAMERA_COMP_Y * sinf(D3D_PI + pMainCamera->GetTransform()->rot.y)) + CAMERA_COMP_HEIGT + pPlayer->GetTransform()->position.y;
 
-	pMainCamera->SetPositionAt(posAt);
+	pMainCamera->SetPositionAt(posPlayer);
 	pMainCamera->SetMove(move);
+
+	if (pInputKeyboard->GetKeyPress(DIK_LSHIFT) ||
+		Xinput.Gamepad.bLeftTrigger > XINPUT_TRIGGER)
+	{
+		Enemy* pEnemy = pMainCamera->GetEnemy();
+		pEnemy = pMainCamera->GetEnemyManager()->GetDistanceEnemy(pMainCamera->GetPlayer());
+		pMainCamera->SetEnemy(pEnemy);
+		pMainCamera->ChangeCameraPattern(new CameraPatternLockOn);
+	}
 }

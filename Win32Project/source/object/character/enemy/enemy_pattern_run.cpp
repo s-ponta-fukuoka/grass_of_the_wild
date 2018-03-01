@@ -19,7 +19,7 @@
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
-#define ENEMY_MOVE (10)
+#define ENEMY_MOVE (8)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -65,11 +65,14 @@ void EnemyPatternRun::Update(Enemy* pEnemy,
 
 	pTransform->rot.y = atan2(pos.z, pos.x) + D3D_PI * 0.5;
 
-	if (Utility::Distance(pTransform->position, pPlayerTransform->position) < 300)
+	if (Utility::Distance(pTransform->position, pPlayerTransform->position) < 200)
 	{
-		pAnimeNumber[0] = 0;
-		pEnemy->ChangeEnemyPattern(new EnemyPatternWait);
+		pEnemy->SetMode(Enemy::MODE_ATTACK);
+		pAnimeNumber[0] = 2;
+		pEnemy->ChangeEnemyPattern(new EnemyPatternAttack);
 	}
+
+	pEnemy->SetMove(move);
 
 	pEnemy->ChangeAnime();
 

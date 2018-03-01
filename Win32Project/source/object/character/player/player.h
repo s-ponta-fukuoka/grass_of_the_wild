@@ -29,6 +29,7 @@ class PlayerPattern;
 class PlayerAttack;
 class PlayerLife;
 class MeshField;
+class EffectManager;
 
 //*****************************************************************************
 // クラス定義
@@ -54,7 +55,8 @@ public:
 		MainCamera* pCamera,
 		CollisionManager* pCollisionManager,
 		PlayerLife* pPlayerLife,
-		MeshField* pMeshFiled);
+		MeshField* pMeshFiled,
+		EffectManager* pEffectManager);
 
 	//デストラクタ
 	virtual ~Player();
@@ -96,15 +98,24 @@ public:
 	
 	void SetCompletionRot(XMVECTOR CompletionRot) { m_CompletionRot = CompletionRot; }
 
+	void Damage(void);
+
+	void WallCollision(void);
+
 	XMVECTOR GetCompletionPosition(void) { return m_CompletionPosition; }
 
 	XMVECTOR GetCompletionRot(void) { return m_CompletionRot; }
 
 	PlayerLife *GetPlayerLife(void) { return m_pPlayerLife; }
 
+	EffectManager *GetEffectManager(void) { return m_pEffectManager; }
+
 private:
+	AppRenderer::Constant* m_pConstant;
 
 	MeshField*			m_pMeshField;
+
+	EffectManager*		m_pEffectManager;
 
 	PlayerLife*			m_pPlayerLife;
 
@@ -127,6 +138,10 @@ private:
 	PlayerAttack*		m_pPlayerAttack;
 
 	float					m_nTime;
+
+	bool				m_bLife;
+
+	VECTOR4*			m_pColor;
 };
 
 #endif

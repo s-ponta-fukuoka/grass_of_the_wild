@@ -38,6 +38,8 @@ Grass::Grass(RenderManager* pRenderManager,
 	VECTOR3 pos, 
 	Object::Transform* pPlayerTransform)
 {
+	m_pNumInstance = new int;
+
 	m_pMeshField = pMeshField;
 
 	m_pTransform = new Transform[GRASS_MAX];
@@ -52,7 +54,7 @@ Grass::Grass(RenderManager* pRenderManager,
 
 	m_vertex.position = VECTOR3(0, 0, 0);
 	m_vertex.tex = VECTOR2(0.0f, 0.0f);
-	m_size = VECTOR3(5, 80, 0);
+	m_size = VECTOR3(3, 80, 0);
 	m_vertex.normal = VECTOR3(0, 0, -1);
 
 	for (int nCnt = 0; nCnt < GRASS_MAX; nCnt++)
@@ -79,7 +81,7 @@ Grass::Grass(RenderManager* pRenderManager,
 			f += nf;
 		}
 
-		m_pTransform[nCnt].position.x += f * 5300;
+		//m_pTransform[nCnt].position.x += f * 5300;
 
 		n = Utility::DecimalConversion<int>(nCnt, 5, 10);
 
@@ -98,7 +100,10 @@ Grass::Grass(RenderManager* pRenderManager,
 			f += nf;
 		}
 
-		m_pTransform[nCnt].position.z += f * 8000;
+		//m_pTransform[nCnt].position.z += f * 8000;
+
+		m_pTransform[nCnt].position.x += Utility::Hulton(nCnt, 2)* 8000;
+		m_pTransform[nCnt].position.z += Utility::Hulton(nCnt, 3)* 5300;
 
 		m_pTransform[nCnt].rot.y += f * 8000;
 
@@ -107,13 +112,17 @@ Grass::Grass(RenderManager* pRenderManager,
 
 	MakeVertex();
 
-	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
+	m_pNumInstance[0] = GRASS_MAX;
 
-	pRenderManager->AddRenderer(new GrowMeshRenderer(m_pVertexBuffer,
+	Texture* pTexture = new Texture("resource/sprite/NULL.jpg", pTextureManager);
+	Texture* pBayerTexture = new Texture("resource/sprite/bayer.png", pTextureManager);
+
+	pRenderManager->AddDeferredRenderer(new GrowMeshRenderer(m_pVertexBuffer,
 		m_pInstanceBuffer,
 		NULL,
 		pShaderManager,
 		pTexture->GetTexture(),
+		pBayerTexture->GetTexture(),
 		NULL,
 		m_pTransform,
 		pPlayerTransform,
@@ -121,11 +130,12 @@ Grass::Grass(RenderManager* pRenderManager,
 		pLightCameraConstant,
 		pCamera,
 		GRASS_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
+		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 		VertexShader::VS_GRASS,
 		GeometryShader::GS_GRASS,
 		PixelShader::PS_GRASS,
-		FALSE));
+		FALSE,
+		m_pNumInstance));
 }
 
 //=============================================================================
@@ -156,6 +166,12 @@ HRESULT Grass::Init( void )
 //=============================================================================
 void Grass::Release(void)
 {
+	if (m_pTransform != NULL)
+	{
+		delete[] m_pTransform;
+		m_pTransform = NULL;
+	}
+
 	Mesh::Release();
 }
 
@@ -164,6 +180,52 @@ void Grass::Release(void)
 //=============================================================================
 void Grass::Update( void )
 {
+	//AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+	//ID3D11Device* pDevice = pAppRenderer->GetDevice();
+	//ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+	//
+	//D3D11_MAPPED_SUBRESOURCE msr;
+	//pDeviceContext->Map(m_pInstanceBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
+	//
+	//std::vector<Object::Transform> Transform;
+	//
+	//for (int nCnt = 0; nCnt < GRASS_MAX; nCnt++)
+	//{
+	//	float distance = sqrt((m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) * (m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) +
+	//		(m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) * (m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) +
+	//		(m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z) * (m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z));
+	//
+	//	if (distance <= 5000)
+	//	{
+	//		Transform.push_back(m_pTransform[nCnt]);
+	//	}
+	//}
+	//
+	//XMMATRIX* hWorld = new XMMATRIX[Transform.size()];
+	//
+	//for (int nCnt = 0; nCnt < Transform.size(); nCnt++)
+	//{
+	//	hWorld[nCnt] = XMMatrixIdentity();
+	//
+	//	XMMATRIX hPosition = XMMatrixTranslation(Transform[nCnt].position.x, Transform[nCnt].position.y, Transform[nCnt].position.z);
+	//	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(Transform[nCnt].rot.x), D3DToRadian(Transform[nCnt].rot.y), D3DToRadian(Transform[nCnt].rot.z));
+	//	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
+	//
+	//	hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hScaling);
+	//	hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hRotate);
+	//	hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hPosition);
+	//
+	//	hWorld[nCnt] = XMMatrixTranspose(hWorld[nCnt]);
+	//}
+	//
+	//memcpy(msr.pData, hWorld, sizeof(XMMATRIX) * Transform.size()); // 3頂点分コピー
+	//
+	//delete[] hWorld;
+	//
+	//pDeviceContext->Unmap(m_pInstanceBuffer, 0);
+	//
+	//m_pNumInstance[0] = Transform.size();
+
 	//m_pTransform->position.x += 0.1f;
 
 	//float angle = atan2( m_pTransform->position.x - m_pCamera->GetPos().x, m_pTransform->position.z - m_pCamera->GetPos().z) * (180.0 / D3D_PI);
@@ -179,8 +241,8 @@ void Grass::MakeVertex(void)
 
 	AppRenderer::Vertex3D* vertices = new AppRenderer::Vertex3D[GRASS_VERTEX];
 
-	vertices[0].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y, m_vertex.position.z);
-	vertices[1].position = VECTOR3(m_vertex.position.x - m_size.x, 0, m_vertex.position.z);
+	vertices[0].position = VECTOR3(m_vertex.position.x + m_size.x, m_vertex.position.y + 35, m_vertex.position.z);
+	vertices[1].position = VECTOR3(m_vertex.position.x - m_size.x, m_vertex.position.y + 35, m_vertex.position.z);
 	vertices[2].position = VECTOR3(m_vertex.position.x, m_vertex.position.y + m_size.y, m_vertex.position.z);
 	//vertices[3].position = VECTOR3(m_vertex.position.x, m_vertex.position.y, m_vertex.position.z);
 	
@@ -231,10 +293,10 @@ void Grass::MakeVertex(void)
 	}
 
 	D3D11_BUFFER_DESC Ibd;
-	Ibd.Usage = D3D11_USAGE_DEFAULT;
+	Ibd.Usage = D3D11_USAGE_DYNAMIC;
 	Ibd.ByteWidth = sizeof(XMMATRIX) * GRASS_MAX;
 	Ibd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	Ibd.CPUAccessFlags = 0;
+	Ibd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	Ibd.MiscFlags = 0;
 	D3D11_SUBRESOURCE_DATA InstanceInitData;
 	InstanceInitData.pSysMem = hWorld;

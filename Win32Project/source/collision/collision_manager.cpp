@@ -1,51 +1,43 @@
 //=============================================================================
 //
-// [manager.h]
+// collision_manager.h
 // Author : shota fukuoka
 //
 //=============================================================================
+
+//*****************************************************************************
+// インクルード
+//*****************************************************************************
 #include "../object/object.h"
 #include "collision_manager.h"
 #include "collider.h"
 
-//*****************************************************************************
-// マクロ定義
-//*****************************************************************************
+///////////////////////////////////////////////////////////////////////////////
+//コンストラクタ
+///////////////////////////////////////////////////////////////////////////////
+CollisionManager::CollisionManager()
+{
+	;
+}
 
-//*****************************************************************************
-// プロトタイプ宣言
-//*****************************************************************************
+///////////////////////////////////////////////////////////////////////////////
+//コンストラクタ
+///////////////////////////////////////////////////////////////////////////////
+CollisionManager::~CollisionManager()
+{
+	;
+}
 
-//*****************************************************************************
-// グローバル変数:
-//*****************************************************************************
-
-
+///////////////////////////////////////////////////////////////////////////////
+//更新
+///////////////////////////////////////////////////////////////////////////////
 void CollisionManager::Update(void)
 {
 	for (auto iteSource = m_listCollider.begin(); iteSource != m_listCollider.end(); ++iteSource)
 	{
 		for (auto iteDest = iteSource; iteDest != m_listCollider.end(); ++iteDest)
 		{
-			if (*iteSource != *iteDest && *iteSource != NULL && *iteDest != NULL)
-			{
-				if (isCollision((*iteSource), (*iteDest)))
-				{
-					if ((*iteSource) != NULL && (*iteDest) != NULL)
-					{
-						(*iteSource)->GetGameObject()->OnCollision((*iteDest));
-						if (!(*iteSource)->isColliderDelete())
-						{
-							(*iteDest)->GetGameObject()->OnCollision((*iteSource));
-						}
-						else
-						{
-							(*iteSource)->RendererDelete();
-							(*iteSource) = NULL;
-						}
-					}
-				}
-			}
+			SearchCollision(*iteSource, *iteDest);
 		}
 	}
 
@@ -60,27 +52,83 @@ void CollisionManager::Update(void)
 	
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//追加
+///////////////////////////////////////////////////////////////////////////////
+void CollisionManager::SearchCollision(Collider* Source, Collider* Dest)
+{
+	if (Source == Dest)
+	{
+		return;
+	}
+
+	if (Source == NULL)
+	{
+		return;
+	}
+
+	if (Dest == NULL)
+	{
+		return;
+	}
+
+	if (!isCollision(Source, Dest))
+	{
+		return;
+	}
+
+	if (Source == NULL)
+	{
+		return;
+	}
+
+	if (Dest == NULL)
+	{
+		return;
+	}
+
+	Source->GetGameObject()->OnCollision(Dest);
+	if (!Source->isColliderDelete())
+	{
+		Dest->GetGameObject()->OnCollision(Source);
+	}
+	else
+	{
+		Source = NULL;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//追加
+///////////////////////////////////////////////////////////////////////////////
 void CollisionManager::AddCollider(Collider* col)
 {
 	m_listCollider.push_back(col);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//削除
+///////////////////////////////////////////////////////////////////////////////
 void CollisionManager::DeleteCollider(Collider* col)
 {
 	for (auto ite = m_listCollider.begin(); ite != m_listCollider.end(); ++ite)
 	{
 		if (*ite == col)
 		{
-			m_listCollider.erase(ite);
+			(*ite) = NULL;
 			break;
 		}
 	}
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//当たっているか
+///////////////////////////////////////////////////////////////////////////////
 bool CollisionManager::isCollision(Collider* Source, Collider* Dest)
 {
 	if (Source->GetType() == Collider::TYPE_BOX && Dest->GetType() == Collider::TYPE_BOX)
 	{
+		;
 	}
 
 	if (Source->GetType() == Collider::TYPE_SPHERE && Dest->GetType() == Collider::TYPE_SPHERE)
@@ -90,6 +138,10 @@ bool CollisionManager::isCollision(Collider* Source, Collider* Dest)
 	return true;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//球と球
+///////////////////////////////////////////////////////////////////////////////
 bool CollisionManager::CollisionSphereSphere(SphereCollider* Source, SphereCollider* Dest)
 {
 	VECTOR3 SourcePos = Source->GetTransform()->position;

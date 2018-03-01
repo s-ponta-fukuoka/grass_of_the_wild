@@ -21,9 +21,11 @@ class Renderer;
 //*****************************************************************************
 class RenderManager
 {
-	std::list<Renderer*>		m_listRenderer;
+	std::list<Renderer*>			m_listRenderer;
 
-	std::list<Renderer*>		m_listShadowRenderer;
+	std::list<Renderer*>			m_listDeferredRenderer;
+
+	std::list<Renderer*>			m_listShadowRenderer;
 
 	D3D11_VIEWPORT					m_ShadowViewPort;
 
@@ -40,6 +42,7 @@ public:
 	//デストラクタ
 	virtual ~RenderManager();
 
+	/*ノーマル*/
 	//追加
 	void AddRenderer(Renderer* renderer);
 
@@ -49,6 +52,7 @@ public:
 	//全描画
 	void DrawAll(void);
 
+	/*シャドウ*/
 	//追加
 	void AddShadowRenderer(Renderer* renderer);
 
@@ -57,6 +61,16 @@ public:
 
 	//シャドウマップ用描画
 	void ShadowDrawAll(void);
+
+	/*ディファード*/
+	//追加
+	void AddDeferredRenderer(Renderer* renderer);
+
+	//削除
+	void DeleteDeferredRenderer(const Renderer* renderer);
+
+	//全描画
+	void DeferredDrawAll(void);
 
 	//全消去
 	void ReleaseAll(void);

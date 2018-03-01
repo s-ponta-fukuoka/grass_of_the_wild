@@ -12,6 +12,7 @@
 #include "../app/app.h"
 #include "../device/input.h"
 #include "../object/mesh/grass/grass.h"
+#include "../object/terrain/tree/tree_manager.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -96,6 +97,7 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ID3D11Buffer* pIndexBuffer,
 	ShaderManager* pShaderManager,
 	ID3D11ShaderResourceView* pTexture,
+	ID3D11ShaderResourceView* pBayerTexture,
 	ID3D11ShaderResourceView* pShadowMap,
 	Object::Transform* pTransform,
 	Object::Transform* pPlayerTransform,
@@ -107,11 +109,14 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	VertexShader::VERTEX_TYPE eVsType,
 	GeometryShader::GEOMETRY_TYPE eGsType,
 	PixelShader::PIXEL_TYPE ePsType,
-	BOOL bBlend)
+	BOOL bBlend,
+	int* pNumInstance)
 {
 	m_pCamera = pCamera;
 
 	m_ePolygon = ePolygon;
+
+	m_pNumInstance = pNumInstance;
 
 	m_pInstanceBuffer = pInstanceBuffer;
 
@@ -140,6 +145,8 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 
 	m_pTexture = pTexture;
 
+	m_pBayerTexture = pBayerTexture;
+
 	m_pShadowMap = pShadowMap;
 
 	m_fTime = 0.0f;
@@ -151,11 +158,13 @@ GrowMeshRenderer::GrowMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	ConfigBlendState(bBlend);
 }
 
-SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+ModelObjectRenderer::ModelObjectRenderer(ID3D11Buffer* pVertexBuffer,
+	ID3D11Buffer* pInstanceBuffer,
 	ID3D11Buffer* pIndexBuffer,
 	ShaderManager* pShaderManager,
 	ID3D11ShaderResourceView* pTexture,
 	ID3D11ShaderResourceView* pToonTexture,
+	ID3D11ShaderResourceView* pBayerTexture,
 	ID3D11ShaderResourceView* pShadowMap,
 	Object::Transform* pTransform,
 	AppRenderer::Constant* pConstant,
@@ -171,6 +180,75 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	SkinMeshModel::Mesh mesh,
 	BOOL bBlend)
 {
+	m_ePolygon = ePolygon;
+
+	m_pVertexBuffer = pVertexBuffer;
+
+	m_pIndexBuffer = pIndexBuffer;
+
+	m_pVertexShader = pShaderManager->GetVertexShader(eVsType);
+
+	m_pInstanceBuffer = pInstanceBuffer;
+
+	m_pGeometryShader = pShaderManager->GetGeometryShader(eGsType);
+
+	m_pPixelShader = pShaderManager->GetPixelShader(ePsType);
+
+	m_pTransform = pTransform;
+
+	m_pConstant = pConstant;
+
+	m_pLightConstant = pLightConstant;
+
+	m_nNumVertexPolygon = nNumVertexPolygon;
+
+	m_pFrame = pFrame;
+
+	m_pAnimeNumber = pAnimeNumber;
+
+	m_pTexture = pTexture;
+
+	m_pShadowMap = pShadowMap;
+
+	m_pCluster = pCluster;
+
+	m_pToonTexture = pToonTexture;
+
+	m_pBayerTexture = pBayerTexture;
+
+	m_mesh = mesh;
+
+	ConfigConstantBuffer(sizeof(Grass::Constant));
+
+	ConfigSamplerState();
+
+	ConfigBlendState(bBlend);
+}
+
+SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+	ID3D11Buffer* pIndexBuffer,
+	ShaderManager* pShaderManager,
+	ID3D11ShaderResourceView* pTexture,
+	ID3D11ShaderResourceView* pToonTexture,
+	ID3D11ShaderResourceView* pBayerTexture,
+	ID3D11ShaderResourceView* pShadowMap,
+	Object::Transform* pTransform,
+	AppRenderer::Constant* pConstant,
+	AppRenderer::Constant* pLightConstant,
+	int	nNumVertexPolygon,
+	int* pFrame,
+	int* pAnimeNumber,
+	D3D_PRIMITIVE_TOPOLOGY ePolygon,
+	VertexShader::VERTEX_TYPE eVsType,
+	GeometryShader::GEOMETRY_TYPE eGsType,
+	PixelShader::PIXEL_TYPE ePsType,
+	SkinMeshModel::Cluster*	pCluster,
+	SkinMeshModel::Mesh mesh,
+	BOOL bBlend,
+	VECTOR4* color)
+{
+	m_pColor = color;
+
 	m_ePolygon = ePolygon;
 
 	m_pVertexBuffer = pVertexBuffer;
@@ -202,6 +280,8 @@ SkinnedMeshRenderer::SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
 	m_pCluster = pCluster;
 
 	m_pToonTexture = pToonTexture;
+
+	m_pBayerTexture = pBayerTexture;
 
 	m_mesh = mesh;
 
@@ -246,27 +326,32 @@ CanvasRenderer::CanvasRenderer(ID3D11Buffer* pVertexBuffer,
 ///////////////////////////////////////////////////////////////////////////////
 Renderer::~Renderer()
 {
-	;
+	Release();
 }
 
 MeshRenderer::~MeshRenderer()
 {
-	;
+	Release();
 }
 
 GrowMeshRenderer::~GrowMeshRenderer()
 {
-	;
+	Release();
+}
+
+ModelObjectRenderer::~ModelObjectRenderer()
+{
+	Release();
 }
 
 SkinnedMeshRenderer::~SkinnedMeshRenderer()
 {
-	;
+	Release();
 }
 
 CanvasRenderer::~CanvasRenderer()
 {
-	;
+	Release();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -275,15 +360,13 @@ CanvasRenderer::~CanvasRenderer()
 void Renderer::Release(void)
 {
 	SAFE_RELEASE(m_pBlendState);
-
-	SAFE_RELEASE(m_pSampleLinear);
-
-	SAFE_RELEASE(m_pTexture);
-
+	
+	SAFE_RELEASE(m_pSampleLinear)
+	
 	SAFE_RELEASE(m_pVertexBuffer);
-
+	
 	SAFE_RELEASE(m_pConstantBuffer);
-
+	
 	SAFE_RELEASE(m_pIndexBuffer);
 }
 
@@ -295,6 +378,13 @@ void MeshRenderer::Release()
 }
 
 void GrowMeshRenderer::Release()
+{
+	SAFE_RELEASE(m_pShadowMap);
+
+	Renderer::Release();
+}
+
+void ModelObjectRenderer::Release()
 {
 	SAFE_RELEASE(m_pShadowMap);
 
@@ -345,7 +435,7 @@ void Renderer::ConfigSamplerState(void)
 	D3D11_SAMPLER_DESC SamDesc;
 	ZeroMemory(&SamDesc, sizeof(D3D11_SAMPLER_DESC));
 
-	SamDesc.Filter = D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT;
+	SamDesc.Filter = D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR;
 	SamDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	SamDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	SamDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -485,21 +575,6 @@ void GrowMeshRenderer::Draw(void)
 {
 	//if (distance < 1000)
 	{
-		//std::vector<Object::Transform> Transform;
-		//
-		//for (int nCnt = 0; nCnt < GRASS_MAX; nCnt++)
-		//{
-		//
-		//	float distance = sqrt((m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) * (m_pTransform[nCnt].position.x - m_pCamera->GetTransform()->position.x) +
-		//		(m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) * (m_pTransform[nCnt].position.y - m_pCamera->GetTransform()->position.y) +
-		//		(m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z) * (m_pTransform[nCnt].position.z - m_pCamera->GetTransform()->position.z));
-		//
-		//	if (distance <= 1000)
-		//	{
-		//		Transform.push_back(m_pTransform[nCnt]);
-		//	}
-		//}
-
 
 		AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 		ID3D11Device* pDevice = pAppRenderer->GetDevice();
@@ -536,13 +611,16 @@ void GrowMeshRenderer::Draw(void)
 
 		hConstant.projection = XMMatrixTranspose(hProj);
 
-		//hConstant.posEye.x = m_pCamera->GetTransform()->position.x;
-		//hConstant.posEye.y = m_pCamera->GetTransform()->position.y;
-		//hConstant.posEye.z = m_pCamera->GetTransform()->position.z;
-		//
-		hConstant.posPlayer.x = m_pPlayerTransform->position.x;
-		hConstant.posPlayer.y = m_pPlayerTransform->position.y;
-		hConstant.posPlayer.z = m_pPlayerTransform->position.z;
+		hConstant.posEye.x = m_pCamera->GetTransform()->position.x;
+		hConstant.posEye.y = m_pCamera->GetTransform()->position.y;
+		hConstant.posEye.z = m_pCamera->GetTransform()->position.z;
+		
+		if (m_pPlayerTransform != NULL)
+		{
+			hConstant.posPlayer.x = m_pPlayerTransform->position.x;
+			hConstant.posPlayer.y = m_pPlayerTransform->position.y;
+			hConstant.posPlayer.z = m_pPlayerTransform->position.z;
+		}
 
 		if (!buse)
 		{
@@ -585,7 +663,9 @@ void GrowMeshRenderer::Draw(void)
 
 		//テクスチャーをシェーダーに渡す
 		pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
+		pDeviceContext->GenerateMips(m_pTexture);
 		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+		pDeviceContext->PSSetShaderResources(2, 1, &m_pBayerTexture);
 
 		if (m_pShadowMap != NULL)
 		{
@@ -602,7 +682,7 @@ void GrowMeshRenderer::Draw(void)
 			}
 			else
 			{
-				pDeviceContext->DrawInstanced(m_nNumVertexPolygon, GRASS_MAX, 0, 0);
+				pDeviceContext->DrawInstanced(m_nNumVertexPolygon, m_pNumInstance[0], 0, 0);
 			}
 		}
 
@@ -610,6 +690,103 @@ void GrowMeshRenderer::Draw(void)
 	}
 
 
+}
+
+void ModelObjectRenderer::Draw()
+{
+	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
+	ID3D11Device* pDevice = pAppRenderer->GetDevice();
+	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
+
+	//ブレンディングをコンテキストに設定
+	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
+	pDeviceContext->OMSetBlendState(m_pBlendState, blendFactor, 0xffffffff);
+
+	//バーテックスバッファーをセット
+	UINT stride = sizeof(XMMATRIX);
+	UINT offset = 0;
+	pDeviceContext->IASetVertexBuffers(1, 1, &m_pInstanceBuffer, &stride, &offset);
+
+	//バーテックスバッファーをセット
+	stride = sizeof(AppRenderer::Vertex3D);
+	offset = 0;
+	pDeviceContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+
+	//プリミティブ・トポロジーをセット
+	pDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//頂点インプットレイアウトをセット
+	pDeviceContext->IASetInputLayout(m_pVertexShader->GetVertexLayout());
+
+	XMMATRIX hLcl = XMMatrixIdentity();
+	XMMATRIX hLclPosition = XMMatrixTranslation(m_mesh.LclPos.x, m_mesh.LclPos.y, m_mesh.LclPos.z);
+	XMMATRIX hLclRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_mesh.LclRot.x), D3DToRadian(m_mesh.LclRot.y), D3DToRadian(m_mesh.LclRot.z));
+	XMMATRIX hLclScaling = XMMatrixScaling(m_mesh.LclScl.x, m_mesh.LclScl.y, m_mesh.LclScl.z);
+
+	hLcl = XMMatrixMultiply(hLcl, hLclScaling);
+	hLcl = XMMatrixMultiply(hLcl, hLclRotate);
+	hLcl = XMMatrixMultiply(hLcl, hLclPosition);
+
+	Grass::Constant hConstant;
+
+	XMMATRIX hPosition = XMMatrixTranslation(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z);
+	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform->rot.x), -m_pTransform->rot.y, D3DToRadian(m_pTransform->rot.z));
+	XMMATRIX hScaling = XMMatrixScaling(m_pTransform->scale.x, m_pTransform->scale.y, m_pTransform->scale.z);
+
+	XMMATRIX hWit = XMMatrixIdentity();
+
+	XMVECTOR dir;
+
+	XMMATRIX hView = m_pConstant->view;
+	XMMATRIX hProj = m_pConstant->projection;
+
+	hConstant.view = XMMatrixTranspose(hView);
+
+	hConstant.projection = XMMatrixTranspose(hProj);
+
+	pDeviceContext->UpdateSubresource(m_pConstantBuffer, 0, NULL, &hConstant, 0, 0);
+
+	//コンテキストに設定
+	pDeviceContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+
+	//使用するシェーダーの登録
+	pDeviceContext->VSSetShader(m_pVertexShader->GetVertexShader(), NULL, 0);
+	pDeviceContext->PSSetShader(m_pPixelShader->GetPixelShader(), NULL, 0);
+
+	if (m_pGeometryShader != NULL)
+	{
+		pDeviceContext->GSSetShader(m_pGeometryShader->GetGeometryShaderr(), NULL, 0);
+	}
+	else
+	{
+		pDeviceContext->GSSetShader(NULL, NULL, 0);
+	}
+
+	//テクスチャーをシェーダーに渡す
+	pDeviceContext->PSSetSamplers(0, 1, &m_pSampleLinear);
+
+	if (m_pTexture != NULL)
+	{
+		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
+		//pDeviceContext->PSSetShaderResources(1, 1, &m_pToonTexture);
+		pDeviceContext->PSSetShaderResources(2, 1, &m_pBayerTexture);
+	}
+
+	if (m_pShadowMap != NULL)
+	{
+		//pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+	}
+
+	if (m_pIndexBuffer != NULL)
+	{
+		//そのインデックスバッファをコンテキストに設定
+		pDeviceContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
+		pDeviceContext->DrawIndexedInstanced(m_nNumVertexPolygon, TREE_MAX, 0, 0, 0);
+	}
+	else
+	{
+		pDeviceContext->DrawInstanced(m_nNumVertexPolygon, TREE_MAX, 0, 0);
+	}
 }
 
 void SkinnedMeshRenderer::Draw()
@@ -672,6 +849,8 @@ void SkinnedMeshRenderer::Draw()
 
 	hConstant.lclCluster = XMMatrixTranspose(hLcl);
 
+	hConstant.color = m_pColor[0];
+
 	if (m_pLightConstant != NULL)
 	{
 		XMMATRIX hLightView = m_pLightConstant->view;
@@ -718,11 +897,12 @@ void SkinnedMeshRenderer::Draw()
 	{
 		pDeviceContext->PSSetShaderResources(0, 1, &m_pTexture);
 		pDeviceContext->PSSetShaderResources(1, 1, &m_pToonTexture);
+		pDeviceContext->PSSetShaderResources(2, 1, &m_pBayerTexture);
 	}
 
 	if (m_pShadowMap != NULL)
 	{
-		//pDeviceContext->PSSetShaderResources(1, 1, &m_pShadowMap);
+		pDeviceContext->PSSetShaderResources(3, 1, &m_pShadowMap);
 	}
 
 	if (m_pIndexBuffer != NULL)
@@ -745,7 +925,7 @@ void CanvasRenderer::Draw(void)
 	ID3D11DeviceContext* pDeviceContext = pAppRenderer->GetDeviceContex();
 
 	ID3D11DepthStencilView* pDSV = pAppRenderer->GetDepthStencilView();
-	pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL, 1.0f, 0);
+	//pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	//ブレンディングをコンテキストに設定
 	float blendFactor[4] = { D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO, D3D11_BLEND_ZERO };
@@ -783,5 +963,5 @@ void CanvasRenderer::Draw(void)
 		pDeviceContext->Draw(m_nNumVertexPolygon, 0);
 	}
 
-	//pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL | D3D11_CLEAR_DEPTH, 1.0f, 0);
+	pDeviceContext->ClearDepthStencilView(pDSV, D3D11_CLEAR_STENCIL | D3D11_CLEAR_DEPTH, 1.0f, 0);
 }

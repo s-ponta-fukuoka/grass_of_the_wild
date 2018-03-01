@@ -8,14 +8,27 @@ struct pixcelIn
 	float4 col2: COL2;
 	float4 Lpos : TEXCOORD1;
 	float4 Spos : TEXCOORD2;
+	float Depth : TEXCOORD5;
 };
 
 Texture2D txDiffuse : register(t0);
 SamplerState samLinear : register(s0);
 
-float4 main(pixcelIn IN) : SV_Target
+float main(pixcelIn IN) : SV_Target
 {
-	if (txDiffuse.Sample(samLinear, IN.tex).a <= 0.0)discard;
+	float2 Moments;
 
-	return IN.Spos.z / IN.Spos.w;
+	float depth = IN.Spos.z / IN.Spos.w;
+
+	//[“x
+	Moments.x = depth;
+
+	//[“x‚Ì•Î”÷•ª
+	float dx = ddx(depth);
+	float dy = ddx(depth);
+
+	//ƒsƒNƒZƒ‹”ÍˆÍ‚ÅŒvŽZ
+	Moments.y = (depth * depth) + (0.25f * (dx * dx + dy * dy));
+
+	return Moments;
 }

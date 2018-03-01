@@ -18,8 +18,9 @@
 //コンストラクタ
 ///////////////////////////////////////////////////////////////////////////////
 Mesh::Mesh()
-{
-	;
+{ 
+	m_pVertexBuffer = NULL;
+	m_pIndexBuffer = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -45,6 +46,8 @@ HRESULT Mesh::Init(void)
 void Mesh::Release(void)
 {
 	ES_SAFE_RELEASE(m_pVertexBuffer);
+	ES_SAFE_RELEASE(m_pIndexBuffer);
+
 	Object::Release();
 }
 

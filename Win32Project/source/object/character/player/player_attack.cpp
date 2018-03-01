@@ -10,11 +10,8 @@
 //*****************************************************************************
 #include "player_attack.h"
 #include "../../../object/camera/main_camera.h"
-#include "../../../model/model.h"
-#include "../../../model/model_manager.h"
+//#include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
-#include "../../../device/input.h"
-#include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
 #include "../../../shader/shader_manager.h"
 //*****************************************************************************
@@ -62,13 +59,35 @@ HRESULT PlayerAttack::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void PlayerAttack::Release(void)
 {
-	delete m_pModel;
-	delete m_pFrame;
-	delete m_pAnimeNumber;
+	if (m_pCollider != NULL)
+	{
+		delete m_pCollider;
+		m_pCollider = NULL;
+	}
 
-	delete m_pTransform;
+	if (m_pTransform != NULL)
+	{
+		delete m_pTransform;
+		m_pTransform = NULL;
+	}
 
-	delete	m_pCollider;
+	if (m_pModel != NULL)
+	{
+		delete m_pModel;
+		m_pModel = NULL;
+	}
+
+	if (m_pFrame != NULL)
+	{
+		delete m_pFrame;
+		m_pFrame = NULL;
+	}
+
+	if (m_pAnimeNumber != NULL)
+	{
+		delete m_pAnimeNumber;
+		m_pAnimeNumber = NULL;
+	}
 
 	Character::Release();
 }

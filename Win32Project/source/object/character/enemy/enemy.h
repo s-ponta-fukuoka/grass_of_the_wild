@@ -25,7 +25,10 @@ class ModelManager;
 class MainCamera;
 class EnemyManager;
 class EnemyPattern;
+class EnemyAttack;
+class EnemyLife;
 class MeshField;
+class EffectManager;
 
 //*****************************************************************************
 // クラス定義
@@ -33,6 +36,12 @@ class MeshField;
 class Enemy : public Character
 {
 public:
+	typedef enum
+	{
+		MODE_ATTACK,
+		MODE_DEFENSE
+	}MODE;
+
 	//コンストラクタ
 	Enemy(
 		VECTOR3 position,
@@ -48,7 +57,8 @@ public:
 		CollisionManager* pCollisionManager,
 		EnemyManager* pEnemyManager,
 		Object::Transform* pPlayerTransform,
-		MeshField* pMeshField);
+		MeshField* pMeshField,
+		EffectManager* pEffectManager);
 
 	//デストラクタ
 	virtual ~Enemy();
@@ -78,9 +88,6 @@ public:
 	//エネミーステート変更
 	void ChangeEnemyPattern(EnemyPattern* pEnemyPattern);
 
-	//VECTOR3 GetMoveVector(void) { return m_moveVector; }
-	//void SetMoveVector(VECTOR3 move) { m_moveVector = move; }
-
 	VECTOR3 GetMove(void) { return m_move; }
 	void SetMove(VECTOR3 move) { m_move = move; }
 
@@ -96,11 +103,29 @@ public:
 
 	Object::Transform* GetPlayerTransform(void) { return m_pPlayerTransform; }
 
-	//PlayerLife *GetPlayerLife(void) { return m_pPlayerLife; }
+	EnemyAttack* GetEnemyAttack(void) { return m_pEnemyAttack; }
+	void SetEnemyAttack(EnemyAttack* pEnemyAttack) { m_pEnemyAttack = pEnemyAttack; }
+
+	int GetCounterCnt(void) { return m_nCounterCnt; }
+	void SetCounterCnt(int nCounterCnt) { m_nCounterCnt = nCounterCnt; }
+
+	MODE GetMode(void) { return m_eMode; }
+	void SetMode(MODE eMode) { m_eMode = eMode; }
+
+	VECTOR4* GetColor(void) { return m_pColor; }
+	void SetColor(VECTOR4* pColor) { m_pColor = pColor; }
+
+	EnemyLife* GetEnemyLife(void) { return m_pEnemyLife; }
+
+	EffectManager* GetEffectManager(void) { return m_pEffectManager; }
+
+	EnemyManager* GetEnemyManager(void) { return m_pEnemyManager; }
 
 private:
 
 	EnemyPattern*		m_pEnemyPattern;
+
+	EffectManager*		m_pEffectManager;
 
 	bool				m_bUse;
 
@@ -115,6 +140,10 @@ private:
 	SphereCollider*		m_pCollider;
 
 	EnemyManager*		m_pEnemyManager;
+
+	EnemyAttack*		m_pEnemyAttack;
+
+	EnemyLife*			m_pEnemyLife;
 
 	ModelManager*		m_pModelManager;
 
@@ -133,6 +162,12 @@ private:
 	VECTOR3				m_oldPos;
 
 	int				    m_nTime;
+
+	MODE				m_eMode;
+
+	int					m_nCounterCnt;
+
+	VECTOR4*			m_pColor;
 };
 
 #endif

@@ -12,15 +12,14 @@
 #include "player_pattern_wait.h"
 #include "player.h"
 #include "../../../object/camera/main_camera.h"
-#include "../../../model/model.h"
 #include "../../../model/model_manager.h"
 #include "../../../renderer/render_manager.h"
 #include "../../../device/input.h"
-#include "../../../collision/collider.h"
+#include "../../../device/xbox_controller.h"
 #include "../../../collision/collision_manager.h"
-#include "../../../shader/shader_manager.h"
 #include "player_attack.h"
-
+#include "../../../shader/shader_manager.h"
+#include "../../../effect/effect_manager.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -48,19 +47,53 @@ void PlayerPatternAttack::Update(Player* pPlayer,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	SkinMeshModel::Anime* pAnime = pPlayer->GetSkinMeshModel()->GetAnime();
+
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
+
+	int* pFrame = pPlayer->GetFrame();
+	int* pAnimeNumber = pPlayer->GetAnimeNumber();
+
 	if (m_pPlayerAttack == NULL)
 	{
-		//m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
-	}
-	
-	m_pPlayerAttack->Update();
+		if (pAnimeNumber[0] == 2)
+		{
+			if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 5)
+			{
+				m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+			}
+		}
 
-	InputOperation(pPlayer);
+		if (pAnimeNumber[0] == 3)
+		{
+			if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 5)
+			{
+				m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+			}
+		}
+
+		if (pAnimeNumber[0] == 4)
+		{
+			if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 5)
+			{
+				m_pPlayerAttack = new PlayerAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+			}
+		}
+	}
+	if (m_pPlayerAttack != NULL)
+	{
+		m_pPlayerAttack->Update();
+	}
+
+	InputAttackOperation(pPlayer, pCollisionManager);
 
 	ChangeAttackAnime(pPlayer, pCollisionManager);
 }
 
-void PlayerPatternAttack::InputOperation(Player* pPlayer)
+void PlayerPatternAttack::InputAttackOperation(Player* pPlayer, CollisionManager* pCollisionManager)
 {
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
@@ -81,35 +114,120 @@ void PlayerPatternAttack::InputOperation(Player* pPlayer)
 
 	XMVECTOR vector = pPlayer->GetCamera()->GetVec();
 
-	XMMATRIX hWorld = XMMatrixIdentity();
-	XMMATRIX hPosition = XMMatrixTranslation(pTransform->position.x, pTransform->position.y, pTransform->position.z);
-	XMMATRIX hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(pTransform->rot.x), -pTransform->rot.y, D3DToRadian(pTransform->rot.z));
-	XMMATRIX hScaling = XMMatrixScaling(1, 1, 1);
+	VECTOR3 move = pPlayer->GetMove();
 
-	hWorld = XMMatrixMultiply(hWorld, hScaling);
-	hWorld = XMMatrixMultiply(hWorld, hRotate);
-	hWorld = XMMatrixMultiply(hWorld, hPosition);
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
 
-	XMMATRIX hAttackWorld = XMMatrixIdentity();
-	hPosition = XMMatrixTranslation(0, 0, 50);
-	hRotate = XMMatrixRotationRollPitchYaw(0,0,0);
-	hScaling = XMMatrixScaling(1, 1, 1);
+	XMVECTOR inputVec = XMVector3Normalize(XMVectorSet(0, 0, 0, 0) - XMVectorSet(-Xinput.Gamepad.sThumbLX, 0, -Xinput.Gamepad.sThumbLY, 0));
 
-	hAttackWorld = XMMatrixMultiply(hAttackWorld, hScaling);
-	hAttackWorld = XMMatrixMultiply(hAttackWorld, hRotate);
-	hAttackWorld = XMMatrixMultiply(hAttackWorld, hPosition);
-	hAttackWorld = XMMatrixMultiply(hAttackWorld, hWorld);
+	//cos(-g_aBullet[i].Rot.y - D3DXToRadian(90)) * 5.5f
+
+	if (m_pPlayerAttack != NULL)
+	{
+		m_pPlayerAttack->GetSphereCollider()->GetTransform()->position.x = pPlayer->GetTransform()->position.x + cosf(-pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 100;
+		m_pPlayerAttack->GetSphereCollider()->GetTransform()->position.y = pPlayer->GetTransform()->position.y + 70;
+		m_pPlayerAttack->GetSphereCollider()->GetTransform()->position.z = pPlayer->GetTransform()->position.z - sinf(pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 100;
+	}
+
+	if (pAnimeNumber[0] == 2)
+	{
+		if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 8)
+		{
+			pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
+			m_pPlayerAttack->Release();
+			delete m_pPlayerAttack;
+			m_pPlayerAttack = NULL;
+		}
+	}
+
+	if (pAnimeNumber[0] == 3)
+	{
+		if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 8)
+		{
+			pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
+			m_pPlayerAttack->Release();
+			delete m_pPlayerAttack;
+			m_pPlayerAttack = NULL;
+		}
+	}
+
+	if (pAnimeNumber[0] == 4)
+	{
+		if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 8)
+		{
+			pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
+			m_pPlayerAttack->Release();
+			delete m_pPlayerAttack;
+			m_pPlayerAttack = NULL;
+		}
+	}
+
+	if (Xinput.Gamepad.sThumbLX != 0)
+	{
+		VECTOR3 vecForward = VECTOR3(XMVectorGetX(vector),
+			XMVectorGetY(vector),
+			XMVectorGetZ(vector));
+
+		VECTOR3 vecRight;
+
+		VECTOR3::Cross(&vecRight, &vecForward, &VECTOR3(0, 1, 0));
+	}
 
 
+	EffectManager* pEffect = pPlayer->GetEffectManager();
 
-	m_pPlayerAttack->GetSphereCollider()->GetTransform()->position.x = m_pPlayerAttack->GetTransform()->position.x =  hAttackWorld._41;
-	m_pPlayerAttack->GetSphereCollider()->GetTransform()->position.z = m_pPlayerAttack->GetTransform()->position.z =  hAttackWorld._43;
+	if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 1 && pAnimeNumber[0] == 2)
+	{
+		// エフェクトの再生
+		::Effekseer::Handle handle;
+		handle = pEffect->GetEManager()->Play(pEffect->GetEffect(EffectManager::EFFECT_ATTACK_001),
+			pPlayer->GetTransform()->position.x + cosf(-pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 50,
+			pPlayer->GetTransform()->position.y + 70,
+			pPlayer->GetTransform()->position.z - sinf(pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 50);
+		pEffect->GetEManager()->SetScale(handle, 50, 50, 50);
+		pEffect->GetEManager()->SetRotation(handle, 0, -pPlayer->GetTransform()->rot.y, 0);
+	}
 
-	if (pInputKeyboard->GetKeyPress(DIK_SPACE) && pAnimeNumber[0] == 2)
+	if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 1 && pAnimeNumber[0] == 3)
+	{
+		// エフェクトの再生
+		::Effekseer::Handle handle;
+		handle = pEffect->GetEManager()->Play(pEffect->GetEffect(EffectManager::EFFECT_ATTACK_002),
+			pPlayer->GetTransform()->position.x + cosf(-pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 50,
+			pPlayer->GetTransform()->position.y + 70,
+			pPlayer->GetTransform()->position.z - sinf(pPlayer->GetTransform()->rot.y - D3DToRadian(85)) * 50);
+		pEffect->GetEManager()->SetScale(handle, 50, 50, 50);
+		pEffect->GetEManager()->SetRotation(handle, 0, -pPlayer->GetTransform()->rot.y, 0);
+	}
+
+	if (pFrame[0] == pAnime[pAnimeNumber[0]].nStartTime + 1 && pAnimeNumber[0] == 4)
+	{
+		// エフェクトの再生
+		::Effekseer::Handle handle;
+		handle = pEffect->GetEManager()->Play(pEffect->GetEffect(EffectManager::EFFECT_ATTACK_003),
+			pPlayer->GetTransform()->position.x + cosf(-pPlayer->GetTransform()->rot.y - D3DToRadian(85)) ,
+			pPlayer->GetTransform()->position.y + 30,
+			pPlayer->GetTransform()->position.z - sinf(pPlayer->GetTransform()->rot.y - D3DToRadian(85)) );
+		pEffect->GetEManager()->SetScale(handle, 50, 50, 50);
+		pEffect->GetEManager()->SetRotation(handle, 0, -pPlayer->GetTransform()->rot.y, 0);
+	}
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE) || Xinput.Gamepad.wButtons == XINPUT_GAMEPAD_A && pAnimeNumber[0] == 2)
 	{
 		if (pFrame[0] >= pAnime[pAnimeNumber[0]].nEndTime - 10)
 		{
 			pAnimeNumber[0] = 3;
+
+			pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
+		}
+	}
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE) || Xinput.Gamepad.wButtons == XINPUT_GAMEPAD_A && pAnimeNumber[0] == 3)
+	{
+		if (pFrame[0] >= pAnime[pAnimeNumber[0]].nEndTime - 1)
+		{
+			pAnimeNumber[0] = 4;
 
 			pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
 		}
@@ -127,15 +245,19 @@ void PlayerPatternAttack::ChangeAttackAnime(Player* pPlayer, CollisionManager* p
 
 	if (pFrame[0] >= pAnime[pAnimeNumber[0]].nEndTime - 1 )
 	{
-		if (m_nWait > 10)
+		if (m_nWait > 20)
 		{
 			m_nWait = 0;
-			if (pAnimeNumber[0] == 2 || pAnimeNumber[0] == 3)
+			if (pAnimeNumber[0] == 2 || pAnimeNumber[0] == 3 || pAnimeNumber[0] == 4)
 			{
 				pAnimeNumber[0] = 0;
-				pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
-				m_pPlayerAttack->Release();
-				m_pPlayerAttack = NULL;
+				if (m_pPlayerAttack != NULL)
+				{
+					pCollisionManager->DeleteCollider(m_pPlayerAttack->GetSphereCollider());
+					m_pPlayerAttack->Release(); 
+					delete m_pPlayerAttack;
+					m_pPlayerAttack = NULL;
+				}
 				pPlayer->ChangePlayerPattern(new PlayerPatternWait);
 			}
 			pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;

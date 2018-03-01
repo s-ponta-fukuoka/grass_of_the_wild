@@ -16,7 +16,9 @@
 #include "../../../renderer/render_manager.h"
 #include "../../../collision/collider.h"
 #include "../../../collision/collision_manager.h"
-
+#include "../../../utility/utility.h"
+#include "../../mesh/meshfiled/mesh_field.h"
+#include "tree_collider.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -37,20 +39,19 @@ Tree::Tree(
 	AppRenderer::Constant* pLightCameraConstant, 
 	MainCamera *pCamera,
 	CollisionManager* pCollisionManager,
-	TreeManager* pTreeManager)
+	TreeManager* pTreeManager,
+	MeshField* pMeshField)
 	: m_pCamera(NULL)
-	, m_move(VECTOR3(0,0,0))
 	, m_pCollider(NULL)
+	, m_move(VECTOR3(0,0,0))
 	, m_bUse(false)
 {
-	m_pTransform = new Transform();
-
-	m_pTransform->position = position;
-	m_pTransform->rot = rot;
-	m_pTransform->scale = scl;
+	m_pTransform = new Transform[TREE_MAX];
 
 	m_CompletionPosition = XMVectorSet(0,0,0,0);
 	m_CompletionRot = XMVectorSet(0, 0, 0, 0);
+
+	m_pMeshField = pMeshField;
 
 	m_pCamera = pCamera;
 
@@ -60,6 +61,7 @@ Tree::Tree(
 	m_pModel = pModelManager->SeekSkinMeshModel(m_pModel);
 	
 	Texture* pToonTexture = new Texture("resource/sprite/toon.png", pTextureManager);
+	Texture* pBayerTexture = new Texture("resource/sprite/bayer.png", pTextureManager);
 
 	SkinMeshModel::Mesh* pMesh = m_pModel->GetMesh();
 
@@ -77,15 +79,16 @@ Tree::Tree(
 
 	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
 	{
+
 		MakeVertex(i, pMesh);
 
 		
 		ID3D11ShaderResourceView* pTextureResource = NULL;
 
-		if (pMesh[i].pFileName != NULL)
+		if (strcmp(pMesh[i].fileName.data(), "") != 0)
 		{
 			ePsType = PixelShader::PS_TOON;
-			Texture* pTexture = new Texture(pMesh[i].pFileName, pTextureManager);
+			Texture* pTexture = new Texture(pMesh[i].fileName.data(), pTextureManager);
 			pTextureResource = pTexture->GetTexture();
 		}
 		else
@@ -94,15 +97,15 @@ Tree::Tree(
 			ePsType = PixelShader::PS_MAT;
 		}
 
-		char* file = pMesh[4].pFileName;
-
 		m_pRenderManager = pRenderManager;
 
-		m_pRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
+		m_pRenderer[i] = new ModelObjectRenderer(m_pVertexBuffer,
+			m_pInstanceBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
 			pToonTexture->GetTexture(),
+			pBayerTexture->GetTexture(),
 			pRenderManager->GetShadowTexture(),
 			m_pTransform,
 			pConstant,
@@ -118,11 +121,13 @@ Tree::Tree(
 			pMesh[i],
 			FALSE);
 
-		m_pShadowRenderer[i] = new SkinnedMeshRenderer(m_pVertexBuffer,
+		m_pShadowRenderer[i] = new ModelObjectRenderer(m_pVertexBuffer,
+			m_pInstanceBuffer,
 			m_pIndexBuffer,
 			pShaderManager,
 			pTextureResource,
 			pToonTexture->GetTexture(),
+			pBayerTexture->GetTexture(),
 			NULL,
 			m_pTransform,
 			pLightCameraConstant,
@@ -138,15 +143,18 @@ Tree::Tree(
 			pMesh[i],
 			FALSE);
 
-		m_pRenderManager->AddRenderer(m_pRenderer[i]);
+		m_pRenderManager->AddDeferredRenderer(m_pRenderer[i]);
 
 		m_pRenderManager->AddShadowRenderer(m_pShadowRenderer[i]);
 	}
 
 	m_pCollisionManager = pCollisionManager;
 
-	m_pCollider = new SphereCollider(VECTOR3(0, 70, 0), 50, this, pCollisionManager, pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant);
-
+	for (int nCnt = 0; nCnt < TREE_MAX; nCnt++)
+	{
+		m_pTreeCollider[nCnt] =  new TreeCollider(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager, 
+			VECTOR3(m_pTransform[nCnt].position.x, m_pTransform[nCnt].position.y + 70, m_pTransform[nCnt].position.z));
+	}
 	SetObjectType(Object::TYPE_TREE);
 }
 
@@ -172,11 +180,18 @@ HRESULT Tree::Init(void)
 ///////////////////////////////////////////////////////////////////////////////
 void Tree::Release(void)
 {
-	m_pCollider->SetColliderDelete(true);
-
+	for (int nCnt = 0; nCnt < TREE_MAX; nCnt++)
+	{
+		if (m_pTreeCollider[nCnt] != NULL)
+		{
+			m_pTreeCollider[nCnt]->Release();
+			delete m_pTreeCollider[nCnt];
+			m_pTreeCollider[nCnt] = NULL;
+		}
+	}
 	for (int i = 0; i < m_pModel->GetNumMesh(); i++)
 	{
-		m_pRenderManager->DeleteRenderer(m_pRenderer[i]);
+		m_pRenderManager->DeleteDeferredRenderer(m_pRenderer[i]);
 		m_pRenderManager->DeleteShadowRenderer(m_pShadowRenderer[i]);
 		delete[] m_pRenderer[i];
 		delete[] m_pShadowRenderer[i];
@@ -194,8 +209,11 @@ void Tree::Update(RenderManager* pRenderManager,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
-	m_pCollider->GetTransform()->position.x = m_pTransform->position.x;
-	m_pCollider->GetTransform()->position.z = m_pTransform->position.z;
+	for (int nCnt = 0; nCnt < TREE_MAX; nCnt++)
+	{
+		//m_pCollider[nCnt]->GetTransform()->position.x = m_pTransform->position.x;
+		//m_pCollider[nCnt]->GetTransform()->position.z = m_pTransform->position.z;
+	}
 
 	Object::Update();
 
@@ -215,15 +233,13 @@ void Tree::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 
 	//四角形
-	SkinMeshModel::ModelVertex* vertices = new SkinMeshModel::ModelVertex[pMesh[nMeshCount].nNumVertex];
+	AppRenderer::Vertex3D* vertices = new AppRenderer::Vertex3D[pMesh[nMeshCount].nNumVertex];
 	for (int j = 0; j < pMesh[nMeshCount].nNumVertex; j++)
 	{
 		vertices[j].position = VECTOR3(pMesh[nMeshCount].pPosition[j].x, pMesh[nMeshCount].pPosition[j].y, pMesh[nMeshCount].pPosition[j].z);
 		vertices[j].normal = VECTOR3(pMesh[nMeshCount].pNormal[j].x, pMesh[nMeshCount].pNormal[j].y, pMesh[nMeshCount].pNormal[j].z);
 		vertices[j].tex = VECTOR2(pMesh[nMeshCount].pTex[j].x, pMesh[nMeshCount].pTex[j].y);
 		vertices[j].color = VECTOR4(pMesh[nMeshCount].pColor[j].x, pMesh[nMeshCount].pColor[j].y, pMesh[nMeshCount].pColor[j].z, pMesh[nMeshCount].pColor[j].w);
-		vertices[j].boneIndex = VECTOR4(pMesh[nMeshCount].pBoneIndex[j].x, pMesh[nMeshCount].pBoneIndex[j].y, pMesh[nMeshCount].pBoneIndex[j].z, pMesh[nMeshCount].pBoneIndex[j].w);
-		vertices[j].weight = VECTOR4(pMesh[nMeshCount].pWeight[j].x, pMesh[nMeshCount].pWeight[j].y, pMesh[nMeshCount].pWeight[j].z, pMesh[nMeshCount].pWeight[j].w);
 	}
 
 	WORD* hIndexData = new WORD[pMesh[nMeshCount].nNumPolygonVertex];
@@ -236,7 +252,7 @@ void Tree::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 
 	D3D11_BUFFER_DESC bd;
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(SkinMeshModel::ModelVertex) * pMesh[nMeshCount].nNumVertex;
+	bd.ByteWidth = sizeof(AppRenderer::Vertex3D) * pMesh[nMeshCount].nNumVertex;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = 0;
 	bd.MiscFlags = 0;
@@ -266,6 +282,46 @@ void Tree::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 	delete[] vertices;
 
 	delete[] hIndexData;
+
+	XMMATRIX* hWorld = new XMMATRIX[TREE_MAX];
+
+	for (int nCnt = 0; nCnt < TREE_MAX; nCnt++)
+	{
+		m_pTransform[nCnt].position = VECTOR3(-4000, 0, -4000);
+		m_pTransform[nCnt].rot = VECTOR3(-90, 0, 0);
+		m_pTransform[nCnt].scale = VECTOR3(100, 100, 100);
+
+		m_pTransform[nCnt].position.x += Utility::Hulton(nCnt, 2) * 8000;
+		m_pTransform[nCnt].position.z += Utility::Hulton(nCnt, 3) * 5300;
+		m_pTransform[nCnt].position.y = m_pMeshField->GetHeight(m_pTransform[nCnt].position);
+
+		XMMATRIX hPosition = XMMatrixIdentity();
+		hPosition = XMMatrixTranslation(m_pTransform[nCnt].position.x, m_pTransform[nCnt].position.y, m_pTransform[nCnt].position.z);
+		XMMATRIX hRotate = XMMatrixIdentity();
+		hRotate = XMMatrixRotationRollPitchYaw(D3DToRadian(m_pTransform[nCnt].rot.x), D3DToRadian(m_pTransform[nCnt].rot.y), D3DToRadian(m_pTransform[nCnt].rot.z));
+		XMMATRIX hScaling = XMMatrixIdentity();
+		hScaling = XMMatrixScaling(m_pTransform[nCnt].scale.x, m_pTransform[nCnt].scale.y, m_pTransform[nCnt].scale.z);
+
+		hWorld[nCnt] = XMMatrixIdentity();
+
+		hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hScaling);
+		hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hRotate);
+		hWorld[nCnt] = XMMatrixMultiply(hWorld[nCnt], hPosition);
+
+		hWorld[nCnt] = XMMatrixTranspose(hWorld[nCnt]);
+	}
+
+	D3D11_BUFFER_DESC Ibd;
+	Ibd.Usage = D3D11_USAGE_DYNAMIC;
+	Ibd.ByteWidth = sizeof(XMMATRIX) * TREE_MAX;
+	Ibd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	Ibd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	Ibd.MiscFlags = 0;
+	D3D11_SUBRESOURCE_DATA InstanceInitData;
+	InstanceInitData.pSysMem = hWorld;
+	pDevice->CreateBuffer(&Ibd, &InstanceInitData, &m_pInstanceBuffer);
+
+	delete[] hWorld;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -274,12 +330,6 @@ void Tree::MakeVertex(int nMeshCount, SkinMeshModel::Mesh* pMesh)
 void Tree::OnCollision(Collider* col)
 {
 	Object::ObjectType eObjectType = col->GetGameObject()->GetObjectType();
-
-	if (eObjectType == Object::TYPE_PLAYER_ATTACK)
-	{
-		m_pTreeManager->TreeDelete(this);
-		m_bUse = true;
-	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

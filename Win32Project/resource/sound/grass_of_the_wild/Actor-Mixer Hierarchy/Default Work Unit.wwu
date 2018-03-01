@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E1104906-FE9E-4A04-A59D-90B9088292C2}" SchemaVersion="80">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{E1104906-FE9E-4A04-A59D-90B9088292C2}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="game" ID="{F12CEBD3-C013-4BF3-AEF9-856EB217DB68}" ShortID="871759312">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-11</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="game" ID="{2F1BF7AC-1E59-467A-9785-46712339E1CA}" ShortID="640822465">
+							<Language>SFX</Language>
+							<AudioFile>game.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="game" ID="{2F1BF7AC-1E59-467A-9785-46712339E1CA}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="title" ID="{D43B4C21-DE80-435D-8620-E4F1D7EC5A19}" ShortID="603800358">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="title" ID="{2BD720F4-D3D7-41EF-922B-2DF0DA2D9B81}" ShortID="288458330">
+							<Language>SFX</Language>
+							<AudioFile>title.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="title" ID="{2BD720F4-D3D7-41EF-922B-2DF0DA2D9B81}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="game_over" ID="{D3D5857E-CFD4-4EB2-818D-1F9A009E4F26}" ShortID="688602889">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="game_over" ID="{2A32D890-37BB-4F1C-B935-9D9A01158F35}" ShortID="865641520">
+							<Language>SFX</Language>
+							<AudioFile>game_over.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="game_over" ID="{2A32D890-37BB-4F1C-B935-9D9A01158F35}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="game_clear" ID="{2FF2991D-4B32-4DFA-AD52-7FBF9F5037FA}" ShortID="76565141">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="clear" ID="{D143959C-7BE8-4F61-9F90-88E322740D4E}" ShortID="55267758">
+							<Language>SFX</Language>
+							<AudioFile>clear.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="clear" ID="{D143959C-7BE8-4F61-9F90-88E322740D4E}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="attack" ID="{EC332CBC-E61C-43C0-82AF-E0C59BBC4208}" ShortID="450697217">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-5</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="attack" ID="{2D27D093-B3DC-4FC8-895A-E0C8CBD252B8}" ShortID="237904017">
+							<Language>SFX</Language>
+							<AudioFile>attack.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="attack" ID="{2D27D093-B3DC-4FC8-895A-E0C8CBD252B8}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="hit" ID="{5A159AF6-5CBF-4C97-B2A6-5FE8620AB985}" ShortID="607678679">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-9</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="enemy_hit" ID="{9A09C35D-CEBC-4C58-98A8-26A77695E618}" ShortID="637244378">
+							<Language>SFX</Language>
+							<AudioFile>enemy_hit.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="enemy_hit" ID="{9A09C35D-CEBC-4C58-98A8-26A77695E618}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="walk" ID="{4A3F8AF4-EB6C-4BA1-A0F2-30C32856CC45}" ShortID="173240819">
+					<PropertyList>
+						<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>1490</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{D00E3A99-8748-4D63-B499-539119A67722}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{BFB7FFE3-0E1B-42D1-A028-019093B4DFE0}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="walk" ID="{FB479D5B-B47B-4AE9-9E26-6308A6D419CF}" ShortID="849798269">
+							<Language>SFX</Language>
+							<AudioFile>walk.wav</AudioFile>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="walk" ID="{FB479D5B-B47B-4AE9-9E26-6308A6D419CF}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>

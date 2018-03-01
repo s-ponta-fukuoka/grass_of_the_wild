@@ -13,7 +13,10 @@
 #include <list>
 #include "tree.h"
 
+#define TREE_MAX (10)
+
 class Player;
+class MeshField;
 
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
@@ -34,7 +37,8 @@ public:
 		AppRenderer::Constant* pConstant,
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera *pCamera,
-		CollisionManager* pCollisionManager);
+		CollisionManager* pCollisionManager,
+		MeshField* pMeshField);
 
 	void TreeAdd(Tree* tree);
 

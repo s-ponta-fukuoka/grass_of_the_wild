@@ -8,6 +8,8 @@
 #include "enemy.h"
 #include "../player/player.h"
 #include "../../mesh/meshfiled/mesh_field.h"
+#include "../../../collision/collision_manager.h"
+#include "../../../effect/effect_manager.h"
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
@@ -22,6 +24,7 @@
 
 EnemyManager::EnemyManager()
 	: m_distance(0)
+	, m_pCollisionManager(NULL)
 {
 }
 
@@ -34,10 +37,18 @@ HRESULT EnemyManager::GenerateEnemy(RenderManager* pRenderManager,
 	MainCamera *pCamera,
 	CollisionManager* pCollisionManager,
 	Object::Transform* pPlayerTransform,
-	MeshField* pMeshField)
+	MeshField* pMeshField, EffectManager* pEffectManager)
 {
-	EnemyAdd(new Enemy(VECTOR3(100,0,1500),VECTOR3(0,180,0), VECTOR3(1,1,1),
-		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this,pPlayerTransform, pMeshField));
+	m_pCollisionManager = pCollisionManager;
+
+	EnemyAdd(new Enemy(VECTOR3(100,0,0),VECTOR3(0,180,0), VECTOR3(1,1,1),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this,pPlayerTransform, pMeshField, pEffectManager));
+
+	EnemyAdd(new Enemy(VECTOR3(-1000, 0, 0), VECTOR3(0, 90, 0), VECTOR3(1, 1, 1),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this, pPlayerTransform, pMeshField, pEffectManager));
+	
+	EnemyAdd(new Enemy(VECTOR3(0, 0, 2000), VECTOR3(0, 0, 0), VECTOR3(1, 1, 1),
+		pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this, pPlayerTransform, pMeshField, pEffectManager));
 
 	//EnemyAdd(new Enemy(VECTOR3(0, 0, -900), VECTOR3(0, 90, 0), VECTOR3(1, 1, 1),
 	//	pRenderManager, pShaderManager, pTextureManager, pModelManager, pConstant, pLightCameraConstant, pCamera, pCollisionManager, this));
@@ -58,8 +69,10 @@ void EnemyManager::EnemyDelete(Enemy *enemy)
 	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
 	{
 		if ((*ite) != enemy) { continue; }
+		m_pCollisionManager->DeleteCollider((*ite)->GetSphereCollider());
 		(*ite)->Release();
-		m_list.erase(ite);
+		delete (*ite);
+		(*ite) = NULL;
 		return;
 	}
 }
@@ -80,6 +93,15 @@ void EnemyManager::Update(RenderManager* pRenderManager,
 			pLightCameraConstant, 
 			pCollisionManager);
 	}
+
+	for (auto ite = m_list.begin(); ite != m_list.end(); ++ite)
+	{
+		if ((*ite) == NULL)
+		{
+			m_list.erase(ite);
+			return;
+		}
+	}
 }
 
 void EnemyManager::Release(void)
@@ -88,6 +110,8 @@ void EnemyManager::Release(void)
 	{
 		(*ite)->Release();
 	}
+
+	m_list.clear();
 }
 
 Enemy* EnemyManager::GetDistanceEnemy(Player* pPlayer)

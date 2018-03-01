@@ -6,7 +6,8 @@
 //=============================================================================
 #include "shadow_map.h"
 #include "../../../app/app.h"
-
+#include "../../../gui/imgui.h"
+#include "../../../gui/imgui_impl_dx11.h"
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
@@ -63,20 +64,6 @@ ShadowMap::ShadowMap(RenderManager* pRenderManager,
 
 	pRenderManager->SetShadowTexture(m_pTexture);
 
-
-#ifdef _DEBUG
-
-	pRenderManager->AddRenderer(new CanvasRenderer(m_pVertexBuffer,
-		NULL,
-		pShaderManager,
-		m_pTexture,
-		SHADOW_MAP_VERTEX,
-		D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
-		VertexShader::VS_2D,
-		PixelShader::PS_2D,
-		FALSE));
-
-#endif // DEBUG
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -99,6 +86,11 @@ void ShadowMap::Release(void)
 ///////////////////////////////////////////////////////////////////////////////
 void ShadowMap::Update( void )
 {
+	ImGui::Begin("shadow_map");
+	{
+		ImGui::Image((ImTextureID)m_pTexture, ImVec2(100,100), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255));
+	}
+	ImGui::End();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

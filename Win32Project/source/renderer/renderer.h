@@ -130,6 +130,7 @@ public:
 		ID3D11Buffer* pIndexBuffer,
 		ShaderManager* pShaderManager,
 		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pBayerTexture,
 		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
 		Object::Transform* pPlayerTransform,
@@ -141,7 +142,8 @@ public:
 		VertexShader::VERTEX_TYPE eVsType,
 		GeometryShader::GEOMETRY_TYPE eGsType,
 		PixelShader::PIXEL_TYPE ePsType,
-		BOOL bBlend);
+		BOOL bBlend,
+		int* pNumInstance);
 
 	//デストラクタ
 	virtual ~GrowMeshRenderer();
@@ -169,21 +171,27 @@ private:
 
 	ID3D11Buffer*						m_pInstanceBuffer;
 
+	ID3D11ShaderResourceView*			m_pBayerTexture;
+
 	float								m_fTime;
+
+	int*								m_pNumInstance;
 };
 
 //-----------------------------------------------------------------------------
-// スキニードレンダラー
+// モデルオブジェクトレンダラー
 //-----------------------------------------------------------------------------
-class SkinnedMeshRenderer : public Renderer
+class ModelObjectRenderer : public Renderer
 {
 public:
 	//コンストラクタ
-	SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+	ModelObjectRenderer(ID3D11Buffer* pVertexBuffer,
+		ID3D11Buffer* pInstanceBuffer,
 		ID3D11Buffer* pIndexBuffer,
 		ShaderManager* pShaderManager,
 		ID3D11ShaderResourceView* pTexture,
 		ID3D11ShaderResourceView* pToonTexture,
+		ID3D11ShaderResourceView* pBayerTexture,
 		ID3D11ShaderResourceView* pShadowMap,
 		Object::Transform* pTransform,
 		AppRenderer::Constant* pConstant,
@@ -198,6 +206,70 @@ public:
 		SkinMeshModel::Cluster*	pCluster,
 		SkinMeshModel::Mesh mesh,
 		BOOL bBlend);
+
+	//デストラクタ
+	virtual ~ModelObjectRenderer();
+
+	//終了
+	void Release(void);
+
+	//描画
+	void Draw(void);
+
+private:
+	AppRenderer::Constant*				m_pConstant;
+
+	AppRenderer::Constant*				m_pLightConstant;
+
+	int									m_nNumVertexPolygon;
+
+	int*								m_pFrame;
+
+	int*								m_pAnimeNumber;
+
+	D3D_PRIMITIVE_TOPOLOGY				m_ePolygon;
+
+	ID3D11Buffer*						m_pInstanceBuffer;
+
+	ID3D11ShaderResourceView*			m_pShadowMap;
+
+	SkinMeshModel::Cluster*				m_pCluster;
+
+	SkinMeshModel::Mesh					m_mesh;
+
+	ID3D11ShaderResourceView*			m_pToonTexture;
+
+	ID3D11ShaderResourceView*			m_pBayerTexture;
+};
+
+//-----------------------------------------------------------------------------
+// スキニードレンダラー
+//-----------------------------------------------------------------------------
+class SkinnedMeshRenderer : public Renderer
+{
+public:
+	//コンストラクタ
+	SkinnedMeshRenderer(ID3D11Buffer* pVertexBuffer,
+		ID3D11Buffer* pIndexBuffer,
+		ShaderManager* pShaderManager,
+		ID3D11ShaderResourceView* pTexture,
+		ID3D11ShaderResourceView* pToonTexture,
+		ID3D11ShaderResourceView* pBayerTexture,
+		ID3D11ShaderResourceView* pShadowMap,
+		Object::Transform* pTransform,
+		AppRenderer::Constant* pConstant,
+		AppRenderer::Constant* pLightConstant,
+		int	nNumVertexPolygon,
+		int* pFrame,
+		int* pAnimeNumber,
+		D3D_PRIMITIVE_TOPOLOGY ePolygon,
+		VertexShader::VERTEX_TYPE eVsType,
+		GeometryShader::GEOMETRY_TYPE eGsType,
+		PixelShader::PIXEL_TYPE ePsType,
+		SkinMeshModel::Cluster*	pCluster,
+		SkinMeshModel::Mesh mesh,
+		BOOL bBlend,
+		VECTOR4* color);
 
 	//デストラクタ
 	virtual ~SkinnedMeshRenderer();
@@ -228,6 +300,10 @@ private:
 	SkinMeshModel::Mesh					m_mesh;
 
 	ID3D11ShaderResourceView*			m_pToonTexture;
+
+	ID3D11ShaderResourceView*			m_pBayerTexture;
+
+	VECTOR4*							m_pColor;
 };
 
 //-----------------------------------------------------------------------------

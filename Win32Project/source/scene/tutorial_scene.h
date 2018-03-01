@@ -20,7 +20,11 @@ class Tutorial : public Scene
 public:
 	Tutorial(){};
 	virtual ~Tutorial(){};
-	HRESULT Init(Fade* pFade);
+	HRESULT Init(NextScene* pNextScene,
+		ShaderManager* pShaderManager,
+		ModelManager* pModelManager,
+		TextureManager* pTextureManager,
+		EffectManager* pEffectManager);
 	void Release(void);
 	void Update(void);
 	void Draw(void);

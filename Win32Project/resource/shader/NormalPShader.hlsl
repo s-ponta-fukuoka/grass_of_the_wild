@@ -13,7 +13,7 @@ float4 main(pixcelIn IN) : SV_Target
 {
 	float4 color = txDiffuse.Sample(samLinear, IN.tex) * IN.color;
 
-	if (color.a <= 0.0)discard;
+	clip(color.a);
 
 	return color;
 }

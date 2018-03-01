@@ -7,10 +7,15 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
 
+//*********************************************************
+//ヘッダファイル
+//*********************************************************
 #include "../renderer/app_renderer.h"
-
 #include <vector>
 
+//*********************************************************
+//前方宣言
+//*********************************************************
 class ModelManager;
 
 //*********************************************************
@@ -42,6 +47,7 @@ class SkinMeshModel : public Model
 {
 public:
 	
+	//モデル頂点バッファ用構造体
 	struct ModelVertex
 	{
 		VECTOR3			position;
@@ -52,6 +58,7 @@ public:
 		VECTOR4			weight;
 	};
 
+	//モデル定数バッファ用構造体
 	struct ModelConstant
 	{
 		XMMATRIX world;
@@ -63,14 +70,17 @@ public:
 		XMMATRIX lclCluster;
 		XMVECTOR light;
 		XMMATRIX wit;
+		VECTOR4 color;
 	};
 
+	//クラスタ構造体
 	struct Cluster
 	{
 		XMMATRIX**	pMatrix;
 		XMMATRIX	pBlendMatrix;
 	};
 
+	//メッシュ構造体
 	struct Mesh
 	{
 		int					nNumCluster;
@@ -78,7 +88,8 @@ public:
 		int					nNumPolygon;
 		int					nNumPolygonVertex;
 		int*				pIndexNumber;
-		char*				pFileName;
+		std::string			fileName;
+		const char*				pFileName;
 		VECTOR3*			pPosition;
 		VECTOR3*			pNormal;
 		VECTOR4*			pColor;
@@ -91,6 +102,7 @@ public:
 		VECTOR3				LclScl;
 	};
 
+	//アニメ構造体
 	struct Anime
 	{
 		int nStartTime;

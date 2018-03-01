@@ -43,8 +43,8 @@ void RenderManager::DeleteRenderer(const Renderer* renderer)
 	for (auto ite = m_listRenderer.begin(); ite != m_listRenderer.end(); ++ite)
 	{
 		if ((*ite) != renderer) { continue; }
-		m_listRenderer.erase(ite);
-		return;
+		(*ite) = NULL;
+		break;
 	}
 }
 
@@ -57,6 +57,56 @@ void RenderManager::DrawAll(void)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Draw();
+	}
+
+	for (auto ite = m_listRenderer.begin(); ite != m_listRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) {
+			m_listRenderer.erase(ite);
+			break;
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//追加
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::AddDeferredRenderer(Renderer* renderer)
+{
+	if (renderer == NULL) { return; }
+	m_listDeferredRenderer.push_back(renderer);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//削除
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::DeleteDeferredRenderer(const Renderer* renderer)
+{
+	for (auto ite = m_listDeferredRenderer.begin(); ite != m_listDeferredRenderer.end(); ++ite)
+	{
+		if ((*ite) != renderer) { continue; }
+		(*ite) = NULL;
+		break;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//全描画
+///////////////////////////////////////////////////////////////////////////////
+void RenderManager::DeferredDrawAll(void)
+{
+	for (auto ite = m_listDeferredRenderer.begin(); ite != m_listDeferredRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Draw();
+	}
+
+	for (auto ite = m_listDeferredRenderer.begin(); ite != m_listDeferredRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL){
+			m_listDeferredRenderer.erase(ite);
+			break;
+		}
 	}
 }
 
@@ -77,8 +127,8 @@ void RenderManager::DeleteShadowRenderer(const Renderer* renderer)
 	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
 	{
 		if ((*ite) != renderer) { continue; }
-		m_listShadowRenderer.erase(ite);
-		return;
+		(*ite) = NULL;
+		break;
 	}
 }
 
@@ -95,7 +145,7 @@ void RenderManager::ShadowDrawAll(void)
 	float clearColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	pDeviceContext->ClearRenderTargetView(m_pShadowRenderTargetView, clearColor);//画面クリア 
 
-																		   // 自前のレンダーターゲットビューに切り替え
+	// 自前のレンダーターゲットビューに切り替え
 	pDeviceContext->ClearDepthStencilView(m_pShadowDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	pDeviceContext->RSSetViewports(1, &m_ShadowViewPort);
@@ -109,6 +159,14 @@ void RenderManager::ShadowDrawAll(void)
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Draw();
 	}
+
+	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) {
+			m_listShadowRenderer.erase(ite);
+			break;
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -120,13 +178,30 @@ void RenderManager::ReleaseAll(void)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
+	}
+
+	for (auto ite = m_listDeferredRenderer.begin(); ite != m_listDeferredRenderer.end(); ++ite)
+	{
+		if ((*ite) == NULL) { continue; }
+		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
 	}
 
 	for (auto ite = m_listShadowRenderer.begin(); ite != m_listShadowRenderer.end(); ++ite)
 	{
 		if ((*ite) == NULL) { continue; }
 		(*ite)->Release();
+		delete (*ite);
+		(*ite) = NULL;
 	}
+	m_listRenderer.clear();
+
+	m_listShadowRenderer.clear();
+
+	m_listDeferredRenderer.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

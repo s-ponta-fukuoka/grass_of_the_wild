@@ -1,6 +1,6 @@
 //=============================================================================
 //
-// camera.cpp
+// light_camera.cpp
 // Author : shota fukuoka
 //
 //=============================================================================
@@ -15,6 +15,8 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
+#define LIGHT_CAMERA_NER (10000)
+#define LIGHT_CAMERA_FOR (20000)
 
 //*****************************************************************************
 // プロトタイプ宣言
@@ -31,9 +33,9 @@ LightCamera::LightCamera(VECTOR3 position, VECTOR3 positionAt, VECTOR3 vectorUp)
 
 	m_vectorUp = vectorUp;
 
-	m_ner = 10000;
+	m_ner = LIGHT_CAMERA_NER;
 
-	m_for = 20000;
+	m_for = LIGHT_CAMERA_FOR;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,55 +70,6 @@ void LightCamera::Update(void)
 {
 	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
 
-	if (pInputKeyboard->GetKeyPress(DIK_1))
-	{
-		m_ner++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_2))
-	{
-		m_ner--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_3))
-	{
-		m_for+= 100;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_4))
-	{
-		m_for-= 100;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_UP))
-	{
-		m_pTransform->position.z++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_DOWN))
-	{
-		m_pTransform->position.z--;
-	}
-	if (pInputKeyboard->GetKeyPress(DIK_RIGHT))
-	{
-		m_pTransform->position.x++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_LEFT))
-	{
-		m_pTransform->position.x--;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_O))
-	{
-		m_pTransform->position.y++;
-	}
-
-	if (pInputKeyboard->GetKeyPress(DIK_L))
-	{
-		m_pTransform->position.y--;
-	}
-
 	Camera::Update();
 }
 
@@ -133,7 +86,6 @@ void LightCamera::SetCamera(void)
 
 	XMMATRIX hProjection;	//透視射影変換行列
 	hProjection = XMMatrixOrthographicLH(7000* 1.414, 7000 * 1.414, m_ner, m_for);
-	//hProjection = XMMatrixPerspectiveFovLH(D3D_PI / 3, (float)2048 / 2048, 5000.0f, 20000);
 
 	XMVECTOR LightPos = XMVectorSet(m_pTransform->position.x, m_pTransform->position.y, m_pTransform->position.z, 1);
 	m_pConstant->light = LightPos;

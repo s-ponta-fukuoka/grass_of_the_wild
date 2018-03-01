@@ -5,8 +5,8 @@ struct vertexIn
 	float4 nrm : NORMAL0;
 	float4 col : COLOR0;
 	float2 tex : TEXCOORD0;
-	float4 BoneIndices : BONEINDICES0;
-	float4 weight : WEIGHT0;
+	float4x4 mat : MATRIX;
+	uint InstanceId : SV_InstanceID;
 };
 
 //出力用
@@ -20,76 +20,46 @@ struct vertexOut
 	float2 tex2 : TEX2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
-	float fogFactor : FOG;
+	float2 fogFactor : FOG;
 };
 
 //変換用行列
 cbuffer ConstantBuffer : register(b0)
 {
-	float4x4  World;		//ワールド変換行列
-	float4x4 View;		//ビュー変換行列
+	float4x4 View;			//ビュー変換行列
 	float4x4 Projection;		//プロジェクション変換行列
-	float4x4 LView;		//ビュー変換行列
-	float4x4 LProjection;		//プロジェクション変換行列
-	float4x4 Bones[100];
-	float4x4 LclBone;
-	float4 Light;
-	//float4 Color;
+	float time;
+	float3 posPlayer;
+	float3 posEye;
 }
 
 vertexOut main(vertexIn IN)
 {
 	vertexOut OUT;
 
-	float4x4 pos0 = 0;
+	float4 posWorld;
+	posWorld = IN.pos;
 
-	float4 pos = mul(IN.pos, LclBone);
-
-	OUT.pos = mul(mul(mul(pos, World), View), Projection);
+	OUT.pos = mul(mul(mul(IN.pos, IN.mat), View), Projection);
 
 	OUT.Spos = OUT.pos;
 
-	float4 posL = mul(mul(pos0, pos), LProjection);
-	posL = posL / posL.w;
-	OUT.Lpos.x = (posL.x + 1.0) / 2.0;
-	OUT.Lpos.y = (-posL.y + 1.0) / 2.0;
-	OUT.Lpos.z = posL.z;
-
-	//光源処理
-	float3 L = normalize(Light.xyz);
-
 	//ワールド変換
-	float4 nrm = mul(IN.nrm, World * pos0);
-	OUT.nrm = nrm;
+	OUT.nrm = normalize(mul(float4(IN.nrm.xyz, 0.0f), IN.mat));
 
-	//ライトと法線の内積
-	float lgtdot = dot(L, OUT.nrm);
-
-	float3 eye = normalize(mul(View, OUT.pos));
-
-	//法線とカメラの内積
-	float eyedot = dot(eye, OUT.nrm);
-
-	//OUT.nrm = mul(IN.nrm, World);
-
-	OUT.col = float4(1, 1, 1, 1);
+	OUT.col = float4(1,1,1,1);
 	OUT.tex = IN.tex;
-	OUT.tex2.x = lgtdot;
-	OUT.tex2.y = eyedot;
-
-	//光源と法線の内積を求める
-	OUT.col2 = dot(OUT.nrm, L);
-
-	OUT.col2.a = 1.0f;
 
 	float4 cameraPosition;
 
 	// Calculate the camera position.
-	cameraPosition = mul(IN.pos, World);
+	cameraPosition = mul(IN.pos, IN.mat);
 	cameraPosition = mul(cameraPosition, View);
 
 	// Calculate linear fog.    
-	OUT.fogFactor = saturate((5000 - cameraPosition.z) / (5000 - 0));
+	OUT.fogFactor.x = saturate(1.0 - (cameraPosition.z - 200) / (0 - 200));
+
+	OUT.fogFactor.y = saturate((cameraPosition.z - 5000) / (0 - 5000));
 
 	return OUT;
 }

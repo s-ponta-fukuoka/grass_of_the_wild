@@ -21,6 +21,7 @@ class MainCamera;
 //*****************************************************************************
 class CameraPatternCompliance : public CameraPattern
 {
+	bool m_bUse;
 public:
 	CameraPatternCompliance();
 

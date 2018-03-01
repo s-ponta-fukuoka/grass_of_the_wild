@@ -29,7 +29,11 @@ PlayerLife::PlayerLife(RenderManager* pRenderManager,
 	ShaderManager* pShaderManager,
 	TextureManager* pTextureManager)
 {
+	m_bLifeZero = false;
+
 	m_pTransform = new Transform();
+
+	m_nCoolTime = 0;
 
 	m_nLife = PLAYER_LIFE_NUM;
 
@@ -154,6 +158,8 @@ void PlayerLife::Update( void )
 
 	memcpy(msr.pData, vertices, sizeof(AppRenderer::Vertex2D) * (PLAYER_LIFE_VERTEX * PLAYER_LIFE_MAX)); // 3頂点分コピー
 
+	delete[] vertices;
+
 	pDeviceContext->Unmap(m_pVertexBuffer, 0);
 }
 
@@ -231,4 +237,6 @@ void PlayerLife::MakeVertex(ID3D11Device* pDevice)
 	{
 		return;
 	}
+
+	delete[] vertices;
 }

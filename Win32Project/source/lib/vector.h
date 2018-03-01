@@ -28,7 +28,8 @@ public:
 	VECTOR2 &operator-=(const VECTOR2 &Vector);
 
 	//æZ
-	VECTOR2 operator*(const float f) const;
+	template <typename T>
+	VECTOR2 operator*(const T f) const;
 	VECTOR2 &operator*=(const float f);
 
 	//œZ

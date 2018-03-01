@@ -20,6 +20,12 @@ class ModelManager
 	std::list<SkinMeshModel*>  m_SkinMeshList;
 public:
 
+	//コンストラクタ
+	ModelManager();
+
+	//デストラクタ
+	virtual ~ModelManager();
+
 	//追加
 	void AddSkinMeshModel(SkinMeshModel* model);
 

@@ -22,8 +22,8 @@ struct vertexOut
 	float4x4 View : VIEW;
 	float4x4 Projection : PROJECTION;
 	float time : TIME;
-	float fogFactor : FOG;
-	//float3 posEye : POSITION_EYE;
+	float2 fogFactor : FOG;
+	float3 posEye : POSITION_EYE;
 	float3 posPlayer : TEXCOORD3;
 };
 
@@ -34,6 +34,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4x4 Projection;		//プロジェクション変換行列
 	float time;
 	float3 posPlayer;
+	float3 posEye;
 }
 
 vertexOut main(vertexIn IN)
@@ -68,7 +69,8 @@ vertexOut main(vertexIn IN)
 	//float3 L = normalize(Light.xyz);
 
 	//ワールド変換
-	OUT.nrm = mul(IN.nrm, IN.mat);
+
+	OUT.nrm = normalize(mul(float4(IN.nrm.xyz, 0.0f), IN.mat));
 
 	OUT.col = IN.col;
 	OUT.tex = IN.tex;
@@ -85,9 +87,10 @@ vertexOut main(vertexIn IN)
 	cameraPosition = mul(cameraPosition, View);
 
 	// Calculate linear fog.    
-	OUT.fogFactor = saturate((5000 - cameraPosition.z) / (5000 - 0));
-
-	//OUT.posEye = posEye;
+	OUT.fogFactor.x = saturate(1.0f - (200 - cameraPosition.z) / (200 - 0));
+	OUT.fogFactor.y = saturate((2000 - cameraPosition.z) / (2000 - 0));
+	
+	OUT.posEye = cameraPosition;
 
 	return OUT;
 }

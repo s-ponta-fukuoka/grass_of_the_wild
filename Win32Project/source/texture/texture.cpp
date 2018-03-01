@@ -21,6 +21,7 @@
 //*****************************************************************************
 
 Texture::Texture(const char* name, TextureManager* m_pTextureManager)
+	: m_Pixels(NULL)
 {
 	m_name = name;
 	Texture* pTexture = m_pTextureManager->GetTexture(this);
@@ -36,7 +37,6 @@ Texture::Texture(const char* name, TextureManager* m_pTextureManager)
 		m_Height = pTexture->m_Height;
 		m_Pixels = pTexture->m_Pixels;
 		m_pTexture = pTexture->m_pTexture;
-		CreateTextureResource();
 	}
 }
 
@@ -58,6 +58,7 @@ ID3D11ShaderResourceView *Texture::GetTexture(void)
 
 void Texture::CreateTextureResource(void)
 {
+
 	AppRenderer* pAppRenderer = AppRenderer::GetInstance();
 	ID3D11Device* pDevice = pAppRenderer->GetDevice();
 
@@ -106,4 +107,15 @@ void Texture::CreateTextureResource(void)
 void Texture::LoadTexture(const char* name)
 {
 	m_Pixels = stbi_load(name, &m_Width, &m_Height, 0, STBI_rgb_alpha);
+}
+
+void Texture::Release(void)
+{
+	if (m_Pixels != NULL)
+	{
+		stbi_image_free(m_Pixels);
+		m_Pixels = NULL;
+	}
+
+	ES_SAFE_RELEASE(m_pTexture);
 }

@@ -12,8 +12,10 @@
 #include "player_pattern_walk.h"
 #include "player_pattern_attack.h"
 #include "player_pattern_wait.h"
+#include "player_pattern_avoid.h"
 #include "player.h"
 #include "../../../device/input.h"
+#include "../../../device/xbox_controller.h"
 #include "../../camera/main_camera.h"
 #include "player_attack.h"
 //*****************************************************************************
@@ -64,6 +66,26 @@ void PlayerPatternStep::InputOperation(Player* pPlayer)
 
 	XMVECTOR StartRot = XMVectorSet(0, pTransform->rot.y, 0, 1.0f);
 
+	XINPUT_STATE Xinput = { NULL };
+	XInputGetState(0, &Xinput);
+
+	XMVECTOR inputVec = XMVector3Normalize(XMVectorSet(0, 0, 0, 0) - XMVectorSet(-Xinput.Gamepad.sThumbLX, 0, -Xinput.Gamepad.sThumbLY, 0));
+
+	if (Xinput.Gamepad.wButtons == XINPUT_GAMEPAD_X ||
+		pInputKeyboard->GetKeyPress(DIK_RSHIFT))
+	{
+		pPlayer->ChangePlayerPattern(new PlayerPatternAvoid);
+		return;
+	}
+
+	if (pInputKeyboard->GetKeyTrigger(DIK_SPACE) ||
+		Xinput.Gamepad.wButtons == XINPUT_GAMEPAD_A)
+	{
+		pAnimeNumber[0] = 2;
+		pPlayer->ChangePlayerPattern(new PlayerPatternAttack);
+		return;
+	}
+
 	if (pInputKeyboard->GetKeyPress(DIK_W))
 	{
 		pAnimeNumber[0] = 1;
@@ -92,10 +114,49 @@ void PlayerPatternStep::InputOperation(Player* pPlayer)
 		move.z += XMVectorGetX(vector) * PLAYER_MOVE;
 	}
 
+	if (Xinput.Gamepad.sThumbLY > 20000)
+	{
+		pAnimeNumber[0] = 1;
+	}
+
+	if (Xinput.Gamepad.sThumbLX < -20000)
+	{
+		pAnimeNumber[0] = 11;
+	}
+
+	if (Xinput.Gamepad.sThumbLX > 20000)
+	{
+		pAnimeNumber[0] = 11;
+	}
+
+	if (Xinput.Gamepad.sThumbLY < -20000)
+	{
+		pAnimeNumber[0] = 12;
+	}
+
+
+	if (Xinput.Gamepad.sThumbLX != 0)
+	{
+		VECTOR3 vecForward = VECTOR3(XMVectorGetX(vector),
+			XMVectorGetY(vector),
+			XMVectorGetZ(vector));
+
+		VECTOR3 vecRight;
+
+		VECTOR3::Cross(&vecRight, &vecForward, &VECTOR3(0, 1, 0));
+
+		move = vecForward * -XMVectorGetZ(inputVec) * PLAYER_MOVE +
+			vecRight * XMVectorGetX(inputVec) * PLAYER_MOVE;
+	}
+
 	if (pInputKeyboard->GetKeyPress(DIK_W) ||
 		pInputKeyboard->GetKeyPress(DIK_A) ||
 		pInputKeyboard->GetKeyPress(DIK_S) ||
-		pInputKeyboard->GetKeyPress(DIK_D))
+		pInputKeyboard->GetKeyPress(DIK_D) ||
+		Xinput.Gamepad.sThumbLX < -20000 ||
+		Xinput.Gamepad.sThumbLX > 20000 ||
+		Xinput.Gamepad.sThumbLY < -20000 ||
+		Xinput.Gamepad.sThumbLY > 20000)
 	{
 		CompletionPosition = XMVectorSet(pTransform->position.x + move.x, 0, pTransform->position.z + move.z, 0);
 		CompletionRot = XMVectorSet(0, atan2(XMVectorGetZ(vector), XMVectorGetX(vector)) + D3D_PI * 0.5, 0, 1);
@@ -112,7 +173,8 @@ void PlayerPatternStep::InputOperation(Player* pPlayer)
 		pPlayer->ChangePlayerPattern(new PlayerPatternAttack);
 	}
 
-	if (pInputKeyboard->GetKeyRelease(DIK_LSHIFT))
+	if (pInputKeyboard->GetKeyRelease(DIK_LSHIFT) ||
+		Xinput.Gamepad.bLeftTrigger < 250)
 	{
 		pAnimeNumber[0] = 1;
 		pPlayer->ChangePlayerPattern(new PlayerPatternWalk);
@@ -123,7 +185,14 @@ void PlayerPatternStep::InputOperation(Player* pPlayer)
 
 	StartRot = XMVectorLerp(StartRot, CompletionRot, 0.1f);
 
-	pTransform->rot.y = XMVectorGetY(StartRot);
+	if (Xinput.Gamepad.sThumbLX != 0)
+	{
+		pTransform->rot.y = XMVectorGetY(CompletionRot);
+	}
+	else
+	{
+		pTransform->rot.y = XMVectorGetY(StartRot);
+	}
 
 	StartPosition = XMVectorLerp(StartPosition, CompletionPosition, 0.1f);
 	pTransform->position.x = XMVectorGetX(StartPosition);

@@ -22,6 +22,7 @@ public:
 	void AddTexture(Texture* tex);
 	void DeleteTexture(Texture* tex);
 	Texture *GetTexture(Texture* tex);
+	void ReleaseAll(void);
 };
 
 #endif

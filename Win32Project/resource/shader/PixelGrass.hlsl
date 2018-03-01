@@ -8,49 +8,60 @@ struct pixcelIn
 	float4 col2: COL2;
 	float4 Lpos : POSITION_SM;
 	float4 Spos : TEXCOORD2;
-	//float3 posEye : POSITION_EYE;
+	float3 posEye : POSITION_EYE;
 	float3 posW : POSITION_W;
+};
+
+struct PS_OUTPUT
+{
+	float4 Out0 : SV_Target0;
+	float4 Out1 : SV_Target1;
+	float4 Out2 : SV_Target2;
+	float4 Out3 : SV_Target3;
 };
 
 Texture2D txDiffuse : register(t0);
 Texture2D txShadow : register(t1);
+Texture2D txBayer : register(t2);
 SamplerState samLinear : register(s0);
 SamplerState samShadow : register(s1);
 
 float3 g_lightVec = { 1,-1,0 };
 
-float4 main(pixcelIn IN) : SV_Target
+PS_OUTPUT main(pixcelIn IN) : SV_Target
 {
+	PS_OUTPUT ps;
+
 	pixcelIn OUT;
 
-	//IN.nrm = normalize(IN.nrm - IN.posW);
+	IN.nrm = normalize(IN.nrm);
 
-	//float3 toEye = normalize(IN.posEye - IN.posW);
+	float3 lightVec = normalize(float3(-1, -1, 1));
 
-	//float3 r = reflect(g_lightVec, IN.nrm);
-
-	//float spec = pow(max(dot(toEye,r),0.0f), 200);
-
-	float bright = max(-dot(IN.nrm, g_lightVec), 0);
-
-	float4 diffuse = txDiffuse.Sample(samLinear, IN.tex) * lerp(float4(0.7f, 0.7f, 0.8f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), bright );
-
-	// ライト目線によるZ値の再算出
-	//float ZValue = IN.Lpos.z / IN.Lpos.w;
+	float3 toEye = normalize(IN.posEye - IN.posW);
 	
-	//// 射影空間のXY座標をテクスチャ座標に変換
-	//float2 TransTexCoord;
-	//TransTexCoord.x = (1.0f + IN.Lpos.x / IN.Lpos.w)*0.5f;
-	//TransTexCoord.y = (1.0f - IN.Lpos.y / IN.Lpos.w)*0.5f;
+	float3 r = reflect(lightVec, IN.nrm);
 
-	//float shadowZ = txShadow.Sample(samLinear, IN.Lpos.xy);
-	//float shadow = (shadowZ + 0.001 > IN.Lpos.z) ? 1.0 : 0.5;
+	float spec = pow(max(dot(toEye,r),0.0f), 10);
+
+	float l = (dot(IN.nrm, -lightVec) * 0.5) + 0.5 * 0.8;
+
+	float4 diffuse = float4(l,l,l,1.0f);
 
 	float4 fogColor;
 	fogColor = float4(0.5f, 0.5f, 0.6f, 0.1f);
 
-	OUT.col = diffuse  * IN.col * IN.col.a + (1.0 - IN.col.a) * fogColor;
+	float2 ditherUv = IN.pos.xy / 4;
 
-	return OUT.col;
+	float dither = txBayer.Sample(samLinear, ditherUv).r;
+
+	clip(IN.col.a - dither);
+
+	ps.Out0 = (diffuse) * IN.col;
+	ps.Out1.rgb = IN.nrm.xyz * 0.5f + 0.5f;
+	ps.Out2 = IN.Spos.z / IN.Spos.w;
+	ps.Out3.rgb = float3(1, 1, 1);
+
+	return ps;
 
 }

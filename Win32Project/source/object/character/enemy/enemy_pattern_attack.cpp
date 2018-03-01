@@ -38,6 +38,13 @@ EnemyPatternAttack::EnemyPatternAttack()
 
 EnemyPatternAttack::~EnemyPatternAttack()
 {
+	if (m_pEnemyAttack != NULL)
+	{
+		m_pCollisionManager->DeleteCollider(m_pEnemyAttack->GetSphereCollider());
+		m_pEnemyAttack->Release();
+		delete m_pEnemyAttack;
+		m_pEnemyAttack = NULL;
+	}
 }
 
 void EnemyPatternAttack::Update(Enemy* pEnemy,
@@ -47,12 +54,92 @@ void EnemyPatternAttack::Update(Enemy* pEnemy,
 	AppRenderer::Constant* pConstant,
 	AppRenderer::Constant* pLightCameraConstant, CollisionManager* pCollisionManager)
 {
-	if (m_pEnemyAttack == NULL)
+	SkinMeshModel::Anime* pAnime = pEnemy->GetSkinMeshModel()->GetAnime();
+
+	m_pCollisionManager = pCollisionManager;
+
+	int* pFrame = pEnemy->GetFrame();
+	int* pAnimeNumber = pEnemy->GetAnimeNumber();
+
+	Object::Transform* pTransform = pEnemy->GetTransform();
+
+	XMVECTOR CompletionPosition = pEnemy->GetCompletionPosition();
+
+	XMVECTOR CompletionRot = pEnemy->GetCompletionRot();
+
+	XMVECTOR StartPosition = XMVectorSet(pTransform->position.x, pTransform->position.y, pTransform->position.z, 1.0f);
+
+	XMVECTOR vector = pEnemy->GetCamera()->GetVec();
+
+	VECTOR3 move = pEnemy->GetMove();
+
+	if (pFrame[0] == pAnime[pAnimeNumber[0]].nEndTime - 70)
 	{
-		m_pEnemyAttack = new EnemyAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+		if (m_pEnemyAttack == NULL)
+		{
+			m_pEnemyAttack = new EnemyAttack(pRenderManager, pShaderManager, pTextureManager, pConstant, pLightCameraConstant, pCollisionManager);
+		}
+	}
+
+	if (pFrame[0] == pAnime[pAnimeNumber[0]].nEndTime - 60)
+	{
+		if (m_pEnemyAttack != NULL)
+		{
+			pCollisionManager->DeleteCollider(m_pEnemyAttack->GetSphereCollider());
+			m_pEnemyAttack->Release();
+			delete m_pEnemyAttack;
+			m_pEnemyAttack = NULL;
+		}
+	}
+
+	if (m_pEnemyAttack != NULL)
+	{
+		m_pEnemyAttack->Update();
+		m_pEnemyAttack->GetSphereCollider()->GetTransform()->position.x = pEnemy->GetTransform()->position.x + cosf(-pEnemy->GetTransform()->rot.y - D3DToRadian(85)) * 200;
+		m_pEnemyAttack->GetSphereCollider()->GetTransform()->position.y = pEnemy->GetTransform()->position.y + 70;
+		m_pEnemyAttack->GetSphereCollider()->GetTransform()->position.z = pEnemy->GetTransform()->position.z - sinf(pEnemy->GetTransform()->rot.y - D3DToRadian(85)) * 200;
+	}
+
+	ChangeAttackAnime(pEnemy, pCollisionManager);
+}
+
+void EnemyPatternAttack::ChangeAttackAnime(Enemy* pEnemy, CollisionManager* pCollisionManager)
+{
+	InputKeyboard* pInputKeyboard = InputKeyboard::GetInstance();
+
+	SkinMeshModel::Anime* pAnime = pEnemy->GetSkinMeshModel()->GetAnime();
+
+	int* pFrame = pEnemy->GetFrame();
+	int* pAnimeNumber = pEnemy->GetAnimeNumber();
+
+	if (pFrame[0] >= pAnime[pAnimeNumber[0]].nEndTime - 1)
+	{
+
+		if (pAnimeNumber[0] == 2 || pAnimeNumber[0] == 3)
+		{
+
+			pEnemy->SetMode(Enemy::MODE_DEFENSE);
+
+			pAnimeNumber[0] = 0;
+			if (m_pEnemyAttack != NULL)
+			{
+				pCollisionManager->DeleteCollider(m_pEnemyAttack->GetSphereCollider());
+				m_pEnemyAttack->Release();
+				delete m_pEnemyAttack;
+				m_pEnemyAttack = NULL;
+			}
+
+			pEnemy->ChangeEnemyPattern(new EnemyPatternWait);
+		}
+		pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
 	}
 	else
 	{
-		m_pEnemyAttack->Update();
+		pFrame[0]++;
+	}
+
+	if (pFrame[0] < pAnime[pAnimeNumber[0]].nStartTime)
+	{
+		pFrame[0] = pAnime[pAnimeNumber[0]].nStartTime;
 	}
 }

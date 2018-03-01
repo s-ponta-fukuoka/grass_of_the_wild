@@ -24,7 +24,8 @@ class CollisionManager;
 class ModelManager;
 class MainCamera;
 class TreeManager;
-
+class MeshField;
+class TreeCollider;
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -44,7 +45,8 @@ public:
 		AppRenderer::Constant* pLightCameraConstant,
 		MainCamera* pCamera,
 		CollisionManager* pCollisionManager,
-		TreeManager* pTreeManager);
+		TreeManager* pTreeManager,
+		MeshField* pMeshField);
 
 	//デストラクタ
 	virtual ~Tree();
@@ -91,7 +93,11 @@ public:
 
 private:
 
+	ID3D11Buffer * m_pInstanceBuffer;
+
 	bool				m_bUse;
+
+	MeshField*			m_pMeshField;
 
 	Renderer**			m_pRenderer;
 
@@ -114,6 +120,8 @@ private:
 	XMVECTOR			m_CompletionPosition;
 
 	XMVECTOR			m_CompletionRot;
+
+	TreeCollider*		m_pTreeCollider[20];
 };
 
 #endif

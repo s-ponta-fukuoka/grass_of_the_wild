@@ -21,6 +21,10 @@
 // 前方宣言
 //*****************************************************************************
 class Fade;
+class ShaderManager;
+class TextureManager;
+class ModelManager;
+class EffectManager;
 //*****************************************************************************
 // クラス定義
 //*****************************************************************************
@@ -34,16 +38,20 @@ public:
 	virtual ~Scene() {};
 
 	//初期化
-	virtual HRESULT Init(NextScene* pNextScene, Fade* pFade) { return S_OK; };
+	virtual HRESULT Init(NextScene* pNextScene,
+		ShaderManager* pShaderManager,
+		ModelManager* pModelManager,
+		TextureManager* pTextureManager,
+		EffectManager* pEffectManager) { return S_OK; };
 
 	//終了
-	virtual void Release(void){};
+	virtual void Release(void) = 0;
 
 	//更新
-	virtual void Update(void) {};
+	virtual void Update(void) = 0;
 
 	//描画
-	virtual void Draw(void) {};
+	virtual void Draw(void) = 0;
 };
 
 #endif

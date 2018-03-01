@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" SchemaVersion="80">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{115228B1-1A7B-4865-BCF4-252469CC89E5}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="GAME" ID="{11C7E364-2814-4D60-8F1C-B64B90C937FF}">
+					<ChildrenList>
+						<Action Name="" ID="{394AC79C-5B31-445C-9F34-50C1A3B4EF24}" ShortID="136419616">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="game" ID="{F12CEBD3-C013-4BF3-AEF9-856EB217DB68}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="TITLE" ID="{0436F897-F1D3-40D5-9169-8704C4FE6936}">
+					<ChildrenList>
+						<Action Name="" ID="{DD15BEAD-0F65-4B72-962B-0BD5765B4D1F}" ShortID="932456190">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="title" ID="{D43B4C21-DE80-435D-8620-E4F1D7EC5A19}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="ATTACK" ID="{EF38CDE1-7DD0-440E-A97A-C088616B90C8}">
+					<ChildrenList>
+						<Action Name="" ID="{B755B087-1014-4560-B0A1-1ED76E074B64}" ShortID="431071770">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="attack" ID="{EC332CBC-E61C-43C0-82AF-E0C59BBC4208}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="HIT" ID="{AE402C17-6CB3-44AB-ADBA-54D6BE9B49EE}">
+					<ChildrenList>
+						<Action Name="" ID="{5E72D26A-F2A1-4707-BFEF-729EA5F3680B}" ShortID="124376572">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="hit" ID="{5A159AF6-5CBF-4C97-B2A6-5FE8620AB985}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="WALK" ID="{10CB56BB-CDCF-47A9-919F-5B8F039BDCB8}">
+					<ChildrenList>
+						<Action Name="" ID="{99021E12-F066-41F8-BB7A-8C32882790F6}" ShortID="946772711">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="walk" ID="{4A3F8AF4-EB6C-4BA1-A0F2-30C32856CC45}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="GAME_OVER" ID="{C442AE1F-B81B-4629-98FB-18AF2B1C7759}">
+					<ChildrenList>
+						<Action Name="" ID="{0C1AD924-BB07-472C-AA97-7A31113612AB}" ShortID="950163821">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="game_over" ID="{D3D5857E-CFD4-4EB2-818D-1F9A009E4F26}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="GAME_CLEAR" ID="{EA9CC2B7-9830-4E1C-9F5D-E33526D6E425}">
+					<ChildrenList>
+						<Action Name="" ID="{C27855CD-F155-42B3-9257-C4CBF9A8AEF2}" ShortID="506589048">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="game_clear" ID="{2FF2991D-4B32-4DFA-AD52-7FBF9F5037FA}" WorkUnitID="{E1104906-FE9E-4A04-A59D-90B9088292C2}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

@@ -27,6 +27,8 @@ class TreeManager;
 class CollisionManager;
 class NextScene;
 class PlayerLife;
+class EffectManager;
+class Pause;
 
 //*****************************************************************************
 // ƒNƒ‰ƒX’è‹`
@@ -36,13 +38,19 @@ class Game : public Scene
 public:
 	Game();
 	virtual ~Game();
-	HRESULT Init(NextScene* pNextScene, Fade* pFade);
+	HRESULT Init(NextScene* pNextScene,
+		ShaderManager* pShaderManager,
+		ModelManager* pModelManager,
+		TextureManager* pTextureManager,
+		EffectManager* pEffectManager);
 	void Release(void);
 	void Update(void);
 	void Draw(void);
 
+	bool isPause(void);
+
 private:
-	Fade*							m_pFade;
+	bool							m_bPause;
 
 	MainCamera*						m_pCamera;
 
@@ -71,6 +79,8 @@ private:
 	CollisionManager*				m_pCollisionManager;
 
 	PlayerLife*						m_pPlayerLife;
+
+	Pause*							m_pPause;
 };
 
 #endif
