@@ -1,7 +1,8 @@
-Name
+GRAsS OF THE WILD(グラスオブザワイルド)
 ====
 
-Overview
+ゼルダの伝説ブレスオブザワイルドの草原に一目ぼれし、草原を再現するべく制作。
+※現在のバージョンはα版
 
 ## Description
 
